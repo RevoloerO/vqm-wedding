@@ -2,10 +2,10 @@
   "name": "vqm-wedding",
   "private": true,
   "homepage": "revoloero.github.io/vqm-wedding",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 0315",
     "build": "vite build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",

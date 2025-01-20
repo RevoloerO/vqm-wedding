@@ -1,25 +1,21 @@
 import { useState } from 'react'
-import Nav from './Nav.jsx';
+import NavBar from './NavBar.jsx';
 import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
-
-  return (
-    <>
-      <Nav />
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+  const Banner = () => {
+    return (
+      <div className='banner'>
+        <h1>Quyen Mai & Hien Dang</h1>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    )
+  }
+  return (
+    <div>
+      <NavBar />
+      <Banner />
+    </div>
   )
 }
 

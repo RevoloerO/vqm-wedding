@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
 body {
-  font-family: "Sacramento", Arial, serif;
+  font-family: "Sacramento", serif;
   font-weight: 400;
+  font-style: normal;
   font-size: 16px;
   line-height: 1.7;
   color: #fff;
@@ -9,6 +11,7 @@ body {
   padding: 0;
   margin: 0;
 }
+
 #root {
   width: 100%;
   height: auto;
@@ -17,7 +20,8 @@ body {
   background-color: aqua;
   position: absolute;
 }
-.banner{
+
+.banner {
   background-image: url("../src/assets/img_bg_2.jpg");
   background-size: cover;
   width: 100%;

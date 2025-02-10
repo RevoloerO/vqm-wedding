@@ -1,31 +1,370 @@
-@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+@import url('https://use.typekit.net/ist3wra.css');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Share+Tech+Mono&display=swap');
+@import url('welcome-animation.css');
 
-body {
-  font-family: "Sacramento", serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 16px;
-  line-height: 1.7;
-  color: #fff;
-  background: #fff;
-  padding: 0;
-  margin: 0;
+:root {
+  --color-background: #f0f0d8;
+  /* Background */
+  --color-primary: #e4f8ba;
+  /* Primary */
+  --color-secondary: #c0d860;
+  /* Secondary */
+  --color-accent: #013220;
+  /*#6B8E23; /* Accent */
+  --color-text: #604848;
+  /* Text */
+  --color-border: #789048;
+  /* Border */
+  --color-neon-1: maroon;
+  --color-neon-2: #C21807;
+  --color-neon-3: #B8860B;
+  --color-neon-4: #FFD700;
+  --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
+  transition:
+    --color-background 1s ease,
+    --color-primary 1s ease,
+    --color-secondary 1s ease,
+    --color-accent 1s ease,
+    --color-text 1s ease,
+    --color-border 1s ease;
 }
 
-#root {
-  width: 100%;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  background-color: aqua;
-  position: absolute;
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: "megrim";
+  transition: background-color 1s ease, color 1s ease;
 }
 
 .banner {
-  background-image: url("../src/assets/img_bg_2.jpg");
-  background-size: cover;
-  width: 100%;
-  height: 70vh;
+  background-color: var(--color-primary);
+  width: 80%;
+  min-height: 800px;
+  height: fit-content;
+  margin: 10% auto;
+  border-style: solid;
+  border-width: 5px;
+  border-image:
+    linear-gradient(to top left,
+      var(--color-accent) 0%,
+      rgba(0, 0, 0, 0) 20%,
+      rgba(0, 0, 0, 0) 80%,
+      var(--color-accent) 100%) 1;
+  display: grid;
+  grid-template-columns: [line1] 10% [line2] 20% [line3] 20% [line4] 20% [line5] 20% [line6] 10% [end];
+  grid-template-rows: [row1] 10% [row2] 30% [row3] 20% [row4] 20% [row5] 20% [end];
   position: relative;
+}
+
+.contact-bar {
+  width: auto;
+  height: fit-content;
+  text-align: right;
+  margin: 3px 10px 0 0;
+  font-size: 30px;
+  color: var(--color-text);
+  filter: drop-shadow(2px 2px 2px var(--color-border));
+  grid-column-start: 1;
+  grid-column-end: end;
+}
+
+.contact-bar a,
+.contact-bar a:visited {
+  text-decoration: none;
+  color: inherit;
+  padding: 0 1%;
+}
+
+.banner-welcome {
+  grid-column-start: 1;
+  grid-column-end: 6;
+}
+
+.wedding-logo{
+  margin: 0 10%;
+  width: fit-content;
+  height: fit-content;
+  background-color: #013220;
   display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  padding: 0 auto;
+
+}
+.wedding-logo-box{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+.logo-text {
+  font-family: "megrim", sans-serif;
+  font-weight: 1000;
+  font-style: normal;
+  text-transform: uppercase;
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: var(--color-text);
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 5s linear infinite;
+  font-size: 8vw;
+}
+#logo-text-1 {
+  background-image: linear-gradient(-225deg,
+  var(--color-neon-2) 20%,
+  var(--color-neon-1) 50%,
+  var(--color-neon-2) 80%);
+}
+#logo-text-2 {
+  background-image: linear-gradient(-225deg,
+      var(--color-neon-3) 30%,
+      var(--color-neon-4) 50%,
+      var(--color-neon-3) 70%);
+}
+#logo-text-3 {
+  background-image: linear-gradient(-225deg,
+      var(--color-neon-4) 25%,
+      var(--color-neon-1) 50%,
+      var(--color-neon-4) 75%);
+  font-size:20vw;
+  margin: 0;
+  padding-top: 0;
+}
+a:visited,
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.title {
+  margin: auto 30px;
+}
+
+.title h1 {
+  font-size: 3.5vw;
+  font-weight: bolder;
+  text-shadow: 1px 1px 2px var(--color-text), 0 0 1em var(--color-accent), 0 0 0.2em var(--color-accent);
+  animation: neon 5s step-end infinite;
+  
+}
+
+.title h3 {
+  font-size: 1.5vw;
+  text-shadow: 0.2px 0.2px 0.2px var(--color-accent), 0 0 0.1em var(--color-text);
+  line-height: 140%;
+}
+
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes neon {
+  0% {
+    text-shadow: 1px 1px 2px var(--color-text), 0 0 1em var(--color-accent), 0 0 0.2em var(--color-accent);
+  }
+
+  33% {
+    text-shadow: 1px 1px 2px var(--color-accent), 0 0 1em var(--color-text), 0 0 0.2em var(--color-text);
+  }
+
+  66% {
+    text-shadow: 1px 1px 2px var(--color-accent), 0 0 1em cyan, 0 0 0.2em cyan;
+  }
+}
+
+@media (max-width: 1200px) {
+  .banner {
+    width: 90%;
+    grid-template-columns: [line1] 50% [line2] 50% [end];
+    grid-template-rows: [row1] 5% [row2] 20% [row3] 30% [row4] 20% [row5] 25% [end];
+  }
+
+  .banner-welcome {
+    grid-column-start: 1;
+    grid-column-end: end;
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+
+  .banner-title {
+    grid-column-start: 1;
+    grid-column-end: end;
+    grid-row-start: 3;
+    grid-row-end: 4;
+
+  }
+
+  .banner-detail {
+    grid-column-start: 1;
+    grid-column-end: end;
+    grid-row-start: 4;
+    grid-row-end: end;
+  }
+
+  .vqm-logo {
+    font-size: 160px;
+    margin: 0 auto;
+  }
+
+  .title {
+    margin: auto;
+    text-align: center;
+  }
+
+  .contact-bar {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 1vh;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+
+  .contact-bar a,
+  .contact-bar a:visited {
+    padding: 0 3%;
+  }
+}
+
+@media (max-width: 599px) {
+  .logo-text {
+    font-size: 15vw;
+  }
+  .logo-text-3 {
+    font-size: 38vw;
+  }
+  .banner {
+    width: 95%;
+    grid-template-columns: [line1] 50% [line2] 50% [end];
+    grid-template-rows: [row1] 5% [row2] 20% [row3] 15% [row4] 35% [row5] 25% [end];
+  }
+
+  .title h1 {
+    font-size: 8.5vw;
+  }
+
+  .title h3 {
+    font-size: 4vw;
+  }
+
+  .title h4 {
+    font-size: 3vw;
+  }
+
+  .banner-detail {
+    padding-bottom: 10vh;
+  }
+
+  .contact-bar {
+    width: auto;
+  }
+}
+
+@media(min-width: 600px) and (max-width: 768px) {
+  .banner {
+    width: 95%;
+    grid-template-columns: [line1] 50% [line2] 50% [end];
+    grid-template-rows: [row1] 5% [row2] 20% [row3] 25% [row4] 25% [row5] 25% [end];
+  }
+  
+  .title h1 {
+    font-size: 8.5vw;
+  }
+
+  .title h3 {
+    font-size: 4vw;
+  }
+
+  .title h4 {
+    font-size: 2.5vw;
+  }
+
+  .contact-bar {
+    width: auto;
+  }
+}
+
+@media(min-width: 769px) and (max-width: 1200px) {
+
+  .title h1 {
+    font-size: 7vw;
+  }
+
+  .title h3 {
+    font-size: 3.5vw;
+  }
+
+  .title h4 {
+    font-size: 2.5vw;
+  }
+
+  #footer-img {
+    height: 70px;
+  }
+}
+
+@media(min-width: 1201px) and (max-width: 1799px) {
+  .banner {
+    margin: auto;
+    width: 85%;
+  }
+
+  .footer {
+    bottom: -45px;
+  }
+
+  #footer-img {
+    height: 70px;
+  }
+}
+
+@media(min-width: 1800px) {
+  .banner {
+    min-height: 900px;
+    margin: 0 0;
+  }
+
+  .banner-title {
+    grid-row-start: end;
+    grid-row-end: 4;
+  }
+
+  .vqm-logo {
+    font-size: 15vw;
+    margin: 0 auto;
+  }
+
+  .banner-detail {
+    margin: 5vw auto;
+  }
+
+  .title {
+    margin: 0;
+    padding: 5vh 7vw;
+  }
+
+  .title h1 {
+    font-size: 2.5vw;
+  }
+
+  .title h3 {
+    font-size: 1.3vw;
+  }
+
+  .title h4 {
+    font-size: 0.8vw;
+  }
+
+  .footer {
+    bottom: -55px;
+  }
+
+  #footer-img {
+    height: 100px;
+  }
 }

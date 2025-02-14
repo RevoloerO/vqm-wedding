@@ -30,6 +30,9 @@ const Banner = () => {
         <HQLogo />
         <WelcomeMessage />
       </div>
+      <div className="footer">
+        
+      </div>
     </div>
   );
 };

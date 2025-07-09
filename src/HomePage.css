@@ -236,19 +236,19 @@ body {
 
 /* --- STICKY TAB NAVIGATION --- */
 .tab-navbar-wrapper {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 0;
   background-color: var(--color-background);
   border-bottom: 1px solid #ddd;
   transition: box-shadow 0.3s ease;
-  z-index: 999; /* Ensure it's on top */
+  z-index: 999;
+  /* The shadow will appear naturally when it sticks */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0);
 }
 
-.tab-navbar-wrapper.sticky {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid transparent;
+.tab-navbar-wrapper:stuck { /* Pseudo-class for when sticky is active - not fully supported */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .tab-navbar {

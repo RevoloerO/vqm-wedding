@@ -263,19 +263,10 @@ const ScrollToTopButton = ({ isVisible }) => {
 // --- Main Page Component ---
 function HomePage() {
   const [activeView, setActiveView] = useState('journey');
-  const [isSticky, setSticky] = useState(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
-  const navWrapperRef = useRef(null);
-
+  
   useEffect(() => {
     const handleScroll = () => {
-      if (navWrapperRef.current) {
-        if (window.scrollY > navWrapperRef.current.offsetTop) {
-          setSticky(true);
-        } else {
-          setSticky(false);
-        }
-      }
       // Logic for scroll to top button
       if (window.scrollY > 300) {
         setShowScrollButton(true);
@@ -294,11 +285,7 @@ function HomePage() {
     <div className="homepage-container">
       <Hero />
       <BlessingSlideshow />
-      {isSticky && <div style={{ height: navWrapperRef.current?.offsetHeight }} />}
-      <div 
-        ref={navWrapperRef} 
-        className={`tab-navbar-wrapper ${isSticky ? 'sticky' : ''}`}
-      >
+      <div className="tab-navbar-wrapper">
         <TabNavigation activeView={activeView} onViewChange={setActiveView} />
       </div>
       <div className="main-content-area">

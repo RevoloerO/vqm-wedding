@@ -36,8 +36,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* MODIFIED: Reduced height to prevent full-screen takeover */
-  height: 85vh;
+  height: 70vh;
   padding: 20px;
   color: var(--color-text-light);
   box-sizing: border-box;
@@ -54,44 +53,76 @@ body {
   height: 100%;
   background-image: url('assets/bg-2.jpeg');
   background-position: center;
+  transition: all 0.5s ease-out;
 }
 
 .hero-background-blur {
   z-index: -2;
   filter: blur(20px);
-  /* Enlarge the background slightly and animate it */
   transform: scale(1.1);
   animation: zoomEffect 40s ease-in-out infinite;
+  will-change: opacity, transform, filter;
 }
 
 .hero-background-clear {
   z-index: -1;
   background-size: contain; /* This fits the image vertically */
   background-repeat: no-repeat;
+  will-change: background-size;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+    z-index: 0;
 }
 
 /* The content now sits on top of the background layers */
 .hero-content {
-    background-color: rgba(0, 0, 0, 0.25);
-    padding: 2rem;
-    border-radius: 10px;
-    backdrop-filter: blur(3px);
-    position: relative; /* Ensure it's in the stacking context */
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem 2rem;
+    border-radius: 15px; /* Softer radius */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px); /* For Safari */
+    position: relative;
     z-index: 1;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease-out;
+    will-change: background-color, backdrop-filter;
 }
+
+.hero-section:hover .hero-background-blur {
+    opacity: 0;
+}
+.hero-section:hover .hero-background-clear {
+    background-size: cover; /* Image expands to fill on hover */
+}
+.hero-section:hover .hero-content {
+    background-color: rgba(0, 0, 0, 0.1); /* Slightly darker tint for clear glass */
+    backdrop-filter: blur(0); /* Removes the blur on hover */
+    -webkit-backdrop-filter: blur(0);
+}
+
 
 .hero-content h1, .hero-content h2 {
     color: var(--color-text-light);
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
 }
-.hero-names { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 400; margin: 0; }
+
+.hero-names { font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 400; margin: 0; }
 .hero-date {
   font-family: var(--font-body);
-  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
   font-weight: 300;
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
 }
 
 /* Zoom animation for the blurred background */
@@ -105,28 +136,32 @@ body {
 /* --- LOGO --- */
 .wedding-logo {
   display: flex; flex-direction: row; justify-content: center;
-  align-items: center; margin: 1rem auto;
+  align-items: center; margin: 0.5rem auto; /* Reduced margin */
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
 }
 .wedding-logo-box { display: flex; flex-direction: column; margin: auto 0; }
 .logo-text {
   font-family: var(--font-logo); font-weight: 1000; font-style: normal;
-  text-transform: uppercase; color: var(--color-text-light); font-size: 6vw;
+  text-transform: uppercase; color: var(--color-text-light);
+  font-size: clamp(2rem, 3vw, 2.5rem);
 }
 #logo-text-1, #logo-text-2 { line-height: 0.8; }
-#logo-text-3 { font-size: 15vw; margin-left: -1vw; }
+#logo-text-3 {
+  font-size: clamp(6rem, 8vw, 8rem);
+  margin-left: -0.5vw;
+}
 
 /* --- COUNTDOWN & COUNTUP --- */
-.countdown, .countup { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; }
+.countdown, .countup { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
 .countdown-item, .countup { text-align: center; }
 .countdown-value, .countup-value {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
   font-weight: 700;
 }
 .countdown-unit, .countup-unit {
   font-family: var(--font-body);
-  font-size: clamp(0.7rem, 2vw, 0.9rem);
+  font-size: clamp(0.6rem, 1vw, 0.7rem);
   text-transform: uppercase; letter-spacing: 1px;
 }
 .countup { flex-direction: column; }
@@ -154,14 +189,26 @@ body {
 
 /* --- BLESSING SLIDESHOW SECTION --- */
 .blessing-section {
-    background-color: var(--color-primary-matcha); text-align: center;
+    background: linear-gradient(135deg, var(--color-primary-matcha), #8a9e80);
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
+    text-align: center;
     padding: 4rem 5%; overflow: hidden; position: relative;
     min-height: 150px;
+    border-top: 3px solid rgba(255, 255, 255, 0.3);
 }
+
+@keyframes gradientShift {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
 .blessing-text {
-    font-family: var(--font-quote); font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-family: var(--font-quote);
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
     font-style: italic; color: var(--color-text-light); line-height: 1.4;
-    margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 .blessing-source {
     font-family: var(--font-body); font-size: 1rem;
@@ -275,10 +322,36 @@ body {
 .waning-crescent::after { right: 15px; }
 .waxing-gibbous::after { left: -30px; }
 
-/* --- DETAILS SECTION --- */
-.details-section h2, .photos-section h2 {
-    text-align: center;
+/* --- SAVE THE DAY SECTION --- */
+.save-the-day-section {
+    background-color: var(--color-secondary-cream);
+    /* Subtle pattern background */
+    background-image:
+        linear-gradient(135deg, rgba(255,255,255,.05) 25%, transparent 25%),
+        linear-gradient(225deg, rgba(255,255,255,.05) 25%, transparent 25%),
+        linear-gradient(45deg, rgba(255,255,255,.05) 25%, transparent 25%),
+        linear-gradient(315deg, rgba(255,255,255,.05) 25%, #fdfbf5 25%);
+    background-size: 2em 2em;
+    background-position: 0 0, 1em 1em, 1em 1em, 0 0;
+
+    padding: 3rem 2rem;
+    border-radius: 8px;
+    border: 1px solid #e0dccc;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
 }
+
+.save-the-day-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
+
+.save-the-day-section h2 {
+    font-size: 3.5rem; /* Make it a bit bigger */
+    color: var(--color-accent-deep-gold);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
 .details-container { display: flex; justify-content: space-around; gap: 2rem; text-align: center; width: 100%; }
 .detail-item { flex: 1; }
 .detail-item h3 { color: var(--color-accent-gold); font-size: 1.5rem; }
@@ -321,4 +394,37 @@ body {
     .hero-names { font-size: 2rem; }
     .hero-date { font-size: 0.9rem; }
     .tab-nav-link { font-size: 0.9rem; padding: 0.8rem 1rem; }
+}
+
+/* --- LARGE SCREEN OPTIMIZATIONS --- */
+@media (min-width: 1600px) {
+    /* Increase the max-width of the main content containers */
+    .main-content-area, .tab-navbar {
+        max-width: 1400px;
+    }
+
+    .page-section h2, .save-the-day-section h2 {
+        font-size: 3.5rem;
+    }
+
+    /* Removed blessing-text override to let clamp() work */
+
+    .story-text-container p, .fact-card p, .detail-item p, .fun-fact-summary {
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+
+    .fact-card h3, .detail-item h3 {
+        font-size: 1.8rem;
+    }
+
+    .tab-nav-link {
+        font-size: 1.2rem;
+        padding: 1.2rem 2rem;
+    }
+
+    .button {
+        font-size: 1rem;
+        padding: 1rem 2rem;
+    }
 }

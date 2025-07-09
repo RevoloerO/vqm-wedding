@@ -78,7 +78,6 @@ const Countup = ({ startDate }) => {
 // Main Hero Section (Stays at the top)
 const Hero = () => (
   <header className="hero-section">
-    {/* New structure for layered background effect */}
     <div className="hero-background-blur"></div>
     <div className="hero-background-clear"></div>
     <div className="hero-content">
@@ -171,13 +170,13 @@ const CelestialSync = () => (
 );
 
 
-// Wedding Details Section
-const WeddingDetails = () => (
-    <section id="details" className="page-section details-section">
-        <h2>Wedding Details</h2>
+// Save the Day Section
+const SaveTheDay = () => (
+    <section id="save-the-day" className="page-section save-the-day-section">
+        <h2>Save the Day</h2>
         <div className="details-container">
             <div className="detail-item">
-                <h3>Ideal Venues</h3>
+                <h3>Ceremony & Reception</h3>
                 <p>We are still dreaming up the perfect place to say "I do." Here are a few of our inspirations:</p>
                 <ul>
                     <li>The Grand Conservatory, Seoul</li>
@@ -212,7 +211,7 @@ const GuestPhotos = () => (
 const TabNavigation = ({ activeView, onViewChange }) => {
   const navItems = [
       { id: 'story', label: 'Our Story' },
-      { id: 'details', label: 'Details' },
+      { id: 'save-the-day', label: 'Save the Day' },
       { id: 'fun-facts', label: 'Fun Facts' },
       { id: 'photos', label: 'Photos' }
   ];
@@ -235,7 +234,7 @@ const ViewDisplay = ({ activeView }) => {
   return (
     <div className="view-container">
       {activeView === 'story' && <OurStory />}
-      {activeView === 'details' && <WeddingDetails />}
+      {activeView === 'save-the-day' && <SaveTheDay />}
       {activeView === 'fun-facts' && <CelestialSync />}
       {activeView === 'photos' && <GuestPhotos />}
     </div>

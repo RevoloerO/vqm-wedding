@@ -36,25 +36,53 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 100vh;
-  padding: 100px 20px 20px;
-  /* UPDATED: Using your new uploaded image */
-  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('assets/bg-2.jpeg');
-  background-size: cover;
-  /* This helps focus on the upper part of the vertical image */
-  background-position: center 25%;
+  /* MODIFIED: Reduced height to prevent full-screen takeover */
+  height: 85vh;
+  padding: 20px;
   color: var(--color-text-light);
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden; /* Crucial for the zoom effect */
 }
+
+/* New Layered Background Styles */
+.hero-background-blur, .hero-background-clear {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/bg-2.jpeg');
+  background-position: center;
+}
+
+.hero-background-blur {
+  z-index: -2;
+  filter: blur(20px);
+  /* Enlarge the background slightly and animate it */
+  transform: scale(1.1);
+  animation: zoomEffect 40s ease-in-out infinite;
+}
+
+.hero-background-clear {
+  z-index: -1;
+  background-size: contain; /* This fits the image vertically */
+  background-repeat: no-repeat;
+}
+
+/* The content now sits on top of the background layers */
 .hero-content {
     background-color: rgba(0, 0, 0, 0.25);
     padding: 2rem;
     border-radius: 10px;
     backdrop-filter: blur(3px);
+    position: relative; /* Ensure it's in the stacking context */
+    z-index: 1;
 }
+
 .hero-content h1, .hero-content h2 {
     color: var(--color-text-light);
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
 }
 .hero-names { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 400; margin: 0; }
 .hero-date {
@@ -65,6 +93,14 @@ body {
   text-transform: uppercase;
   margin: 1.5rem 0;
 }
+
+/* Zoom animation for the blurred background */
+@keyframes zoomEffect {
+    0% { transform: scale(1.1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1.1); }
+}
+
 
 /* --- LOGO --- */
 .wedding-logo {
@@ -139,7 +175,7 @@ body {
     100% { opacity: 0; transform: translateY(-10px); }
 }
 
-/* --- NEW: STICKY TAB NAVIGATION --- */
+/* --- STICKY TAB NAVIGATION --- */
 .tab-navbar-wrapper {
   background-color: var(--color-background);
   border-bottom: 1px solid #ddd;

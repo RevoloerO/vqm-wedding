@@ -78,6 +78,9 @@ const Countup = ({ startDate }) => {
 // Main Hero Section (Stays at the top)
 const Hero = () => (
   <header className="hero-section">
+    {/* New structure for layered background effect */}
+    <div className="hero-background-blur"></div>
+    <div className="hero-background-clear"></div>
     <div className="hero-content">
       <h1 className="hero-names">Quyen Mai & Hien Dang</h1>
       <HQLogo />
@@ -129,7 +132,7 @@ const BlessingSlideshow = () => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % quotes.length);
         }, 7000); // Change quote every 7 seconds
 
-        return () => clearInterval(intervalId);
+        return () => clearInterval(intervalId); // Cleanup on component unmount
     }, [quotes.length]);
 
     const currentQuote = quotes[currentIndex];

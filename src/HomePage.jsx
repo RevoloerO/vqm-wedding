@@ -89,21 +89,17 @@ const Hero = () => (
   </header>
 );
 
-// Our Story Section
-const OurStory = () => (
-    <section id="story" className="page-section story-section">
-        <div className="section-content-story">
-            <div className="story-image-container">
-                <img 
-                    src="https://placehold.co/600x800/A3B899/FFFFFF?text=Quyen+%26+Hien" 
-                    alt="Quyen and Hien" 
-                    className="story-image"
-                />
+// Our Journey Section
+const OurJourney = () => (
+    <section id="journey" className="page-section journey-section">
+        <div className="section-content-journey">
+            <div className="journey-image-container">
+                {/* This div is now styled with the background image via CSS */}
             </div>
-            <div className="story-text-container">
-                <h2>Our Story</h2>
+            <div className="journey-text-container">
+                <h2>Our Journey</h2>
                 <p>Our journey together began with a shared love for matcha lattes and quiet afternoons. It has since blossomed into a life filled with laughter, adventure, and countless beautiful memories. We are so excited to start this next chapter and couldn't have done it without the love and support from all of you...</p>
-                <a href="/our-story" className="button">Read Our Full Story</a>
+                <a href="/our-journey" className="button">Read Our Full Journey</a>
             </div>
         </div>
     </section>
@@ -210,7 +206,7 @@ const GuestPhotos = () => (
 
 const TabNavigation = ({ activeView, onViewChange }) => {
   const navItems = [
-      { id: 'story', label: 'Our Story' },
+      { id: 'journey', label: 'Our Journey' },
       { id: 'save-the-day', label: 'Save the Day' },
       { id: 'fun-facts', label: 'Fun Facts' },
       { id: 'photos', label: 'Photos' }
@@ -233,7 +229,7 @@ const TabNavigation = ({ activeView, onViewChange }) => {
 const ViewDisplay = ({ activeView }) => {
   return (
     <div className="view-container">
-      {activeView === 'story' && <OurStory />}
+      {activeView === 'journey' && <OurJourney />}
       {activeView === 'save-the-day' && <SaveTheDay />}
       {activeView === 'fun-facts' && <CelestialSync />}
       {activeView === 'photos' && <GuestPhotos />}
@@ -266,7 +262,7 @@ const ScrollToTopButton = ({ isVisible }) => {
 
 // --- Main Page Component ---
 function HomePage() {
-  const [activeView, setActiveView] = useState('story');
+  const [activeView, setActiveView] = useState('journey');
   const [isSticky, setSticky] = useState(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
   const navWrapperRef = useRef(null);
@@ -309,7 +305,16 @@ function HomePage() {
         <ViewDisplay activeView={activeView} />
       </div>
       <footer className="footer">
-        <p>AMDG | Made with love by Quyen & Hien | 2028</p>
+        <p>
+            <span className="amdg-wrapper">
+                AMDG
+                <span className="amdg-tooltip">
+                    <strong>Ad Majorem Dei Gloriam</strong>
+                    <em>"for the greater glory of God"</em>
+                </span>
+            </span>
+            &nbsp;|&nbsp;Made with love by Quyen & Hien&nbsp;|&nbsp;2028
+        </p>
       </footer>
       <ScrollToTopButton isVisible={showScrollButton} />
     </div>

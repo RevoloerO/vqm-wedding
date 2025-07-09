@@ -170,22 +170,34 @@ body {
 .page-section { padding: 0; }
 .page-section h2 { font-size: 2.8rem; margin-bottom: 2rem; text-align: center; }
 
-/* --- STORY SECTION (Creative Layout) --- */
-.section-content-story { display: flex; align-items: center; gap: 2rem; }
-.story-image-container {
-    flex: 1; position: relative; min-width: 300px;
-}
-.story-image-container::before {
-    content: ''; position: absolute; top: -20px; left: -20px;
-    width: 100%; height: 100%; border: 2px solid var(--color-accent-gold);
-    border-radius: 5px; z-index: -1;
-}
-.story-image {
-    width: 100%; height: auto; object-fit: cover; border-radius: 5px;
+/* --- OUR JOURNEY SECTION (Creative Layout) --- */
+.section-content-journey { display: flex; align-items: center; gap: 3rem; }
+.journey-image-container {
+    flex: 1 1 40%; /* Flex-grow, flex-shrink, flex-basis */
+    position: relative;
+    max-width: 500px;
+    aspect-ratio: 3 / 4; /* Modern way to maintain aspect ratio */
+    background-image: url('assets/bg-2.jpeg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
     box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
-.story-text-container { flex: 1.2; }
-.story-text-container h2 { text-align: left; }
+.journey-image-container::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--color-accent-gold);
+    border-radius: 8px;
+    z-index: -1;
+}
+.journey-text-container {
+    flex: 1 1 60%;
+}
+.journey-text-container h2 { text-align: left; }
 
 /* --- BLESSING SLIDESHOW SECTION --- */
 .blessing-section {
@@ -385,6 +397,52 @@ body {
   color: var(--color-text-light);
 }
 
+/* --- AMDG TOOLTIP --- */
+.amdg-wrapper {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.7);
+    cursor: help;
+}
+
+.amdg-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    width: 220px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -110px; /* Use half of the width to center */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    transform: translateY(10px);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.amdg-tooltip strong {
+    font-family: var(--font-quote);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.amdg-tooltip em {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.amdg-wrapper:hover .amdg-tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* --- SCROLL TO TOP BUTTON --- */
 .scroll-to-top-btn {
     position: fixed;
@@ -431,9 +489,9 @@ body {
 
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 768px) {
-    .section-content-story, .fun-facts-container, .details-container { flex-direction: column; }
-    .story-image-container, .story-text-container { width: 100%; }
-    .story-text-container h2 { text-align: center; }
+    .section-content-journey, .fun-facts-container, .details-container { flex-direction: column; }
+    .journey-image-container, .journey-text-container { width: 100%; max-width: 100%; }
+    .journey-text-container h2 { text-align: center; }
     .page-section h2 { font-size: 2.2rem; }
     .hero-names { font-size: 2rem; }
     .hero-date { font-size: 0.9rem; }
@@ -453,7 +511,7 @@ body {
 
     /* Removed blessing-text override to let clamp() work */
 
-    .story-text-container p, .fact-card p, .detail-item p, .fun-fact-summary {
+    .journey-text-container p, .fact-card p, .detail-item p, .fun-fact-summary {
         font-size: 1.1rem;
         line-height: 1.7;
     }

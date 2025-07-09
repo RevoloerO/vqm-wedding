@@ -1,6 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './HomePage.css';
+
+// --- ASSET IMPORT ---
+import heroBgImage from './assets/bg-2.jpeg';
+import journeyImage from './assets/bg-2.jpeg'; 
+
+// --- CONSTANTS ---
+const VIEWS = {
+  JOURNEY: 'journey',
+  SAVE_THE_DATE: 'save-the-date',
+  CROSS_SYMBOLISM: 'cross-symbolism',
+  LOVE_FACTS: 'love-facts',
+  RSVP: 'rsvp',
+};
 
 // --- Reusable Components ---
 
@@ -17,7 +30,7 @@ const HQLogo = () => (
 
 // Countdown Timer for the Wedding
 const Countdown = ({ targetDate }) => {
-  const calculateTimeLeft = () => {
+  const calculateTimeLeft = useCallback(() => {
     const difference = +new Date(targetDate) - +new Date();
     let timeLeft = {};
 
@@ -30,23 +43,32 @@ const Countdown = ({ targetDate }) => {
       };
     }
     return timeLeft;
-  };
+  }, [targetDate]);
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
-    const timer = setTimeout(() => setTimeLeft(calculateTimeLeft()), 1000);
-    return () => clearTimeout(timer);
-  });
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [calculateTimeLeft]);
 
   return (
     <div className="countdown">
-      {Object.entries(timeLeft).map(([unit, value]) => (
-        <div key={unit} className="countdown-item">
-          <div className="countdown-value">{value}</div>
-          <div className="countdown-unit">{unit}</div>
+      {Object.keys(timeLeft).length > 0 ? (
+        Object.entries(timeLeft).map(([unit, value]) => (
+          <div key={unit} className="countdown-item">
+            <div className="countdown-value">{value}</div>
+            <div className="countdown-unit">{unit}</div>
+          </div>
+        ))
+      ) : (
+        <div className="countdown-item">
+            <div className="countdown-value">0</div>
+            <div className="countdown-unit">Days</div>
         </div>
-      ))}
+      )}
     </div>
   );
 };
@@ -54,18 +76,11 @@ const Countdown = ({ targetDate }) => {
 // --- Page Sections (Views) ---
 
 // Main Hero Section (Stays at the top)
-const Hero = () => {
+const Hero = ({ backgroundImage, onViewChange }) => {
     const quotes = [
         { text: "I have found the one whom my soul loves.", source: "Song of Solomon 3:4" },
         { text: "Two are better than one... If either of them falls down, one can help the other up.", source: "Ecclesiastes 4:9-10" },
-        { text: "Let the morning bring me word of your unfailing love, for I have put my trust in you.", source: "Psalm 143:8" },
-        { text: "I will betroth you to me forever; I will betroth you in righteousness and justice, in love and compassion.", source: "Hosea 2:19" },
-        { text: "I have loved you with an everlasting love; I have drawn you with unfailing kindness.", source: "Jeremiah 31:3" },
-        { text: "Love bears all things, believes all things, hopes all things, endures all things.", source: "1 Corinthians 13:7" },
-        { text: "Be completely humble and gentle; be patient, bearing with one another in love.", source: "Ephesians 4:2" },
-        { text: "No one has ever seen God; but if we love one another, God lives in us and his love is made complete in us.", source: "1 John 4:12" },
-        { text: "But the fruit of the Spirit is love, joy, peace, forbearance, kindness, goodness, faithfulness, gentleness and self-control.", source: "Galatians 5:22-23" },
-        { text: "Therefore what God has joined together, let no one separate.", source: "Mark 10:9" }
+        { text: "Let the morning bring me word of your unfailing love, for I have put my trust in you.", source: "Psalm 143:8" }
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -73,19 +88,48 @@ const Hero = () => {
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % quotes.length);
-        }, 7000); // Change quote every 7 seconds
-
-        return () => clearInterval(intervalId); // Cleanup on component unmount
+        }, 7000);
+        return () => clearInterval(intervalId);
     }, [quotes.length]);
 
     const currentQuote = quotes[currentIndex];
 
+    const bgStyle = { backgroundImage: `url(${backgroundImage})` };
+
+    // Function to handle click and navigate to the "Our Cross" section
+    const handleCrossClick = () => {
+        onViewChange(VIEWS.CROSS_SYMBOLISM);
+        // Scroll to the section after a short delay to allow the view to render
+        setTimeout(() => {
+            const element = document.getElementById('cross-symbolism');
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 100);
+    };
+
     return (
       <header className="hero-section">
-        <div className="hero-background-blur"></div>
-        <div className="hero-background-clear"></div>
+        <div className="hero-background-blur" style={bgStyle}></div>
+        <div className="hero-background-clear" style={bgStyle}></div>
         <div className="hero-content">
-          <div className="cross-design"></div>
+          {/* --- UPDATED: Cross is now a button that links to the explanation section --- */}
+          <button onClick={handleCrossClick} className="cross-design-wrapper" aria-label="Learn about our cross">
+            <div className="cross-design">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M50 12 V30 M27 35 H45 M73 35 H55" strokeWidth="3"/>
+                  <circle className="accent-circle" cx="50" cy="8" r="4"/>
+                  <circle className="accent-circle" cx="23" cy="35" r="4"/>
+                  <circle className="accent-circle" cx="77" cy="35" r="4"/>
+                  <circle className="accent-circle" cx="50" cy="35" r="5"/>
+                  <path d="M50 40 C 40 55, 60 55, 50 70 C 40 85, 60 85, 50 90" strokeWidth="2.5"/>
+                  <path d="M50 40 C 60 55, 40 55, 50 70 C 60 85, 40 85, 50 90" strokeWidth="2.5"/>
+                  <path d="M50 40 V 90" strokeWidth="2.5"/>
+                  <circle className="accent-circle" cx="50" cy="94" r="4"/>
+              </svg>
+            </div>
+            {/* Tooltip removed from here as it's now a direct link */}
+          </button>
           <h1 className="hero-names">Quyen Mai & Hien Dang</h1>
           <p className="hero-details">July 1, 2028 &nbsp;|&nbsp; Hawaii, USA</p>
           <Countdown targetDate="2028-07-01T00:00:00" />
@@ -106,8 +150,7 @@ const OurJourney = () => (
             <h2>Our Journey</h2>
         </div>
         <div className="section-content-journey">
-            <div className="journey-image-container">
-                {/* This div is now styled with the background image via CSS */}
+            <div className="journey-image-container" style={{ backgroundImage: `url(${journeyImage})` }}>
             </div>
             <div className="journey-text-container">
                 <p>Our journey together began with a shared love for matcha lattes and quiet afternoons. It has since blossomed into a life filled with laughter, adventure, and countless beautiful memories. We are so excited to start this next chapter and couldn't have done it without the love and support from all of you...</p>
@@ -117,10 +160,60 @@ const OurJourney = () => (
     </section>
 );
 
-// Fun Facts / Celestial Sync Section
-const CelestialSync = () => (
-    <section id="fun-facts" className="page-section fun-facts-section">
-        <h2>Celestial Sync</h2>
+// Cord of Three Strands Cross Explanation Section
+const CrossExplanation = () => (
+    <section id="cross-symbolism" className="page-section cross-explanation-section">
+        <div className="section-header">
+            <HQLogo />
+            <h2>Our Cross</h2>
+        </div>
+        <div className="explanation-content">
+            <div className="explanation-visual">
+                <svg className="explanation-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <g className="explanation-glow-group">
+                      <path d="M50 12 V30 M27 35 H45 M73 35 H55" strokeWidth="3"/>
+                      <path d="M50 40 C 40 55, 60 55, 50 70 C 40 85, 60 85, 50 90" strokeWidth="2.5"/>
+                      <path d="M50 40 C 60 55, 40 55, 50 70 C 60 85, 40 85, 50 90" strokeWidth="2.5"/>
+                      <path d="M50 40 V 90" strokeWidth="2.5"/>
+                    </g>
+                    <circle className="accent-circle" cx="50" cy="8" r="4"/>
+                    <circle className="accent-circle" cx="23" cy="35" r="4"/>
+                    <circle className="accent-circle" cx="77" cy="35" r="4"/>
+                    <circle className="accent-circle" cx="50" cy="35" r="5"/>
+                    <circle className="accent-circle" cx="50" cy="94" r="4"/>
+                </svg>
+            </div>
+            <div className="explanation-text">
+                <h3 className="explanation-title">The Cord of Three Strands</h3>
+                <p className="explanation-scripture"><em>"A cord of three strands is not quickly broken." — Ecclesiastes 4:12</em></p>
+                <div className="symbolism-item">
+                    <h4>The Three Strands</h4>
+                    <p>The three single strands represent the bride, the groom, and God, each whole and individual before their lives are woven together.</p>
+                </div>
+                <div className="symbolism-item">
+                    <h4>The Braid</h4>
+                    <p>The braiding symbolizes the couple becoming one while also incorporating God into their union, creating a bond of incredible strength.</p>
+                </div>
+                 <div className="symbolism-item">
+                    <h4>The Five Holy Wounds</h4>
+                    <p>The five circles represent the wounds of Jesus. They symbolize the sacrificial love that forms the ultimate foundation of a Christian marriage.</p>
+                </div>
+                <div className="symbolism-item">
+                    <h4>A Lasting Reminder</h4>
+                    <p>This cross serves as a lasting reminder of the vows made and the covenant formed between the couple and God on their wedding day.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+);
+
+// Love Facts / Celestial Sync Section
+const LoveFacts = () => (
+    <section id="love-facts" className="page-section love-facts-section">
+        <div className="section-header">
+             <HQLogo />
+             <h2>Love Facts</h2>
+        </div>
         <div className="fun-facts-container">
             <div className="fact-card">
                 <div className="moon-icon waning-crescent"></div>
@@ -228,7 +321,6 @@ const RsvpForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // In a real app, you'd send this data to a server.
         console.log('RSVP Submission:', formData);
         setSubmitted(true);
     };
@@ -257,11 +349,11 @@ const RsvpForm = () => {
                         <fieldset>
                             <legend>Will you be joining us?</legend>
                             <div className="radio-group">
-                                <label className={formData.attending === 'yes' ? 'selected' : ''}>
-                                    <input type="radio" name="attending" value="yes" checked={formData.attending === 'yes'} onChange={handleChange} required /> Joyfully Accepts
+                                <label htmlFor="attending-yes" className={formData.attending === 'yes' ? 'selected' : ''}>
+                                    <input type="radio" id="attending-yes" name="attending" value="yes" checked={formData.attending === 'yes'} onChange={handleChange} required /> Joyfully Accepts
                                 </label>
-                                <label className={formData.attending === 'no' ? 'selected' : ''}>
-                                    <input type="radio" name="attending" value="no" checked={formData.attending === 'no'} onChange={handleChange} /> Regretfully Declines
+                                <label htmlFor="attending-no" className={formData.attending === 'no' ? 'selected' : ''}>
+                                    <input type="radio" id="attending-no" name="attending" value="no" checked={formData.attending === 'no'} onChange={handleChange} /> Regretfully Declines
                                 </label>
                             </div>
                         </fieldset>
@@ -271,11 +363,11 @@ const RsvpForm = () => {
                              <fieldset>
                                 <legend>Which events will you attend?</legend>
                                 <div className="checkbox-group">
-                                    <label className={formData.attendingChurch ? 'selected' : ''}>
-                                        <input type="checkbox" name="attendingChurch" checked={formData.attendingChurch} onChange={handleChange} /> Church Ceremony
+                                    <label htmlFor="attending-church" className={formData.attendingChurch ? 'selected' : ''}>
+                                        <input type="checkbox" id="attending-church" name="attendingChurch" checked={formData.attendingChurch} onChange={handleChange} /> Church Ceremony
                                     </label>
-                                    <label className={formData.attendingParty ? 'selected' : ''}>
-                                        <input type="checkbox" name="attendingParty" checked={formData.attendingParty} onChange={handleChange} /> Wedding Party
+                                    <label htmlFor="attending-party" className={formData.attendingParty ? 'selected' : ''}>
+                                        <input type="checkbox" id="attending-party" name="attendingParty" checked={formData.attendingParty} onChange={handleChange} /> Wedding Party
                                     </label>
                                 </div>
                             </fieldset>
@@ -301,10 +393,11 @@ const RsvpForm = () => {
 
 const TabNavigation = ({ activeView, onViewChange }) => {
   const navItems = [
-      { id: 'journey', label: 'Our Journey' },
-      { id: 'save-the-date', label: 'Save the Date' },
-      { id: 'fun-facts', label: 'Fun Facts' },
-      { id: 'rsvp', label: 'RSVP' }
+      { id: VIEWS.JOURNEY, label: 'Our Journey' },
+      { id: VIEWS.SAVE_THE_DATE, label: 'Save the Date' },
+      { id: VIEWS.CROSS_SYMBOLISM, label: 'Our Cross' },
+      { id: VIEWS.LOVE_FACTS, label: 'Love Facts' },
+      { id: VIEWS.RSVP, label: 'RSVP' }
   ];
   return (
     <nav className="tab-navbar">
@@ -324,10 +417,11 @@ const TabNavigation = ({ activeView, onViewChange }) => {
 const ViewDisplay = ({ activeView }) => {
   return (
     <div className="view-container">
-      {activeView === 'journey' && <OurJourney />}
-      {activeView === 'save-the-date' && <SaveTheDate />}
-      {activeView === 'fun-facts' && <CelestialSync />}
-      {activeView === 'rsvp' && <RsvpForm />}
+      {activeView === VIEWS.JOURNEY && <OurJourney />}
+      {activeView === VIEWS.SAVE_THE_DATE && <SaveTheDate />}
+      {activeView === VIEWS.CROSS_SYMBOLISM && <CrossExplanation />}
+      {activeView === VIEWS.LOVE_FACTS && <LoveFacts />}
+      {activeView === VIEWS.RSVP && <RsvpForm />}
     </div>
   );
 };
@@ -357,17 +451,12 @@ const ScrollToTopButton = ({ isVisible }) => {
 
 // --- Main Page Component ---
 function HomePage() {
-  const [activeView, setActiveView] = useState('journey');
+  const [activeView, setActiveView] = useState(VIEWS.JOURNEY);
   const [showScrollButton, setShowScrollButton] = useState(false);
   
   useEffect(() => {
     const handleScroll = () => {
-      // Logic for scroll to top button
-      if (window.scrollY > 300) {
-        setShowScrollButton(true);
-      } else {
-        setShowScrollButton(false);
-      }
+      setShowScrollButton(window.scrollY > 300);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -378,7 +467,7 @@ function HomePage() {
 
   return (
     <div className="homepage-container">
-      <Hero />
+      <Hero backgroundImage={heroBgImage} onViewChange={setActiveView} />
       <div className="tab-navbar-wrapper">
         <TabNavigation activeView={activeView} onViewChange={setActiveView} />
       </div>

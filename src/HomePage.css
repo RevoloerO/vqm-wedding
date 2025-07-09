@@ -1,7 +1,6 @@
 /* Import new elegant fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap');
-@import url('https://use.typekit.net/ist3wra.css'); /* Keep Megrim for logo */
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap'); /* NEW: Font for Hero Names */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap'); 
 
 /* --- MATCHA LATTE THEME (Refined) --- */
 :root {
@@ -16,9 +15,9 @@
 
   --font-heading: 'Playfair Display', serif;
   --font-body: 'Montserrat', sans-serif;
-  --font-logo: 'megrim', sans-serif;
+  --font-logo: 'Cormorant Garamond', serif; 
   --font-quote: 'Cormorant Garamond', serif;
-  --font-special: 'Great Vibes', cursive;
+  --font-special: 'Great Vibes', cursive; /* Reverted to Great Vibes for hero names */
 }
 
 /* --- GENERAL STYLES --- */
@@ -32,10 +31,10 @@ body {
   line-height: 1.6;
 }
 
-/* --- HERO SECTION --- */
+/* --- HERO SECTION (Reverted to Static Image) --- */
 .hero-section {
   display: flex;
-  flex-direction: column; /* Stack cross and content vertically */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -43,17 +42,16 @@ body {
   color: var(--color-text-light);
   box-sizing: border-box;
   position: relative;
-  overflow: hidden; /* Crucial for the zoom effect */
+  overflow: hidden; 
+  min-height: 80vh;
 }
 
-/* New Layered Background Styles */
 .hero-background-blur, .hero-background-clear {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('assets/bg-2.jpeg');
   background-position: center;
   transition: opacity 0.5s ease-out, background-size 0.5s ease-out;
 }
@@ -68,7 +66,7 @@ body {
 
 .hero-background-clear {
   z-index: -1;
-  background-size: contain; /* This fits the image vertically */
+  background-size: contain; 
   background-repeat: no-repeat;
   will-change: background-size;
 }
@@ -84,62 +82,87 @@ body {
     z-index: 0;
 }
 
-/* The content now sits on top of the background layers */
 .hero-content {
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 1.5rem 2rem;
-    border-radius: 15px; /* Softer radius */
+    border-radius: 15px;
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px); /* For Safari */
+    -webkit-backdrop-filter: blur(5px);
     position: relative;
     z-index: 1;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
     transition: background-color 0.5s ease-out, backdrop-filter 0.5s ease-out;
     will-change: background-color, backdrop-filter;
-    width: auto; /* Allow content to define width */
-    max-width: 90%; /* Prevent it from touching edges */
-    display: grid; /* Use grid to manage internal layout */
-    place-items: center; /* Center all items inside */
+    width: auto;
+    max-width: 90%;
+    display: grid;
+    place-items: center;
 }
 
 .hero-section:hover .hero-background-blur {
     opacity: 0;
 }
 .hero-section:hover .hero-background-clear {
-    background-size: cover; /* Image expands to fill on hover */
+    background-size: cover; 
 }
 .hero-section:hover .hero-content {
-    background-color: rgba(0, 0, 0, 0.1); /* Slightly darker tint for clear glass */
-    backdrop-filter: blur(0); /* Removes the blur on hover */
+    background-color: rgba(0, 0, 0, 0.1); 
+    backdrop-filter: blur(0); 
     -webkit-backdrop-filter: blur(0);
 }
 
-/* MODIFIED: Redesigned Cross Design */
-.cross-design {
-    width: 30px;
-    height: 42px;
+@keyframes zoomEffect {
+    0% { transform: scale(1.1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1.1); }
+}
+
+/* --- Cross Design --- */
+.cross-design-wrapper {
     position: relative;
+    display: inline-block;
+    cursor: pointer; /* Changed from help to pointer */
     margin-bottom: 1.5rem;
-    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
+    background: none;
+    border: none;
+    padding: 0;
 }
-.cross-design::before, .cross-design::after {
-    content: '';
-    position: absolute;
-    background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4));
-    border-radius: 3px;
+
+.cross-design {
+    width: 50px; 
+    height: 60px;
 }
-.cross-design::before { /* vertical bar */
-    width: 4px;
-    height: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.cross-design::after { /* horizontal bar */
+
+.cross-design svg {
     width: 100%;
-    height: 4px;
-    top: 12px;
-    left: 0;
+    height: 100%;
+    fill: none; 
+    stroke: rgba(255, 255, 255, 0.85); 
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+    transition: stroke 0.5s ease-out, filter 0.5s ease-out, fill 0.5s ease-out;
+}
+
+.cross-design svg .accent-circle {
+    stroke-width: 0;
+    fill: rgba(255, 255, 255, 0.85); 
+}
+
+/* --- UPDATED: Hero cross now glows on hero section hover, not cross hover --- */
+.hero-section:hover .cross-design svg {
+    stroke: rgba(255, 255, 255, 1);
+    filter: 
+        drop-shadow(0 0 5px rgba(255, 255, 255, 0.9)) 
+        drop-shadow(0 0 15px rgba(255, 255, 255, 0.7)) 
+        drop-shadow(0 0 25px var(--color-accent-gold, #C0A172));
+}
+.hero-section:hover .cross-design svg .accent-circle {
+    fill: rgba(255, 255, 255, 1);
+}
+
+/* Tooltip is removed from hero section */
+.cross-tooltip {
+    display: none;
 }
 
 .hero-content h1, .hero-content h2 {
@@ -164,20 +187,17 @@ body {
   margin: 1rem 0;
 }
 
-/* Zoom animation for the blurred background */
-@keyframes zoomEffect {
-    0% { transform: scale(1.1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1.1); }
-}
-
-
 /* --- LOGO --- */
 .wedding-logo {
-  display: flex; flex-direction: row; justify-content: center;
+  display: flex; flex-direction: row;
   align-items: center;
 }
-.wedding-logo-box { display: flex; flex-direction: column; margin: auto 0; }
+.wedding-logo-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 0.2em;
+}
 .logo-text {
   font-family: var(--font-body);
   font-weight: 600;
@@ -199,9 +219,14 @@ body {
 }
 .countup { flex-direction: column; }
 
-/* --- GENERAL PAGE SECTION (used inside views) --- */
-.page-section { padding: 0; }
-.page-section h2 { font-size: 2.8rem; margin-bottom: 2rem; text-align: center; }
+/* --- UI CONSISTENCY: General Page Section Titles --- */
+.page-section h2 { 
+    font-size: 2.8rem; 
+    margin-bottom: 2rem; 
+    text-align: center;
+    color: var(--color-accent-deep-gold);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
 
 .section-header {
     display: flex;
@@ -211,35 +236,35 @@ body {
 }
 
 .section-header .wedding-logo {
-    transform: scale(0.6); /* Make the logo smaller in sections */
-    margin-bottom: -1rem;
+    transform: scale(0.5);
+    margin-bottom: -2rem;
+    margin-top: -2rem;
 }
-
-.section-header .wedding-logo .logo-text {
-    color: var(--color-accent-gold);
+.section-header .logo-text {
     font-family: var(--font-heading);
     font-weight: 400;
+    color: var(--color-accent-gold);
+    font-size: 3rem;
+    line-height: 1;
+}
+.section-header #logo-text-2 {
     font-size: 2.5rem;
 }
-.section-header .wedding-logo #logo-text-2 {
-    line-height: 1.2;
-}
-.section-header .wedding-logo #logo-text-3 {
+.section-header #logo-text-3 {
     font-family: var(--font-special);
-    font-size: 6rem;
+    font-size: 8rem;
     color: var(--color-text-dark);
     text-transform: lowercase;
-    margin-left: -0.2rem;
+    line-height: 1.1;
 }
 
 /* --- OUR JOURNEY SECTION (Creative Layout) --- */
 .section-content-journey { display: flex; align-items: center; gap: 3rem; }
 .journey-image-container {
-    flex: 1 1 40%; /* Flex-grow, flex-shrink, flex-basis */
+    flex: 1 1 40%; 
     position: relative;
     max-width: 500px;
-    aspect-ratio: 3 / 4; /* Modern way to maintain aspect ratio */
-    background-image: url('assets/bg-2.jpeg');
+    aspect-ratio: 3 / 4; 
     background-size: cover;
     background-position: center;
     border-radius: 8px;
@@ -261,12 +286,109 @@ body {
 }
 .journey-text-container h2 { text-align: left; }
 
+/* --- CROSS EXPLANATION SECTION --- */
+.cross-explanation-section {
+    padding: 3rem 0;
+}
+
+.explanation-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .explanation-content {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 3rem;
+    }
+}
+
+.explanation-visual {
+    flex: 0 0 150px; 
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.explanation-svg {
+    width: 100px;
+    height: 120px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* --- UPDATED: Heartbeat Glow Animation for lines only --- */
+.explanation-svg .explanation-glow-group {
+    fill: none;
+    stroke: var(--color-text-dark);
+    animation: heartbeatGlowLines 2.5s ease-in-out infinite;
+}
+
+@keyframes heartbeatGlowLines {
+    0%, 100% {
+        stroke: var(--color-text-dark);
+        filter: drop-shadow(0 0 2px rgba(40, 40, 40, 0.2));
+    }
+    50% {
+        stroke: var(--color-accent-deep-gold);
+        filter: drop-shadow(0 0 8px var(--color-accent-gold));
+    }
+}
+
+/* Circles now have a static color and are not affected by the animation */
+.explanation-svg .accent-circle {
+    stroke-width: 0;
+    fill: var(--color-text-dark);
+}
+
+.explanation-text {
+    flex: 1;
+}
+
+.explanation-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-accent-deep-gold);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .explanation-title {
+        text-align: left;
+    }
+}
+
+.explanation-scripture {
+    font-family: var(--font-quote);
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    border-left: 3px solid var(--color-accent-gold);
+    padding-left: 1rem;
+}
+
+.symbolism-item {
+    margin-bottom: 1.5rem;
+}
+
+.symbolism-item h4 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--color-accent-gold);
+    margin-bottom: 0.25rem;
+}
+
 /* --- BLESSING STYLES (INSIDE HERO) --- */
 .hero-blessing {
     margin-top: 2rem;
     padding-top: 1.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
-    min-height: 4.5em; /* Set a minimum height to prevent layout shifts */
+    min-height: 4.5em; 
     width: 100%;
     display: grid;
     place-items: center;
@@ -275,7 +397,7 @@ body {
     font-family: var(--font-quote);
     font-size: clamp(1.1rem, 1.5vw, 1.4rem);
     font-style: italic; color: var(--color-text-light); line-height: 1.4;
-    margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    margin: 0;
 }
 .blessing-source {
     font-family: var(--font-body); font-size: 0.9rem;
@@ -291,7 +413,7 @@ body {
 
 /* --- STICKY TAB NAVIGATION --- */
 .tab-navbar-wrapper {
-  position: -webkit-sticky; /* For Safari */
+  position: -webkit-sticky; 
   position: sticky;
   top: 0;
   background-color: var(--color-background);
@@ -301,7 +423,7 @@ body {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0);
 }
 
-.tab-navbar-wrapper:stuck { /* Pseudo-class for when sticky is active - not fully supported */
+.tab-navbar-wrapper:stuck { 
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
@@ -351,7 +473,6 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 3rem 5%;
-    transition: padding-top 0.3s ease; /* Smooth transition for padding */
 }
 
 .view-container {
@@ -362,8 +483,8 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- FUN FACTS (CELESTIAL SYNC) SECTION --- */
-.fun-facts-section { text-align: center; }
+/* --- LOVE FACTS SECTION (formerly fun-facts) --- */
+.love-facts-section { text-align: center; }
 .fun-facts-container { display: flex; justify-content: center; align-items: center; gap: 2rem; margin-top: 2rem; }
 .fact-card {
     background: var(--color-secondary-cream); padding: 2rem; border-radius: 5px;
@@ -411,9 +532,7 @@ body {
 }
 
 .save-the-date-section h2 {
-    font-size: 3.5rem; /* Make it a bit bigger */
-    color: var(--color-accent-deep-gold);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    font-size: 3.5rem;
 }
 
 .details-container { display: flex; justify-content: space-around; gap: 3rem; text-align: center; width: 100%; }
@@ -421,12 +540,6 @@ body {
 .detail-item h3 { color: var(--color-accent-gold); font-size: 1.5rem; margin-bottom: 0.5rem;}
 .detail-item p { margin: 0.3rem 0; }
 .detail-item .button-group { margin-top: 1rem; justify-content: center; }
-
-.add-to-calendar {
-    margin-top: 2.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #e0dccc;
-}
 
 .calendar-btn {
     background-color: transparent;
@@ -509,7 +622,25 @@ body {
     cursor: pointer;
     text-align: center;
     transition: all 0.3s ease;
+    position: relative;
 }
+
+.rsvp-form .radio-group input,
+.rsvp-form .checkbox-group input {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    cursor: pointer;
+}
+
+.rsvp-form .radio-group label:focus-within,
+.rsvp-form .checkbox-group label:focus-within {
+    outline: 2px solid var(--color-accent-deep-gold);
+    outline-offset: 2px;
+    border-color: var(--color-accent-gold);
+}
+
 
 .rsvp-form .radio-group .selected, .rsvp-form .checkbox-group .selected {
     border-color: var(--color-accent-gold);
@@ -522,12 +653,6 @@ body {
     padding: 2rem;
     background-color: var(--color-secondary-cream);
     border-left: 5px solid var(--color-primary-matcha);
-}
-
-/* --- GUEST PHOTOS --- */
-.photos-section .section-text-center {
-    width: 100%;
-    text-align: center;
 }
 
 /* --- BUTTONS --- */
@@ -574,7 +699,7 @@ body {
     z-index: 1;
     bottom: 150%;
     left: 50%;
-    margin-left: -110px; /* Use half of the width to center */
+    margin-left: -110px; 
     transition: opacity 0.3s ease-out, transform 0.3s ease-out;
     transform: translateY(10px);
     font-size: 0.9rem;
@@ -656,7 +781,6 @@ body {
 
 /* --- LARGE SCREEN OPTIMIZATIONS --- */
 @media (min-width: 1600px) {
-    /* Increase the max-width of the main content containers */
     .main-content-area, .tab-navbar {
         max-width: 1400px;
     }
@@ -664,8 +788,6 @@ body {
     .page-section h2, .save-the-date-section h2 {
         font-size: 3.5rem;
     }
-
-    /* Removed blessing-text override to let clamp() work */
 
     .journey-text-container p, .fact-card p, .detail-item p, .fun-fact-summary {
         font-size: 1.1rem;

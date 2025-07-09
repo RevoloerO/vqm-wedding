@@ -243,7 +243,6 @@ body {
   border-bottom: 1px solid #ddd;
   transition: box-shadow 0.3s ease;
   z-index: 999;
-  /* The shadow will appear naturally when it sticks */
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0);
 }
 
@@ -334,10 +333,9 @@ body {
 .waning-crescent::after { right: 15px; }
 .waxing-gibbous::after { left: -30px; }
 
-/* --- SAVE THE DAY SECTION --- */
-.save-the-day-section {
+/* --- SAVE THE DATE SECTION --- */
+.save-the-date-section {
     background-color: var(--color-secondary-cream);
-    /* Subtle pattern background */
     background-image:
         linear-gradient(135deg, rgba(255,255,255,.05) 25%, transparent 25%),
         linear-gradient(225deg, rgba(255,255,255,.05) 25%, transparent 25%),
@@ -345,7 +343,6 @@ body {
         linear-gradient(315deg, rgba(255,255,255,.05) 25%, #fdfbf5 25%);
     background-size: 2em 2em;
     background-position: 0 0, 1em 1em, 1em 1em, 0 0;
-
     padding: 3rem 2rem;
     border-radius: 8px;
     border: 1px solid #e0dccc;
@@ -353,22 +350,128 @@ body {
     transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
 }
 
-.save-the-day-section:hover {
+.save-the-date-section:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 24px rgba(0,0,0,0.08);
 }
 
-.save-the-day-section h2 {
+.save-the-date-section h2 {
     font-size: 3.5rem; /* Make it a bit bigger */
     color: var(--color-accent-deep-gold);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
 }
 
-.details-container { display: flex; justify-content: space-around; gap: 2rem; text-align: center; width: 100%; }
+.details-container { display: flex; justify-content: space-around; gap: 3rem; text-align: center; width: 100%; }
 .detail-item { flex: 1; }
-.detail-item h3 { color: var(--color-accent-gold); font-size: 1.5rem; }
-.detail-item ul { list-style: none; padding: 0; }
-.detail-item li { margin-bottom: 0.5rem; }
+.detail-item h3 { color: var(--color-accent-gold); font-size: 1.5rem; margin-bottom: 0.5rem;}
+.detail-item p { margin: 0.3rem 0; }
+.detail-item .button-group { margin-top: 1rem; justify-content: center; }
+
+.add-to-calendar {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0dccc;
+}
+
+.calendar-btn {
+    background-color: transparent;
+    border: 2px solid var(--color-accent-gold);
+    color: var(--color-accent-gold);
+    font-size: 0.8rem;
+}
+
+.calendar-btn:hover {
+    background-color: var(--color-accent-gold);
+    color: var(--color-text-light);
+}
+
+/* --- RSVP FORM SECTION --- */
+.rsvp-section {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.rsvp-form p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.rsvp-form .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.rsvp-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+.rsvp-form input[type="text"],
+.rsvp-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rsvp-form input[type="text"]:focus,
+.rsvp-form textarea:focus {
+    border-color: var(--color-accent-gold);
+    box-shadow: 0 0 0 3px rgba(192, 161, 114, 0.2);
+    outline: none;
+}
+
+.rsvp-form fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rsvp-form legend {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding: 0;
+}
+
+.rsvp-form .radio-group, .rsvp-form .checkbox-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.rsvp-form .radio-group label, .rsvp-form .checkbox-group label {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.rsvp-form .radio-group input, .rsvp-form .checkbox-group input {
+    display: none;
+}
+
+.rsvp-form .radio-group .selected, .rsvp-form .checkbox-group .selected {
+    border-color: var(--color-accent-gold);
+    background-color: var(--color-secondary-cream);
+    color: var(--color-accent-deep-gold);
+    font-weight: 700;
+}
+
+.thank-you-message {
+    padding: 2rem;
+    background-color: var(--color-secondary-cream);
+    border-left: 5px solid var(--color-primary-matcha);
+}
 
 /* --- GUEST PHOTOS --- */
 .photos-section .section-text-center {
@@ -383,6 +486,8 @@ body {
     font-weight: 600; margin-top: 1rem;
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
 }
 .button:hover {
     background-color: var(--color-accent-deep-gold);
@@ -505,7 +610,7 @@ body {
         max-width: 1400px;
     }
 
-    .page-section h2, .save-the-day-section h2 {
+    .page-section h2, .save-the-date-section h2 {
         font-size: 3.5rem;
     }
 

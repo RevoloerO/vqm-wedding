@@ -51,28 +51,6 @@ const Countdown = ({ targetDate }) => {
   );
 };
 
-// Count-up Timer for Days Together
-const Countup = ({ startDate }) => {
-    const calculateTimeSince = () => {
-        const difference = +new Date() - +new Date(startDate);
-        return Math.floor(difference / (1000 * 60 * 60 * 24));
-    };
-
-    const [days, setDays] = useState(calculateTimeSince());
-
-    useEffect(() => {
-        const timer = setInterval(() => setDays(calculateTimeSince()), 1000 * 60 * 60 * 24);
-        return () => clearInterval(timer);
-    });
-
-    return (
-        <div className="countup">
-            <div className="countup-value">{days}</div>
-            <div className="countup-unit">Days Together</div>
-        </div>
-    );
-};
-
 // --- Page Sections (Views) ---
 
 // Main Hero Section (Stays at the top)
@@ -166,50 +144,164 @@ const CelestialSync = () => (
 );
 
 
-// Save the Day Section
-const SaveTheDay = () => (
-    <section id="save-the-day" className="page-section save-the-day-section">
-        <h2>Save the Day</h2>
-        <div className="details-container">
-            <div className="detail-item">
-                <h3>Ceremony & Reception</h3>
-                <p>We are still dreaming up the perfect place to say "I do." Here are a few of our inspirations:</p>
-                <ul>
-                    <li>The Grand Conservatory, Seoul</li>
-                    <li>Starlight Rooftop Ballroom, Daegu</li>
-                    <li>The Secret Garden Chapel, Jeju Island</li>
-                </ul>
-            </div>
-            <div className="detail-item">
-                <h3>Our Journey</h3>
-                <Countup startDate="2020-08-15T00:00:00" />
-            </div>
-        </div>
-    </section>
-);
+// Save the Date Section
+const SaveTheDate = () => {
+    const churchCeremony = {
+        title: "Wedding Ceremony of Quyen & Hien",
+        startDate: '20280704T140000',
+        endDate: '20280704T150000',
+        location: 'Myeongdong Cathedral, Seoul',
+        description: "The sacred union of Quyen Mai & Hien Dang.",
+    };
 
-// Guest Photos Section
-const GuestPhotos = () => (
-    <section id="photos" className="page-section photos-section">
-        <h2>Share The Memories</h2>
-        <div className="section-text-center">
-            <p>Help us capture our special day! Upload your photos from the event and view the collective gallery through the links below.</p>
-            <div className="button-group">
-                <a href="#/upload" className="button">Upload Your Photos</a>
-                <a href="#/gallery" className="button">View Guest Gallery</a>
+    const weddingParty = {
+        title: "Wedding Party for Quyen & Hien",
+        startDate: '20280704T180000',
+        endDate: '20280704T230000',
+        location: 'The Shilla Seoul',
+        description: "Join us for a night of dinner, dancing, and celebration!",
+    };
+
+    const createGoogleCalendarUrl = (event) => `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.startDate}/${event.endDate}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`;
+    
+    const createIcsUrl = (event) => {
+        const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+URL:${window.location.href}
+DTSTART:${event.startDate}
+DTEND:${event.endDate}
+SUMMARY:${event.title}
+DESCRIPTION:${event.description}
+LOCATION:${event.location}
+END:VEVENT
+END:VCALENDAR`;
+        return `data:text/calendar;charset=utf8,${encodeURIComponent(icsContent)}`;
+    };
+
+    return (
+        <section id="save-the-date" className="page-section save-the-date-section">
+            <h2>Save the Date</h2>
+            <div className="details-container">
+                <div className="detail-item">
+                    <h3>Church Ceremony</h3>
+                    <p><strong>4th of July, 2028 at 2:00 PM</strong></p>
+                    <p>Myeongdong Cathedral, Seoul</p>
+                     <div className="button-group">
+                        <a href={createGoogleCalendarUrl(churchCeremony)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a>
+                        <a href={createIcsUrl(churchCeremony)} download="wedding-ceremony.ics" className="button calendar-btn">Apple/Outlook</a>
+                    </div>
+                </div>
+                <div className="detail-item">
+                    <h3>Wedding Party</h3>
+                    <p><strong>4th of July, 2028 at 6:00 PM</strong></p>
+                    <p>The Shilla Seoul</p>
+                     <div className="button-group">
+                        <a href={createGoogleCalendarUrl(weddingParty)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a>
+                        <a href={createIcsUrl(weddingParty)} download="wedding-party.ics" className="button calendar-btn">Apple/Outlook</a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
-);
+        </section>
+    );
+};
+
+// RSVP Form Section
+const RsvpForm = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        attending: '',
+        attendingChurch: false,
+        attendingParty: false,
+        song: '',
+        message: ''
+    });
+    const [submitted, setSubmitted] = useState(false);
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // In a real app, you'd send this data to a server.
+        console.log('RSVP Submission:', formData);
+        setSubmitted(true);
+    };
+
+    const isAttending = formData.attending === 'yes';
+
+    return (
+        <section id="rsvp" className="page-section rsvp-section">
+            <h2>Kindly Respond</h2>
+            {submitted ? (
+                <div className="thank-you-message">
+                    <h3>Thank you!</h3>
+                    <p>Your response has been recorded. We can't wait to celebrate with you!</p>
+                </div>
+            ) : (
+                <form onSubmit={handleSubmit} className="rsvp-form">
+                    <p>Please let us know if you can join our celebration by May 1st, 2028.</p>
+                    <div className="form-group">
+                        <label htmlFor="name">Full Name(s)</label>
+                        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="e.g., John & Jane Doe" required />
+                    </div>
+                    <div className="form-group">
+                        <fieldset>
+                            <legend>Will you be joining us?</legend>
+                            <div className="radio-group">
+                                <label className={formData.attending === 'yes' ? 'selected' : ''}>
+                                    <input type="radio" name="attending" value="yes" checked={formData.attending === 'yes'} onChange={handleChange} required /> Joyfully Accepts
+                                </label>
+                                <label className={formData.attending === 'no' ? 'selected' : ''}>
+                                    <input type="radio" name="attending" value="no" checked={formData.attending === 'no'} onChange={handleChange} /> Regretfully Declines
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    {isAttending && (
+                        <div className="form-group fade-in">
+                             <fieldset>
+                                <legend>Which events will you attend?</legend>
+                                <div className="checkbox-group">
+                                    <label className={formData.attendingChurch ? 'selected' : ''}>
+                                        <input type="checkbox" name="attendingChurch" checked={formData.attendingChurch} onChange={handleChange} /> Church Ceremony
+                                    </label>
+                                    <label className={formData.attendingParty ? 'selected' : ''}>
+                                        <input type="checkbox" name="attendingParty" checked={formData.attendingParty} onChange={handleChange} /> Wedding Party
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+                    )}
+                     <div className="form-group">
+                        <label htmlFor="song">What song will get you on the dance floor?</label>
+                        <input type="text" id="song" name="song" value={formData.song} onChange={handleChange} placeholder="Song Title & Artist" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="message">Leave a message for the couple (optional)</label>
+                        <textarea id="message" name="message" value={formData.message} onChange={handleChange} rows="4"></textarea>
+                    </div>
+                    <button type="submit" className="button">Submit RSVP</button>
+                </form>
+            )}
+        </section>
+    );
+};
+
 
 // --- New Tab Navigation and View Container ---
 
 const TabNavigation = ({ activeView, onViewChange }) => {
   const navItems = [
       { id: 'journey', label: 'Our Journey' },
-      { id: 'save-the-day', label: 'Save the Day' },
+      { id: 'save-the-date', label: 'Save the Date' },
       { id: 'fun-facts', label: 'Fun Facts' },
-      { id: 'photos', label: 'Photos' }
+      { id: 'rsvp', label: 'RSVP' }
   ];
   return (
     <nav className="tab-navbar">
@@ -230,9 +322,9 @@ const ViewDisplay = ({ activeView }) => {
   return (
     <div className="view-container">
       {activeView === 'journey' && <OurJourney />}
-      {activeView === 'save-the-day' && <SaveTheDay />}
+      {activeView === 'save-the-date' && <SaveTheDate />}
       {activeView === 'fun-facts' && <CelestialSync />}
-      {activeView === 'photos' && <GuestPhotos />}
+      {activeView === 'rsvp' && <RsvpForm />}
     </div>
   );
 };

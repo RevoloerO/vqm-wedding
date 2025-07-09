@@ -251,6 +251,8 @@ function HomePage() {
   useEffect(() => {
     const handleScroll = () => {
       if (navWrapperRef.current) {
+        // The offsetTop gives the distance of the element from the top of the document.
+        // When the user scrolls past this point, we make the navbar sticky.
         if (window.scrollY > navWrapperRef.current.offsetTop) {
           setSticky(true);
         } else {
@@ -259,7 +261,7 @@ function HomePage() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -271,7 +273,10 @@ function HomePage() {
       <BlessingSlideshow />
       {/* This placeholder prevents content from jumping when the nav becomes sticky */}
       {isSticky && <div style={{ height: navWrapperRef.current?.offsetHeight }} />}
-      <div ref={navWrapperRef} className={`tab-navbar-wrapper ${isSticky ? 'sticky' : ''}`}>
+      <div 
+        ref={navWrapperRef} 
+        className={`tab-navbar-wrapper ${isSticky ? 'sticky' : ''}`}
+      >
         <TabNavigation activeView={activeView} onViewChange={setActiveView} />
       </div>
       <div className="main-content-area">

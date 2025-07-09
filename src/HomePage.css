@@ -385,6 +385,50 @@ body {
   color: var(--color-text-light);
 }
 
+/* --- SCROLL TO TOP BUTTON --- */
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: var(--color-text-light);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out, background-color 0.3s ease;
+    will-change: opacity, transform;
+    pointer-events: none;
+}
+
+.scroll-to-top-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.scroll-to-top-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+}
+
+.scroll-to-top-btn svg {
+    stroke: var(--color-text-light);
+    width: 24px;
+    height: 24px;
+}
+
+
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 768px) {
     .section-content-story, .fun-facts-container, .details-container { flex-direction: column; }

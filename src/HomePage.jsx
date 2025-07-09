@@ -241,23 +241,50 @@ const ViewDisplay = ({ activeView }) => {
   );
 };
 
+// --- Scroll to Top Button ---
+const ScrollToTopButton = ({ isVisible }) => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  return (
+    <button
+      className={`scroll-to-top-btn ${isVisible ? 'visible' : ''}`}
+      onClick={scrollToTop}
+      aria-label="Scroll to top"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+      </svg>
+    </button>
+  );
+};
+
 
 // --- Main Page Component ---
 function HomePage() {
   const [activeView, setActiveView] = useState('story');
   const [isSticky, setSticky] = useState(false);
+  const [showScrollButton, setShowScrollButton] = useState(false);
   const navWrapperRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
       if (navWrapperRef.current) {
-        // The offsetTop gives the distance of the element from the top of the document.
-        // When the user scrolls past this point, we make the navbar sticky.
         if (window.scrollY > navWrapperRef.current.offsetTop) {
           setSticky(true);
         } else {
           setSticky(false);
         }
+      }
+      // Logic for scroll to top button
+      if (window.scrollY > 300) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
       }
     };
 
@@ -271,7 +298,6 @@ function HomePage() {
     <div className="homepage-container">
       <Hero />
       <BlessingSlideshow />
-      {/* This placeholder prevents content from jumping when the nav becomes sticky */}
       {isSticky && <div style={{ height: navWrapperRef.current?.offsetHeight }} />}
       <div 
         ref={navWrapperRef} 
@@ -285,6 +311,7 @@ function HomePage() {
       <footer className="footer">
         <p>AMDG | Made with love by Quyen & Hien | 2028</p>
       </footer>
+      <ScrollToTopButton isVisible={showScrollButton} />
     </div>
   );
 }

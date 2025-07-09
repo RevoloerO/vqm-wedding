@@ -1,6 +1,7 @@
 /* Import new elegant fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap');
 @import url('https://use.typekit.net/ist3wra.css'); /* Keep Megrim for logo */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap'); /* NEW: Font for Hero Names */
 
 /* --- MATCHA LATTE THEME (Refined) --- */
 :root {
@@ -17,6 +18,7 @@
   --font-body: 'Montserrat', sans-serif;
   --font-logo: 'megrim', sans-serif;
   --font-quote: 'Cormorant Garamond', serif;
+  --font-special: 'Great Vibes', cursive;
 }
 
 /* --- GENERAL STYLES --- */
@@ -33,11 +35,11 @@ body {
 /* --- HERO SECTION --- */
 .hero-section {
   display: flex;
+  flex-direction: column; /* Stack cross and content vertically */
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 70vh;
-  padding: 20px;
+  padding: 4rem 20px;
   color: var(--color-text-light);
   box-sizing: border-box;
   position: relative;
@@ -86,7 +88,7 @@ body {
 .hero-content {
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 1rem 2rem;
+    padding: 1.5rem 2rem;
     border-radius: 15px; /* Softer radius */
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px); /* For Safari */
@@ -95,6 +97,10 @@ body {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
     transition: background-color 0.5s ease-out, backdrop-filter 0.5s ease-out;
     will-change: background-color, backdrop-filter;
+    width: auto; /* Allow content to define width */
+    max-width: 90%; /* Prevent it from touching edges */
+    display: grid; /* Use grid to manage internal layout */
+    place-items: center; /* Center all items inside */
 }
 
 .hero-section:hover .hero-background-blur {
@@ -109,19 +115,52 @@ body {
     -webkit-backdrop-filter: blur(0);
 }
 
+/* MODIFIED: Redesigned Cross Design */
+.cross-design {
+    width: 30px;
+    height: 42px;
+    position: relative;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
+}
+.cross-design::before, .cross-design::after {
+    content: '';
+    position: absolute;
+    background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4));
+    border-radius: 3px;
+}
+.cross-design::before { /* vertical bar */
+    width: 4px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.cross-design::after { /* horizontal bar */
+    width: 100%;
+    height: 4px;
+    top: 12px;
+    left: 0;
+}
 
 .hero-content h1, .hero-content h2 {
     color: var(--color-text-light);
     text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
 }
 
-.hero-names { font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 400; margin: 0; }
-.hero-date {
+.hero-names {
+    font-family: var(--font-special);
+    font-size: 6rem;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3), 0 0 10px rgba(255,255,255,0.3);
+}
+
+.hero-details {
   font-family: var(--font-body);
-  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
   font-weight: 300;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  letter-spacing: 1px;
   margin: 1rem 0;
 }
 
@@ -136,19 +175,13 @@ body {
 /* --- LOGO --- */
 .wedding-logo {
   display: flex; flex-direction: row; justify-content: center;
-  align-items: center; margin: 0.5rem auto; /* Reduced margin */
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  align-items: center;
 }
 .wedding-logo-box { display: flex; flex-direction: column; margin: auto 0; }
 .logo-text {
-  font-family: var(--font-logo); font-weight: 1000; font-style: normal;
-  text-transform: uppercase; color: var(--color-text-light);
-  font-size: clamp(2rem, 3vw, 2.5rem);
-}
-#logo-text-1, #logo-text-2 { line-height: 0.8; }
-#logo-text-3 {
-  font-size: clamp(6rem, 8vw, 8rem);
-  margin-left: -0.5vw;
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 /* --- COUNTDOWN & COUNTUP --- */
@@ -169,6 +202,35 @@ body {
 /* --- GENERAL PAGE SECTION (used inside views) --- */
 .page-section { padding: 0; }
 .page-section h2 { font-size: 2.8rem; margin-bottom: 2rem; text-align: center; }
+
+.section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.section-header .wedding-logo {
+    transform: scale(0.6); /* Make the logo smaller in sections */
+    margin-bottom: -1rem;
+}
+
+.section-header .wedding-logo .logo-text {
+    color: var(--color-accent-gold);
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 2.5rem;
+}
+.section-header .wedding-logo #logo-text-2 {
+    line-height: 1.2;
+}
+.section-header .wedding-logo #logo-text-3 {
+    font-family: var(--font-special);
+    font-size: 6rem;
+    color: var(--color-text-dark);
+    text-transform: lowercase;
+    margin-left: -0.2rem;
+}
 
 /* --- OUR JOURNEY SECTION (Creative Layout) --- */
 .section-content-journey { display: flex; align-items: center; gap: 3rem; }
@@ -199,39 +261,32 @@ body {
 }
 .journey-text-container h2 { text-align: left; }
 
-/* --- BLESSING SLIDESHOW SECTION --- */
-.blessing-section {
-    background: linear-gradient(135deg, var(--color-primary-matcha), #8a9e80);
-    background-size: 200% 200%;
-    animation: gradientShift 15s ease infinite;
-    text-align: center;
-    padding: 4rem 5%; overflow: hidden; position: relative;
-    min-height: 150px;
-    border-top: 3px solid rgba(255, 255, 255, 0.3);
+/* --- BLESSING STYLES (INSIDE HERO) --- */
+.hero-blessing {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    min-height: 4.5em; /* Set a minimum height to prevent layout shifts */
+    width: 100%;
+    display: grid;
+    place-items: center;
 }
-
-@keyframes gradientShift {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-
 .blessing-text {
     font-family: var(--font-quote);
-    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
     font-style: italic; color: var(--color-text-light); line-height: 1.4;
-    margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 .blessing-source {
-    font-family: var(--font-body); font-size: 1rem;
-    color: var(--color-text-light); margin-top: 1rem; opacity: 0.9;
+    font-family: var(--font-body); font-size: 0.9rem;
+    color: var(--color-text-light); margin-top: 0.5rem; opacity: 0.8;
 }
 .fade-in-out { animation: fadeInOut 7s infinite; }
 @keyframes fadeInOut {
-    0% { opacity: 0; transform: translateY(10px); }
-    14% { opacity: 1; transform: translateY(0); }
-    86% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(-10px); }
+    0% { opacity: 0; }
+    14% { opacity: 1; }
+    86% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 /* --- STICKY TAB NAVIGATION --- */
@@ -456,10 +511,6 @@ body {
     transition: all 0.3s ease;
 }
 
-.rsvp-form .radio-group input, .rsvp-form .checkbox-group input {
-    display: none;
-}
-
 .rsvp-form .radio-group .selected, .rsvp-form .checkbox-group .selected {
     border-color: var(--color-accent-gold);
     background-color: var(--color-secondary-cream);
@@ -598,7 +649,7 @@ body {
     .journey-image-container, .journey-text-container { width: 100%; max-width: 100%; }
     .journey-text-container h2 { text-align: center; }
     .page-section h2 { font-size: 2.2rem; }
-    .hero-names { font-size: 2rem; }
+    .hero-names { font-size: 3.5rem; }
     .hero-date { font-size: 0.9rem; }
     .tab-nav-link { font-size: 0.9rem; padding: 0.8rem 1rem; }
 }

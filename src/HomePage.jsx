@@ -8,10 +8,10 @@ import './HomePage.css';
 const HQLogo = () => (
   <div className="wedding-logo">
     <div className='wedding-logo-box'>
-      <div className="logo-text" id='logo-text-1'>QUY</div>
-      <div className="logo-text" id='logo-text-2'>& HI</div>
+      <div className="logo-text" id='logo-text-1'>Quy</div>
+      <div className="logo-text" id='logo-text-2'>& Hi</div>
     </div>
-    <div className="logo-text" id='logo-text-3'>EN</div>
+    <div className="logo-text" id='logo-text-3'>en</div>
   </div>
 );
 
@@ -54,37 +54,7 @@ const Countdown = ({ targetDate }) => {
 // --- Page Sections (Views) ---
 
 // Main Hero Section (Stays at the top)
-const Hero = () => (
-  <header className="hero-section">
-    <div className="hero-background-blur"></div>
-    <div className="hero-background-clear"></div>
-    <div className="hero-content">
-      <h1 className="hero-names">Quyen Mai & Hien Dang</h1>
-      <HQLogo />
-      <h2 className="hero-date">Are getting married on July 4, 2028</h2>
-      <Countdown targetDate="2028-07-04T00:00:00" />
-    </div>
-  </header>
-);
-
-// Our Journey Section
-const OurJourney = () => (
-    <section id="journey" className="page-section journey-section">
-        <div className="section-content-journey">
-            <div className="journey-image-container">
-                {/* This div is now styled with the background image via CSS */}
-            </div>
-            <div className="journey-text-container">
-                <h2>Our Journey</h2>
-                <p>Our journey together began with a shared love for matcha lattes and quiet afternoons. It has since blossomed into a life filled with laughter, adventure, and countless beautiful memories. We are so excited to start this next chapter and couldn't have done it without the love and support from all of you...</p>
-                <a href="/our-journey" className="button">Read Our Full Journey</a>
-            </div>
-        </div>
-    </section>
-);
-
-// A Blessing Section - Now a Slideshow
-const BlessingSlideshow = () => {
+const Hero = () => {
     const quotes = [
         { text: "I have found the one whom my soul loves.", source: "Song of Solomon 3:4" },
         { text: "Two are better than one... If either of them falls down, one can help the other up.", source: "Ecclesiastes 4:9-10" },
@@ -111,14 +81,41 @@ const BlessingSlideshow = () => {
     const currentQuote = quotes[currentIndex];
 
     return (
-        <section id="blessing" className="page-section blessing-section">
-            <div className="section-content-col">
+      <header className="hero-section">
+        <div className="hero-background-blur"></div>
+        <div className="hero-background-clear"></div>
+        <div className="hero-content">
+          <div className="cross-design"></div>
+          <h1 className="hero-names">Quyen Mai & Hien Dang</h1>
+          <p className="hero-details">July 1, 2028 &nbsp;|&nbsp; Hawaii, USA</p>
+          <Countdown targetDate="2028-07-01T00:00:00" />
+           <div className="hero-blessing">
                 <p className="blessing-text fade-in-out">"{currentQuote.text}"</p>
                 <p className="blessing-source fade-in-out">{currentQuote.source}</p>
             </div>
-        </section>
+        </div>
+      </header>
     );
 };
+
+// Our Journey Section
+const OurJourney = () => (
+    <section id="journey" className="page-section journey-section">
+        <div className="section-header">
+            <HQLogo />
+            <h2>Our Journey</h2>
+        </div>
+        <div className="section-content-journey">
+            <div className="journey-image-container">
+                {/* This div is now styled with the background image via CSS */}
+            </div>
+            <div className="journey-text-container">
+                <p>Our journey together began with a shared love for matcha lattes and quiet afternoons. It has since blossomed into a life filled with laughter, adventure, and countless beautiful memories. We are so excited to start this next chapter and couldn't have done it without the love and support from all of you...</p>
+                <a href="/our-journey" className="button">Read Our Full Journey</a>
+            </div>
+        </div>
+    </section>
+);
 
 // Fun Facts / Celestial Sync Section
 const CelestialSync = () => (
@@ -148,17 +145,17 @@ const CelestialSync = () => (
 const SaveTheDate = () => {
     const churchCeremony = {
         title: "Wedding Ceremony of Quyen & Hien",
-        startDate: '20280704T140000',
-        endDate: '20280704T150000',
-        location: 'Myeongdong Cathedral, Seoul',
+        startDate: '20280701T140000',
+        endDate: '20280701T150000',
+        location: 'Haiku Mill, Maui, Hawaii',
         description: "The sacred union of Quyen Mai & Hien Dang.",
     };
 
     const weddingParty = {
         title: "Wedding Party for Quyen & Hien",
-        startDate: '20280704T180000',
-        endDate: '20280704T230000',
-        location: 'The Shilla Seoul',
+        startDate: '20280701T180000',
+        endDate: '20280701T230000',
+        location: 'The Royal Hawaiian, Oahu, Hawaii',
         description: "Join us for a night of dinner, dancing, and celebration!",
     };
 
@@ -181,12 +178,15 @@ END:VCALENDAR`;
 
     return (
         <section id="save-the-date" className="page-section save-the-date-section">
-            <h2>Save the Date</h2>
+            <div className="section-header">
+                <HQLogo />
+                <h2>Save the Date</h2>
+            </div>
             <div className="details-container">
                 <div className="detail-item">
                     <h3>Church Ceremony</h3>
-                    <p><strong>4th of July, 2028 at 2:00 PM</strong></p>
-                    <p>Myeongdong Cathedral, Seoul</p>
+                    <p><strong>July 1, 2028 at 2:00 PM</strong></p>
+                    <p>Haiku Mill, Maui, Hawaii</p>
                      <div className="button-group">
                         <a href={createGoogleCalendarUrl(churchCeremony)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a>
                         <a href={createIcsUrl(churchCeremony)} download="wedding-ceremony.ics" className="button calendar-btn">Apple/Outlook</a>
@@ -194,8 +194,8 @@ END:VCALENDAR`;
                 </div>
                 <div className="detail-item">
                     <h3>Wedding Party</h3>
-                    <p><strong>4th of July, 2028 at 6:00 PM</strong></p>
-                    <p>The Shilla Seoul</p>
+                    <p><strong>July 1, 2028 at 6:00 PM</strong></p>
+                    <p>The Royal Hawaiian, Oahu, Hawaii</p>
                      <div className="button-group">
                         <a href={createGoogleCalendarUrl(weddingParty)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a>
                         <a href={createIcsUrl(weddingParty)} download="wedding-party.ics" className="button calendar-btn">Apple/Outlook</a>
@@ -237,7 +237,10 @@ const RsvpForm = () => {
 
     return (
         <section id="rsvp" className="page-section rsvp-section">
-            <h2>Kindly Respond</h2>
+            <div className="section-header">
+                <HQLogo />
+                <h2>Kindly Respond</h2>
+            </div>
             {submitted ? (
                 <div className="thank-you-message">
                     <h3>Thank you!</h3>
@@ -376,7 +379,6 @@ function HomePage() {
   return (
     <div className="homepage-container">
       <Hero />
-      <BlessingSlideshow />
       <div className="tab-navbar-wrapper">
         <TabNavigation activeView={activeView} onViewChange={setActiveView} />
       </div>

@@ -38,9 +38,11 @@ body {
   text-align: center;
   min-height: 100vh;
   padding: 100px 20px 20px;
-  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1597861405922-274b8c715b59?q=80&w=1887');
+  /* UPDATED: Using your new uploaded image */
+  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('assets/bg-2.jpeg');
   background-size: cover;
-  background-position: center;
+  /* This helps focus on the upper part of the vertical image */
+  background-position: center 25%;
   color: var(--color-text-light);
   box-sizing: border-box;
 }

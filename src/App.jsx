@@ -1,46 +1,13 @@
 import './App.css';
-
-const HQLogo = () => {
-  return (
-    <div className="wedding-logo">
-      <div className='wedding-logo-box'>
-        <div className="logo-text" id='logo-text-1'>QUY</div>
-        <div className="logo-text" id='logo-text-2'>& HI</div>
-      </div>
-      <div className="logo-text" id='logo-text-3'>EN</div>
-    </div>
-
-  );
-};
-
-const WelcomeMessage = () => {
-  return (
-    <div className="message-wrap">
-      <span></span>
-    </div>
-  );
-};
-
-const Banner = () => {
-  return (
-    <div className="banner">
-      <div className="banner-welcome">
-        <h1><a href="https://revoloero.github.io/vqm-wedding">HOMEPAGE</a></h1>
-
-        <HQLogo />
-        <WelcomeMessage />
-      </div>
-      <div className="footer">
-        
-      </div>
-    </div>
-  );
-};
+import { Routes, Route, Link } from 'react-router-dom';
+import HomePage from './HomePage.jsx';
 
 function App() {
   return (
     <div>
-      <Banner />
+      <Routes>
+        <Route path="/vqm-wedding/" element={<HomePage />} />
+      </Routes>
     </div>
   )
 }

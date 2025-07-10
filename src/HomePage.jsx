@@ -113,7 +113,6 @@ const Hero = ({ backgroundImage, onViewChange }) => {
         <div className="hero-background-blur" style={bgStyle}></div>
         <div className="hero-background-clear" style={bgStyle}></div>
         <div className="hero-content">
-          {/* --- UPDATED: Cross is now a button that links to the explanation section --- */}
           <button onClick={handleCrossClick} className="cross-design-wrapper" aria-label="Learn about our cross">
             <div className="cross-design">
               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -128,7 +127,6 @@ const Hero = ({ backgroundImage, onViewChange }) => {
                   <circle className="accent-circle" cx="50" cy="94" r="4"/>
               </svg>
             </div>
-            {/* Tooltip removed from here as it's now a direct link */}
           </button>
           <h1 className="hero-names">Quyen Mai & Hien Dang</h1>
           <p className="hero-details">July 1, 2028 &nbsp;|&nbsp; Hawaii, USA</p>

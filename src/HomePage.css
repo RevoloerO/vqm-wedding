@@ -17,7 +17,7 @@
   --font-body: 'Montserrat', sans-serif;
   --font-logo: 'Cormorant Garamond', serif; 
   --font-quote: 'Cormorant Garamond', serif;
-  --font-special: 'Great Vibes', cursive; /* Reverted to Great Vibes for hero names */
+  --font-special: 'Great Vibes', cursive; 
 }
 
 /* --- GENERAL STYLES --- */
@@ -31,14 +31,14 @@ body {
   line-height: 1.6;
 }
 
-/* --- HERO SECTION (Reverted to Static Image) --- */
+/* --- HERO SECTION --- */
 .hero-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 4rem 20px;
+  padding: 2rem 20px; 
   color: var(--color-text-light);
   box-sizing: border-box;
   position: relative;
@@ -122,7 +122,7 @@ body {
 .cross-design-wrapper {
     position: relative;
     display: inline-block;
-    cursor: pointer; /* Changed from help to pointer */
+    cursor: pointer; 
     margin-bottom: 1.5rem;
     background: none;
     border: none;
@@ -130,8 +130,8 @@ body {
 }
 
 .cross-design {
-    width: 50px; 
-    height: 60px;
+    width: 60px; 
+    height: 72px; 
 }
 
 .cross-design svg {
@@ -148,7 +148,6 @@ body {
     fill: rgba(255, 255, 255, 0.85); 
 }
 
-/* --- UPDATED: Hero cross now glows on hero section hover, not cross hover --- */
 .hero-section:hover .cross-design svg {
     stroke: rgba(255, 255, 255, 1);
     filter: 
@@ -160,7 +159,6 @@ body {
     fill: rgba(255, 255, 255, 1);
 }
 
-/* Tooltip is removed from hero section */
 .cross-tooltip {
     display: none;
 }
@@ -321,25 +319,24 @@ body {
     stroke-linejoin: round;
 }
 
-/* --- UPDATED: Heartbeat Glow Animation for lines only --- */
 .explanation-svg .explanation-glow-group {
     fill: none;
     stroke: var(--color-text-dark);
-    animation: heartbeatGlowLines 2.5s ease-in-out infinite;
+    animation: heartbeatGlowLines 3s ease-in-out infinite; 
 }
 
+/* --- UPDATED: Heartbeat Glow Keyframes for lines only --- */
 @keyframes heartbeatGlowLines {
     0%, 100% {
         stroke: var(--color-text-dark);
         filter: drop-shadow(0 0 2px rgba(40, 40, 40, 0.2));
     }
-    50% {
+    40%, 60% { 
         stroke: var(--color-accent-deep-gold);
         filter: drop-shadow(0 0 8px var(--color-accent-gold));
     }
 }
 
-/* Circles now have a static color and are not affected by the animation */
 .explanation-svg .accent-circle {
     stroke-width: 0;
     fill: var(--color-text-dark);
@@ -762,9 +759,15 @@ body {
 }
 
 .scroll-to-top-btn svg {
-    stroke: var(--color-text-light);
+    /* --- UPDATED: Arrow color changed to gold --- */
+    stroke: var(--color-accent-gold);
     width: 24px;
     height: 24px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.scroll-to-top-btn:hover svg {
+    transform: translateY(-2px);
 }
 
 

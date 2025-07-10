@@ -15,6 +15,8 @@
   --color-accent-deep-gold: #ab8a5b; /* Darker Gold for hover */
   --color-text-dark: #36454F; /* Charcoal */
   --color-text-light: #FFFFFF;
+  --color-newspaper-bg: #fdfaf0; /* Aged paper color */
+  --color-newspaper-border: #dcd3b2; /* Faded border color */
 
   /* --- UPDATED FONT PALETTE --- */
   --font-display: 'Great Vibes', cursive; /* For the most prominent banner text */
@@ -283,8 +285,8 @@ h2, h3, h4, h5, h6 {
 }
 
 .journey-book {
-    width: 300px;
-    height: 420px;
+    width: 350px;
+    height: 490px;
     position: relative;
     perspective: 1500px;
     cursor: pointer;
@@ -322,24 +324,25 @@ h2, h3, h4, h5, h6 {
 
 .journey-book-title {
     font-family: var(--font-display);
-    font-size: 3.5rem;
+    font-size: 4rem;
     color: white;
     margin: 0;
     line-height: 1;
 }
 
 .journey-book-subtitle {
-    font-family: var(--font-ui);
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.8);
-    margin: 1rem 0;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 1.5rem 0;
 }
 
 .journey-stamp-logo {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 80px;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 90px;
     height: auto;
     transform: rotate(10deg);
     opacity: 0.8;
@@ -347,13 +350,16 @@ h2, h3, h4, h5, h6 {
 
 .journey-book-prompt {
     position: absolute;
-    bottom: 2rem;
+    bottom: 2.5rem;
     font-family: var(--font-ui);
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     transition: opacity 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
 }
 
 .journey-book:hover .journey-book-prompt {
@@ -409,28 +415,142 @@ h2, h3, h4, h5, h6 {
 }
 
 
-/* --- MODERNIZED: Cross Explanation Section --- */
-.cross-explanation-section {
-    padding: 4rem 0;
+/* --- REWORKED: Cross Explanation Section (Living Newspaper Style) --- */
+@keyframes newspaper-unfold {
+    from {
+        opacity: 0;
+        transform: scaleY(0.95) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scaleY(1) translateY(0);
+    }
 }
-.explanation-content {
+
+@keyframes paper-grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -1%); }
+  20% { transform: translate(1%, 1%); }
+  30% { transform: translate(-2%, 2%); }
+  40% { transform: translate(2%, -2%); }
+  50% { transform: translate(-1%, 2%); }
+  60% { transform: translate(2%, -1%); }
+  70% { transform: translate(-2%, -2%); }
+  80% { transform: translate(1%, -1%); }
+  90% { transform: translate(-1%, 1%); }
+}
+
+.cross-newspaper-section {
+    padding: 4rem 2rem;
+    background-color: var(--color-newspaper-bg);
+    border-top: 1px solid var(--color-newspaper-border);
+    border-bottom: 1px solid var(--color-newspaper-border);
+    position: relative;
+    overflow: hidden;
+    animation: newspaper-unfold 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Grain overlay */
+.cross-newspaper-section::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    z-index: 1;
+    pointer-events: none;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOCIgbnVtT2N0YXZlcz0iNCIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWx0ZXI9InVybCgjbm9pc2UpIiBvcGFjaXR5PSIwLjA1Ii8+PC9zdmc+');
+    animation: paper-grain 0.4s steps(1) infinite;
+}
+
+/* Vignette overlay */
+.cross-newspaper-section::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    box-shadow: inset 0 0 100px 20px rgba(185, 175, 145, 0.4);
+}
+
+.newspaper-header {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.newspaper-stamp-logo {
+    width: 120px;
+    height: auto;
+    transform: rotate(-8deg);
+    opacity: 0.75;
+    margin-bottom: -1.5rem;
+}
+
+.newspaper-title-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 4px double #b9b19c;
+    border-bottom: 1px solid #b9b19c;
+    padding: 0.25rem 0;
+}
+
+.newspaper-title-item {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #5c544a;
+    text-transform: uppercase;
+}
+
+.newspaper-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #4a3f35;
+    margin: 0 1rem;
+    padding: 0;
+    line-height: 1;
+}
+
+.newspaper-sub-header {
+    border-bottom: 4px double #b9b19c;
+    padding-bottom: 0.25rem;
+    font-family: var(--font-ui);
+    font-style: italic;
+    color: #5c544a;
+}
+
+.newspaper-content {
     display: grid;
-    grid-template-columns: 200px 1fr;
-    align-items: start;
-    gap: 3rem;
+    grid-template-columns: 220px 1fr;
+    gap: 2.5rem;
     max-width: 900px;
     margin: 0 auto;
-    background: white;
-    padding: 3rem;
-    border-radius: 12px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-newspaper-border);
+    position: relative;
+    z-index: 3;
 }
-.explanation-visual {
+
+.newspaper-column-left {
     text-align: center;
-    cursor: pointer;
 }
+
+.newspaper-column-right {
+    border-left: 1px solid var(--color-newspaper-border);
+    padding-left: 2.5rem;
+}
+
+.explanation-visual {
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
 .explanation-svg {
-    width: 120px;
+    width: 140px;
     height: auto;
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -453,7 +573,7 @@ h2, h3, h4, h5, h6 {
 }
 
 .explanation-visual:hover .explanation-svg .explanation-glow-group {
-    animation: none; /* Pause the animation on hover */
+    animation: none;
     stroke: var(--color-accent-deep-gold);
     filter: drop-shadow(0 0 10px var(--color-accent-gold));
 }
@@ -469,24 +589,58 @@ h2, h3, h4, h5, h6 {
 }
 
 .explanation-title {
-    font-size: 2.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
     text-align: left;
+    color: #333;
 }
+
 .explanation-scripture {
     font-style: italic;
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    border-left: 3px solid var(--color-accent-gold);
-    padding-left: 1rem;
+    font-size: 1.1rem;
+    text-align: center;
+    color: #555;
+    padding: 1rem;
+    background-color: rgba(214, 204, 174, 0.2);
+    border-radius: 4px;
 }
+
 .symbolism-item {
     margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
+
+.symbolism-item:hover {
+    transform: translateY(-3px);
+    background-color: rgba(214, 204, 174, 0.15);
+}
+
 .symbolism-item h4 {
-    font-size: 1.3rem;
-    color: var(--color-accent-gold);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-accent-deep-gold);
     margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.symbolism-item p {
+    text-align: justify;
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.drop-cap {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 3rem;
+    float: left;
+    line-height: 1;
+    margin-right: 0.5rem;
+    margin-top: 0.2rem;
+    color: var(--color-accent-deep-gold);
 }
 
 
@@ -948,11 +1102,12 @@ h2, h3, h4, h5, h6 {
 
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 900px) {
-    .explanation-content, .fun-facts-container {
+    .newspaper-content {
         grid-template-columns: 1fr;
     }
-    .explanation-visual {
-        margin-bottom: 2rem;
+    .newspaper-column-right {
+        border-left: none;
+        padding-left: 0;
     }
     .explanation-title {
         text-align: center;
@@ -972,12 +1127,11 @@ h2, h3, h4, h5, h6 {
         padding: 2rem 0;
     }
     .journey-book {
-        width: 280px;
-        height: 392px;
+        width: 300px;
+        height: 420px;
     }
 
     .fun-facts-container { flex-direction: column; }
-    .journey-text-container h2 { text-align: center; }
     .page-section h2 { font-size: 2.2rem; }
     .welcome-banner-names { font-size: 3.5rem; }
     .welcome-banner-details { font-size: 0.9rem; }
@@ -996,7 +1150,7 @@ h2, h3, h4, h5, h6 {
         font-size: 3.5rem;
     }
 
-    .journey-text-container p, .fact-card p, .detail-item p, .fun-fact-summary {
+    .fact-card p, .detail-item p, .fun-fact-summary {
         font-size: 1.1rem;
         line-height: 1.7;
     }

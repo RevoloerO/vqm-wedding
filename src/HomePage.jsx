@@ -149,9 +149,9 @@ const OurJourney = () => (
                         <div className="journey-book-cover">
                             <img src={hqStamp2} alt="Quyen & Hien Stamp" className="journey-stamp-logo" />
                             <h2 className="journey-book-title">Our Journey</h2>
-                            <p className="journey-book-subtitle">A glimpse into our story...</p>
+                            <p className="journey-book-subtitle">Walking together in faith and love.</p>
                             <div className="journey-book-prompt">
-                                <span>Hover to Open</span>
+                                <span>Discover Love Story</span>
                             </div>
                         </div>
                     </div>
@@ -162,47 +162,56 @@ const OurJourney = () => (
 );
 
 
-// Cord of Three Strands Cross Explanation Section
-const CrossExplanation = () => (
-    <section id="cross-symbolism" className="page-section cross-explanation-section">
-        <div className="section-header">
-            <img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
-            <h2>Our Cross</h2>
-        </div>
-        <div className="explanation-content">
-            <div className="explanation-visual">
-                <svg className="explanation-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <g className="explanation-glow-group">
-                      <path d="M50 12 V30 M27 35 H45 M73 35 H55" strokeWidth="3"/>
-                      <path d="M50 40 C 40 55, 60 55, 50 70 C 40 85, 60 85, 50 90" strokeWidth="2.5"/>
-                      <path d="M50 40 C 60 55, 40 55, 50 70 C 60 85, 40 85, 50 90" strokeWidth="2.5"/>
-                      <path d="M50 40 V 90" strokeWidth="2.5"/>
-                    </g>
-                    <circle className="accent-circle" cx="50" cy="8" r="4"/>
-                    <circle className="accent-circle" cx="23" cy="35" r="4"/>
-                    <circle className="accent-circle" cx="77" cy="35" r="4"/>
-                    <circle className="accent-circle" cx="50" cy="35" r="5"/>
-                    <circle className="accent-circle" cx="50" cy="94" r="4"/>
-                </svg>
+// Cord of Three Strands Cross Explanation Section - Reworked as a Newspaper
+const CrossNewspaperSection = () => (
+    <section id="cross-symbolism" className="page-section cross-newspaper-section">
+        <div className="newspaper-header">
+            <img src={hqStamp1} alt="Quyen & Hien Stamp" className="newspaper-stamp-logo" />
+            <div className="newspaper-title-line">
+                <div className="newspaper-title-item">EST. 2028</div>
+                <h2 className="newspaper-headline">The Wedding Chronicle</h2>
+                <div className="newspaper-title-item">HAWAII, USA</div>
             </div>
-            <div className="explanation-text">
-                <h3 className="explanation-title">The Cord of Three Strands</h3>
-                <p className="explanation-scripture"><em>"A cord of three strands is not quickly broken." — Ecclesiastes 4:12</em></p>
+            <div className="newspaper-sub-header">
+                <span>A Special Report on Faith &amp; Union</span>
+            </div>
+        </div>
+        <div className="newspaper-content">
+            <div className="newspaper-column-left">
+                <div className="explanation-visual">
+                    <svg className="explanation-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <g className="explanation-glow-group">
+                          <path d="M50 12 V30 M27 35 H45 M73 35 H55" strokeWidth="3"/>
+                          <path d="M50 40 C 40 55, 60 55, 50 70 C 40 85, 60 85, 50 90" strokeWidth="2.5"/>
+                          <path d="M50 40 C 60 55, 40 55, 50 70 C 60 85, 40 85, 50 90" strokeWidth="2.5"/>
+                          <path d="M50 40 V 90" strokeWidth="2.5"/>
+                        </g>
+                        <circle className="accent-circle" cx="50" cy="8" r="4"/>
+                        <circle className="accent-circle" cx="23" cy="35" r="4"/>
+                        <circle className="accent-circle" cx="77" cy="35" r="4"/>
+                        <circle className="accent-circle" cx="50" cy="35" r="5"/>
+                        <circle className="accent-circle" cx="50" cy="94" r="4"/>
+                    </svg>
+                </div>
+                <p className="explanation-scripture"><em>"A cord of three strands is not quickly broken."<br/>— Ecclesiastes 4:12</em></p>
+            </div>
+            <div className="newspaper-column-right">
+                <h3 className="explanation-title">The Symbolism of the Three-Strand Cord</h3>
                 <div className="symbolism-item">
                     <h4>The Three Strands</h4>
-                    <p>The three single strands represent the bride, the groom, and God, each whole and individual before their lives are woven together.</p>
+                    <p><span className="drop-cap">I</span>n the Cord of Three Strands ceremony, three separate strands are braided together. These represent the bride, the groom, and God, each being whole and individual before being woven together in holy matrimony.</p>
                 </div>
                 <div className="symbolism-item">
                     <h4>The Braid</h4>
-                    <p>The braiding symbolizes the couple becoming one while also incorporating God into their union, creating a bond of incredible strength.</p>
+                    <p>The act of braiding symbolizes the couple's lives being intertwined into a new, single entity. Crucially, it signifies the deliberate inclusion of God as the central, binding force in their union, creating a bond of incredible strength and resilience.</p>
                 </div>
                  <div className="symbolism-item">
-                    <h4>The Five Holy Wounds</h4>
-                    <p>The five circles represent the wounds of Jesus. They symbolize the sacrificial love that forms the ultimate foundation of a Christian marriage.</p>
+                    <h4>The Five Wounds</h4>
+                    <p>Our cross design incorporates five circles, symbolizing the Five Holy Wounds of Jesus. This serves as a reminder of the ultimate sacrificial love that forms the foundation of a Christian marriage covenant.</p>
                 </div>
                 <div className="symbolism-item">
                     <h4>A Lasting Reminder</h4>
-                    <p>This cross serves as a lasting reminder of the vows made and the covenant formed between the couple and God on their wedding day.</p>
+                    <p>This cross will be displayed in our home as a lasting reminder of the sacred vows we make on our wedding day—a covenant not just between us, but with God at the center of our new life together.</p>
                 </div>
             </div>
         </div>
@@ -412,7 +421,7 @@ const ViewDisplay = ({ activeView }) => {
   return (
     <div className="view-container">
       {activeView === VIEWS.JOURNEY && <OurJourney />}
-      {activeView === VIEWS.CROSS_SYMBOLISM && <CrossExplanation />}
+      {activeView === VIEWS.CROSS_SYMBOLISM && <CrossNewspaperSection />}
       {activeView === VIEWS.LOVE_FACTS && <LoveFacts />}
       {activeView === VIEWS.RSVP && <RsvpForm />}
     </div>

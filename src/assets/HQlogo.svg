@@ -1,0 +1,56 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital@1&display=swap');
+      
+      .logo-text {
+        font-family: 'Cinzel Decorative', serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        fill: #A3B899;
+      }
+      .ampersand-text {
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        fill: #A3B899;
+      }
+      .border-rect {
+        fill: none;
+        stroke: #A3B899;
+      }
+    </style>
+  </defs>
+
+  <!-- Outer, thicker, distressed border -->
+  <rect 
+    class="border-rect"
+    x="3" y="3" 
+    width="194" height="194"
+    stroke-width="6" 
+    stroke-dasharray="150 20 100 20 80 20 120 20"
+  />
+
+  <!-- Inner, thinner, distressed border -->
+  <rect 
+    class="border-rect"
+    x="18" y="18" 
+    width="164" height="164"
+    stroke-width="3" 
+    stroke-dasharray="210 10 120 10"
+  />
+
+  <!-- Logo Text Elements -->
+  <g transform="translate(15, 10)">
+    <!-- QUY -->
+    <text x="70" y="75" class="logo-text" font-size="48" text-anchor="end">QUY</text>
+    
+    <!-- & -->
+    <text x="80" y="118" class="ampersand-text" font-size="40" text-anchor="middle">&</text>
+    
+    <!-- HI -->
+    <text x="108" y="120" class="logo-text" font-size="48" text-anchor="start">HI</text>
+    
+    <!-- EN -->
+    <text x="110" y="88" class="logo-text" font-size="100" text-anchor="start" dominant-baseline="middle">EN</text>
+  </g>
+</svg>

@@ -4,12 +4,11 @@ import './HomePage.css';
 
 // --- ASSET IMPORT ---
 import heroBgImage from './assets/bg-2.jpeg';
-import journeyImage from './assets/bg-2.jpeg'; 
+import journeyImage from './assets/bg-2.jpeg';
 
 // --- CONSTANTS ---
 const VIEWS = {
   JOURNEY: 'journey',
-  SAVE_THE_DATE: 'save-the-date',
   CROSS_SYMBOLISM: 'cross-symbolism',
   LOVE_FACTS: 'love-facts',
   RSVP: 'rsvp',
@@ -148,14 +147,12 @@ const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
 // Our Journey Section
 const OurJourney = () => (
     <section id="journey" className="page-section journey-section">
-        <div className="section-header">
-            <HQLogo />
-            <h2>Our Journey</h2>
-        </div>
         <div className="section-content-journey">
             <div className="journey-image-container" style={{ backgroundImage: `url(${journeyImage})` }}>
             </div>
             <div className="journey-text-container">
+                <HQLogo />
+                <h2>Our Journey</h2>
                 <p>Our journey together began with a shared love for matcha lattes and quiet afternoons. It has since blossomed into a life filled with laughter, adventure, and countless beautiful memories. We are so excited to start this next chapter and couldn't have done it without the love and support from all of you...</p>
                 <a href="/our-journey" className="button">Read Our Full Journey</a>
             </div>
@@ -236,9 +233,19 @@ const LoveFacts = () => (
     </section>
 );
 
+// RSVP Form Section - NOW INCLUDES SAVE THE DATE
+const RsvpForm = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        attending: '',
+        attendingChurch: false,
+        attendingParty: false,
+        song: '',
+        message: ''
+    });
+    const [submitted, setSubmitted] = useState(false);
 
-// Save the Date Section
-const SaveTheDate = () => {
+    // Event details and calendar link logic from former SaveTheDate component
     const churchCeremony = {
         title: "Wedding Ceremony of Quyen & Hien",
         startDate: '20280701T140000',
@@ -256,7 +263,7 @@ const SaveTheDate = () => {
     };
 
     const createGoogleCalendarUrl = (event) => `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.startDate}/${event.endDate}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`;
-    
+
     const createIcsUrl = (event) => {
         const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
@@ -271,48 +278,6 @@ END:VEVENT
 END:VCALENDAR`;
         return `data:text/calendar;charset=utf8,${encodeURIComponent(icsContent)}`;
     };
-
-    return (
-        <section id="save-the-date" className="page-section save-the-date-section">
-            <div className="section-header">
-                <HQLogo />
-                <h2>Save the Date</h2>
-            </div>
-            <div className="details-container">
-                <div className="detail-item">
-                    <h3>Church Ceremony</h3>
-                    <p><strong>July 1, 2028 at 2:00 PM</strong></p>
-                    <p>Haiku Mill, Maui, Hawaii</p>
-                     <div className="button-group">
-                        <a href={createGoogleCalendarUrl(churchCeremony)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a>
-                        <a href={createIcsUrl(churchCeremony)} download="wedding-ceremony.ics" className="button calendar-btn">Apple/Outlook</a>
-                    </div>
-                </div>
-                <div className="detail-item">
-                    <h3>Wedding Party</h3>
-                    <p><strong>July 1, 2028 at 6:00 PM</strong></p>
-                    <p>The Royal Hawaiian, Oahu, Hawaii</p>
-                     <div className="button-group">
-                        <a href={createGoogleCalendarUrl(weddingParty)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a>
-                        <a href={createIcsUrl(weddingParty)} download="wedding-party.ics" className="button calendar-btn">Apple/Outlook</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-};
-
-// RSVP Form Section
-const RsvpForm = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        attending: '',
-        attendingChurch: false,
-        attendingParty: false,
-        song: '',
-        message: ''
-    });
-    const [submitted, setSubmitted] = useState(false);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -334,8 +299,33 @@ const RsvpForm = () => {
         <section id="rsvp" className="page-section rsvp-section">
             <div className="section-header">
                 <HQLogo />
-                <h2>Kindly Respond</h2>
+                <h2>Event Details & RSVP</h2>
             </div>
+
+            {/* Event Details (formerly Save the Date) */}
+            <div className="rsvp-details-container">
+                <div className="detail-item">
+                    <h3>Church Ceremony</h3>
+                    <p><strong>July 1, 2028 at 2:00 PM</strong></p>
+                    <p>Haiku Mill, Maui, Hawaii</p>
+                     <div className="button-group">
+                        <a href={createGoogleCalendarUrl(churchCeremony)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a>
+                        <a href={createIcsUrl(churchCeremony)} download="wedding-ceremony.ics" className="button calendar-btn">Apple/Outlook</a>
+                    </div>
+                </div>
+                <div className="detail-item">
+                    <h3>Wedding Party</h3>
+                    <p><strong>July 1, 2028 at 6:00 PM</strong></p>
+                    <p>The Royal Hawaiian, Oahu, Hawaii</p>
+                     <div className="button-group">
+                        <a href={createGoogleCalendarUrl(weddingParty)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a>
+                        <a href={createIcsUrl(weddingParty)} download="wedding-party.ics" className="button calendar-btn">Apple/Outlook</a>
+                    </div>
+                </div>
+            </div>
+
+            <hr className="rsvp-divider" />
+
             {submitted ? (
                 <div className="thank-you-message">
                     <h3>Thank you!</h3>
@@ -397,7 +387,6 @@ const RsvpForm = () => {
 const TabNavigation = ({ activeView, onViewChange }) => {
   const navItems = [
       { id: VIEWS.JOURNEY, label: 'Our Journey' },
-      { id: VIEWS.SAVE_THE_DATE, label: 'Save the Date' },
       { id: VIEWS.CROSS_SYMBOLISM, label: 'Our Cross' },
       { id: VIEWS.LOVE_FACTS, label: 'Love Facts' },
       { id: VIEWS.RSVP, label: 'RSVP' }
@@ -421,7 +410,6 @@ const ViewDisplay = ({ activeView }) => {
   return (
     <div className="view-container">
       {activeView === VIEWS.JOURNEY && <OurJourney />}
-      {activeView === VIEWS.SAVE_THE_DATE && <SaveTheDate />}
       {activeView === VIEWS.CROSS_SYMBOLISM && <CrossExplanation />}
       {activeView === VIEWS.LOVE_FACTS && <LoveFacts />}
       {activeView === VIEWS.RSVP && <RsvpForm />}
@@ -456,7 +444,7 @@ const ScrollToTopButton = ({ isVisible }) => {
 function HomePage() {
   const [activeView, setActiveView] = useState(VIEWS.JOURNEY);
   const [showScrollButton, setShowScrollButton] = useState(false);
-  
+
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollButton(window.scrollY > 300);

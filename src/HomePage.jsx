@@ -75,8 +75,8 @@ const Countdown = ({ targetDate }) => {
 
 // --- Page Sections (Views) ---
 
-// Main Hero Section (Stays at the top)
-const Hero = ({ backgroundImage, onViewChange }) => {
+// Main Welcome Banner (Stays at the top)
+const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
     const quotes = [
         { text: "I have found the one whom my soul loves.", source: "Song of Solomon 3:4" },
         { text: "Two are better than one... If either of them falls down, one can help the other up.", source: "Ecclesiastes 4:9-10" },
@@ -109,10 +109,10 @@ const Hero = ({ backgroundImage, onViewChange }) => {
     };
 
     return (
-      <header className="hero-section">
-        <div className="hero-background-blur" style={bgStyle}></div>
-        <div className="hero-background-clear" style={bgStyle}></div>
-        <div className="hero-content">
+      <header className="welcome-banner-section">
+        <div className="welcome-banner-background-blur" style={bgStyle}></div>
+        <div className="welcome-banner-background-clear" style={bgStyle}></div>
+        <div className="welcome-banner-content">
           <button onClick={handleCrossClick} className="cross-design-wrapper" aria-label="Learn about our cross">
             <div className="cross-design">
               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -128,10 +128,10 @@ const Hero = ({ backgroundImage, onViewChange }) => {
               </svg>
             </div>
           </button>
-          <h1 className="hero-names">Quyen Mai & Hien Dang</h1>
-          <p className="hero-details">July 1, 2028 &nbsp;|&nbsp; Hawaii, USA</p>
+          <h1 className="welcome-banner-names">Quyen Mai & Hien Dang</h1>
+          <p className="welcome-banner-details">July 1, 2028 &nbsp;|&nbsp; Hawaii, USA</p>
           <Countdown targetDate="2028-07-01T00:00:00" />
-           <div className="hero-blessing">
+           <div className="welcome-banner-blessing">
                 <p className="blessing-text fade-in-out">"{currentQuote.text}"</p>
                 <p className="blessing-source fade-in-out">{currentQuote.source}</p>
             </div>
@@ -465,7 +465,7 @@ function HomePage() {
 
   return (
     <div className="homepage-container">
-      <Hero backgroundImage={heroBgImage} onViewChange={setActiveView} />
+      <WelcomeBanner backgroundImage={heroBgImage} onViewChange={setActiveView} />
       <div className="tab-navbar-wrapper">
         <TabNavigation activeView={activeView} onViewChange={setActiveView} />
       </div>

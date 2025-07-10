@@ -31,8 +31,8 @@ body {
   line-height: 1.6;
 }
 
-/* --- HERO SECTION --- */
-.hero-section {
+/* --- Welcome Banner Section --- */
+.welcome-banner-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,7 +46,7 @@ body {
   min-height: 80vh;
 }
 
-.hero-background-blur, .hero-background-clear {
+.welcome-banner-background-blur, .welcome-banner-background-clear {
   position: absolute;
   top: 0;
   left: 0;
@@ -56,7 +56,7 @@ body {
   transition: opacity 0.5s ease-out, background-size 0.5s ease-out;
 }
 
-.hero-background-blur {
+.welcome-banner-background-blur {
   z-index: -2;
   filter: blur(20px);
   transform: scale(1.1);
@@ -64,14 +64,14 @@ body {
   will-change: opacity, transform, filter;
 }
 
-.hero-background-clear {
+.welcome-banner-background-clear {
   z-index: -1;
   background-size: contain; 
   background-repeat: no-repeat;
   will-change: background-size;
 }
 
-.hero-section::after {
+.welcome-banner-section::after {
     content: '';
     position: absolute;
     top: 0;
@@ -82,7 +82,7 @@ body {
     z-index: 0;
 }
 
-.hero-content {
+.welcome-banner-content {
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 1.5rem 2rem;
@@ -100,13 +100,13 @@ body {
     place-items: center;
 }
 
-.hero-section:hover .hero-background-blur {
+.welcome-banner-section:hover .welcome-banner-background-blur {
     opacity: 0;
 }
-.hero-section:hover .hero-background-clear {
+.welcome-banner-section:hover .welcome-banner-background-clear {
     background-size: cover; 
 }
-.hero-section:hover .hero-content {
+.welcome-banner-section:hover .welcome-banner-content {
     background-color: rgba(0, 0, 0, 0.1); 
     backdrop-filter: blur(0); 
     -webkit-backdrop-filter: blur(0);
@@ -148,14 +148,14 @@ body {
     fill: rgba(255, 255, 255, 0.85); 
 }
 
-.hero-section:hover .cross-design svg {
+.welcome-banner-section:hover .cross-design svg {
     stroke: rgba(255, 255, 255, 1);
     filter: 
         drop-shadow(0 0 5px rgba(255, 255, 255, 0.9)) 
         drop-shadow(0 0 15px rgba(255, 255, 255, 0.7)) 
         drop-shadow(0 0 25px var(--color-accent-gold, #C0A172));
 }
-.hero-section:hover .cross-design svg .accent-circle {
+.welcome-banner-section:hover .cross-design svg .accent-circle {
     fill: rgba(255, 255, 255, 1);
 }
 
@@ -163,12 +163,12 @@ body {
     display: none;
 }
 
-.hero-content h1, .hero-content h2 {
+.welcome-banner-content h1, .welcome-banner-content h2 {
     color: var(--color-text-light);
     text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
 }
 
-.hero-names {
+.welcome-banner-names {
     font-family: var(--font-special);
     font-size: 6rem;
     font-weight: 400;
@@ -177,12 +177,22 @@ body {
     text-shadow: 1px 1px 2px rgba(0,0,0,0.3), 0 0 10px rgba(255,255,255,0.3);
 }
 
-.hero-details {
+.welcome-banner-details {
   font-family: var(--font-body);
   font-size: clamp(1rem, 1.8vw, 1.4rem);
   font-weight: 300;
   letter-spacing: 1px;
   margin: 1rem 0;
+}
+
+.welcome-banner-blessing {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    min-height: 4.5em; 
+    width: 100%;
+    display: grid;
+    place-items: center;
 }
 
 /* --- LOGO --- */
@@ -325,7 +335,6 @@ body {
     animation: heartbeatGlowLines 3s ease-in-out infinite; 
 }
 
-/* --- UPDATED: Heartbeat Glow Keyframes for lines only --- */
 @keyframes heartbeatGlowLines {
     0%, 100% {
         stroke: var(--color-text-dark);
@@ -380,16 +389,6 @@ body {
     margin-bottom: 0.25rem;
 }
 
-/* --- BLESSING STYLES (INSIDE HERO) --- */
-.hero-blessing {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    min-height: 4.5em; 
-    width: 100%;
-    display: grid;
-    place-items: center;
-}
 .blessing-text {
     font-family: var(--font-quote);
     font-size: clamp(1.1rem, 1.5vw, 1.4rem);
@@ -759,7 +758,6 @@ body {
 }
 
 .scroll-to-top-btn svg {
-    /* --- UPDATED: Arrow color changed to gold --- */
     stroke: var(--color-accent-gold);
     width: 24px;
     height: 24px;
@@ -777,8 +775,8 @@ body {
     .journey-image-container, .journey-text-container { width: 100%; max-width: 100%; }
     .journey-text-container h2 { text-align: center; }
     .page-section h2 { font-size: 2.2rem; }
-    .hero-names { font-size: 3.5rem; }
-    .hero-date { font-size: 0.9rem; }
+    .welcome-banner-names { font-size: 3.5rem; }
+    .welcome-banner-details { font-size: 0.9rem; }
     .tab-nav-link { font-size: 0.9rem; padding: 0.8rem 1rem; }
 }
 

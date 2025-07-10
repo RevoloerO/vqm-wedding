@@ -17,14 +17,19 @@ const VIEWS = {
 
 // --- Reusable Components ---
 
-// Themed Logo
+// --- UPDATED: Reworked Logo Component ---
 const HQLogo = () => (
   <div className="wedding-logo">
-    <div className='wedding-logo-box'>
-      <div className="logo-text" id='logo-text-1'>Quy</div>
-      <div className="logo-text" id='logo-text-2'>& Hi</div>
+    <div className="logo-left-column">
+      <span className="logo-text-quy">QUY</span>
+      <div className="logo-text-hi-wrapper">
+        <span className="logo-text-ampersand">&</span>
+        <span className="logo-text-hi">HI</span>
+      </div>
     </div>
-    <div className="logo-text" id='logo-text-3'>en</div>
+    <div className="logo-right-column">
+      <span className="logo-text-en">EN</span>
+    </div>
   </div>
 );
 

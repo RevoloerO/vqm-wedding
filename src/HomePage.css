@@ -1,6 +1,8 @@
 /* Import new elegant fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
+
 
 /* --- MATCHA LATTE THEME (Refined) --- */
 :root {
@@ -15,8 +17,8 @@
 
   --font-heading: 'Playfair Display', serif;
   --font-body: 'Montserrat', sans-serif;
-  --font-logo: 'Cormorant Garamond', serif; 
-  --font-quote: 'Cormorant Garamond', serif;
+  --font-logo: 'Cinzel Decorative', serif; 
+  --font-quote: 'Cormorant Garamond', serif; 
   --font-special: 'Great Vibes', cursive; 
 }
 
@@ -195,22 +197,65 @@ body {
     place-items: center;
 }
 
-/* --- LOGO --- */
+/* --- UPDATED: New Logo Stamp Styles --- */
 .wedding-logo {
-  display: flex; flex-direction: row;
-  align-items: center;
+  display: inline-flex;
+  align-items: stretch; 
+  gap: 0.4rem; 
+  font-size: 1rem; 
+  color: var(--color-primary-matcha);
+  border: 3px solid var(--color-primary-matcha);
+  padding: 0.5rem 0.7rem;
 }
-.wedding-logo-box {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    margin-right: 0.2em;
+
+.logo-left-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  line-height: 1;
 }
-.logo-text {
-  font-family: var(--font-body);
-  font-weight: 600;
+
+.logo-text-quy, .logo-text-hi {
+  font-family: var(--font-logo);
+  font-weight: 700;
   text-transform: uppercase;
 }
+
+.logo-text-quy {
+  font-size: 1.5em;
+}
+
+.logo-text-hi-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25em;
+}
+
+.logo-text-ampersand {
+  font-family: var(--font-quote);
+  font-weight: 400; 
+  font-size: 1.2em;
+  opacity: 0.9;
+}
+
+.logo-text-hi {
+  font-size: 1.5em;
+}
+
+.logo-right-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text-en {
+  font-family: var(--font-logo);
+  font-weight: 400; 
+  font-size: 3.6em; 
+  line-height: 0.85;
+}
+
 
 /* --- COUNTDOWN & COUNTUP --- */
 .countdown, .countup { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
@@ -243,27 +288,14 @@ body {
     margin-bottom: 2rem;
 }
 
+/* --- UPDATED: Specificity fix for logo color --- */
 .section-header .wedding-logo {
-    transform: scale(0.5);
-    margin-bottom: -2rem;
-    margin-top: -2rem;
+    font-size: 1.2rem;
+    color: var(--color-primary-matcha); /* Use matcha green */
+    border-color: var(--color-primary-matcha); /* Use matcha green */
 }
-.section-header .logo-text {
-    font-family: var(--font-heading);
-    font-weight: 400;
-    color: var(--color-accent-gold);
-    font-size: 3rem;
-    line-height: 1;
-}
-.section-header #logo-text-2 {
-    font-size: 2.5rem;
-}
-.section-header #logo-text-3 {
-    font-family: var(--font-special);
-    font-size: 8rem;
+.section-header .logo-text-ampersand {
     color: var(--color-text-dark);
-    text-transform: lowercase;
-    line-height: 1.1;
 }
 
 /* --- OUR JOURNEY SECTION (Creative Layout) --- */

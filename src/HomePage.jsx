@@ -5,6 +5,8 @@ import './HomePage.css';
 // --- ASSET IMPORT ---
 import heroBgImage from './assets/bg-2.jpeg';
 import journeyImage from './assets/bg-2.jpeg';
+import hqStamp1 from './assets/HQ-stamp-1-nobg.png'; // Rectangular Stamp
+import hqStamp2 from './assets/HQ-stamp-2-nobg.png'; // Circular Stamp
 
 // --- CONSTANTS ---
 const VIEWS = {
@@ -15,22 +17,6 @@ const VIEWS = {
 };
 
 // --- Reusable Components ---
-
-// --- UPDATED: Reworked Logo Component ---
-const HQLogo = () => (
-  <div className="wedding-logo">
-    <div className="logo-left-column">
-      <span className="logo-text-quy">QUY</span>
-      <div className="logo-text-hi-wrapper">
-        <span className="logo-text-ampersand">&</span>
-        <span className="logo-text-hi">HI</span>
-      </div>
-    </div>
-    <div className="logo-right-column">
-      <span className="logo-text-en">EN</span>
-    </div>
-  </div>
-);
 
 // Countdown Timer for the Wedding
 const Countdown = ({ targetDate }) => {
@@ -144,27 +130,43 @@ const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
     );
 };
 
-// Our Journey Section
+// Our Journey Section - Reworked as a Book
 const OurJourney = () => (
     <section id="journey" className="page-section journey-section">
         <div className="section-content-journey">
             <div className="journey-image-container" style={{ backgroundImage: `url(${journeyImage})` }}>
+                {/* This is the background image next to the book */}
             </div>
-            <div className="journey-text-container">
-                <HQLogo />
-                <h2>Our Journey</h2>
-                <p>Our journey together began with a shared love for matcha lattes and quiet afternoons. It has since blossomed into a life filled with laughter, adventure, and countless beautiful memories. We are so excited to start this next chapter and couldn't have done it without the love and support from all of you...</p>
-                <a href="/our-journey" className="button">Read Our Full Journey</a>
+            <div className="journey-book-container">
+                <Link to="/our-full-story" className="journey-book-link">
+                    <div className="journey-book">
+                        <div className="journey-book-pages">
+                            {/* These divs are for the page-edge effect */}
+                            <div className="page-edge"></div>
+                            <div className="page-edge"></div>
+                            <div className="page-edge"></div>
+                        </div>
+                        <div className="journey-book-cover">
+                            <img src={hqStamp2} alt="Quyen & Hien Stamp" className="journey-stamp-logo" />
+                            <h2 className="journey-book-title">Our Journey</h2>
+                            <p className="journey-book-subtitle">A glimpse into our story...</p>
+                            <div className="journey-book-prompt">
+                                <span>Hover to Open</span>
+                            </div>
+                        </div>
+                    </div>
+                </Link>
             </div>
         </div>
     </section>
 );
 
+
 // Cord of Three Strands Cross Explanation Section
 const CrossExplanation = () => (
     <section id="cross-symbolism" className="page-section cross-explanation-section">
         <div className="section-header">
-            <HQLogo />
+            <img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
             <h2>Our Cross</h2>
         </div>
         <div className="explanation-content">
@@ -211,7 +213,7 @@ const CrossExplanation = () => (
 const LoveFacts = () => (
     <section id="love-facts" className="page-section love-facts-section">
         <div className="section-header">
-             <HQLogo />
+             <img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
              <h2>Love Facts</h2>
         </div>
         <div className="fun-facts-container">
@@ -298,7 +300,7 @@ END:VCALENDAR`;
     return (
         <section id="rsvp" className="page-section rsvp-section">
             <div className="section-header">
-                <HQLogo />
+                <img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
                 <h2>Event Details & RSVP</h2>
             </div>
 

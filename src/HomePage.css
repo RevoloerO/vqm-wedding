@@ -207,97 +207,6 @@ h2, h3, h4, h5, h6 {
     place-items: center;
 }
 
-/* --- REFINED: Double Ink Stamp Logo Effect --- */
-.wedding-logo {
-  display: inline-flex;
-  align-items: stretch;
-  gap: 0.4rem;
-  font-size: 1rem;
-  color: var(--color-primary-matcha);
-  padding: 0.5rem 0.7rem;
-  position: relative;
-  margin: 12px; /* Add margin to make space for the outer border */
-}
-
-.wedding-logo::after, .wedding-logo::before {
-    content: '';
-    position: absolute;
-    border-style: solid;
-    border-image-slice: 2;
-    border-image-repeat: round;
-}
-
-/* Inner, thinner border with subtle gaps */
-.wedding-logo::after {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-width: 3px;
-    border-image-source: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='96' height='96' x='2' y='2' style='fill:none; stroke:%23A3B899; stroke-width:3; stroke-dasharray: 70 5 15 5;' /%3E%3C/svg%3E");
-}
-
-/* Outer, thicker, more distressed border with different gaps */
-.wedding-logo::before {
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    border-width: 8px; /* Made the border thicker */
-    border-image-source: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='94' height='94' x='3' y='3' style='fill:none; stroke:%23A3B899; stroke-width:6; stroke-dasharray: 50 8 30 8 15 10;' /%3E%3C/svg%3E");
-}
-
-
-.logo-left-column {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  line-height: 1;
-}
-
-.logo-text-quy, .logo-text-hi {
-  font-family: var(--font-logo);
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.logo-text-quy {
-  font-size: 1.5em;
-}
-
-.logo-text-hi-wrapper {
-  display: flex;
-  align-items: baseline;
-  gap: 0.25em;
-}
-
-.logo-text-ampersand {
-  font-family: var(--font-body);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 1.2em;
-  opacity: 0.9;
-}
-
-.logo-text-hi {
-  font-size: 1.5em;
-}
-
-.logo-right-column {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo-text-en {
-  font-family: var(--font-logo);
-  font-weight: 400;
-  font-size: 3.6em;
-  line-height: 0.85;
-}
-
-
 /* --- COUNTDOWN & COUNTUP --- */
 .countdown, .countup { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
 .countdown-item, .countup { text-align: center; }
@@ -329,28 +238,29 @@ h2, h3, h4, h5, h6 {
 }
 
 /* Stamped Logo Placement for general sections */
-.section-header .wedding-logo {
-    font-size: 1.2rem;
-    color: var(--color-primary-matcha); /* Use matcha green */
-    transform: rotate(-2.5deg);
-    margin-top: 1rem;
-    margin-left: -1rem; /* Add a slight horizontal offset */
+.section-stamp-logo {
+    width: 150px;
+    height: auto;
+    transform: rotate(-3deg);
+    margin-bottom: -1rem; /* Pull the title up slightly */
+    opacity: 0.9;
 }
 
-/* --- MODERNIZED: Our Journey Section --- */
+/* --- REWORKED: Our Journey Section --- */
 .journey-section {
     background: var(--color-secondary-cream);
     padding: 4rem 2rem;
-    overflow: hidden; /* To contain the repositioned logo */
 }
+
 .section-content-journey {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 3rem;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
 }
+
 .journey-image-container {
     width: 100%;
     border-radius: 12px;
@@ -360,37 +270,144 @@ h2, h3, h4, h5, h6 {
     background-size: cover;
     background-position: center;
 }
-.journey-text-container {
-    background: white;
-    padding: 2rem 3rem 3rem 3rem;
-    border-radius: 12px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+
+.journey-book-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.journey-book-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.journey-book {
+    width: 300px;
+    height: 420px;
     position: relative;
+    perspective: 1500px;
+    cursor: pointer;
 }
 
-/* Position the logo as a stamp in the corner of the journey text box */
-.journey-text-container .wedding-logo {
+.journey-book-cover {
+    width: 100%;
+    height: 100%;
     position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    font-size: 1rem; /* A bit smaller for the corner */
-    transform: rotate(5deg); /* A different angle for variety */
-    z-index: 1; /* Ensure it's above the text */
-    margin: 0; /* Override any general margins */
+    top: 0;
+    left: 0;
+    background-color: var(--color-primary-matcha);
+    border-radius: 4px 8px 8px 4px;
+    box-shadow: 
+        inset 2px 0 0 rgba(255,255,255,0.1),
+        3px 3px 15px rgba(0,0,0,0.2);
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    box-sizing: border-box;
 }
 
-/* Style the title within the text container */
-.journey-text-container h2 {
-    text-align: left;
-    margin-top: 0;
-    margin-bottom: 1.5rem;
+.journey-book:hover .journey-book-cover {
+    transform: rotateY(-35deg) translateX(5px);
+    box-shadow: 
+        inset 2px 0 0 rgba(255,255,255,0.1),
+        10px 10px 25px rgba(0,0,0,0.3);
 }
 
-.journey-text-container p {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    margin-bottom: 2rem;
+.journey-book-title {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: white;
+    margin: 0;
+    line-height: 1;
 }
+
+.journey-book-subtitle {
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 1rem 0;
+}
+
+.journey-stamp-logo {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 80px;
+    height: auto;
+    transform: rotate(10deg);
+    opacity: 0.8;
+}
+
+.journey-book-prompt {
+    position: absolute;
+    bottom: 2rem;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: opacity 0.3s ease;
+}
+
+.journey-book:hover .journey-book-prompt {
+    opacity: 0;
+}
+
+.journey-book-pages {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    border-radius: 4px 8px 8px 4px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.15);
+    overflow: hidden;
+}
+
+.journey-book-pages .page-edge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(to right, #e0e0e0, #f0f0f0);
+}
+.journey-book-pages .page-edge:nth-child(1) { width: 3px; right: 1px; }
+.journey-book-pages .page-edge:nth-child(2) { width: 2px; right: 5px; }
+.journey-book-pages .page-edge:nth-child(3) { width: 1px; right: 8px; }
+
+
+/* Shining effect */
+.journey-book-pages::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-45deg, 
+        transparent 30%, 
+        rgba(255, 255, 255, 0.8) 45%,
+        rgba(255, 235, 170, 0.6) 50%,
+        rgba(255, 255, 255, 0.8) 55%,
+        transparent 70%
+    );
+    z-index: 5;
+    transform: translateX(-150%);
+    transition: transform 1s ease-in-out;
+}
+
+.journey-book:hover .journey-book-pages::before {
+    transform: translateX(150%);
+}
+
 
 /* --- MODERNIZED: Cross Explanation Section --- */
 .cross-explanation-section {
@@ -944,9 +961,22 @@ h2, h3, h4, h5, h6 {
 
 
 @media (max-width: 768px) {
-    .section-content-journey, .fun-facts-container { flex-direction: column; }
-    .section-content-journey { grid-template-columns: 1fr; }
-    .journey-image-container, .journey-text-container { width: 100%; max-width: 100%; }
+    .section-content-journey {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .journey-image-container {
+        display: none; /* Hide the side image on mobile to focus on the book */
+    }
+    .journey-book-container {
+        padding: 2rem 0;
+    }
+    .journey-book {
+        width: 280px;
+        height: 392px;
+    }
+
+    .fun-facts-container { flex-direction: column; }
     .journey-text-container h2 { text-align: center; }
     .page-section h2 { font-size: 2.2rem; }
     .welcome-banner-names { font-size: 3.5rem; }

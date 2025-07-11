@@ -17,6 +17,7 @@ const VIEWS = {
   JOURNEY: 'journey',
   CROSS_SYMBOLISM: 'cross-symbolism',
   LOVE_FACTS: 'love-facts',
+  SCHEDULE: 'schedule',
   RSVP: 'rsvp',
 };
 
@@ -123,7 +124,7 @@ const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
             </div>
           </button>
           <h1 className="welcome-banner-names">Quyen Mai & Hien Dang</h1>
-          <p className="welcome-banner-details">July 1, 2028 &nbsp;|&nbsp; Hawaii, USA</p>
+          <p className="welcome-banner-details">July 1, 2028 &nbsp;|&nbsp; Columbus, OH</p>
           <Countdown targetDate="2028-07-01T00:00:00" />
            <div className="welcome-banner-blessing">
                 <p className="blessing-text fade-in-out">"{currentQuote.text}"</p>
@@ -151,7 +152,13 @@ const OurJourney = () => (
                             <div className="page-edge"></div>
                         </div>
                         <div className="journey-book-cover">
-                            <img src={hqStamp2} alt="Quyen & Hien Stamp" className="journey-stamp-logo" />
+                            <div
+                              className="journey-stamp-wrapper"
+                              style={{
+                                WebkitMaskImage: `url(${hqStamp2})`,
+                                maskImage: `url(${hqStamp2})`
+                              }}
+                            />
                             <h2 className="journey-book-title">Our Journey</h2>
                             <p className="journey-book-subtitle">Walking together in faith and love.</p>
                             <div className="journey-book-prompt">
@@ -173,7 +180,7 @@ const CrossNewspaperSection = () => (
             <div className="newspaper-title-line">
                 <div className="newspaper-title-item">EST. 2028</div>
                 <h2 className="newspaper-headline">The Wedding Chronicle</h2>
-                <div className="newspaper-title-item">HAWAII, USA</div>
+                <div className="newspaper-title-item">COLUMBUS, OH</div>
             </div>
             <div className="newspaper-sub-header">
                 <span>A Special Report on Faith &amp; Union</span>
@@ -248,6 +255,63 @@ const LoveFacts = () => (
     </section>
 );
 
+// NEW: Wedding Day Schedule Section
+const WeddingDaySchedule = () => (
+    <section id="schedule" className="page-section schedule-section">
+        <div className="section-header">
+            <img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
+            <h2>Our Wedding Day</h2>
+        </div>
+        <div className="schedule-container">
+            <div className="schedule-item">
+                <div className="schedule-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L18 4H6V6H18Z"/><path d="M12 4V2"/><path d="M10 6V4"/><path d="M14 6V4"/><path d="M4 22H20"/><path d="M6 22V10L12 4L18 10V22H6Z"/></svg>
+                </div>
+                <div className="schedule-content">
+                    <h3>The Ceremony</h3>
+                    <p className="schedule-time">2:00 PM</p>
+                    <p>Join us as we exchange vows and begin our journey as one.</p>
+                    <p className="schedule-location">St. Joseph Cathedral, Columbus, OH</p>
+                </div>
+            </div>
+            <div className="schedule-item">
+                <div className="schedule-icon">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </div>
+                <div className="schedule-content">
+                    <h3>Cocktail Hour</h3>
+                    <p className="schedule-time">6:00 PM</p>
+                    <p>Enjoy drinks and appetizers before the main celebration begins.</p>
+                    <p className="schedule-location">The Westin Great Southern, Columbus, OH</p>
+                </div>
+            </div>
+            <div className="schedule-item">
+                <div className="schedule-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path><path d="M15 5l4 4"></path></svg>
+                </div>
+                <div className="schedule-content">
+                    <h3>Dinner & Celebration</h3>
+                    <p className="schedule-time">7:15 PM</p>
+                    <p>Dine, dance, and celebrate with us through the night.</p>
+                    <p className="schedule-location">The Westin Great Southern, Columbus, OH</p>
+                </div>
+            </div>
+             <div className="schedule-item">
+                <div className="schedule-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l2.5 6.5L21 12l-6.5 2.5L12 22l-2.5-6.5L3 12l6.5-2.5L12 2z"/></svg>
+                </div>
+                <div className="schedule-content">
+                    <h3>Grand Exit</h3>
+                    <p className="schedule-time">11:00 PM</p>
+                    <p>Help us end our special day with a memorable send-off!</p>
+                    <p className="schedule-location">The Westin Great Southern, Columbus, OH</p>
+                </div>
+            </div>
+        </div>
+    </section>
+);
+
+
 // RSVP Form Section - NOW INCLUDES SAVE THE DATE
 const RsvpForm = () => {
     const [formData, setFormData] = useState({
@@ -265,7 +329,7 @@ const RsvpForm = () => {
         title: "Wedding Ceremony of Quyen & Hien",
         startDate: '20280701T140000',
         endDate: '20280701T150000',
-        location: 'Haiku Mill, Maui, Hawaii',
+        location: 'St. Joseph Cathedral, 212 E Broad St, Columbus, OH 43215',
         description: "The sacred union of Quyen Mai & Hien Dang.",
     };
 
@@ -273,7 +337,7 @@ const RsvpForm = () => {
         title: "Wedding Party for Quyen & Hien",
         startDate: '20280701T180000',
         endDate: '20280701T230000',
-        location: 'The Royal Hawaiian, Oahu, Hawaii',
+        location: 'The Westin Great Southern Columbus, 310 S High St, Columbus, OH 43215',
         description: "Join us for a night of dinner, dancing, and celebration!",
     };
 
@@ -322,7 +386,7 @@ END:VCALENDAR`;
                 <div className="detail-item">
                     <h3>Church Ceremony</h3>
                     <p><strong>July 1, 2028 at 2:00 PM</strong></p>
-                    <p>Haiku Mill, Maui, Hawaii</p>
+                    <p>St. Joseph Cathedral, Columbus, OH</p>
                      <div className="button-group">
                         <a href={createGoogleCalendarUrl(churchCeremony)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a>
                         <a href={createIcsUrl(churchCeremony)} download="wedding-ceremony.ics" className="button calendar-btn">Apple/Outlook</a>
@@ -331,7 +395,7 @@ END:VCALENDAR`;
                 <div className="detail-item">
                     <h3>Wedding Party</h3>
                     <p><strong>July 1, 2028 at 6:00 PM</strong></p>
-                    <p>The Royal Hawaiian, Oahu, Hawaii</p>
+                    <p>The Westin Great Southern, Columbus, OH</p>
                      <div className="button-group">
                         <a href={createGoogleCalendarUrl(weddingParty)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a>
                         <a href={createIcsUrl(weddingParty)} download="wedding-party.ics" className="button calendar-btn">Apple/Outlook</a>
@@ -404,6 +468,7 @@ const TabNavigation = ({ activeView, onViewChange }) => {
       { id: VIEWS.JOURNEY, label: 'Our Journey' },
       { id: VIEWS.CROSS_SYMBOLISM, label: 'Our Cross' },
       { id: VIEWS.LOVE_FACTS, label: 'Love Facts' },
+      { id: VIEWS.SCHEDULE, label: 'Schedule' },
       { id: VIEWS.RSVP, label: 'RSVP' }
   ];
   return (
@@ -427,6 +492,7 @@ const ViewDisplay = ({ activeView }) => {
       {activeView === VIEWS.JOURNEY && <OurJourney />}
       {activeView === VIEWS.CROSS_SYMBOLISM && <CrossNewspaperSection />}
       {activeView === VIEWS.LOVE_FACTS && <LoveFacts />}
+      {activeView === VIEWS.SCHEDULE && <WeddingDaySchedule />}
       {activeView === VIEWS.RSVP && <RsvpForm />}
     </div>
   );

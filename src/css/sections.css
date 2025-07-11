@@ -237,7 +237,7 @@
         inset 2px 0 0 rgba(255,255,255,0.1),
         3px 3px 15px rgba(0,0,0,0.2);
     transform-origin: left;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s ease;
     z-index: 10;
     display: flex;
     flex-direction: column;
@@ -249,10 +249,8 @@
 }
 
 .journey-book:hover .journey-book-cover {
-    transform: rotateY(-35deg) translateX(5px);
-    box-shadow: 
-        inset 2px 0 0 rgba(255,255,255,0.1),
-        10px 10px 25px rgba(0,0,0,0.3);
+    transform: rotateY(-35deg);
+    box-shadow: 0 0 35px 5px rgba(255, 253, 240, 0.5);
 }
 
 .journey-book-title {
@@ -271,16 +269,46 @@
     margin: 1.5rem 0;
 }
 
-.journey-stamp-logo {
+/* --- SHINY SILVER STAMP EFFECT (MASKING APPROACH) --- */
+@keyframes silver-shimmer-animation {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+.journey-stamp-wrapper {
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
     width: 90px;
-    height: auto;
+    height: 90px;
     transform: rotate(10deg);
-    opacity: 0.9;
-    filter: brightness(0) invert(1);
+    z-index: 11;
+    
+    background: linear-gradient(100deg, #c8c8c8, #f8f8f8, #c8c8c8);
+    background-size: 200% 100%;
+    
+    animation: silver-shimmer-animation 8s infinite linear;
+    
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
+
+.journey-book:hover .journey-stamp-wrapper {
+    transform: rotate(10deg);
+}
+
+.journey-stamp-logo,
+.journey-stamp-wrapper::after {
+    display: none;
+}
+/* --- END SHINY SILVER STAMP --- */
+
 
 .journey-book-prompt {
     position: absolute;
@@ -323,29 +351,8 @@
 .journey-book-pages .page-edge:nth-child(2) { width: 2px; right: 5px; }
 .journey-book-pages .page-edge:nth-child(3) { width: 1px; right: 8px; }
 
-
-/* Shining effect */
 .journey-book-pages::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(-45deg, 
-        transparent 30%, 
-        rgba(255, 255, 255, 0.8) 45%,
-        rgba(255, 235, 170, 0.6) 50%,
-        rgba(255, 255, 255, 0.8) 55%,
-        transparent 70%
-    );
-    z-index: 5;
-    transform: translateX(-150%);
-    transition: transform 1s ease-in-out;
-}
-
-.journey-book:hover .journey-book-pages::before {
-    transform: translateX(150%);
+    display: none;
 }
 
 
@@ -652,6 +659,130 @@
 }
 .waning-crescent::after { right: 15px; }
 .waxing-gibbous::after { left: -30px; }
+
+
+/* --- NEW: Wedding Day Schedule Section --- */
+.schedule-section {
+    background: var(--color-secondary-cream);
+    padding: 4rem 2rem;
+}
+
+.schedule-container {
+    position: relative;
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem 0;
+}
+
+.schedule-container::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    background-color: var(--color-primary-matcha);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1.5px;
+    z-index: 1;
+}
+
+.schedule-item {
+    padding: 1rem 3rem;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+}
+
+.schedule-item:nth-child(odd) {
+    left: 0;
+    padding-right: 4rem;
+    text-align: right;
+}
+
+.schedule-item:nth-child(even) {
+    left: 50%;
+    padding-left: 4rem;
+    text-align: left;
+}
+
+.schedule-icon {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: -25px;
+    background-color: white;
+    border: 3px solid var(--color-primary-matcha);
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.schedule-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--color-accent-deep-gold);
+}
+
+.schedule-item:nth-child(even) .schedule-icon {
+    left: -25px;
+}
+
+.schedule-content {
+    padding: 1.5rem;
+    background-color: white;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+}
+
+.schedule-content h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: var(--color-accent-gold);
+}
+
+.schedule-content .schedule-time {
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-primary-matcha);
+    margin-bottom: 0.5rem;
+}
+
+.schedule-content .schedule-location {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .schedule-container::after {
+        left: 31px;
+    }
+    .schedule-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    .schedule-item:nth-child(odd),
+    .schedule-item:nth-child(even) {
+        left: 0;
+        text-align: left;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    .schedule-icon {
+        left: 6px;
+    }
+    .schedule-item:nth-child(even) .schedule-icon {
+        left: 6px;
+    }
+}
 
 
 /* --- MODERNIZED: RSVP & Details Section --- */

@@ -481,11 +481,14 @@ h2, h3, h4, h5, h6 {
 }
 
 .newspaper-stamp-logo {
-    width: 120px;
+    position: absolute;
+    bottom: -1rem;
+    left: 4rem;
+    width: 180px;
     height: auto;
-    transform: rotate(-8deg);
-    opacity: 0.75;
-    margin-bottom: -1.5rem;
+    transform: rotate(-2deg);
+    opacity: 0.6;
+    z-index: 4;
 }
 
 .newspaper-title-line {

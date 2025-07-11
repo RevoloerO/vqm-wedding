@@ -166,7 +166,6 @@ const OurJourney = () => (
 const CrossNewspaperSection = () => (
     <section id="cross-symbolism" className="page-section cross-newspaper-section">
         <div className="newspaper-header">
-            <img src={hqStamp1} alt="Quyen & Hien Stamp" className="newspaper-stamp-logo" />
             <div className="newspaper-title-line">
                 <div className="newspaper-title-item">EST. 2028</div>
                 <h2 className="newspaper-headline">The Wedding Chronicle</h2>
@@ -203,18 +202,19 @@ const CrossNewspaperSection = () => (
                 </div>
                 <div className="symbolism-item">
                     <h4>The Braid</h4>
-                    <p>The act of braiding symbolizes the couple's lives being intertwined into a new, single entity. Crucially, it signifies the deliberate inclusion of God as the central, binding force in their union, creating a bond of incredible strength and resilience.</p>
+                    <p><span className="drop-cap">N</span>ewly formed as one, the act of braiding symbolizes the couple's lives being intertwined. It signifies the deliberate inclusion of God as the central, binding force in their union, creating a bond of incredible strength and resilience.</p>
                 </div>
                  <div className="symbolism-item">
                     <h4>The Five Wounds</h4>
-                    <p>Our cross design incorporates five circles, symbolizing the Five Holy Wounds of Jesus. This serves as a reminder of the ultimate sacrificial love that forms the foundation of a Christian marriage covenant.</p>
+                    <p><span className="drop-cap">R</span>emembering the ultimate sacrifice, our cross design incorporates five circles symbolizing the Five Holy Wounds of Jesus. This serves as a reminder of the sacrificial love that forms the foundation of a Christian marriage covenant.</p>
                 </div>
                 <div className="symbolism-item">
                     <h4>A Lasting Reminder</h4>
-                    <p>This cross will be displayed in our home as a lasting reminder of the sacred vows we make on our wedding day—a covenant not just between us, but with God at the center of our new life together.</p>
+                    <p><span className="drop-cap">I</span>n our home, this cross will serve as a lasting reminder of the sacred vows we make on our wedding day—a covenant not just between us, but with God at the center of our new life together.</p>
                 </div>
             </div>
         </div>
+        <img src={hqStamp1} alt="Quyen & Hien Stamp" className="newspaper-stamp-logo" />
     </section>
 );
 

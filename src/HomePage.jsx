@@ -10,6 +10,7 @@ import heroBgImage from './assets/bg-2.jpeg';
 import journeyImage from './assets/bg-2.jpeg';
 import hqStamp1 from './assets/HQ-stamp-1-nobg.png'; // Rectangular Stamp
 import hqStamp2 from './assets/HQ-stamp-2-nobg.png'; // Circular Stamp
+import hqStamp3 from './assets/HQ-stamp-3-nobg.png'; // New stamp for schedule
 import hqArt from './assets/HQ-art.png'; // Footer Art
 
 // --- CONSTANTS ---
@@ -259,7 +260,7 @@ const LoveFacts = () => (
 const WeddingDaySchedule = () => (
     <section id="schedule" className="page-section schedule-section">
         <div className="section-header">
-            <img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
+            <img src={hqStamp3} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
             <h2>Our Wedding Day</h2>
         </div>
         <div className="schedule-container">

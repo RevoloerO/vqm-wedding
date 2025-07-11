@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './css/base.css';
 import './css/sections.css';
@@ -462,9 +462,13 @@ END:VCALENDAR`;
 };
 
 
-// --- New Tab Navigation and View Container ---
+// --- Tab Navigation with Scroll-to-Center Logic ---
 
 const TabNavigation = ({ activeView, onViewChange }) => {
+  const navRef = useRef(null);
+  const [showLeftHint, setShowLeftHint] = useState(false);
+  const [showRightHint, setShowRightHint] = useState(false);
+
   const navItems = [
       { id: VIEWS.JOURNEY, label: 'Our Journey' },
       { id: VIEWS.CROSS_SYMBOLISM, label: 'Our Cross' },
@@ -472,18 +476,70 @@ const TabNavigation = ({ activeView, onViewChange }) => {
       { id: VIEWS.SCHEDULE, label: 'Schedule' },
       { id: VIEWS.RSVP, label: 'RSVP' }
   ];
+  
+  useEffect(() => {
+    const nav = navRef.current;
+    if (nav && activeView) {
+      const activeButton = nav.querySelector(`[data-view-id="${activeView}"]`);
+      if (activeButton) {
+        const navWidth = nav.clientWidth;
+        const buttonWidth = activeButton.offsetWidth;
+        const buttonLeft = activeButton.offsetLeft;
+        
+        const scrollTo = buttonLeft - (navWidth / 2) + (buttonWidth / 2);
+
+        nav.scrollTo({
+          left: scrollTo,
+          behavior: 'smooth',
+        });
+      }
+    }
+  }, [activeView]);
+
+  const checkForScroll = useCallback(() => {
+    const nav = navRef.current;
+    if (nav) {
+      const isScrollable = nav.scrollWidth > nav.clientWidth;
+      setShowLeftHint(isScrollable && nav.scrollLeft > 1);
+      setShowRightHint(isScrollable && nav.scrollLeft < nav.scrollWidth - nav.clientWidth - 1);
+    }
+  }, []);
+
+  useEffect(() => {
+    const nav = navRef.current;
+    if (nav) {
+      checkForScroll();
+      nav.addEventListener('scroll', checkForScroll, { passive: true });
+      window.addEventListener('resize', checkForScroll);
+
+      return () => {
+        nav.removeEventListener('scroll', checkForScroll);
+        window.removeEventListener('resize', checkForScroll);
+      };
+    }
+  }, [checkForScroll]);
+
   return (
-    <nav className="tab-navbar">
-      {navItems.map(item => (
-        <button
-          key={item.id}
-          className={`tab-nav-link ${activeView === item.id ? 'active' : ''}`}
-          onClick={() => onViewChange(item.id)}
-        >
-          {item.label}
-        </button>
-      ))}
-    </nav>
+    <div className="tab-navbar-wrapper">
+      <div className={`scroll-hint left ${showLeftHint ? 'visible' : ''}`}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </div>
+      <nav className="tab-navbar" ref={navRef}>
+        {navItems.map(item => (
+          <button
+            key={item.id}
+            data-view-id={item.id}
+            className={`tab-nav-link ${activeView === item.id ? 'active' : ''}`}
+            onClick={() => onViewChange(item.id)}
+          >
+            {item.label}
+          </button>
+        ))}
+      </nav>
+      <div className={`scroll-hint right ${showRightHint ? 'visible' : ''}`}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </div>
+    </div>
   );
 };
 
@@ -541,9 +597,7 @@ function HomePage() {
   return (
     <div className="homepage-container">
       <WelcomeBanner backgroundImage={heroBgImage} onViewChange={setActiveView} />
-      <div className="tab-navbar-wrapper">
-        <TabNavigation activeView={activeView} onViewChange={setActiveView} />
-      </div>
+      <TabNavigation activeView={activeView} onViewChange={setActiveView} />
       <div className="main-content-area">
         <ViewDisplay activeView={activeView} />
       </div>

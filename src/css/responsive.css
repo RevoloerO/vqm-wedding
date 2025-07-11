@@ -1,4 +1,6 @@
 /* --- RESPONSIVE DESIGN --- */
+
+/* For Tablets and smaller desktops */
 @media (max-width: 900px) {
     .newspaper-content {
         grid-template-columns: 1fr;
@@ -10,9 +12,12 @@
     .explanation-title {
         text-align: center;
     }
+    .main-content-area {
+        padding: 3rem 3%; /* Adjust padding for smaller screens */
+    }
 }
 
-
+/* For Mobile Devices */
 @media (max-width: 768px) {
     .section-content-journey {
         grid-template-columns: 1fr;
@@ -29,14 +34,80 @@
         height: 420px;
     }
 
-    .fun-facts-container { flex-direction: column; }
+    .fun-facts-container { 
+        flex-direction: column; 
+        grid-template-columns: 1fr; /* Stack fact cards */
+        padding: 0 1rem;
+    }
     .page-section h2 { font-size: 2.2rem; }
-    .welcome-banner-names { font-size: 3.5rem; }
+
+    .welcome-banner-names { font-size: 3rem; }
     .welcome-banner-details { font-size: 0.9rem; }
-    .tab-nav-link { font-size: 0.9rem; padding: 0.8rem 1rem; }
+    
+    .tab-navbar {
+        justify-content: flex-start; 
+        overflow-x: auto; 
+        white-space: nowrap; 
+        -webkit-overflow-scrolling: touch; 
+        scrollbar-width: none; 
+        padding: 0 35px; 
+        /* MODIFICATION: Add smooth scrolling behavior via CSS */
+        scroll-behavior: smooth;
+    }
+
+    .tab-navbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab-nav-link { 
+        font-size: 0.9rem; 
+        padding: 0.8rem 1.2rem; 
+    }
+
     .rsvp-form .radio-group, .rsvp-form .checkbox-group { grid-template-columns: 1fr; }
     .rsvp-details-container { grid-template-columns: 1fr; }
+
+    .newspaper-headline { font-size: 2rem; }
+    .newspaper-stamp-logo {
+        width: 120px;
+        left: 1rem;
+        bottom: -0.5rem;
+    }
 }
+
+/* For Small Mobile Devices */
+@media (max-width: 480px) {
+    .welcome-banner-content {
+        padding: 1rem 1.5rem;
+        max-width: 95%;
+    }
+    .welcome-banner-names {
+        font-size: 2.5rem; /* Further reduce font size */
+    }
+    .countdown-value {
+        font-size: 1.5rem;
+    }
+    .page-section {
+        padding: 3rem 1rem;
+    }
+    .page-section h2 {
+        font-size: 1.8rem;
+    }
+    .rsvp-section {
+        padding: 2rem 1rem;
+        margin: 2rem auto;
+    }
+    .footer {
+        padding: 1.5rem;
+    }
+    .scroll-to-top-btn {
+        bottom: 1rem;
+        right: 1rem;
+        width: 45px;
+        height: 45px;
+    }
+}
+
 
 /* --- LARGE SCREEN OPTIMIZATIONS --- */
 @media (min-width: 1600px) {

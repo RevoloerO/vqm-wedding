@@ -43,6 +43,8 @@
   transition: box-shadow 0.3s ease;
   z-index: 999;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0);
+  /* MODIFICATION: Add position relative for scroll hint positioning */
+  position: relative;
 }
 
 .tab-navbar-wrapper:stuck {
@@ -51,7 +53,7 @@
 
 .tab-navbar {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center align by default for desktop */
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 5%;
@@ -70,6 +72,7 @@
     color: var(--color-text-dark);
     position: relative;
     transition: color 0.3s ease, background-color 0.3s ease;
+    flex-shrink: 0; /* Prevent items from shrinking on mobile */
 }
 
 .tab-nav-link:hover {
@@ -90,6 +93,40 @@
     height: 3px;
     background-color: var(--color-accent-gold);
 }
+
+/* --- MODIFICATION START: Scroll Hint Styles --- */
+.scroll-hint {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* Make them non-interactive */
+    z-index: 10;
+}
+.scroll-hint.left {
+    left: 0;
+    /* MODIFICATION: Make gradient softer/wider */
+    background: linear-gradient(to right, var(--color-background) 40%, transparent);
+}
+.scroll-hint.right {
+    right: 0;
+    /* MODIFICATION: Make gradient softer/wider */
+    background: linear-gradient(to left, var(--color-background) 40%, transparent);
+}
+.scroll-hint.visible {
+    opacity: 1;
+}
+.scroll-hint svg {
+    stroke: var(--color-accent-gold);
+    filter: drop-shadow(0 0 3px rgba(0,0,0,0.2));
+}
+/* --- MODIFICATION END --- */
+
 
 /* --- RSVP Form --- */
 .rsvp-form p {

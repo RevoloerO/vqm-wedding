@@ -661,7 +661,7 @@
 .waxing-gibbous::after { left: -30px; }
 
 
-/* --- NEW: Wedding Day Schedule Section --- */
+/* --- MODIFICATION: Reworked Wedding Day Schedule Section (Timeline) --- */
 .schedule-section {
     background: var(--color-background);
     padding: 4rem 2rem;
@@ -674,51 +674,141 @@
     opacity: 0.7;
 }
 
-.schedule-container {
-    max-width: 800px;
-    margin: 2rem auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.schedule-timeline-container {
+    position: relative;
+    max-width: 900px;
+    margin: 3rem auto 0;
+}
+
+/* The central timeline bar */
+.schedule-timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: #e0dccc; /* Lighter than border */
+    transform: translateX(-50%);
+    border-radius: 3px;
 }
 
 .schedule-item {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    background-color: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid var(--color-newspaper-border);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+    margin-bottom: 3rem; /* Space between items */
 }
 
-.schedule-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-}
-
-.schedule-icon {
-    flex-shrink: 0;
+/* The icon on the timeline */
+.schedule-item .schedule-icon {
+    position: absolute;
     width: 50px;
     height: 50px;
     background-color: var(--color-secondary-cream);
+    border: 2px solid var(--color-accent-gold);
+    top: 15px;
     border-radius: 50%;
+    z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 0 0 4px var(--color-background);
+    transition: transform 0.3s ease;
+}
+
+.schedule-item:hover .schedule-icon {
+    transform: scale(1.1) translateX(-45.5%); /* Adjust for left/right positioning */
 }
 
 .schedule-icon svg {
     width: 24px;
     height: 24px;
     stroke: var(--color-accent-deep-gold);
+    stroke-width: 1.5;
 }
 
-.schedule-content {
-    flex-grow: 1;
+/* Position items on the left */
+.schedule-item:nth-child(odd) {
+    left: 0;
+    padding-left: 0;
+    padding-right: 30px;
 }
+
+/* Position items on the right */
+.schedule-item:nth-child(even) {
+    left: 50%;
+    padding-right: 0;
+    padding-left: 30px;
+}
+
+/* Position icon for left items */
+.schedule-item:nth-child(odd) .schedule-icon {
+    right: -25px;
+    transform: translateX(50%);
+}
+.schedule-item:nth-child(odd):hover .schedule-icon {
+    transform: scale(1.1) translateX(50%);
+}
+
+
+/* Position icon for right items */
+.schedule-item:nth-child(even) .schedule-icon {
+    left: -25px;
+    transform: translateX(-50%);
+}
+.schedule-item:nth-child(even):hover .schedule-icon {
+    transform: scale(1.1) translateX(-50%);
+}
+
+
+.schedule-content {
+    padding: 20px 30px;
+    background-color: white;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+    border: 1px solid var(--color-newspaper-border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.schedule-item:hover .schedule-content {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+}
+
+
+/* Pointer arrow for content cards */
+.schedule-content::after {
+    content: " ";
+    position: absolute;
+    top: 28px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    transition: transform 0.3s ease;
+}
+
+/* Arrow for left items */
+.schedule-item:nth-child(odd) .schedule-content {
+    text-align: right;
+}
+.schedule-item:nth-child(odd) .schedule-content::after {
+    right: -10px;
+    border-left: 10px solid white;
+    filter: drop-shadow(1px 0px 0px #e0dccc);
+}
+
+/* Arrow for right items */
+.schedule-item:nth-child(even) .schedule-content {
+    text-align: left;
+}
+.schedule-item:nth-child(even) .schedule-content::after {
+    left: -10px;
+    border-right:10px solid white;
+    filter: drop-shadow(-1px 0px 0px #e0dccc);
+}
+
 
 .schedule-content h3 {
     margin-top: 0;

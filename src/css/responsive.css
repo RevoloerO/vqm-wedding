@@ -50,9 +50,10 @@
         white-space: nowrap; 
         -webkit-overflow-scrolling: touch; 
         scrollbar-width: none; 
+        /* Add padding to prevent text from sliding under the hints */
         padding: 0 35px; 
-        /* MODIFICATION: Add smooth scrolling behavior via CSS */
-        scroll-behavior: smooth;
+        /* Add scroll-snap for a better manual scrolling experience */
+        scroll-snap-type: x mandatory;
     }
 
     .tab-navbar::-webkit-scrollbar {
@@ -62,6 +63,8 @@
     .tab-nav-link { 
         font-size: 0.9rem; 
         padding: 0.8rem 1.2rem; 
+        /* Add scroll-snap alignment */
+        scroll-snap-align: center;
     }
 
     .rsvp-form .radio-group, .rsvp-form .checkbox-group { grid-template-columns: 1fr; }
@@ -73,6 +76,44 @@
         left: 1rem;
         bottom: -0.5rem;
     }
+
+    /* --- MODIFICATION START: Schedule Timeline on Mobile --- */
+    .schedule-timeline-container::before {
+        left: 25px; /* Move timeline to the left */
+        transform: translateX(-50%);
+    }
+
+    .schedule-item,
+    .schedule-item:nth-child(even) {
+        width: 100%;
+        left: 0;
+        padding-left: 55px; /* Space for the timeline */
+        padding-right: 15px;
+    }
+
+    .schedule-item:nth-child(odd) .schedule-content,
+    .schedule-item:nth-child(even) .schedule-content {
+        text-align: left;
+    }
+
+    .schedule-item .schedule-icon,
+    .schedule-item:nth-child(even) .schedule-icon {
+        left: 25px;
+        transform: translateX(-50%);
+    }
+    
+    .schedule-item:hover .schedule-icon {
+        transform: scale(1.1) translateX(-50%) !important;
+    }
+
+    .schedule-content::after,
+    .schedule-item:nth-child(odd) .schedule-content::after {
+        left: -10px;
+        border-right: 10px solid white;
+        border-left: none; /* remove the other arrow */
+        filter: drop-shadow(-1px 0px 0px #e0dccc);
+    }
+    /* --- MODIFICATION END --- */
 }
 
 /* For Small Mobile Devices */

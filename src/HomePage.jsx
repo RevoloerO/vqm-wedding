@@ -256,28 +256,32 @@ const LoveFacts = () => (
     </section>
 );
 
-// NEW: Wedding Day Schedule Section
+// --- MODIFICATION: Reworked Wedding Day Schedule Section with Timeline and new Icons ---
 const WeddingDaySchedule = () => (
     <section id="schedule" className="page-section schedule-section">
         <div className="section-header">
             <img src={hqStamp3} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
             <h2>Our Wedding Day</h2>
         </div>
-        <div className="schedule-container">
+        <div className="schedule-timeline-container">
+            {/* Item 1: Church Ceremony */}
             <div className="schedule-item">
                 <div className="schedule-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L18 4H6V6H18Z"/><path d="M12 4V2"/><path d="M10 6V4"/><path d="M14 6V4"/><path d="M4 22H20"/><path d="M6 22V10L12 4L18 10V22H6Z"/></svg>
+                    {/* Church Icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M8 9H4v10h4V9zm8 0h4v10h-4V9z"/><path d="M4 9V5l8-3 8 3v4"/></svg>
                 </div>
                 <div className="schedule-content">
-                    <h3>The Ceremony</h3>
+                    <h3>Church Ceremony</h3>
                     <p className="schedule-time">2:00 PM</p>
                     <p>Join us as we exchange vows and begin our journey as one.</p>
                     <p className="schedule-location">St. Joseph Cathedral, Columbus, OH</p>
                 </div>
             </div>
+            {/* Item 2: Cocktail Hour */}
             <div className="schedule-item">
                 <div className="schedule-icon">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    {/* Martini Glass Icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="m19 3-7 8-7-8Z"/></svg>
                 </div>
                 <div className="schedule-content">
                     <h3>Cocktail Hour</h3>
@@ -286,9 +290,11 @@ const WeddingDaySchedule = () => (
                     <p className="schedule-location">The Westin Great Southern, Columbus, OH</p>
                 </div>
             </div>
+            {/* Item 3: Dinner & Celebration */}
             <div className="schedule-item">
                 <div className="schedule-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path><path d="M15 5l4 4"></path></svg>
+                    {/* Music Notes Icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
                 </div>
                 <div className="schedule-content">
                     <h3>Dinner & Celebration</h3>
@@ -297,9 +303,11 @@ const WeddingDaySchedule = () => (
                     <p className="schedule-location">The Westin Great Southern, Columbus, OH</p>
                 </div>
             </div>
+            {/* Item 4: Grand Exit */}
              <div className="schedule-item">
                 <div className="schedule-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l2.5 6.5L21 12l-6.5 2.5L12 22l-2.5-6.5L3 12l6.5-2.5L12 2z"/></svg>
+                    {/* Car Icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9L2 12v9c0 .6.4 1 1 1h3"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
                 </div>
                 <div className="schedule-content">
                     <h3>Grand Exit</h3>

@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import './HomePage.css';
+import './css/base.css';
+import './css/sections.css';
+import './css/components.css';
+import './css/responsive.css';
 
 // --- ASSET IMPORT ---
 import heroBgImage from './assets/bg-2.jpeg';
 import journeyImage from './assets/bg-2.jpeg';
 import hqStamp1 from './assets/HQ-stamp-1-nobg.png'; // Rectangular Stamp
 import hqStamp2 from './assets/HQ-stamp-2-nobg.png'; // Circular Stamp
+import hqArt from './assets/HQ-art.png'; // Footer Art
 
 // --- CONSTANTS ---
 const VIEWS = {
@@ -232,7 +236,7 @@ const LoveFacts = () => (
                 <h4>Waning Crescent</h4>
                 <p>Born on September 20, 1995, under a Waning Crescent moon. This is a time of quiet reflection, intuition, and dreaming of the future.</p>
             </div>
-            <div className="fact-card-connector">+</div>
+            <div className="fact-card-connector">+</div >
             <div className="fact-card">
                  <div className="moon-icon waxing-gibbous"></div>
                 <h3>Hien's Moon</h3>
@@ -477,6 +481,7 @@ function HomePage() {
         <ViewDisplay activeView={activeView} />
       </div>
       <footer className="footer">
+        <img src={hqArt} alt="Quyen & Hien decorative art" className="footer-art" />
         <p>
             <span className="amdg-wrapper">
                 AMDG

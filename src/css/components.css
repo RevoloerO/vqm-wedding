@@ -1,0 +1,289 @@
+/* --- BUTTONS --- */
+.button {
+    display: inline-block; background-color: var(--color-accent-gold);
+    color: var(--color-text-light); padding: 1rem 2.5rem; border-radius: 8px;
+    font-weight: 700; margin-top: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    text-transform: uppercase; letter-spacing: 1px; font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-ui);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.button:hover {
+    background-color: var(--color-accent-deep-gold);
+    color: var(--color-text-light); transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0,0,0,0.15);
+}
+.button-group { display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
+
+/* --- COUNTDOWN & COUNTUP --- */
+.countdown, .countup { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
+.countdown-item, .countup { text-align: center; }
+.countdown-value, .countup-value {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700;
+}
+.countdown-unit, .countup-unit {
+  font-family: var(--font-ui);
+  font-size: clamp(0.6rem, 1vw, 0.7rem);
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.countup { flex-direction: column; }
+
+
+/* --- STICKY TAB NAVIGATION --- */
+.tab-navbar-wrapper {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: var(--color-background);
+  border-bottom: 1px solid #ddd;
+  transition: box-shadow 0.3s ease;
+  z-index: 999;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0);
+}
+
+.tab-navbar-wrapper:stuck {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.tab-navbar {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.tab-nav-link {
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: none;
+    border: none;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    color: var(--color-text-dark);
+    position: relative;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.tab-nav-link:hover {
+    color: var(--color-accent-gold);
+    background-color: var(--color-secondary-cream);
+}
+
+.tab-nav-link.active {
+    color: var(--color-accent-gold);
+}
+
+.tab-nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-accent-gold);
+}
+
+/* --- RSVP Form --- */
+.rsvp-form p {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    color: #555;
+}
+
+.rsvp-form .form-group {
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.rsvp-form label,
+.rsvp-form legend {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-text-dark);
+}
+
+.rsvp-form input[type="text"],
+.rsvp-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: var(--color-secondary-cream);
+}
+
+.rsvp-form input[type="text"]:focus,
+.rsvp-form textarea:focus {
+    border-color: var(--color-accent-gold);
+    box-shadow: 0 0 0 4px rgba(192, 161, 114, 0.15);
+    outline: none;
+    background: white;
+}
+
+.rsvp-form fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rsvp-form .radio-group, .rsvp-form .checkbox-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.rsvp-form .radio-group label, .rsvp-form .checkbox-group label {
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    font-family: var(--font-ui);
+    font-weight: 600;
+}
+
+.rsvp-form .radio-group input,
+.rsvp-form .checkbox-group input {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    cursor: pointer;
+}
+
+.rsvp-form .radio-group label:hover,
+.rsvp-form .checkbox-group label:hover {
+    border-color: var(--color-accent-deep-gold);
+}
+
+.rsvp-form .radio-group .selected, .rsvp-form .checkbox-group .selected {
+    border-color: var(--color-accent-gold);
+    background-color: var(--color-secondary-cream);
+    color: var(--color-accent-deep-gold);
+    font-weight: 700;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+}
+
+.thank-you-message {
+    padding: 3rem;
+    background-color: var(--color-secondary-cream);
+    border-left: 5px solid var(--color-primary-matcha);
+    text-align: left;
+}
+.thank-you-message h3 {
+    font-size: 2rem;
+}
+
+/* --- AMDG TOOLTIP --- */
+.amdg-wrapper {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.7);
+    cursor: help;
+}
+
+.amdg-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    width: 220px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -110px;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    transform: translateY(10px);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.amdg-tooltip strong {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.amdg-tooltip em {
+    font-family: var(--font-ui);
+    font-style: normal;
+    opacity: 0.8;
+}
+
+.amdg-wrapper:hover .amdg-tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- SCROLL TO TOP BUTTON --- */
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: var(--color-text-light);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out, background-color 0.3s ease;
+    will-change: opacity, transform;
+    pointer-events: none;
+}
+
+.scroll-to-top-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.scroll-to-top-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+}
+
+.scroll-to-top-btn svg {
+    stroke: var(--color-accent-gold);
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.scroll-to-top-btn:hover svg {
+    transform: translateY(-2px);
+}

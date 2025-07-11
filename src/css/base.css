@@ -1,0 +1,83 @@
+/* Import new elegant fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+
+/* --- MATCHA LATTE THEME (Refined) --- */
+:root {
+  /* Palette: Matcha, Cream, Gold, and Charcoal */
+  --color-background: #F7F5F2; /* Creamy Latte Foam */
+  --color-primary-matcha: #A3B899; /* Soft Matcha Green */
+  --color-secondary-cream: #FDFBF5; /* Lighter Cream */
+  --color-accent-gold: #C0A172; /* Elegant Gold */
+  --color-accent-deep-gold: #ab8a5b; /* Darker Gold for hover */
+  --color-text-dark: #36454F; /* Charcoal */
+  --color-text-light: #FFFFFF;
+  --color-newspaper-bg: #fdfaf0; /* Aged paper color */
+  --color-newspaper-border: #dcd3b2; /* Faded border color */
+
+  /* --- UPDATED FONT PALETTE --- */
+  --font-display: 'Great Vibes', cursive; /* For the most prominent banner text */
+  --font-heading: 'Playfair Display', serif; /* For all section and card titles */
+  --font-body: 'Cormorant Garamond', serif; /* For all paragraphs and descriptive text */
+  --font-ui: 'Lato', sans-serif; /* For buttons, nav, labels, and secondary details */
+  --font-logo: 'Cinzel Decorative', serif; /* Unchanged */
+}
+
+/* --- GENERAL STYLES --- */
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-dark);
+  font-family: var(--font-body); /* Default to the elegant body font */
+  margin: 0;
+  padding: 0;
+  line-height: 1.7; /* Increased line-height for better readability with serif */
+  font-size: 17px; /* Slightly larger base font size for readability */
+}
+
+/* Apply heading font consistently */
+h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-accent-deep-gold);
+}
+
+/* --- UI CONSISTENCY: General Page Section Titles --- */
+.page-section h2 {
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+.section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+/* Stamped Logo Placement for general sections */
+.section-stamp-logo {
+    width: 150px;
+    height: auto;
+    transform: rotate(-3deg);
+    margin-bottom: -1rem; /* Pull the title up slightly */
+    opacity: 0.9;
+}
+
+.main-content-area {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 5%;
+}
+
+.view-container {
+    animation: contentFadeIn 0.6s ease;
+}
+@keyframes contentFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

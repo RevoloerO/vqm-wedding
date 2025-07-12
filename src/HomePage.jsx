@@ -170,15 +170,43 @@ const OurJourney = () => (
     </section>
 );
 
+// --- MODIFICATION: Toggleable Item Component for Chronicle ---
+const ToggleableItem = ({ title, children }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const contentRef = useRef(null);
+
+    return (
+        <div className={`toggleable-item ${isOpen ? 'open' : ''}`}>
+            <button className="toggleable-header" onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen}>
+                <h4>{title}</h4>
+                {/* MODIFICATION: Changed to a plus/minus icon */}
+                <div className="toggle-icon">
+                    <div className="icon-bar horizontal"></div>
+                    <div className="icon-bar vertical"></div>
+                </div>
+            </button>
+            <div className="toggleable-content-wrapper" style={{ maxHeight: isOpen ? contentRef.current?.scrollHeight : 0 }}>
+                <div className="toggleable-content" ref={contentRef}>
+                    {children}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
 // --- MODIFICATION: Combined Cross & Love Facts with a Fade Animation ---
 const StoryChronicleSection = () => {
     const [isFlipped, setIsFlipped] = useState(false);
 
     return (
-        <section id="chronicle" className="page-section chronicle-section-wrapper">
+        <section id="chronicle" className="chronicle-section-wrapper">
             <div className="chronicle-container">
+                <button onClick={() => setIsFlipped(false)} className={`chronicle-side-nav left ${isFlipped ? 'visible' : ''}`} aria-label="Previous Page">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                
                 <div className="chronicle-newspaper">
-                    {/* Page 1: Front (Cross Symbolism) */}
                     <div className={`chronicle-page page-front ${!isFlipped ? 'active' : ''}`}>
                         <div className="newspaper-header">
                             <div className="newspaper-title-line">
@@ -194,12 +222,7 @@ const StoryChronicleSection = () => {
                             <div className="newspaper-column-left">
                                 <div className="explanation-visual">
                                     <svg className="explanation-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                        <g className="explanation-glow-group">
-                                            <path d="M50 12 V30 M27 35 H45 M73 35 H55" strokeWidth="3"/>
-                                            <path d="M50 40 C 40 55, 60 55, 50 70 C 40 85, 60 85, 50 90" strokeWidth="2.5"/>
-                                            <path d="M50 40 C 60 55, 40 55, 50 70 C 60 85, 40 85, 50 90" strokeWidth="2.5"/>
-                                            <path d="M50 40 V 90" strokeWidth="2.5"/>
-                                        </g>
+                                        <g className="explanation-glow-group"><path d="M50 12 V30 M27 35 H45 M73 35 H55" strokeWidth="3"/><path d="M50 40 C 40 55, 60 55, 50 70 C 40 85, 60 85, 50 90" strokeWidth="2.5"/><path d="M50 40 C 60 55, 40 55, 50 70 C 60 85, 40 85, 50 90" strokeWidth="2.5"/><path d="M50 40 V 90" strokeWidth="2.5"/></g>
                                         <circle className="accent-circle" cx="50" cy="8" r="4"/><circle className="accent-circle" cx="23" cy="35" r="4"/><circle className="accent-circle" cx="77" cy="35" r="4"/><circle className="accent-circle" cx="50" cy="35" r="5"/><circle className="accent-circle" cx="50" cy="94" r="4"/>
                                     </svg>
                                 </div>
@@ -207,41 +230,29 @@ const StoryChronicleSection = () => {
                             </div>
                             <div className="newspaper-column-right">
                                 <h3 className="explanation-title">The Symbolism of the Three-Strand Cord</h3>
-                                <div className="symbolism-item"><h4>The Three Strands</h4><p><span className="drop-cap">I</span>n the Cord of Three Strands ceremony, three separate strands are braided together. These represent the bride, the groom, and God, each being whole and individual before being woven together.</p></div>
-                                <div className="symbolism-item"><h4>The Braid</h4><p><span className="drop-cap">N</span>ewly formed as one, the act of braiding symbolizes the couple's lives being intertwined. It signifies the deliberate inclusion of God as the central, binding force in their union.</p></div>
-                                <div className="symbolism-item"><h4>The Five Wounds</h4><p><span className="drop-cap">R</span>emembering the ultimate sacrifice, our cross design incorporates five circles symbolizing the Five Holy Wounds of Jesus, a reminder of the sacrificial love that forms the foundation of a Christian marriage.</p></div>
-                                <div className="symbolism-item"><h4>A Lasting Reminder</h4><p><span className="drop-cap">I</span>n our home, this cross will serve as a lasting reminder of the sacred vows we make on our wedding day—a covenant not just between us, but with God at the center of our new life together.</p></div>
+                                <ToggleableItem title="The Three Strands"><p><span className="drop-cap">I</span>n the Cord of Three Strands ceremony, three separate strands are braided together. These represent the bride, the groom, and God, each being whole and individual before being woven together.</p></ToggleableItem>
+                                <ToggleableItem title="The Braid"><p><span className="drop-cap">N</span>ewly formed as one, the act of braiding symbolizes the couple's lives being intertwined. It signifies the deliberate inclusion of God as the central, binding force in their union.</p></ToggleableItem>
+                                <ToggleableItem title="The Five Wounds"><p><span className="drop-cap">R</span>emembering the ultimate sacrifice, our cross design incorporates five circles symbolizing the Five Holy Wounds of Jesus, a reminder of the sacrificial love that forms the foundation of a Christian marriage.</p></ToggleableItem>
+                                <ToggleableItem title="A Lasting Reminder"><p><span className="drop-cap">I</span>n our home, this cross will serve as a lasting reminder of the sacred vows we make on our wedding day—a covenant not just between us, but with God at the center of our new life together.</p></ToggleableItem>
                             </div>
                         </div>
                         <img src={hqStamp1} alt="Quyen & Hien Stamp" className="newspaper-stamp-logo" />
                     </div>
-                    {/* Page 2: Back (Love Facts) */}
                     <div className={`chronicle-page page-back ${isFlipped ? 'active' : ''}`}>
                         <div className="section-header">
                             <h2 className="newspaper-headline">Celestial Sync</h2>
                         </div>
                         <div className="fun-facts-container">
-                            <div className="fact-card">
-                                <div className="moon-icon waning-crescent"></div>
-                                <h3>Quyen's Moon</h3>
-                                <h4>Waning Crescent</h4>
-                                <p>Born on September 20, 1995, under a Waning Crescent moon. This is a time of quiet reflection, intuition, and dreaming of the future.</p>
-                            </div>
-                            <div className="fact-card-connector">+</div >
-                            <div className="fact-card">
-                                <div className="moon-icon waxing-gibbous"></div>
-                                <h3>Hien's Moon</h3>
-                                <h4>Waxing Gibbous</h4>
-                                <p>Born on March 15, 2000, under a Waxing Gibbous moon. This is a time of anticipation, refinement, and nurturing things toward fulfillment.</p>
-                            </div>
+                            <div className="fact-card"><div className="moon-icon waning-crescent"></div><h3>Quyen's Moon</h3><h4>Waning Crescent</h4><p>Born on September 20, 1995, under a Waning Crescent moon. This is a time of quiet reflection, intuition, and dreaming of the future.</p></div>
+                            <div className="fact-card-connector">+</div>
+                            <div className="fact-card"><div className="moon-icon waxing-gibbous"></div><h3>Hien's Moon</h3><h4>Waxing Gibbous</h4><p>Born on March 15, 2000, under a Waxing Gibbous moon. This is a time of anticipation, refinement, and nurturing things toward fulfillment.</p></div>
                         </div>
                         <p className="fun-fact-summary">One was born as the moon rested, the other as it grew towards fullness. Together, their spirits create a perfect, harmonious cycle of reflection and joyful anticipation.</p>
                     </div>
                 </div>
-            </div>
-            <div className="chronicle-nav">
-                <button onClick={() => setIsFlipped(false)} className={`flip-button ${!isFlipped ? 'disabled' : ''}`}>← Previous Page</button>
-                <button onClick={() => setIsFlipped(true)} className={`flip-button ${isFlipped ? 'disabled' : ''}`}>Next Page →</button>
+                <button onClick={() => setIsFlipped(true)} className={`chronicle-side-nav right ${!isFlipped ? 'visible' : ''}`} aria-label="Next Page">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
             </div>
         </section>
     );
@@ -256,30 +267,10 @@ const WeddingDaySchedule = () => (
             <h2>Our Wedding Day</h2>
         </div>
         <div className="schedule-timeline-container">
-            <div className="schedule-item">
-                <div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M8 9H4v10h4V9zm8 0h4v10h-4V9z"/><path d="M4 9V5l8-3 8 3v4"/></svg></div>
-                <div className="schedule-content">
-                    <h3>Church Ceremony</h3><p className="schedule-time">2:00 PM</p><p>Join us as we exchange vows and begin our journey as one.</p><p className="schedule-location">St. Joseph Cathedral, Columbus, OH</p>
-                </div>
-            </div>
-            <div className="schedule-item">
-                <div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="m19 3-7 8-7-8Z"/></svg></div>
-                <div className="schedule-content">
-                    <h3>Cocktail Hour</h3><p className="schedule-time">6:00 PM</p><p>Enjoy drinks and appetizers before the main celebration begins.</p><p className="schedule-location">The Westin Great Southern, Columbus, OH</p>
-                </div>
-            </div>
-            <div className="schedule-item">
-                <div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-                <div className="schedule-content">
-                    <h3>Dinner & Celebration</h3><p className="schedule-time">7:15 PM</p><p>Dine, dance, and celebrate with us through the night.</p><p className="schedule-location">The Westin Great Southern, Columbus, OH</p>
-                </div>
-            </div>
-             <div className="schedule-item">
-                <div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9L2 12v9c0 .6.4 1 1 1h3"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
-                <div className="schedule-content">
-                    <h3>Grand Exit</h3><p className="schedule-time">11:00 PM</p><p>Help us end our special day with a memorable send-off!</p><p className="schedule-location">The Westin Great Southern, Columbus, OH</p>
-                </div>
-            </div>
+            <div className="schedule-item"><div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M8 9H4v10h4V9zm8 0h4v10h-4V9z"/><path d="M4 9V5l8-3 8 3v4"/></svg></div><div className="schedule-content"><h3>Church Ceremony</h3><p className="schedule-time">2:00 PM</p><p>Join us as we exchange vows and begin our journey as one.</p><p className="schedule-location">St. Joseph Cathedral, Columbus, OH</p></div></div>
+            <div className="schedule-item"><div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="m19 3-7 8-7-8Z"/></svg></div><div className="schedule-content"><h3>Cocktail Hour</h3><p className="schedule-time">6:00 PM</p><p>Enjoy drinks and appetizers before the main celebration begins.</p><p className="schedule-location">The Westin Great Southern, Columbus, OH</p></div></div>
+            <div className="schedule-item"><div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div className="schedule-content"><h3>Dinner & Celebration</h3><p className="schedule-time">7:15 PM</p><p>Dine, dance, and celebrate with us through the night.</p><p className="schedule-location">The Westin Great Southern, Columbus, OH</p></div></div>
+            <div className="schedule-item"><div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9L2 12v9c0 .6.4 1 1 1h3"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div><div className="schedule-content"><h3>Grand Exit</h3><p className="schedule-time">11:00 PM</p><p>Help us end our special day with a memorable send-off!</p><p className="schedule-location">The Westin Great Southern, Columbus, OH</p></div></div>
         </div>
     </section>
 );
@@ -319,39 +310,17 @@ const RsvpForm = () => {
         <section id="rsvp" className="page-section rsvp-section">
             <div className="section-header"><img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" /><h2>Event Details & RSVP</h2></div>
             <div className="rsvp-details-container">
-                <div className="detail-item">
-                    <h3>Church Ceremony</h3><p><strong>July 1, 2028 at 2:00 PM</strong></p><p>St. Joseph Cathedral, Columbus, OH</p>
-                     <div className="button-group"><a href={createGoogleCalendarUrl(churchCeremony)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a><a href={createIcsUrl(churchCeremony)} download="wedding-ceremony.ics" className="button calendar-btn">Apple/Outlook</a></div>
-                </div>
-                <div className="detail-item">
-                    <h3>Wedding Party</h3><p><strong>July 1, 2028 at 6:00 PM</strong></p><p>The Westin Great Southern, Columbus, OH</p>
-                     <div className="button-group"><a href={createGoogleCalendarUrl(weddingParty)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a><a href={createIcsUrl(weddingParty)} download="wedding-party.ics" className="button calendar-btn">Apple/Outlook</a></div>
-                </div>
+                <div className="detail-item"><h3>Church Ceremony</h3><p><strong>July 1, 2028 at 2:00 PM</strong></p><p>St. Joseph Cathedral, Columbus, OH</p><div className="button-group"><a href={createGoogleCalendarUrl(churchCeremony)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a><a href={createIcsUrl(churchCeremony)} download="wedding-ceremony.ics" className="button calendar-btn">Apple/Outlook</a></div></div>
+                <div className="detail-item"><h3>Wedding Party</h3><p><strong>July 1, 2028 at 6:00 PM</strong></p><p>The Westin Great Southern, Columbus, OH</p><div className="button-group"><a href={createGoogleCalendarUrl(weddingParty)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a><a href={createIcsUrl(weddingParty)} download="wedding-party.ics" className="button calendar-btn">Apple/Outlook</a></div></div>
             </div>
             <hr className="rsvp-divider" />
             {submitted ? (<div className="thank-you-message"><h3>Thank you!</h3><p>Your response has been recorded. We can't wait to celebrate with you!</p></div>) : (
                 <form onSubmit={handleSubmit} className="rsvp-form">
                     <p>Please let us know if you can join our celebration by May 1st, 2028.</p>
                     <div className="form-group"><label htmlFor="name">Full Name(s)</label><input type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="e.g., John & Jane Doe" required /></div>
-                    <div className="form-group">
-                        <fieldset><legend>Will you be joining us?</legend>
-                            <div className="radio-group">
-                                <label htmlFor="attending-yes" className={formData.attending === 'yes' ? 'selected' : ''}><input type="radio" id="attending-yes" name="attending" value="yes" checked={formData.attending === 'yes'} onChange={handleChange} required /> Joyfully Accepts</label>
-                                <label htmlFor="attending-no" className={formData.attending === 'no' ? 'selected' : ''}><input type="radio" id="attending-no" name="attending" value="no" checked={formData.attending === 'no'} onChange={handleChange} /> Regretfully Declines</label>
-                            </div>
-                        </fieldset>
-                    </div>
-                    {isAttending && (
-                        <div className="form-group fade-in">
-                             <fieldset><legend>Which events will you attend?</legend>
-                                <div className="checkbox-group">
-                                    <label htmlFor="attending-church" className={formData.attendingChurch ? 'selected' : ''}><input type="checkbox" id="attending-church" name="attendingChurch" checked={formData.attendingChurch} onChange={handleChange} /> Church Ceremony</label>
-                                    <label htmlFor="attending-party" className={formData.attendingParty ? 'selected' : ''}><input type="checkbox" id="attending-party" name="attendingParty" checked={formData.attendingParty} onChange={handleChange} /> Wedding Party</label>
-                                </div>
-                            </fieldset>
-                        </div>
-                    )}
-                     <div className="form-group"><label htmlFor="song">What song will get you on the dance floor?</label><input type="text" id="song" name="song" value={formData.song} onChange={handleChange} placeholder="Song Title & Artist" /></div>
+                    <div className="form-group"><fieldset><legend>Will you be joining us?</legend><div className="radio-group"><label htmlFor="attending-yes" className={formData.attending === 'yes' ? 'selected' : ''}><input type="radio" id="attending-yes" name="attending" value="yes" checked={formData.attending === 'yes'} onChange={handleChange} required /> Joyfully Accepts</label><label htmlFor="attending-no" className={formData.attending === 'no' ? 'selected' : ''}><input type="radio" id="attending-no" name="attending" value="no" checked={formData.attending === 'no'} onChange={handleChange} /> Regretfully Declines</label></div></fieldset></div>
+                    {isAttending && (<div className="form-group fade-in"><fieldset><legend>Which events will you attend?</legend><div className="checkbox-group"><label htmlFor="attending-church" className={formData.attendingChurch ? 'selected' : ''}><input type="checkbox" id="attending-church" name="attendingChurch" checked={formData.attendingChurch} onChange={handleChange} /> Church Ceremony</label><label htmlFor="attending-party" className={formData.attendingParty ? 'selected' : ''}><input type="checkbox" id="attending-party" name="attendingParty" checked={formData.attendingParty} onChange={handleChange} /> Wedding Party</label></div></fieldset></div>)}
+                    <div className="form-group"><label htmlFor="song">What song will get you on the dance floor?</label><input type="text" id="song" name="song" value={formData.song} onChange={handleChange} placeholder="Song Title & Artist" /></div>
                     <div className="form-group"><label htmlFor="message">Leave a message for the couple (optional)</label><textarea id="message" name="message" value={formData.message} onChange={handleChange} rows="4"></textarea></div>
                     <button type="submit" className="button">Submit RSVP</button>
                 </form>

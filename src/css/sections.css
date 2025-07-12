@@ -7,7 +7,6 @@
   text-align: center;
   padding: 2rem 20px;
   color: var(--color-text-light);
-  box-sizing: border-box;
   position: relative;
   overflow: hidden;
   min-height: 80vh;
@@ -245,7 +244,6 @@
     align-items: center;
     text-align: center;
     padding: 2rem;
-    box-sizing: border-box;
 }
 
 .journey-book:hover .journey-book-cover {
@@ -357,19 +355,21 @@
 
 /* --- MODIFICATION: Combined Chronicle/Newspaper Section --- */
 .chronicle-section-wrapper {
-    padding: 4rem 2rem;
+    padding: 0rem 2rem;
     background: var(--color-background);
 }
 
 .chronicle-container {
-    max-width: 900px;
+    max-width: 1100px;
     margin: 0 auto;
+    position: relative;
 }
 
 .chronicle-newspaper {
     width: 100%;
     position: relative;
     display: grid;
+    min-height: 600px;
 }
 
 .chronicle-page {
@@ -382,40 +382,52 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.6s ease-in-out;
+    visibility: hidden;
 }
 
 .chronicle-page.active {
     opacity: 1;
     pointer-events: auto;
+    visibility: visible;
 }
 
-.chronicle-nav {
+/* MODIFICATION: Elegant Side Navigation */
+.chronicle-side-nav {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.flip-button {
-    font-family: var(--font-ui);
-    font-weight: 700;
-    background-color: transparent;
-    color: var(--color-accent-deep-gold);
-    border: 2px solid var(--color-newspaper-border);
-    padding: 0.5rem 1.5rem;
-    border-radius: 20px;
+    background: transparent;
+    border: none;
+    color: var(--color-accent-gold);
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.flip-button:hover {
-    background-color: var(--color-secondary-cream);
-    border-color: var(--color-accent-gold);
-}
-
-.flip-button.disabled {
-    opacity: 0.5;
+    opacity: 0;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+    z-index: 20;
     pointer-events: none;
+}
+.chronicle-side-nav.left {
+    left: 0;
+    border-radius: 8px 0 0 8px;
+}
+.chronicle-side-nav.right {
+    right: 0;
+    border-radius: 0 8px 8px 0;
+}
+.chronicle-side-nav.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+.chronicle-side-nav:hover {
+    background-color: rgba(247, 245, 242, 0.7);
+}
+.chronicle-side-nav svg {
+    width: 30px;
+    height: 30px;
+    filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.2));
 }
 
 
@@ -543,10 +555,84 @@
 
 .explanation-title { font-size: 1.8rem; margin-top: 0; margin-bottom: 1rem; text-align: left; color: #333; }
 .explanation-scripture { font-style: italic; font-size: 1.1rem; text-align: center; color: #555; padding: 1rem; background-color: rgba(214, 204, 174, 0.2); border-radius: 4px; }
-.symbolism-item { margin-bottom: 1rem; }
-.symbolism-item h4 { font-size: 1.2rem; font-weight: 700; color: var(--color-accent-deep-gold); margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 0.5px; }
-.symbolism-item p { text-align: justify; line-height: 1.7; font-size: 1rem; }
-.drop-cap { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 2.5rem; float: left; line-height: 1; margin-right: 0.4rem; margin-top: 0.1rem; color: var(--color-accent-deep-gold); }
+
+/* MODIFICATION: Toggleable Item Styles */
+.toggleable-item {
+    border-bottom: 1px solid var(--color-newspaper-border);
+}
+.toggleable-item:last-child {
+    border-bottom: none;
+}
+.toggleable-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0.75rem 0;
+    cursor: pointer;
+    text-align: left;
+}
+.toggleable-header h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-accent-deep-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.toggle-icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+.icon-bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 2px;
+    background-color: var(--color-accent-gold);
+    border-radius: 1px;
+    transition: transform 0.3s ease;
+}
+.icon-bar.horizontal {
+    transform: translate(-50%, -50%);
+}
+.icon-bar.vertical {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+.toggleable-item.open .icon-bar.vertical {
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+.toggleable-content-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+}
+.toggleable-content {
+    padding: 0 0.5rem 1rem 0.5rem;
+}
+.toggleable-content p {
+    text-align: justify;
+    line-height: 1.7;
+    font-size: 1rem;
+    margin: 0;
+}
+.toggleable-content .drop-cap {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    float: left;
+    line-height: 1;
+    margin-right: 0.4rem;
+    margin-top: 0.1rem;
+    color: var(--color-accent-deep-gold);
+}
+
 
 /* Styles for Love Facts on Page 2 */
 .page-back .fun-facts-container {

@@ -36,6 +36,11 @@
         height: 420px;
     }
 
+    .fun-facts-container { 
+        flex-direction: column; 
+        grid-template-columns: 1fr; /* Stack fact cards */
+        padding: 0 1rem;
+    }
     .page-section h2 { font-size: 2.2rem; }
 
     .welcome-banner-names { font-size: 3rem; }
@@ -66,7 +71,7 @@
     .newspaper-headline { font-size: 2rem; }
     .newspaper-stamp-logo {
         width: 120px;
-        left: 1rem;
+        left: 10rem;
         bottom: -0.5rem;
     }
 
@@ -109,13 +114,14 @@
 
     /* --- Chronicle/Newspaper on Mobile --- */
     .chronicle-section-wrapper {
-        padding: 2rem 1rem;
+        /* MODIFICATION: Restored padding now that box-sizing is fixed */
+        padding: 0rem 1rem;
     }
     .chronicle-newspaper {
-        aspect-ratio: 3 / 4;
+        min-height: unset;
     }
     .chronicle-page {
-        padding: 1.5rem;
+        padding: 1rem 1rem 3rem 1rem;
     }
     .newspaper-content {
         grid-template-columns: 1fr;
@@ -128,6 +134,14 @@
     }
     .page-back .fun-facts-container {
         flex-direction: column;
+    }
+    
+    /* MODIFICATION: Adjust padding for mobile */
+    .main-content-area {
+        padding: 2rem 1rem;
+    }
+    .page-section {
+        padding: 2.5rem 1rem;
     }
 
 
@@ -148,9 +162,6 @@
     }
     .countdown-value {
         font-size: 1.5rem;
-    }
-    .page-section {
-        padding: 3rem 1rem;
     }
     .page-section h2 {
         font-size: 1.8rem;

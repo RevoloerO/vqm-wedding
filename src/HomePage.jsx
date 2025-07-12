@@ -16,9 +16,9 @@ import hqArt from './assets/HQ-art.png'; // Footer Art
 // --- CONSTANTS ---
 const VIEWS = {
   JOURNEY: 'journey',
-  CROSS_SYMBOLISM: 'cross-symbolism',
-  LOVE_FACTS: 'love-facts',
+  CHRONICLE: 'chronicle', // Renamed and combined view
   SCHEDULE: 'schedule',
+  PHOTOBOOK: 'photobook',
   RSVP: 'rsvp',
 };
 
@@ -92,12 +92,10 @@ const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
 
     const bgStyle = { backgroundImage: `url(${backgroundImage})` };
 
-    // Function to handle click and navigate to the "Our Cross" section
     const handleCrossClick = () => {
-        onViewChange(VIEWS.CROSS_SYMBOLISM);
-        // Scroll to the section after a short delay to allow the view to render
+        onViewChange(VIEWS.CHRONICLE);
         setTimeout(() => {
-            const element = document.getElementById('cross-symbolism');
+            const element = document.getElementById('chronicle');
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
             }
@@ -109,7 +107,7 @@ const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
         <div className="welcome-banner-background-blur" style={bgStyle}></div>
         <div className="welcome-banner-background-clear" style={bgStyle}></div>
         <div className="welcome-banner-content">
-          <button onClick={handleCrossClick} className="cross-design-wrapper" aria-label="Learn about our cross">
+          <button onClick={handleCrossClick} className="cross-design-wrapper" aria-label="Learn about our story">
             <div className="cross-design">
               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                   <path d="M50 12 V30 M27 35 H45 M73 35 H55" strokeWidth="3"/>
@@ -147,7 +145,6 @@ const OurJourney = () => (
                 <Link to="/our-full-story" className="journey-book-link">
                     <div className="journey-book">
                         <div className="journey-book-pages">
-                            {/* These divs are for the page-edge effect */}
                             <div className="page-edge"></div>
                             <div className="page-edge"></div>
                             <div className="page-edge"></div>
@@ -173,90 +170,85 @@ const OurJourney = () => (
     </section>
 );
 
+// --- MODIFICATION: Combined Cross & Love Facts with a Fade Animation ---
+const StoryChronicleSection = () => {
+    const [isFlipped, setIsFlipped] = useState(false);
 
-// Cord of Three Strands Cross Explanation Section - Reworked as a Newspaper
-const CrossNewspaperSection = () => (
-    <section id="cross-symbolism" className="page-section cross-newspaper-section">
-        <div className="newspaper-header">
-            <div className="newspaper-title-line">
-                <div className="newspaper-title-item">EST. 2028</div>
-                <h2 className="newspaper-headline">The Wedding Chronicle</h2>
-                <div className="newspaper-title-item">COLUMBUS, OH</div>
+    return (
+        <section id="chronicle" className="page-section chronicle-section-wrapper">
+            <div className="chronicle-container">
+                <div className="chronicle-newspaper">
+                    {/* Page 1: Front (Cross Symbolism) */}
+                    <div className={`chronicle-page page-front ${!isFlipped ? 'active' : ''}`}>
+                        <div className="newspaper-header">
+                            <div className="newspaper-title-line">
+                                <div className="newspaper-title-item">EST. 2028</div>
+                                <h2 className="newspaper-headline">The Wedding Chronicle</h2>
+                                <div className="newspaper-title-item">COLUMBUS, OH</div>
+                            </div>
+                            <div className="newspaper-sub-header">
+                                <span>A Special Report on Faith &amp; Union</span>
+                            </div>
+                        </div>
+                        <div className="newspaper-content">
+                            <div className="newspaper-column-left">
+                                <div className="explanation-visual">
+                                    <svg className="explanation-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                        <g className="explanation-glow-group">
+                                            <path d="M50 12 V30 M27 35 H45 M73 35 H55" strokeWidth="3"/>
+                                            <path d="M50 40 C 40 55, 60 55, 50 70 C 40 85, 60 85, 50 90" strokeWidth="2.5"/>
+                                            <path d="M50 40 C 60 55, 40 55, 50 70 C 60 85, 40 85, 50 90" strokeWidth="2.5"/>
+                                            <path d="M50 40 V 90" strokeWidth="2.5"/>
+                                        </g>
+                                        <circle className="accent-circle" cx="50" cy="8" r="4"/><circle className="accent-circle" cx="23" cy="35" r="4"/><circle className="accent-circle" cx="77" cy="35" r="4"/><circle className="accent-circle" cx="50" cy="35" r="5"/><circle className="accent-circle" cx="50" cy="94" r="4"/>
+                                    </svg>
+                                </div>
+                                <p className="explanation-scripture"><em>"A cord of three strands is not quickly broken."<br/>— Ecclesiastes 4:12</em></p>
+                            </div>
+                            <div className="newspaper-column-right">
+                                <h3 className="explanation-title">The Symbolism of the Three-Strand Cord</h3>
+                                <div className="symbolism-item"><h4>The Three Strands</h4><p><span className="drop-cap">I</span>n the Cord of Three Strands ceremony, three separate strands are braided together. These represent the bride, the groom, and God, each being whole and individual before being woven together.</p></div>
+                                <div className="symbolism-item"><h4>The Braid</h4><p><span className="drop-cap">N</span>ewly formed as one, the act of braiding symbolizes the couple's lives being intertwined. It signifies the deliberate inclusion of God as the central, binding force in their union.</p></div>
+                                <div className="symbolism-item"><h4>The Five Wounds</h4><p><span className="drop-cap">R</span>emembering the ultimate sacrifice, our cross design incorporates five circles symbolizing the Five Holy Wounds of Jesus, a reminder of the sacrificial love that forms the foundation of a Christian marriage.</p></div>
+                                <div className="symbolism-item"><h4>A Lasting Reminder</h4><p><span className="drop-cap">I</span>n our home, this cross will serve as a lasting reminder of the sacred vows we make on our wedding day—a covenant not just between us, but with God at the center of our new life together.</p></div>
+                            </div>
+                        </div>
+                        <img src={hqStamp1} alt="Quyen & Hien Stamp" className="newspaper-stamp-logo" />
+                    </div>
+                    {/* Page 2: Back (Love Facts) */}
+                    <div className={`chronicle-page page-back ${isFlipped ? 'active' : ''}`}>
+                        <div className="section-header">
+                            <h2 className="newspaper-headline">Celestial Sync</h2>
+                        </div>
+                        <div className="fun-facts-container">
+                            <div className="fact-card">
+                                <div className="moon-icon waning-crescent"></div>
+                                <h3>Quyen's Moon</h3>
+                                <h4>Waning Crescent</h4>
+                                <p>Born on September 20, 1995, under a Waning Crescent moon. This is a time of quiet reflection, intuition, and dreaming of the future.</p>
+                            </div>
+                            <div className="fact-card-connector">+</div >
+                            <div className="fact-card">
+                                <div className="moon-icon waxing-gibbous"></div>
+                                <h3>Hien's Moon</h3>
+                                <h4>Waxing Gibbous</h4>
+                                <p>Born on March 15, 2000, under a Waxing Gibbous moon. This is a time of anticipation, refinement, and nurturing things toward fulfillment.</p>
+                            </div>
+                        </div>
+                        <p className="fun-fact-summary">One was born as the moon rested, the other as it grew towards fullness. Together, their spirits create a perfect, harmonious cycle of reflection and joyful anticipation.</p>
+                    </div>
+                </div>
             </div>
-            <div className="newspaper-sub-header">
-                <span>A Special Report on Faith &amp; Union</span>
+            <div className="chronicle-nav">
+                <button onClick={() => setIsFlipped(false)} className={`flip-button ${!isFlipped ? 'disabled' : ''}`}>← Previous Page</button>
+                <button onClick={() => setIsFlipped(true)} className={`flip-button ${isFlipped ? 'disabled' : ''}`}>Next Page →</button>
             </div>
-        </div>
-        <div className="newspaper-content">
-            <div className="newspaper-column-left">
-                <div className="explanation-visual">
-                    <svg className="explanation-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <g className="explanation-glow-group">
-                          <path d="M50 12 V30 M27 35 H45 M73 35 H55" strokeWidth="3"/>
-                          <path d="M50 40 C 40 55, 60 55, 50 70 C 40 85, 60 85, 50 90" strokeWidth="2.5"/>
-                          <path d="M50 40 C 60 55, 40 55, 50 70 C 60 85, 40 85, 50 90" strokeWidth="2.5"/>
-                          <path d="M50 40 V 90" strokeWidth="2.5"/>
-                        </g>
-                        <circle className="accent-circle" cx="50" cy="8" r="4"/>
-                        <circle className="accent-circle" cx="23" cy="35" r="4"/>
-                        <circle className="accent-circle" cx="77" cy="35" r="4"/>
-                        <circle className="accent-circle" cx="50" cy="35" r="5"/>
-                        <circle className="accent-circle" cx="50" cy="94" r="4"/>
-                    </svg>
-                </div>
-                <p className="explanation-scripture"><em>"A cord of three strands is not quickly broken."<br/>— Ecclesiastes 4:12</em></p>
-            </div>
-            <div className="newspaper-column-right">
-                <h3 className="explanation-title">The Symbolism of the Three-Strand Cord</h3>
-                <div className="symbolism-item">
-                    <h4>The Three Strands</h4>
-                    <p><span className="drop-cap">I</span>n the Cord of Three Strands ceremony, three separate strands are braided together. These represent the bride, the groom, and God, each being whole and individual before being woven together in holy matrimony.</p>
-                </div>
-                <div className="symbolism-item">
-                    <h4>The Braid</h4>
-                    <p><span className="drop-cap">N</span>ewly formed as one, the act of braiding symbolizes the couple's lives being intertwined. It signifies the deliberate inclusion of God as the central, binding force in their union, creating a bond of incredible strength and resilience.</p>
-                </div>
-                 <div className="symbolism-item">
-                    <h4>The Five Wounds</h4>
-                    <p><span className="drop-cap">R</span>emembering the ultimate sacrifice, our cross design incorporates five circles symbolizing the Five Holy Wounds of Jesus. This serves as a reminder of the sacrificial love that forms the foundation of a Christian marriage covenant.</p>
-                </div>
-                <div className="symbolism-item">
-                    <h4>A Lasting Reminder</h4>
-                    <p><span className="drop-cap">I</span>n our home, this cross will serve as a lasting reminder of the sacred vows we make on our wedding day—a covenant not just between us, but with God at the center of our new life together.</p>
-                </div>
-            </div>
-        </div>
-        <img src={hqStamp1} alt="Quyen & Hien Stamp" className="newspaper-stamp-logo" />
-    </section>
-);
+        </section>
+    );
+};
 
-// Love Facts / Celestial Sync Section
-const LoveFacts = () => (
-    <section id="love-facts" className="page-section love-facts-section">
-        <div className="section-header">
-             <img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
-             <h2>Love Facts</h2>
-        </div>
-        <div className="fun-facts-container">
-            <div className="fact-card">
-                <div className="moon-icon waning-crescent"></div>
-                <h3>Quyen's Moon</h3>
-                <h4>Waning Crescent</h4>
-                <p>Born on September 20, 1995, under a Waning Crescent moon. This is a time of quiet reflection, intuition, and dreaming of the future.</p>
-            </div>
-            <div className="fact-card-connector">+</div >
-            <div className="fact-card">
-                 <div className="moon-icon waxing-gibbous"></div>
-                <h3>Hien's Moon</h3>
-                <h4>Waxing Gibbous</h4>
-                <p>Born on March 15, 2000, under a Waxing Gibbous moon. This is a time of anticipation, refinement, and nurturing things toward fulfillment.</p>
-            </div>
-        </div>
-        <p className="fun-fact-summary">One was born as the moon rested, the other as it grew towards fullness. Together, your spirits create a perfect, harmonious cycle of reflection and joyful anticipation.</p>
-    </section>
-);
 
-// --- MODIFICATION: Reworked Wedding Day Schedule Section with Timeline and new Icons ---
+// Reworked Wedding Day Schedule Section with Timeline and new Icons
 const WeddingDaySchedule = () => (
     <section id="schedule" className="page-section schedule-section">
         <div className="section-header">
@@ -264,204 +256,103 @@ const WeddingDaySchedule = () => (
             <h2>Our Wedding Day</h2>
         </div>
         <div className="schedule-timeline-container">
-            {/* Item 1: Church Ceremony */}
             <div className="schedule-item">
-                <div className="schedule-icon">
-                    {/* Church Icon */}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M8 9H4v10h4V9zm8 0h4v10h-4V9z"/><path d="M4 9V5l8-3 8 3v4"/></svg>
-                </div>
+                <div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M8 9H4v10h4V9zm8 0h4v10h-4V9z"/><path d="M4 9V5l8-3 8 3v4"/></svg></div>
                 <div className="schedule-content">
-                    <h3>Church Ceremony</h3>
-                    <p className="schedule-time">2:00 PM</p>
-                    <p>Join us as we exchange vows and begin our journey as one.</p>
-                    <p className="schedule-location">St. Joseph Cathedral, Columbus, OH</p>
+                    <h3>Church Ceremony</h3><p className="schedule-time">2:00 PM</p><p>Join us as we exchange vows and begin our journey as one.</p><p className="schedule-location">St. Joseph Cathedral, Columbus, OH</p>
                 </div>
             </div>
-            {/* Item 2: Cocktail Hour */}
             <div className="schedule-item">
-                <div className="schedule-icon">
-                    {/* Martini Glass Icon */}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="m19 3-7 8-7-8Z"/></svg>
-                </div>
+                <div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="m19 3-7 8-7-8Z"/></svg></div>
                 <div className="schedule-content">
-                    <h3>Cocktail Hour</h3>
-                    <p className="schedule-time">6:00 PM</p>
-                    <p>Enjoy drinks and appetizers before the main celebration begins.</p>
-                    <p className="schedule-location">The Westin Great Southern, Columbus, OH</p>
+                    <h3>Cocktail Hour</h3><p className="schedule-time">6:00 PM</p><p>Enjoy drinks and appetizers before the main celebration begins.</p><p className="schedule-location">The Westin Great Southern, Columbus, OH</p>
                 </div>
             </div>
-            {/* Item 3: Dinner & Celebration */}
             <div className="schedule-item">
-                <div className="schedule-icon">
-                    {/* Music Notes Icon */}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-                </div>
+                <div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
                 <div className="schedule-content">
-                    <h3>Dinner & Celebration</h3>
-                    <p className="schedule-time">7:15 PM</p>
-                    <p>Dine, dance, and celebrate with us through the night.</p>
-                    <p className="schedule-location">The Westin Great Southern, Columbus, OH</p>
+                    <h3>Dinner & Celebration</h3><p className="schedule-time">7:15 PM</p><p>Dine, dance, and celebrate with us through the night.</p><p className="schedule-location">The Westin Great Southern, Columbus, OH</p>
                 </div>
             </div>
-            {/* Item 4: Grand Exit */}
              <div className="schedule-item">
-                <div className="schedule-icon">
-                    {/* Car Icon */}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9L2 12v9c0 .6.4 1 1 1h3"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
-                </div>
+                <div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9L2 12v9c0 .6.4 1 1 1h3"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
                 <div className="schedule-content">
-                    <h3>Grand Exit</h3>
-                    <p className="schedule-time">11:00 PM</p>
-                    <p>Help us end our special day with a memorable send-off!</p>
-                    <p className="schedule-location">The Westin Great Southern, Columbus, OH</p>
+                    <h3>Grand Exit</h3><p className="schedule-time">11:00 PM</p><p>Help us end our special day with a memorable send-off!</p><p className="schedule-location">The Westin Great Southern, Columbus, OH</p>
                 </div>
             </div>
         </div>
     </section>
 );
 
+// --- Guest Photobook Section ---
+const GuestPhotobook = () => (
+    <section id="photobook" className="page-section photobook-section">
+        <div className="section-header">
+            <img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
+            <h2>Guest Photobook</h2>
+        </div>
+        <div className="photobook-intro">
+            <p>Share your favorite moments from our special day! We've set up a Google Form to collect photos from our beloved guests. Your pictures will be a cherished part of our wedding album.</p>
+            <p>Please upload your photos and share a memory with us below.</p>
+        </div>
+        <div className="google-form-embed-container">
+            <iframe
+                src="https://docs.google.com/forms/d/e/1FAIpQLSflv_2y3tL9w7_p4z4v5c6d7e8f9g0h1i2j3k4l5m6n7o8p9q/viewform?embedded=true"
+                width="100%" height="800" frameBorder="0" marginHeight="0" marginWidth="0" title="Guest Photo Upload Form">Loading…</iframe>
+        </div>
+    </section>
+);
 
-// RSVP Form Section - NOW INCLUDES SAVE THE DATE
+// RSVP Form Section
 const RsvpForm = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        attending: '',
-        attendingChurch: false,
-        attendingParty: false,
-        song: '',
-        message: ''
-    });
+    const [formData, setFormData] = useState({ name: '', attending: '', attendingChurch: false, attendingParty: false, song: '', message: '' });
     const [submitted, setSubmitted] = useState(false);
-
-    // Event details and calendar link logic from former SaveTheDate component
-    const churchCeremony = {
-        title: "Wedding Ceremony of Quyen & Hien",
-        startDate: '20280701T140000',
-        endDate: '20280701T150000',
-        location: 'St. Joseph Cathedral, 212 E Broad St, Columbus, OH 43215',
-        description: "The sacred union of Quyen Mai & Hien Dang.",
-    };
-
-    const weddingParty = {
-        title: "Wedding Party for Quyen & Hien",
-        startDate: '20280701T180000',
-        endDate: '20280701T230000',
-        location: 'The Westin Great Southern Columbus, 310 S High St, Columbus, OH 43215',
-        description: "Join us for a night of dinner, dancing, and celebration!",
-    };
-
+    const churchCeremony = { title: "Wedding Ceremony of Quyen & Hien", startDate: '20280701T140000', endDate: '20280701T150000', location: 'St. Joseph Cathedral, 212 E Broad St, Columbus, OH 43215', description: "The sacred union of Quyen Mai & Hien Dang." };
+    const weddingParty = { title: "Wedding Party for Quyen & Hien", startDate: '20280701T180000', endDate: '20280701T230000', location: 'The Westin Great Southern Columbus, 310 S High St, Columbus, OH 43215', description: "Join us for a night of dinner, dancing, and celebration!" };
     const createGoogleCalendarUrl = (event) => `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.startDate}/${event.endDate}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`;
-
-    const createIcsUrl = (event) => {
-        const icsContent = `BEGIN:VCALENDAR
-VERSION:2.0
-BEGIN:VEVENT
-URL:${window.location.href}
-DTSTART:${event.startDate}
-DTEND:${event.endDate}
-SUMMARY:${event.title}
-DESCRIPTION:${event.description}
-LOCATION:${event.location}
-END:VEVENT
-END:VCALENDAR`;
-        return `data:text/calendar;charset=utf8,${encodeURIComponent(icsContent)}`;
-    };
-
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: type === 'checkbox' ? checked : value
-        }));
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('RSVP Submission:', formData);
-        setSubmitted(true);
-    };
-
+    const createIcsUrl = (event) => `data:text/calendar;charset=utf8,${encodeURIComponent(`BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nURL:${window.location.href}\nDTSTART:${event.startDate}\nDTEND:${event.endDate}\nSUMMARY:${event.title}\nDESCRIPTION:${event.description}\nLOCATION:${event.location}\nEND:VEVENT\nEND:VCALENDAR`)}`;
+    const handleChange = (e) => { const { name, value, type, checked } = e.target; setFormData(prevData => ({ ...prevData, [name]: type === 'checkbox' ? checked : value })); };
+    const handleSubmit = (e) => { e.preventDefault(); console.log('RSVP Submission:', formData); setSubmitted(true); };
     const isAttending = formData.attending === 'yes';
 
     return (
         <section id="rsvp" className="page-section rsvp-section">
-            <div className="section-header">
-                <img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
-                <h2>Event Details & RSVP</h2>
-            </div>
-
-            {/* Event Details (formerly Save the Date) */}
+            <div className="section-header"><img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" /><h2>Event Details & RSVP</h2></div>
             <div className="rsvp-details-container">
                 <div className="detail-item">
-                    <h3>Church Ceremony</h3>
-                    <p><strong>July 1, 2028 at 2:00 PM</strong></p>
-                    <p>St. Joseph Cathedral, Columbus, OH</p>
-                     <div className="button-group">
-                        <a href={createGoogleCalendarUrl(churchCeremony)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a>
-                        <a href={createIcsUrl(churchCeremony)} download="wedding-ceremony.ics" className="button calendar-btn">Apple/Outlook</a>
-                    </div>
+                    <h3>Church Ceremony</h3><p><strong>July 1, 2028 at 2:00 PM</strong></p><p>St. Joseph Cathedral, Columbus, OH</p>
+                     <div className="button-group"><a href={createGoogleCalendarUrl(churchCeremony)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a><a href={createIcsUrl(churchCeremony)} download="wedding-ceremony.ics" className="button calendar-btn">Apple/Outlook</a></div>
                 </div>
                 <div className="detail-item">
-                    <h3>Wedding Party</h3>
-                    <p><strong>July 1, 2028 at 6:00 PM</strong></p>
-                    <p>The Westin Great Southern, Columbus, OH</p>
-                     <div className="button-group">
-                        <a href={createGoogleCalendarUrl(weddingParty)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a>
-                        <a href={createIcsUrl(weddingParty)} download="wedding-party.ics" className="button calendar-btn">Apple/Outlook</a>
-                    </div>
+                    <h3>Wedding Party</h3><p><strong>July 1, 2028 at 6:00 PM</strong></p><p>The Westin Great Southern, Columbus, OH</p>
+                     <div className="button-group"><a href={createGoogleCalendarUrl(weddingParty)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a><a href={createIcsUrl(weddingParty)} download="wedding-party.ics" className="button calendar-btn">Apple/Outlook</a></div>
                 </div>
             </div>
-
             <hr className="rsvp-divider" />
-
-            {submitted ? (
-                <div className="thank-you-message">
-                    <h3>Thank you!</h3>
-                    <p>Your response has been recorded. We can't wait to celebrate with you!</p>
-                </div>
-            ) : (
+            {submitted ? (<div className="thank-you-message"><h3>Thank you!</h3><p>Your response has been recorded. We can't wait to celebrate with you!</p></div>) : (
                 <form onSubmit={handleSubmit} className="rsvp-form">
                     <p>Please let us know if you can join our celebration by May 1st, 2028.</p>
+                    <div className="form-group"><label htmlFor="name">Full Name(s)</label><input type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="e.g., John & Jane Doe" required /></div>
                     <div className="form-group">
-                        <label htmlFor="name">Full Name(s)</label>
-                        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="e.g., John & Jane Doe" required />
-                    </div>
-                    <div className="form-group">
-                        <fieldset>
-                            <legend>Will you be joining us?</legend>
+                        <fieldset><legend>Will you be joining us?</legend>
                             <div className="radio-group">
-                                <label htmlFor="attending-yes" className={formData.attending === 'yes' ? 'selected' : ''}>
-                                    <input type="radio" id="attending-yes" name="attending" value="yes" checked={formData.attending === 'yes'} onChange={handleChange} required /> Joyfully Accepts
-                                </label>
-                                <label htmlFor="attending-no" className={formData.attending === 'no' ? 'selected' : ''}>
-                                    <input type="radio" id="attending-no" name="attending" value="no" checked={formData.attending === 'no'} onChange={handleChange} /> Regretfully Declines
-                                </label>
+                                <label htmlFor="attending-yes" className={formData.attending === 'yes' ? 'selected' : ''}><input type="radio" id="attending-yes" name="attending" value="yes" checked={formData.attending === 'yes'} onChange={handleChange} required /> Joyfully Accepts</label>
+                                <label htmlFor="attending-no" className={formData.attending === 'no' ? 'selected' : ''}><input type="radio" id="attending-no" name="attending" value="no" checked={formData.attending === 'no'} onChange={handleChange} /> Regretfully Declines</label>
                             </div>
                         </fieldset>
                     </div>
                     {isAttending && (
                         <div className="form-group fade-in">
-                             <fieldset>
-                                <legend>Which events will you attend?</legend>
+                             <fieldset><legend>Which events will you attend?</legend>
                                 <div className="checkbox-group">
-                                    <label htmlFor="attending-church" className={formData.attendingChurch ? 'selected' : ''}>
-                                        <input type="checkbox" id="attending-church" name="attendingChurch" checked={formData.attendingChurch} onChange={handleChange} /> Church Ceremony
-                                    </label>
-                                    <label htmlFor="attending-party" className={formData.attendingParty ? 'selected' : ''}>
-                                        <input type="checkbox" id="attending-party" name="attendingParty" checked={formData.attendingParty} onChange={handleChange} /> Wedding Party
-                                    </label>
+                                    <label htmlFor="attending-church" className={formData.attendingChurch ? 'selected' : ''}><input type="checkbox" id="attending-church" name="attendingChurch" checked={formData.attendingChurch} onChange={handleChange} /> Church Ceremony</label>
+                                    <label htmlFor="attending-party" className={formData.attendingParty ? 'selected' : ''}><input type="checkbox" id="attending-party" name="attendingParty" checked={formData.attendingParty} onChange={handleChange} /> Wedding Party</label>
                                 </div>
                             </fieldset>
                         </div>
                     )}
-                     <div className="form-group">
-                        <label htmlFor="song">What song will get you on the dance floor?</label>
-                        <input type="text" id="song" name="song" value={formData.song} onChange={handleChange} placeholder="Song Title & Artist" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="message">Leave a message for the couple (optional)</label>
-                        <textarea id="message" name="message" value={formData.message} onChange={handleChange} rows="4"></textarea>
-                    </div>
+                     <div className="form-group"><label htmlFor="song">What song will get you on the dance floor?</label><input type="text" id="song" name="song" value={formData.song} onChange={handleChange} placeholder="Song Title & Artist" /></div>
+                    <div className="form-group"><label htmlFor="message">Leave a message for the couple (optional)</label><textarea id="message" name="message" value={formData.message} onChange={handleChange} rows="4"></textarea></div>
                     <button type="submit" className="button">Submit RSVP</button>
                 </form>
             )}
@@ -469,9 +360,7 @@ END:VCALENDAR`;
     );
 };
 
-
 // --- Tab Navigation with Scroll-to-Center Logic ---
-
 const TabNavigation = ({ activeView, onViewChange }) => {
   const navRef = useRef(null);
   const [showLeftHint, setShowLeftHint] = useState(false);
@@ -479,9 +368,9 @@ const TabNavigation = ({ activeView, onViewChange }) => {
 
   const navItems = [
       { id: VIEWS.JOURNEY, label: 'Our Journey' },
-      { id: VIEWS.CROSS_SYMBOLISM, label: 'Our Cross' },
-      { id: VIEWS.LOVE_FACTS, label: 'Love Facts' },
+      { id: VIEWS.CHRONICLE, label: 'Our Chronicle' },
       { id: VIEWS.SCHEDULE, label: 'Schedule' },
+      { id: VIEWS.PHOTOBOOK, label: 'Photobook' },
       { id: VIEWS.RSVP, label: 'RSVP' }
   ];
   
@@ -493,13 +382,8 @@ const TabNavigation = ({ activeView, onViewChange }) => {
         const navWidth = nav.clientWidth;
         const buttonWidth = activeButton.offsetWidth;
         const buttonLeft = activeButton.offsetLeft;
-        
         const scrollTo = buttonLeft - (navWidth / 2) + (buttonWidth / 2);
-
-        nav.scrollTo({
-          left: scrollTo,
-          behavior: 'smooth',
-        });
+        nav.scrollTo({ left: scrollTo, behavior: 'smooth' });
       }
     }
   }, [activeView]);
@@ -519,7 +403,6 @@ const TabNavigation = ({ activeView, onViewChange }) => {
       checkForScroll();
       nav.addEventListener('scroll', checkForScroll, { passive: true });
       window.addEventListener('resize', checkForScroll);
-
       return () => {
         nav.removeEventListener('scroll', checkForScroll);
         window.removeEventListener('resize', checkForScroll);
@@ -529,24 +412,13 @@ const TabNavigation = ({ activeView, onViewChange }) => {
 
   return (
     <div className="tab-navbar-wrapper">
-      <div className={`scroll-hint left ${showLeftHint ? 'visible' : ''}`}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-      </div>
+      <div className={`scroll-hint left ${showLeftHint ? 'visible' : ''}`}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
       <nav className="tab-navbar" ref={navRef}>
         {navItems.map(item => (
-          <button
-            key={item.id}
-            data-view-id={item.id}
-            className={`tab-nav-link ${activeView === item.id ? 'active' : ''}`}
-            onClick={() => onViewChange(item.id)}
-          >
-            {item.label}
-          </button>
+          <button key={item.id} data-view-id={item.id} className={`tab-nav-link ${activeView === item.id ? 'active' : ''}`} onClick={() => onViewChange(item.id)}>{item.label}</button>
         ))}
       </nav>
-      <div className={`scroll-hint right ${showRightHint ? 'visible' : ''}`}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-      </div>
+      <div className={`scroll-hint right ${showRightHint ? 'visible' : ''}`}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
     </div>
   );
 };
@@ -555,9 +427,9 @@ const ViewDisplay = ({ activeView }) => {
   return (
     <div className="view-container">
       {activeView === VIEWS.JOURNEY && <OurJourney />}
-      {activeView === VIEWS.CROSS_SYMBOLISM && <CrossNewspaperSection />}
-      {activeView === VIEWS.LOVE_FACTS && <LoveFacts />}
+      {activeView === VIEWS.CHRONICLE && <StoryChronicleSection />}
       {activeView === VIEWS.SCHEDULE && <WeddingDaySchedule />}
+      {activeView === VIEWS.PHOTOBOOK && <GuestPhotobook />}
       {activeView === VIEWS.RSVP && <RsvpForm />}
     </div>
   );
@@ -565,26 +437,13 @@ const ViewDisplay = ({ activeView }) => {
 
 // --- Scroll to Top Button ---
 const ScrollToTopButton = ({ isVisible }) => {
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
+  const scrollToTop = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
   return (
-    <button
-      className={`scroll-to-top-btn ${isVisible ? 'visible' : ''}`}
-      onClick={scrollToTop}
-      aria-label="Scroll to top"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 19V5M5 12l7-7 7 7"/>
-      </svg>
+    <button className={`scroll-to-top-btn ${isVisible ? 'visible' : ''}`} onClick={scrollToTop} aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
     </button>
   );
 };
-
 
 // --- Main Page Component ---
 function HomePage() {
@@ -592,14 +451,9 @@ function HomePage() {
   const [showScrollButton, setShowScrollButton] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollButton(window.scrollY > 300);
-    };
-
+    const handleScroll = () => { setShowScrollButton(window.scrollY > 300); };
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => { window.removeEventListener('scroll', handleScroll); };
   }, []);
 
   return (
@@ -612,13 +466,7 @@ function HomePage() {
       <footer className="footer">
         <img src={hqArt} alt="Quyen & Hien decorative art" className="footer-art" />
         <p>
-            <span className="amdg-wrapper">
-                AMDG
-                <span className="amdg-tooltip">
-                    <strong>Ad Majorem Dei Gloriam</strong>
-                    <em>"for the greater glory of God"</em>
-                </span>
-            </span>
+            <span className="amdg-wrapper">AMDG<span className="amdg-tooltip"><strong>Ad Majorem Dei Gloriam</strong><em>"for the greater glory of God"</em></span></span>
             &nbsp;|&nbsp;Made with love by Quyen & Hien&nbsp;|&nbsp;2028
         </p>
       </footer>

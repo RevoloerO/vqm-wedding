@@ -8,6 +8,8 @@
     .newspaper-column-right {
         border-left: none;
         padding-left: 0;
+        padding-top: 1rem;
+        border-top: 1px solid var(--color-newspaper-border);
     }
     .explanation-title {
         text-align: center;
@@ -34,11 +36,6 @@
         height: 420px;
     }
 
-    .fun-facts-container { 
-        flex-direction: column; 
-        grid-template-columns: 1fr; /* Stack fact cards */
-        padding: 0 1rem;
-    }
     .page-section h2 { font-size: 2.2rem; }
 
     .welcome-banner-names { font-size: 3rem; }
@@ -50,10 +47,8 @@
         white-space: nowrap; 
         -webkit-overflow-scrolling: touch; 
         scrollbar-width: none; 
-        /* Add padding to prevent text from sliding under the hints */
         padding: 0 35px; 
-        /* Add scroll-snap for a better manual scrolling experience */
-        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
     }
 
     .tab-navbar::-webkit-scrollbar {
@@ -63,8 +58,6 @@
     .tab-nav-link { 
         font-size: 0.9rem; 
         padding: 0.8rem 1.2rem; 
-        /* Add scroll-snap alignment */
-        scroll-snap-align: center;
     }
 
     .rsvp-form .radio-group, .rsvp-form .checkbox-group { grid-template-columns: 1fr; }
@@ -77,7 +70,7 @@
         bottom: -0.5rem;
     }
 
-    /* --- MODIFICATION START: Schedule Timeline on Mobile --- */
+    /* --- Schedule Timeline on Mobile --- */
     .schedule-timeline-container::before {
         left: 25px; /* Move timeline to the left */
         transform: translateX(-50%);
@@ -113,7 +106,35 @@
         border-left: none; /* remove the other arrow */
         filter: drop-shadow(-1px 0px 0px #e0dccc);
     }
-    /* --- MODIFICATION END --- */
+
+    /* --- Chronicle/Newspaper on Mobile --- */
+    .chronicle-section-wrapper {
+        padding: 2rem 1rem;
+    }
+    .chronicle-newspaper {
+        aspect-ratio: 3 / 4;
+    }
+    .chronicle-page {
+        padding: 1.5rem;
+    }
+    .newspaper-content {
+        grid-template-columns: 1fr;
+    }
+    .newspaper-column-right {
+        padding-left: 0;
+        border-left: none;
+        padding-top: 1rem;
+        border-top: 1px solid var(--color-newspaper-border);
+    }
+    .page-back .fun-facts-container {
+        flex-direction: column;
+    }
+
+
+    /* --- Photobook on Mobile --- */
+    .photobook-section {
+        padding: 2rem 1rem;
+    }
 }
 
 /* For Small Mobile Devices */

@@ -4,6 +4,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
+/* --- MODIFICATION: Universal Box Sizing --- */
+/* This is a best practice to make layouts more predictable. */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
 /* --- MATCHA LATTE THEME (Refined) --- */
 :root {

@@ -10,7 +10,7 @@ import heroBgImage from './assets/bg-2.jpeg';
 import journeyImage from './assets/bg-2.jpeg';
 import hqStamp1 from './assets/HQ-stamp-1-nobg.png'; // Rectangular Stamp
 import hqStamp2 from './assets/HQ-stamp-2-nobg.png'; // Circular Stamp
-import hqStamp3 from './assets/hq-stamp-3-nobg.png'; // New stamp for schedule
+import hqStamp3 from './assets/HQ-stamp-3-nobg.png'; // New stamp for schedule
 import hqArt from './assets/HQ-art.png'; // Footer Art
 
 // --- CONSTANTS ---
@@ -201,7 +201,7 @@ const LovePaparazziSection = () => {
                     <div className="article-content">
                         <div className="article-column-visual">
                             <div className="explanation-visual">
-                                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <svg className="explanation-svg"  viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                                     <g className="explanation-glow-group"><path d="M50 12 V30 M27 35 H45 M73 35 H55" strokeWidth="3"/><path d="M50 40 C 40 55, 60 55, 50 70 C 40 85, 60 85, 50 90" strokeWidth="2.5"/><path d="M50 40 C 60 55, 40 55, 50 70 C 60 85, 40 85, 50 90" strokeWidth="2.5"/><path d="M50 40 V 90" strokeWidth="2.5"/></g>
                                     <circle className="accent-circle" cx="50" cy="8" r="4"/><circle className="accent-circle" cx="23" cy="35" r="4"/><circle className="accent-circle" cx="77" cy="35" r="4"/><circle className="accent-circle" cx="50" cy="35" r="5"/><circle className="accent-circle" cx="50" cy="94" r="4"/>
                                 </svg>

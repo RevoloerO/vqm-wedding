@@ -378,7 +378,6 @@
     z-index: 0;
     pointer-events: none;
     opacity: 0.05;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFalE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjgiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNub2lzZSkiLz48L3N2Zz4=');
 }
 
 .cross-newspaper-masthead,
@@ -566,11 +565,6 @@
     transition: none;
 }
 
-/* Apply hover effects also when 'active-moon-animation' class is present */
-.moon-visualization-container:hover,
-.moon-visualization-container.active-moon-animation {
-    /* No gap change here, transform handles movement */
-}
 
 .moon-wrapper {
     text-align: center;

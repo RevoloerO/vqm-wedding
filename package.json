@@ -2,7 +2,7 @@
   "name": "vqm-wedding",
   "private": true,
   "homepage": "revoloero.github.io/vqm-wedding",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "type": "module",
   "scripts": {
     "dev": "vite --port 0315",

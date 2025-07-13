@@ -232,7 +232,7 @@
     left: 0;
     background-color: var(--color-primary-matcha);
     border-radius: 4px 8px 8px 4px;
-    box-shadow: 
+    box-shadow:
         inset 2px 0 0 rgba(255,255,255,0.1),
         3px 3px 15px rgba(0,0,0,0.2);
     transform-origin: left;
@@ -281,12 +281,12 @@
     height: 90px;
     transform: rotate(10deg);
     z-index: 11;
-    
+
     background: linear-gradient(100deg, #c8c8c8, #f8f8f8, #c8c8c8);
     background-size: 200% 100%;
-    
+
     animation: silver-shimmer-animation 8s infinite linear;
-    
+
     -webkit-mask-size: contain;
     mask-size: contain;
     -webkit-mask-repeat: no-repeat;
@@ -378,7 +378,7 @@
     z-index: 0;
     pointer-events: none;
     opacity: 0.05;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOCIgbnVtT2N0YXZlcz0iNCIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWx0ZXI9InVybCgjbm9pc2UpIi8+PC9zdmc+');
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFalE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjgiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsdGVyPSJ1cmwoI25vaXNlKSIvPjwvc3ZnPg==');
 }
 
 .cross-newspaper-masthead,
@@ -508,14 +508,14 @@
     fill: var(--color-accent-deep-gold);
 }
 
-.explanation-scripture { 
-    font-style: italic; 
-    font-size: 1.1rem; 
-    text-align: center; 
-    color: #555; 
-    padding: 1rem; 
-    background-color: rgba(214, 204, 174, 0.2); 
-    border-radius: 4px; 
+.explanation-scripture {
+    font-style: italic;
+    font-size: 1.1rem;
+    text-align: center;
+    color: #555;
+    padding: 1rem;
+    background-color: rgba(214, 204, 174, 0.2);
+    border-radius: 4px;
 }
 
 .article-paragraph {
@@ -559,45 +559,93 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4rem;
+    /* Changed gap to 0 and will use transform for initial separation */
+    gap: 0;
     margin: 2rem 0;
     padding: 2rem 0;
     min-height: 150px;
     cursor: pointer;
-    transition: gap 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    position: relative; /* Added for absolute positioning of combined label */
+    /* Remove transition from gap, as it will now be handled by transform */
+    transition: none;
 }
 
-.moon-visualization-container:hover {
-    gap: 0;
+/* Apply hover effects also when 'active-moon-animation' class is present */
+.moon-visualization-container:hover,
+.moon-visualization-container.active-moon-animation {
+    /* No gap change here, transform handles movement */
 }
 
 .moon-wrapper {
     text-align: center;
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform; /* Hint to browser for optimization */
 }
 
-.moon-visualization-container:hover .moon-wrapper:first-child {
+/* Initial separation for the moons using transform */
+.moon-wrapper:first-child {
+    transform: translateX(-1rem); /* Adjust based on desired initial visual gap */
+}
+.moon-wrapper:nth-child(2) {
+    transform: translateX(1rem); /* Adjust based on desired initial visual gap */
+}
+
+
+/* On hover/active, move them back to original position (no translation) */
+.moon-visualization-container:hover .moon-wrapper:first-child,
+.moon-visualization-container.active-moon-animation .moon-wrapper:first-child {
     transform: translateX(50%);
 }
-.moon-visualization-container:hover .moon-wrapper:last-child {
+/* Apply hover effects also when 'active-moon-animation' class is present */
+.moon-visualization-container:hover .moon-wrapper:nth-child(2),
+.moon-visualization-container.active-moon-animation .moon-wrapper:nth-child(2) {
     transform: translateX(-50%);
 }
+/* Hide individual labels on hover, also when 'active-moon-animation' class is present */
+.moon-visualization-container:hover .moon-label,
+.moon-visualization-container.active-moon-animation .moon-label,
+.moon-visualization-container:hover .moon-phase-name,
+.moon-visualization-container.active-moon-animation .moon-phase-name {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none; /* Disable interaction with hidden elements */
+}
 
-.moon-label {
+/* New combined label styles */
+.moon-combined-label {
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0; /* Initially hidden */
+    pointer-events: none; /* Initially non-interactive */
+    transition: opacity 0.6s ease; /* Smooth fade in/out */
+    z-index: 3; /* Ensure it appears above moons */
+}
+
+/* Show on hover, also when 'active-moon-animation' class is present */
+.moon-visualization-container:hover .moon-combined-label,
+.moon-visualization-container.active-moon-animation .moon-combined-label {
+    opacity: 1; /* Show on hover */
+    pointer-events: auto; /* Enable interaction on hover */
+}
+
+.moon-combined-main, .moon-label {
     font-family: var(--font-ui);
     font-weight: 600;
-    color: #888;
-    margin-top: 0.5rem;
     transition: opacity 0.6s ease;
+    color: var(--color-accent-deep-gold);
+    line-height: 1;
 }
 
-.moon-visualization-container:hover .moon-label {
-    opacity: 0;
+.moon-combined-sub, .moon-phase-name {
+    font-size: 1.2rem;
+    color: #777;
+    margin: 0;
 }
 
-.moon-visualization-container:hover .moon-phase-name {
-    opacity: 0;
-}
+
 .moon-explanation-text {
     text-align: center;
     padding: 1.5rem;
@@ -635,7 +683,9 @@
     transition: box-shadow 0.6s ease;
 }
 
-.moon-visualization-container:hover .moon-icon {
+/* Apply hover effects also when 'active-moon-animation' class is present */
+.moon-visualization-container:hover .moon-icon,
+.moon-visualization-container.active-moon-animation .moon-icon {
     box-shadow: inset 0 0 20px -5px rgba(0,0,0,0.2);
 }
 
@@ -671,13 +721,23 @@
     box-shadow: 20px 0px 10px -10px #f0e68c inset;
 }
 
+/* Added to make the waning crescent moon join on hover */
+/* Apply hover effects also when 'active-moon-animation' class is present */
+.moon-visualization-container:hover .waning-crescent::after,
+.moon-visualization-container.active-moon-animation .waning-crescent::after {
+    transform: translateX(100%); /* Move to the right to reveal the full moon */
+}
+
+
 .waxing-gibbous::after {
     left: 0;
     background-color: transparent;
     box-shadow: 25px 0px 10px -10px var(--color-newspaper-bg) inset;
 }
 
-.moon-visualization-container:hover .waxing-gibbous::after {
+/* Apply hover effects also when 'active-moon-animation' class is present */
+.moon-visualization-container:hover .waxing-gibbous::after,
+.moon-visualization-container.active-moon-animation .waxing-gibbous::after {
     transform: translateX(-100%);
 }
 

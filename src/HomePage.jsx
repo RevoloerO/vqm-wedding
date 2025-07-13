@@ -170,6 +170,14 @@ const OurJourney = () => (
 
 // --- REVISED: Love Paparazzi Section as a Newspaper Article ---
 const LovePaparazziSection = () => {
+    // State to manage the active animation class for the moon visualization
+    const [isMoonAnimated, setIsMoonAnimated] = useState(false);
+
+    // Function to toggle the animation class
+    const toggleMoonAnimation = () => {
+        setIsMoonAnimated(prev => !prev);
+    };
+
     return (
         <section id="love_paparazzi" className="page-section love-paparazzi-newspaper-section">
             <div className="cross-newspaper-page">
@@ -225,18 +233,23 @@ const LovePaparazziSection = () => {
                 <div id="article-moon" className="moon-phase-article">
                     {/* Changed h3 to h2 as requested */}
                     <h2 className="article-headline">A Celestial Sync: Written in the Stars</h2>
-                    <div className="moon-visualization-container">
+                    {/* Added onClick handler and dynamic class based on state */}
+                    <div className={`moon-visualization-container ${isMoonAnimated ? 'active-moon-animation' : ''}`} onClick={toggleMoonAnimation}>
+                        {/* Individual moon wrappers (will fade out on hover) */}
                         <div className="moon-wrapper">
                             <div className="moon-icon waning-crescent"></div>
                             <p className="moon-label">Quyen's Moon</p>
-                            {/* Added new label for moon phase */}
                             <p className="moon-phase-name">Waning Crescent</p>
                         </div>
                         <div className="moon-wrapper">
                             <div className="moon-icon waxing-gibbous"></div>
                             <p className="moon-label">Hien's Moon</p>
-                            {/* Added new label for moon phase */}
                             <p className="moon-phase-name">Waxing Gibbous</p>
+                        </div>
+                        {/* New combined label for hover effect */}
+                        <div className="moon-combined-label">
+                            <p className="moon-combined-main">Our Moon</p>
+                            <p className="moon-combined-sub">Full Moon</p>
                         </div>
                     </div>
                     <div className="moon-explanation-text">

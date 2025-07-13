@@ -235,6 +235,8 @@
     display: inline-block;
     border-bottom: 1px dotted rgba(255, 255, 255, 0.7);
     cursor: help;
+    /* Added for better click feedback */
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .amdg-tooltip {
@@ -271,11 +273,38 @@
     opacity: 0.8;
 }
 
+/* Show tooltip on hover for desktop */
 .amdg-wrapper:hover .amdg-tooltip {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
 }
+
+/* Show tooltip on click/active for mobile (and also works on desktop) */
+.amdg-wrapper.active .amdg-tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Improve click effect for better UX */
+.amdg-wrapper.active {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle highlight on click */
+    border-radius: 4px; /* Match tooltip border radius */
+    transform: scale(1.05); /* Slight scale effect */
+}
+
+/* Media query for phone screens to adjust tooltip position */
+@media (max-width: 768px) {
+    .amdg-tooltip {
+        bottom: auto; /* Reset bottom positioning */
+        top: 120%; /* Position below the text */
+        left: 200%;
+        margin-left: -110px; /* Center it */
+        width: 220px; /* Keep consistent width */
+    }
+}
+
 
 /* --- SCROLL TO TOP BUTTON --- */
 .scroll-to-top-btn {

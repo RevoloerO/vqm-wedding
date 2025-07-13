@@ -426,12 +426,19 @@ const ScrollToTopButton = ({ isVisible }) => {
 function HomePage() {
   const [activeView, setActiveView] = useState(VIEWS.JOURNEY);
   const [showScrollButton, setShowScrollButton] = useState(false);
+  // State to control the visibility of the AMDG tooltip on click
+  const [showAmdgTooltip, setShowAmdgTooltip] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => { setShowScrollButton(window.scrollY > 300); };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => { window.removeEventListener('scroll', handleScroll); };
   }, []);
+
+  // Function to toggle AMDG tooltip visibility
+  const toggleAmdgTooltip = () => {
+    setShowAmdgTooltip(prev => !prev);
+  };
 
   return (
     <div className="homepage-container">
@@ -443,7 +450,17 @@ function HomePage() {
       <footer className="footer">
         <img src={hqArt} alt="Quyen & Hien decorative art" className="footer-art" />
         <p>
-            <span className="amdg-wrapper">AMDG<span className="amdg-tooltip"><strong>Ad Majorem Dei Gloriam</strong><em>"for the greater glory of God"</em></span></span>
+            {/* Add onClick handler and conditional class to amdg-wrapper */}
+            <span 
+                className={`amdg-wrapper ${showAmdgTooltip ? 'active' : ''}`} 
+                onClick={toggleAmdgTooltip}
+            >
+                AMDG
+                <span className="amdg-tooltip">
+                    <strong>Ad Majorem Dei Gloriam</strong>
+                    <em>"for the greater glory of God"</em>
+                </span>
+            </span>
             &nbsp;|&nbsp;Made with love by Quyen & Hien&nbsp;|&nbsp;2028
         </p>
       </footer>

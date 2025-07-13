@@ -551,10 +551,6 @@
     border-top: 2px solid var(--color-newspaper-border);
 }
 
-.moon-phase-article .article-headline {
-    font-size: 1.8rem;
-}
-
 .moon-visualization-container {
     display: flex;
     justify-content: center;

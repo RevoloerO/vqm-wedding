@@ -16,7 +16,7 @@ import hqArt from './assets/HQ-art.png'; // Footer Art
 // --- CONSTANTS ---
 const VIEWS = {
   JOURNEY: 'journey',
-  OUR_CROSS: 'our_cross',
+  LOVE_PAPARAZZI: 'love_paparazzi',
   SCHEDULE: 'schedule',
   PHOTOBOOK: 'photobook',
   RSVP: 'rsvp',
@@ -93,9 +93,9 @@ const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
     const bgStyle = { backgroundImage: `url(${backgroundImage})` };
 
     const handleCrossClick = () => {
-        onViewChange(VIEWS.OUR_CROSS);
+        onViewChange(VIEWS.LOVE_PAPARAZZI);
         setTimeout(() => {
-            const element = document.getElementById('our_cross');
+            const element = document.getElementById('love_paparazzi');
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
             }
@@ -170,39 +170,10 @@ const OurJourney = () => (
     </section>
 );
 
-// --- REVISED: Our Cross Section as a Newspaper Article ---
-const OurCrossSection = () => {
-    const moonSectionRef = useRef(null);
-    const [isMoonSectionVisible, setMoonSectionVisible] = useState(false);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setMoonSectionVisible(true);
-                    observer.disconnect();
-                }
-            },
-            {
-                threshold: 0.5, // Trigger when 50% of the element is visible
-            }
-        );
-
-        const currentRef = moonSectionRef.current;
-        if (currentRef) {
-            observer.observe(currentRef);
-        }
-
-        return () => {
-            if (currentRef) {
-                observer.unobserve(currentRef);
-            }
-        };
-    }, []);
-
-
+// --- REVISED: Love Paparazzi Section as a Newspaper Article ---
+const LovePaparazziSection = () => {
     return (
-        <section id="our_cross" className="page-section cross-newspaper-section">
+        <section id="love_paparazzi" className="page-section love-paparazzi-newspaper-section">
             <div className="cross-newspaper-page">
                 <div className="cross-newspaper-masthead">
                     <div className="masthead-title">The Love Paparazzi</div>
@@ -232,33 +203,47 @@ const OurCrossSection = () => {
                             <p className="explanation-scripture"><em>"A cord of three strands is not quickly broken."<br/>— Ecclesiastes 4:12</em></p>
                         </div>
                         <div className="article-column-text">
-                            <p><span className="drop-cap">I</span>n the Cord of Three Strands ceremony, three separate strands are braided together. These represent the bride, the groom, and God, each being whole and individual before being woven together.</p>
-                            <p><span className="drop-cap">N</span>ewly formed as one, the act of braiding symbolizes the couple's lives being intertwined. It signifies the deliberate inclusion of God as the central, binding force in their union.</p>
-                            <p><span className="drop-cap">R</span>emembering the ultimate sacrifice, our cross design incorporates five circles symbolizing the Five Holy Wounds of Jesus, a reminder of the sacrificial love that forms the foundation of a Christian marriage.</p>
-                            <p><span className="drop-cap">I</span>n our home, this cross will serve as a lasting reminder of the sacred vows we make on our wedding day—a covenant not just between us, but with God at the center of our new life together.</p>
+                            <div className="article-paragraph">
+                                <h4 className="article-paragraph-title">The Three Strands</h4>
+                                <p>In the Cord of Three Strands ceremony, three separate strands are braided together. These represent the bride, the groom, and God, each being whole and individual before being woven together.</p>
+                            </div>
+                             <div className="article-paragraph">
+                                <h4 className="article-paragraph-title">The Braid</h4>
+                                <p>Newly formed as one, the act of braiding symbolizes the couple's lives being intertwined. It signifies the deliberate inclusion of God as the central, binding force in their union.</p>
+                            </div>
+                             <div className="article-paragraph">
+                                <h4 className="article-paragraph-title">The Five Holy Wounds</h4>
+                                <p>Remembering the ultimate sacrifice, our cross design incorporates five circles symbolizing the Five Holy Wounds of Jesus, a reminder of the sacrificial love that forms the foundation of a Christian marriage.</p>
+                            </div>
+                             <div className="article-paragraph">
+                                <h4 className="article-paragraph-title">A Lasting Reminder</h4>
+                                <p>In our home, this cross will serve as a lasting reminder of the sacred vows we make on our wedding day—a covenant not just between us, but with God at the center of our new life together.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 {/* REVISED Moon Phase Article */}
-                <div id="article-moon" className="moon-phase-article" ref={moonSectionRef}>
+                <div id="article-moon" className="moon-phase-article">
                     <h3 className="article-headline">A Celestial Sync: Written in the Stars</h3>
-                    <div className={`fun-facts-container ${isMoonSectionVisible ? 'animate' : ''}`}>
-                        <div className="fact-card">
+                    <div className="moon-visualization-container">
+                        <div className="moon-wrapper">
                             <div className="moon-icon waning-crescent"></div>
-                            <h3>Quyen's Moon</h3>
-                            <h4><strong>Waning Crescent</strong></h4>
-                            <p>Born under a <strong>Waning Crescent</strong> moon, a time for quiet reflection, release, and dreaming of the future.</p>
+                            <p className="moon-label">Quyen's Moon</p>
                         </div>
-                        <div className="fact-card-connector">+</div>
-                        <div className="fact-card">
+                        <div className="moon-wrapper">
                             <div className="moon-icon waxing-gibbous"></div>
-                            <h3>Hien's Moon</h3>
-                            <h4><strong>Waxing Gibbous</strong></h4>
-                            <p>Born under a <strong>Waxing Gibbous</strong> moon, a time for anticipation, refinement, and nurturing things toward fulfillment.</p>
+                            <p className="moon-label">Hien's Moon</p>
                         </div>
                     </div>
-                    <p className={`fun-fact-summary ${isMoonSectionVisible ? 'animate' : ''}`}>As one moon rests and dreams, the other grows toward fullness. A celestial balance of introspection and anticipation, their spirits align to create a complete and harmonious cycle of love.</p>
+                    <div className="moon-explanation-text">
+                        <p>
+                            Born under a <strong>Waning Crescent</strong>, a time for quiet reflection, and a <strong>Waxing Gibbous</strong>, a time for nurturing things toward fulfillment.
+                        </p>
+                        <p className="moon-summary">
+                            As one moon rests and dreams, the other grows toward fullness. Hover over the moons to see how their spirits align to create a complete and harmonious cycle of love.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -344,7 +329,7 @@ const TabNavigation = ({ activeView, onViewChange }) => {
 
   const navItems = [
       { id: VIEWS.JOURNEY, label: 'Our Journey' },
-      { id: VIEWS.OUR_CROSS, label: 'Our Cross' },
+      { id: VIEWS.LOVE_PAPARAZZI, label: 'Love Paparazzi' },
       { id: VIEWS.SCHEDULE, label: 'Schedule' },
       { id: VIEWS.PHOTOBOOK, label: 'Photobook' },
       { id: VIEWS.RSVP, label: 'RSVP' }
@@ -403,7 +388,7 @@ const ViewDisplay = ({ activeView }) => {
   return (
     <div className="view-container">
       {activeView === VIEWS.JOURNEY && <OurJourney />}
-      {activeView === VIEWS.OUR_CROSS && <OurCrossSection />}
+      {activeView === VIEWS.LOVE_PAPARAZZI && <LovePaparazziSection />}
       {activeView === VIEWS.SCHEDULE && <WeddingDaySchedule />}
       {activeView === VIEWS.PHOTOBOOK && <GuestPhotobook />}
       {activeView === VIEWS.RSVP && <RsvpForm />}

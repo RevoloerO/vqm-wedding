@@ -353,9 +353,9 @@
     display: none;
 }
 
-/* --- REVISED: Our Cross Section (Newspaper Style) --- */
-.cross-newspaper-section {
-    padding: 4rem 2rem;
+/* --- REVISED: Love Paparazzi Section (Newspaper Style) --- */
+.love-paparazzi-newspaper-section {
+    padding: 1rem 2rem;
     background-color: var(--color-background);
 }
 
@@ -518,29 +518,31 @@
     border-radius: 4px; 
 }
 
-.article-column-text p {
-    text-align: justify;
-    line-height: 1.7;
-    font-size: 1rem;
-    margin: 0 0 1rem 0;
-    padding-bottom: 1rem;
-    border-bottom: 1px dotted var(--color-newspaper-border);
+.article-paragraph {
+    margin-bottom: 1.5rem;
 }
-.article-column-text p:last-child {
-    border-bottom: none;
+.article-paragraph:last-child {
     margin-bottom: 0;
 }
 
-.drop-cap {
-    font-family: 'Playfair Display', serif;
+.article-paragraph-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
     font-weight: 700;
-    font-size: 3rem;
-    float: left;
-    line-height: 1;
-    margin-right: 0.5rem;
-    margin-top: 0.2rem;
     color: var(--color-accent-deep-gold);
+    margin-bottom: 0.5rem;
+    text-align: left;
 }
+
+.article-column-text .article-paragraph p {
+    text-align: justify;
+    line-height: 1.7;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    border-bottom: none;
+}
+
 
 /* REVISED: Moon Phase Article Styles */
 .moon-phase-article {
@@ -550,128 +552,130 @@
 }
 
 .moon-phase-article .article-headline {
-    font-size: 1.8rem; /* Slightly smaller headline for the second article */
+    font-size: 1.8rem;
 }
 
-.fun-facts-container {
+.moon-visualization-container {
     display: flex;
-    align-items: flex-start;
     justify-content: center;
-    gap: 2rem;
-    margin-top: 1rem;
-    position: relative; /* Needed for animation positioning */
+    align-items: center;
+    gap: 4rem;
+    margin: 2rem 0;
+    padding: 2rem 0;
+    min-height: 150px;
+    cursor: pointer;
+    transition: gap 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.fact-card {
-    background: transparent;
-    padding: 1.5rem;
-    border: 1px solid var(--color-newspaper-border);
-    border-radius: 4px;
-    box-shadow: none;
-    flex: 1;
+.moon-visualization-container:hover {
+    gap: 0;
+}
+
+.moon-wrapper {
     text-align: center;
-    opacity: 0; /* Initially hidden for animation */
-    transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s ease;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Animation initial states (for small screens) */
-.fun-facts-container .fact-card:first-child {
-    transform: translateY(-100px);
+.moon-visualization-container:hover .moon-wrapper:first-child {
+    transform: translateX(50%);
 }
-.fun-facts-container .fact-card:last-child {
-    transform: translateY(100px);
-}
-
-/* Animation active states */
-.fun-facts-container.animate .fact-card {
-    transform: translateY(0);
-    opacity: 1;
+.moon-visualization-container:hover .moon-wrapper:last-child {
+    transform: translateX(-50%);
 }
 
-.fact-card-connector {
-    font-size: 2.5rem;
-    font-family: var(--font-heading);
-    color: var(--color-accent-gold);
-    align-self: center;
-    opacity: 0;
-    transform: scale(0);
-    transition: transform 0.5s ease-out 0.8s, opacity 0.5s ease-out 0.8s; /* Delayed appearance */
-}
-.fun-facts-container.animate .fact-card-connector {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.fun-fact-summary {
-    font-size: 1.1rem;
-    font-style: italic;
-    text-align: center;
-    margin-top: 2rem;
-    padding: 0 2rem;
-    color: #555;
-    opacity: 0;
-    transition: opacity 1s ease 1.2s; /* Delayed appearance */
-}
-.fun-fact-summary.animate {
-    opacity: 1;
-}
-
-.fact-card h3 {
-    font-size: 1.5rem;
-    font-family: var(--font-heading);
-    margin: 0.5rem 0;
-    color: var(--color-text-dark);
-}
-
-.fact-card h4 {
-    font-size: 1rem;
+.moon-label {
     font-family: var(--font-ui);
-    font-weight: 400; /* Bolding is done in HTML */
-    color: var(--color-primary-matcha);
-    margin: 0 0 0.75rem 0;
+    font-weight: 600;
+    color: #888;
+    margin-top: 0.5rem;
+    transition: opacity 0.6s ease;
 }
 
-.fact-card p {
-    font-size: 0.95rem;
+.moon-visualization-container:hover .moon-label {
+    opacity: 0;
+}
+
+.moon-explanation-text {
     text-align: center;
-    margin: 0;
-    padding: 0;
-    border: none;
-    line-height: 1.5;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    background-color: rgba(214, 204, 174, 0.15);
+    border-radius: 4px;
+    border: 1px solid rgba(214, 204, 174, 0.4);
 }
 
-/* REVISED: CSS Moon Phase Representation */
+.moon-explanation-text p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.moon-summary {
+    margin-top: 1rem !important;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+
+/* REVISED: CSS Moon Phase Representation with Interactive Merge */
 .moon-icon {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    margin: 0 auto 1rem auto;
+    margin: 0 auto;
     position: relative;
     overflow: hidden;
     background-color: #f0e68c; /* Light part of the moon */
-    box-shadow: inset -8px 0px 12px -8px rgba(0,0,0,0.4);
+    box-shadow: inset -10px 0px 15px -10px rgba(0,0,0,0.4);
+    transition: box-shadow 0.6s ease;
 }
+
+.moon-visualization-container:hover .moon-icon {
+    box-shadow: inset 0 0 20px -5px rgba(0,0,0,0.2);
+}
+
+/* Glossy highlight pseudo-element */
+.moon-icon::before {
+    content: '';
+    position: absolute;
+    top: -25%;
+    left: -25%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 50%);
+    transform: translate(20px, 20px);
+    z-index: 1;
+    transition: opacity 0.6s ease;
+}
+
 
 .moon-icon::after {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    z-index: 2;
+    background-color: var(--color-newspaper-bg);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .waning-crescent::after {
-    background-color: var(--color-newspaper-bg);
-    transform: translateX(15%);
+    left: 0;
+    box-shadow: 20px 0px 10px -10px #f0e68c inset;
 }
 
 .waxing-gibbous::after {
-    background-color: transparent; /* Make overlay transparent */
-    /* Create the shadow crescent on the left */
-    box-shadow: 20px 0px 0 -5px var(--color-newspaper-bg) inset;
-    
+    left: 0;
+    background-color: transparent;
+    box-shadow: 25px 0px 10px -10px var(--color-newspaper-bg) inset;
+}
+
+.moon-visualization-container:hover .waxing-gibbous::after {
+    transform: translateX(-100%);
 }
 
 

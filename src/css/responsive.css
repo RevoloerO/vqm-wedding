@@ -2,20 +2,19 @@
 
 /* For Tablets and smaller desktops */
 @media (max-width: 900px) {
-    .newspaper-content {
-        grid-template-columns: 1fr;
-    }
-    .newspaper-column-right {
-        border-left: none;
-        padding-left: 0;
-        padding-top: 1rem;
-        border-top: 1px solid var(--color-newspaper-border);
-    }
-    .explanation-title {
-        text-align: center;
-    }
     .main-content-area {
         padding: 3rem 3%; /* Adjust padding for smaller screens */
+    }
+
+    /* REVISED: Stack the newspaper article columns */
+    .article-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .fun-facts-container {
+        flex-direction: column;
+        align-items: center;
     }
 }
 
@@ -36,11 +35,6 @@
         height: 420px;
     }
 
-    .fun-facts-container { 
-        flex-direction: column; 
-        grid-template-columns: 1fr; /* Stack fact cards */
-        padding: 0 1rem;
-    }
     .page-section h2 { font-size: 2.2rem; }
 
     .welcome-banner-names { font-size: 3rem; }
@@ -67,13 +61,6 @@
 
     .rsvp-form .radio-group, .rsvp-form .checkbox-group { grid-template-columns: 1fr; }
     .rsvp-details-container { grid-template-columns: 1fr; }
-
-    .newspaper-headline { font-size: 2rem; }
-    .newspaper-stamp-logo {
-        width: 120px;
-        left: 10rem;
-        bottom: -0.5rem;
-    }
 
     /* --- Schedule Timeline on Mobile --- */
     .schedule-timeline-container::before {
@@ -111,30 +98,6 @@
         border-left: none; /* remove the other arrow */
         filter: drop-shadow(-1px 0px 0px #e0dccc);
     }
-
-    /* --- Chronicle/Newspaper on Mobile --- */
-    .chronicle-section-wrapper {
-        /* MODIFICATION: Restored padding now that box-sizing is fixed */
-        padding: 0rem 1rem;
-    }
-    .chronicle-newspaper {
-        min-height: unset;
-    }
-    .chronicle-page {
-        padding: 1rem 1rem 3rem 1rem;
-    }
-    .newspaper-content {
-        grid-template-columns: 1fr;
-    }
-    .newspaper-column-right {
-        padding-left: 0;
-        border-left: none;
-        padding-top: 1rem;
-        border-top: 1px solid var(--color-newspaper-border);
-    }
-    .page-back .fun-facts-container {
-        flex-direction: column;
-    }
     
     /* MODIFICATION: Adjust padding for mobile */
     .main-content-area {
@@ -142,6 +105,26 @@
     }
     .page-section {
         padding: 2.5rem 1rem;
+    }
+
+    /* REVISED: Newspaper section on mobile */
+    .cross-newspaper-section {
+        padding: 2.5rem 1rem;
+    }
+    .cross-newspaper-page {
+        padding: 1.5rem;
+    }
+    .masthead-title {
+        font-size: 2.5rem;
+    }
+    .masthead-subheading {
+        font-size: 0.7rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    .article-headline {
+        font-size: 1.8rem;
     }
 
 
@@ -183,6 +166,20 @@
 
 
 /* --- LARGE SCREEN OPTIMIZATIONS --- */
+@media (min-width: 901px) {
+    /* Animation initial states (for large screens) */
+    .fun-facts-container .fact-card:first-child {
+        transform: translateX(-100px);
+    }
+    .fun-facts-container .fact-card:last-child {
+        transform: translateX(100px);
+    }
+    /* Animation active states */
+    .fun-facts-container.animate .fact-card {
+        transform: translateX(0);
+    }
+}
+
 @media (min-width: 1600px) {
     .main-content-area, .tab-navbar {
         max-width: 1400px;
@@ -192,12 +189,12 @@
         font-size: 3.5rem;
     }
 
-    .fact-card p, .detail-item p, .fun-fact-summary {
+    .detail-item p {
         font-size: 1.1rem;
         line-height: 1.7;
     }
 
-    .fact-card h3, .detail-item h3 {
+    .detail-item h3 {
         font-size: 1.8rem;
     }
 

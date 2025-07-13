@@ -16,7 +16,7 @@ import hqArt from './assets/HQ-art.png'; // Footer Art
 // --- CONSTANTS ---
 const VIEWS = {
   JOURNEY: 'journey',
-  CHRONICLE: 'chronicle', // Renamed and combined view
+  OUR_CROSS: 'our_cross',
   SCHEDULE: 'schedule',
   PHOTOBOOK: 'photobook',
   RSVP: 'rsvp',
@@ -93,9 +93,9 @@ const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
     const bgStyle = { backgroundImage: `url(${backgroundImage})` };
 
     const handleCrossClick = () => {
-        onViewChange(VIEWS.CHRONICLE);
+        onViewChange(VIEWS.OUR_CROSS);
         setTimeout(() => {
-            const element = document.getElementById('chronicle');
+            const element = document.getElementById('our_cross');
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
             }
@@ -170,89 +170,89 @@ const OurJourney = () => (
     </section>
 );
 
-// --- MODIFICATION: Toggleable Item Component for Chronicle ---
-const ToggleableItem = ({ title, children }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const contentRef = useRef(null);
+// --- REVISED: Our Cross Section as a Newspaper Article ---
+const OurCrossSection = () => {
+    const moonSectionRef = useRef(null);
+    const [isMoonSectionVisible, setMoonSectionVisible] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setMoonSectionVisible(true);
+                    observer.disconnect();
+                }
+            },
+            {
+                threshold: 0.5, // Trigger when 50% of the element is visible
+            }
+        );
+
+        if (moonSectionRef.current) {
+            observer.observe(moonSectionRef.current);
+        }
+
+        return () => {
+            if (moonSectionRef.current) {
+                observer.unobserve(moonSectionRef.current);
+            }
+        };
+    }, []);
+
 
     return (
-        <div className={`toggleable-item ${isOpen ? 'open' : ''}`}>
-            <button className="toggleable-header" onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen}>
-                <h4>{title}</h4>
-                {/* MODIFICATION: Changed to a plus/minus icon */}
-                <div className="toggle-icon">
-                    <div className="icon-bar horizontal"></div>
-                    <div className="icon-bar vertical"></div>
-                </div>
-            </button>
-            <div className="toggleable-content-wrapper" style={{ maxHeight: isOpen ? contentRef.current?.scrollHeight : 0 }}>
-                <div className="toggleable-content" ref={contentRef}>
-                    {children}
-                </div>
-            </div>
-        </div>
-    );
-};
-
-
-// --- MODIFICATION: Combined Cross & Love Facts with a Fade Animation ---
-const StoryChronicleSection = () => {
-    const [isFlipped, setIsFlipped] = useState(false);
-
-    return (
-        <section id="chronicle" className="chronicle-section-wrapper">
-            <div className="chronicle-container">
-                <button onClick={() => setIsFlipped(false)} className={`chronicle-side-nav left ${isFlipped ? 'visible' : ''}`} aria-label="Previous Page">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                </button>
-                
-                <div className="chronicle-newspaper">
-                    <div className={`chronicle-page page-front ${!isFlipped ? 'active' : ''}`}>
-                        <div className="newspaper-header">
-                            <div className="newspaper-title-line">
-                                <div className="newspaper-title-item">EST. 2028</div>
-                                <h2 className="newspaper-headline">The Wedding Chronicle</h2>
-                                <div className="newspaper-title-item">COLUMBUS, OH</div>
-                            </div>
-                            <div className="newspaper-sub-header">
-                                <span>A Special Report on Faith &amp; Union</span>
-                            </div>
-                        </div>
-                        <div className="newspaper-content">
-                            <div className="newspaper-column-left">
-                                <div className="explanation-visual">
-                                    <svg className="explanation-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                        <g className="explanation-glow-group"><path d="M50 12 V30 M27 35 H45 M73 35 H55" strokeWidth="3"/><path d="M50 40 C 40 55, 60 55, 50 70 C 40 85, 60 85, 50 90" strokeWidth="2.5"/><path d="M50 40 C 60 55, 40 55, 50 70 C 60 85, 40 85, 50 90" strokeWidth="2.5"/><path d="M50 40 V 90" strokeWidth="2.5"/></g>
-                                        <circle className="accent-circle" cx="50" cy="8" r="4"/><circle className="accent-circle" cx="23" cy="35" r="4"/><circle className="accent-circle" cx="77" cy="35" r="4"/><circle className="accent-circle" cx="50" cy="35" r="5"/><circle className="accent-circle" cx="50" cy="94" r="4"/>
-                                    </svg>
-                                </div>
-                                <p className="explanation-scripture"><em>"A cord of three strands is not quickly broken."<br/>— Ecclesiastes 4:12</em></p>
-                            </div>
-                            <div className="newspaper-column-right">
-                                <h3 className="explanation-title">The Symbolism of the Three-Strand Cord</h3>
-                                <ToggleableItem title="The Three Strands"><p><span className="drop-cap">I</span>n the Cord of Three Strands ceremony, three separate strands are braided together. These represent the bride, the groom, and God, each being whole and individual before being woven together.</p></ToggleableItem>
-                                <ToggleableItem title="The Braid"><p><span className="drop-cap">N</span>ewly formed as one, the act of braiding symbolizes the couple's lives being intertwined. It signifies the deliberate inclusion of God as the central, binding force in their union.</p></ToggleableItem>
-                                <ToggleableItem title="The Five Wounds"><p><span className="drop-cap">R</span>emembering the ultimate sacrifice, our cross design incorporates five circles symbolizing the Five Holy Wounds of Jesus, a reminder of the sacrificial love that forms the foundation of a Christian marriage.</p></ToggleableItem>
-                                <ToggleableItem title="A Lasting Reminder"><p><span className="drop-cap">I</span>n our home, this cross will serve as a lasting reminder of the sacred vows we make on our wedding day—a covenant not just between us, but with God at the center of our new life together.</p></ToggleableItem>
-                            </div>
-                        </div>
-                        <img src={hqStamp1} alt="Quyen & Hien Stamp" className="newspaper-stamp-logo" />
-                    </div>
-                    <div className={`chronicle-page page-back ${isFlipped ? 'active' : ''}`}>
-                        <div className="section-header">
-                            <h2 className="newspaper-headline">Celestial Sync</h2>
-                        </div>
-                        <div className="fun-facts-container">
-                            <div className="fact-card"><div className="moon-icon waning-crescent"></div><h3>Quyen's Moon</h3><h4>Waning Crescent</h4><p>Born on September 20, 1995, under a Waning Crescent moon. This is a time of quiet reflection, intuition, and dreaming of the future.</p></div>
-                            <div className="fact-card-connector">+</div>
-                            <div className="fact-card"><div className="moon-icon waxing-gibbous"></div><h3>Hien's Moon</h3><h4>Waxing Gibbous</h4><p>Born on March 15, 2000, under a Waxing Gibbous moon. This is a time of anticipation, refinement, and nurturing things toward fulfillment.</p></div>
-                        </div>
-                        <p className="fun-fact-summary">One was born as the moon rested, the other as it grew towards fullness. Together, their spirits create a perfect, harmonious cycle of reflection and joyful anticipation.</p>
+        <section id="our_cross" className="page-section cross-newspaper-section">
+            <div className="cross-newspaper-page">
+                <div className="cross-newspaper-masthead">
+                    <div className="masthead-title">The Covenant Chronicle</div>
+                    <div className="masthead-subheading">
+                        <span>Vol. IV, No. 12</span>
+                        <span>A.D. July 1, 2028</span>
+                        <span>Price: One Prayer</span>
                     </div>
                 </div>
-                <button onClick={() => setIsFlipped(true)} className={`chronicle-side-nav right ${!isFlipped ? 'visible' : ''}`} aria-label="Next Page">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </button>
+
+                <div className="cross-newspaper-article">
+                    <h2 className="article-headline">On the Symbolism of the Three-Strand Cord</h2>
+                    <div className="article-content">
+                        <div className="article-column-visual">
+                            <div className="explanation-visual">
+                                <svg className="explanation-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <g className="explanation-glow-group"><path d="M50 12 V30 M27 35 H45 M73 35 H55" strokeWidth="3"/><path d="M50 40 C 40 55, 60 55, 50 70 C 40 85, 60 85, 50 90" strokeWidth="2.5"/><path d="M50 40 C 60 55, 40 55, 50 70 C 60 85, 40 85, 50 90" strokeWidth="2.5"/><path d="M50 40 V 90" strokeWidth="2.5"/></g>
+                                    <circle className="accent-circle" cx="50" cy="8" r="4"/><circle className="accent-circle" cx="23" cy="35" r="4"/><circle className="accent-circle" cx="77" cy="35" r="4"/><circle className="accent-circle" cx="50" cy="35" r="5"/><circle className="accent-circle" cx="50" cy="94" r="4"/>
+                                </svg>
+                            </div>
+                            <p className="explanation-scripture"><em>"A cord of three strands is not quickly broken."<br/>— Ecclesiastes 4:12</em></p>
+                        </div>
+                        <div className="article-column-text">
+                            <p><span className="drop-cap">I</span>n the Cord of Three Strands ceremony, three separate strands are braided together. These represent the bride, the groom, and God, each being whole and individual before being woven together.</p>
+                            <p><span className="drop-cap">N</span>ewly formed as one, the act of braiding symbolizes the couple's lives being intertwined. It signifies the deliberate inclusion of God as the central, binding force in their union.</p>
+                            <p><span className="drop-cap">R</span>emembering the ultimate sacrifice, our cross design incorporates five circles symbolizing the Five Holy Wounds of Jesus, a reminder of the sacrificial love that forms the foundation of a Christian marriage.</p>
+                            <p><span className="drop-cap">I</span>n our home, this cross will serve as a lasting reminder of the sacred vows we make on our wedding day—a covenant not just between us, but with God at the center of our new life together.</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* REVISED Moon Phase Article */}
+                <div className="moon-phase-article" ref={moonSectionRef}>
+                    <h3 className="article-headline">A Celestial Sync: Written in the Stars</h3>
+                    <div className={`fun-facts-container ${isMoonSectionVisible ? 'animate' : ''}`}>
+                        <div className="fact-card">
+                            <div className="moon-icon waning-crescent-icon"></div>
+                            <h3>Quyen's Moon</h3>
+                            <h4><strong>Waning Crescent</strong></h4>
+                            <p>Born under a <strong>Waning Crescent</strong> moon, a time for quiet reflection, release, and dreaming of the future.</p>
+                        </div>
+                        <div className="fact-card-connector">+</div>
+                        <div className="fact-card">
+                            <div className="moon-icon waxing-gibbous-icon"></div>
+                            <h3>Hien's Moon</h3>
+                            <h4><strong>Waxing Gibbous</strong></h4>
+                            <p>Born under a <strong>Waxing Gibbous</strong> moon, a time for anticipation, refinement, and nurturing things toward fulfillment.</p>
+                        </div>
+                    </div>
+                    <p className={`fun-fact-summary ${isMoonSectionVisible ? 'animate' : ''}`}>As one moon rests and dreams, the other grows toward fullness. A celestial balance of introspection and anticipation, their spirits align to create a complete and harmonious cycle of love.</p>
+                </div>
             </div>
         </section>
     );
@@ -337,7 +337,7 @@ const TabNavigation = ({ activeView, onViewChange }) => {
 
   const navItems = [
       { id: VIEWS.JOURNEY, label: 'Our Journey' },
-      { id: VIEWS.CHRONICLE, label: 'Our Chronicle' },
+      { id: VIEWS.OUR_CROSS, label: 'Our Cross' },
       { id: VIEWS.SCHEDULE, label: 'Schedule' },
       { id: VIEWS.PHOTOBOOK, label: 'Photobook' },
       { id: VIEWS.RSVP, label: 'RSVP' }
@@ -396,7 +396,7 @@ const ViewDisplay = ({ activeView }) => {
   return (
     <div className="view-container">
       {activeView === VIEWS.JOURNEY && <OurJourney />}
-      {activeView === VIEWS.CHRONICLE && <StoryChronicleSection />}
+      {activeView === VIEWS.OUR_CROSS && <OurCrossSection />}
       {activeView === VIEWS.SCHEDULE && <WeddingDaySchedule />}
       {activeView === VIEWS.PHOTOBOOK && <GuestPhotobook />}
       {activeView === VIEWS.RSVP && <RsvpForm />}

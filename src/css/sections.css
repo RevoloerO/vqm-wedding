@@ -353,160 +353,86 @@
     display: none;
 }
 
-/* --- MODIFICATION: Combined Chronicle/Newspaper Section --- */
-.chronicle-section-wrapper {
-    padding: 0rem 2rem;
-    background: var(--color-background);
+/* --- REVISED: Our Cross Section (Newspaper Style) --- */
+.cross-newspaper-section {
+    padding: 4rem 2rem;
+    background-color: var(--color-background);
 }
 
-.chronicle-container {
-    max-width: 1100px;
+.cross-newspaper-page {
+    max-width: 1000px;
     margin: 0 auto;
-    position: relative;
-}
-
-.chronicle-newspaper {
-    width: 100%;
-    position: relative;
-    display: grid;
-    min-height: 600px;
-}
-
-.chronicle-page {
-    grid-area: 1 / 1;
+    padding: 2.5rem;
     background-color: var(--color-newspaper-bg);
     border: 1px solid var(--color-newspaper-border);
-    padding: 2rem;
-    border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.6s ease-in-out;
-    visibility: hidden;
+    position: relative;
 }
 
-.chronicle-page.active {
-    opacity: 1;
-    pointer-events: auto;
-    visibility: visible;
-}
-
-/* MODIFICATION: Elegant Side Navigation */
-.chronicle-side-nav {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border: none;
-    color: var(--color-accent-gold);
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s ease, background-color 0.3s ease;
-    z-index: 20;
-    pointer-events: none;
-}
-.chronicle-side-nav.left {
-    left: 0;
-    border-radius: 8px 0 0 8px;
-}
-.chronicle-side-nav.right {
-    right: 0;
-    border-radius: 0 8px 8px 0;
-}
-.chronicle-side-nav.visible {
-    opacity: 1;
-    pointer-events: auto;
-}
-.chronicle-side-nav:hover {
-    background-color: rgba(247, 245, 242, 0.7);
-}
-.chronicle-side-nav svg {
-    width: 30px;
-    height: 30px;
-    filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.2));
-}
-
-
-/* --- Styles for content within the newspaper pages --- */
-.chronicle-page::before {
+/* Add a subtle noise texture for aged paper effect */
+.cross-newspaper-page::before {
     content: '';
     position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    z-index: -1;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
     pointer-events: none;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOCIgbnVtT2N0YXZlcz0iNCIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWx0ZXI9InVybCgjbm9pc2UpIiBvcGFjaXR5PSIwLjA1Ii8+PC9zdmc+');
+    opacity: 0.05;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOCIgbnVtT2N0YXZlcz0iNCIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWx0ZXI9InVybCgjbm9pc2UpIi8+PC9zdmc+');
 }
 
-.newspaper-header {
+.cross-newspaper-masthead,
+.cross-newspaper-article,
+.moon-phase-article {
+    position: relative;
+    z-index: 1;
+}
+
+.cross-newspaper-masthead {
     text-align: center;
-    margin-bottom: 1.5rem;
+    border-bottom: 4px double var(--color-newspaper-border);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
-.newspaper-stamp-logo {
-    position: absolute;
-    bottom: 1rem;
-    left: 1.5rem;
-    width: 150px;
-    height: auto;
-    transform: rotate(-8deg);
-    opacity: 0.5;
+.masthead-title {
+    font-family: var(--font-newspaper-headline);
+    font-size: 3.5rem;
+    color: var(--color-text-dark);
+    line-height: 1;
+    margin: 0;
 }
 
-.newspaper-title-line {
+.masthead-subheading {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    border-top: 4px double #b9b19c;
-    border-bottom: 1px solid #b9b19c;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    color: #5c544a;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--color-newspaper-border);
+    border-bottom: 1px solid var(--color-newspaper-border);
     padding: 0.25rem 0;
 }
 
-.newspaper-title-item {
-    font-family: var(--font-ui);
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #5c544a;
-    text-transform: uppercase;
+.article-headline {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--color-text-dark);
 }
 
-.newspaper-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: #4a3f35;
-    margin: 0 1rem;
-    padding: 0;
-    line-height: 1;
-}
-
-.newspaper-sub-header {
-    border-bottom: 4px double #b9b19c;
-    padding-bottom: 0.25rem;
-    font-family: var(--font-ui);
-    font-style: italic;
-    color: #5c544a;
-}
-
-.newspaper-content {
+.article-content {
     display: grid;
     grid-template-columns: 220px 1fr;
-    gap: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--color-newspaper-border);
+    gap: 2.5rem;
+    align-items: start;
 }
 
-.newspaper-column-left {
+.article-column-visual {
     text-align: center;
-}
-
-.newspaper-column-right {
-    border-left: 1px solid var(--color-newspaper-border);
-    padding-left: 1.5rem;
 }
 
 .explanation-visual {
@@ -515,10 +441,11 @@
 }
 
 .explanation-svg {
-    width: 140px;
+    width: 160px;
     height: auto;
     stroke-linecap: round;
     stroke-linejoin: round;
+    margin: 0 auto;
 }
 
 @keyframes heartbeatGlowLines {
@@ -553,109 +480,155 @@
     fill: var(--color-accent-deep-gold);
 }
 
-.explanation-title { font-size: 1.8rem; margin-top: 0; margin-bottom: 1rem; text-align: left; color: #333; }
-.explanation-scripture { font-style: italic; font-size: 1.1rem; text-align: center; color: #555; padding: 1rem; background-color: rgba(214, 204, 174, 0.2); border-radius: 4px; }
-
-/* MODIFICATION: Toggleable Item Styles */
-.toggleable-item {
-    border-bottom: 1px solid var(--color-newspaper-border);
-}
-.toggleable-item:last-child {
-    border-bottom: none;
-}
-.toggleable-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    background: none;
-    border: none;
-    padding: 0.75rem 0;
-    cursor: pointer;
-    text-align: left;
-}
-.toggleable-header h4 {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--color-accent-deep-gold);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.toggle-icon {
-    position: relative;
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-}
-.icon-bar {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 16px;
-    height: 2px;
-    background-color: var(--color-accent-gold);
-    border-radius: 1px;
-    transition: transform 0.3s ease;
-}
-.icon-bar.horizontal {
-    transform: translate(-50%, -50%);
-}
-.icon-bar.vertical {
-    transform: translate(-50%, -50%) rotate(90deg);
-}
-.toggleable-item.open .icon-bar.vertical {
-    transform: translate(-50%, -50%) rotate(180deg);
+.explanation-scripture { 
+    font-style: italic; 
+    font-size: 1.1rem; 
+    text-align: center; 
+    color: #555; 
+    padding: 1rem; 
+    background-color: rgba(214, 204, 174, 0.2); 
+    border-radius: 4px; 
 }
 
-.toggleable-content-wrapper {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
-}
-.toggleable-content {
-    padding: 0 0.5rem 1rem 0.5rem;
-}
-.toggleable-content p {
+.article-column-text p {
     text-align: justify;
     line-height: 1.7;
     font-size: 1rem;
-    margin: 0;
+    margin: 0 0 1rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px dotted var(--color-newspaper-border);
 }
-.toggleable-content .drop-cap {
+.article-column-text p:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.drop-cap {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: 2.5rem;
+    font-size: 3rem;
     float: left;
     line-height: 1;
-    margin-right: 0.4rem;
-    margin-top: 0.1rem;
+    margin-right: 0.5rem;
+    margin-top: 0.2rem;
     color: var(--color-accent-deep-gold);
 }
 
+/* REVISED: Moon Phase Article Styles */
+.moon-phase-article {
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 2px solid var(--color-newspaper-border);
+}
 
-/* Styles for Love Facts on Page 2 */
-.page-back .fun-facts-container {
+.moon-phase-article .article-headline {
+    font-size: 1.8rem; /* Slightly smaller headline for the second article */
+}
+
+.fun-facts-container {
     display: flex;
     align-items: flex-start;
     justify-content: center;
     gap: 2rem;
     margin-top: 1rem;
+    position: relative; /* Needed for animation positioning */
 }
-.page-back .fact-card {
+
+.fact-card {
     background: transparent;
-    padding: 1rem;
+    padding: 1.5rem;
     border: 1px solid var(--color-newspaper-border);
     border-radius: 4px;
     box-shadow: none;
     flex: 1;
+    text-align: center;
+    opacity: 0; /* Initially hidden for animation */
+    transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s ease;
 }
-.page-back .fact-card h3 { font-size: 1.5rem; }
-.page-back .fact-card h4 { font-size: 1rem; }
-.page-back .fact-card p { font-size: 0.95rem; }
-.page-back .fact-card-connector { font-size: 2.5rem; align-self: center; }
-.page-back .fun-fact-summary { font-size: 1.1rem; }
-.page-back .moon-icon { width: 50px; height: 50px; }
+
+/* Animation initial states (for small screens) */
+.fun-facts-container .fact-card:first-child {
+    transform: translateY(-100px);
+}
+.fun-facts-container .fact-card:last-child {
+    transform: translateY(100px);
+}
+
+/* Animation active states */
+.fun-facts-container.animate .fact-card {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.fact-card-connector {
+    font-size: 2.5rem;
+    font-family: var(--font-heading);
+    color: var(--color-accent-gold);
+    align-self: center;
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.5s ease-out 0.8s, opacity 0.5s ease-out 0.8s; /* Delayed appearance */
+}
+.fun-facts-container.animate .fact-card-connector {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.fun-fact-summary {
+    font-size: 1.1rem;
+    font-style: italic;
+    text-align: center;
+    margin-top: 2rem;
+    padding: 0 2rem;
+    color: #555;
+    opacity: 0;
+    transition: opacity 1s ease 1.2s; /* Delayed appearance */
+}
+.fun-fact-summary.animate {
+    opacity: 1;
+}
+
+.fact-card h3 {
+    font-size: 1.5rem;
+    font-family: var(--font-heading);
+    margin: 0.5rem 0;
+    color: var(--color-text-dark);
+}
+
+.fact-card h4 {
+    font-size: 1rem;
+    font-family: var(--font-ui);
+    font-weight: 400; /* Bolding is done in HTML */
+    color: var(--color-primary-matcha);
+    margin: 0 0 0.75rem 0;
+}
+
+.fact-card p {
+    font-size: 0.95rem;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    border: none;
+    line-height: 1.5;
+}
+
+/* REVISED: Moon Icon styles to use actual images */
+.moon-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.waning-crescent-icon {
+    background-image: url('http://googleusercontent.com/file_content/10');
+}
+
+.waxing-gibbous-icon {
+    background-image: url('http://googleusercontent.com/file_content/9');
+}
 
 
 /* --- Reworked Wedding Day Schedule Section (Timeline) --- */

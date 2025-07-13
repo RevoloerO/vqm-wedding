@@ -595,6 +595,9 @@
     opacity: 0;
 }
 
+.moon-visualization-container:hover .moon-phase-name {
+    opacity: 0;
+}
 .moon-explanation-text {
     text-align: center;
     padding: 1.5rem;

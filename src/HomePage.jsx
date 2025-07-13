@@ -69,8 +69,6 @@ const Countdown = ({ targetDate }) => {
   );
 };
 
-// --- Page Sections (Views) ---
-
 // Main Welcome Banner (Stays at the top)
 const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
     const quotes = [
@@ -225,15 +223,20 @@ const LovePaparazziSection = () => {
 
                 {/* REVISED Moon Phase Article */}
                 <div id="article-moon" className="moon-phase-article">
-                    <h3 className="article-headline">A Celestial Sync: Written in the Stars</h3>
+                    {/* Changed h3 to h2 as requested */}
+                    <h2 className="article-headline">A Celestial Sync: Written in the Stars</h2>
                     <div className="moon-visualization-container">
                         <div className="moon-wrapper">
                             <div className="moon-icon waning-crescent"></div>
                             <p className="moon-label">Quyen's Moon</p>
+                            {/* Added new label for moon phase */}
+                            <p className="moon-phase-name">Waning Crescent</p>
                         </div>
                         <div className="moon-wrapper">
                             <div className="moon-icon waxing-gibbous"></div>
                             <p className="moon-label">Hien's Moon</p>
+                            {/* Added new label for moon phase */}
+                            <p className="moon-phase-name">Waxing Gibbous</p>
                         </div>
                     </div>
                     <div className="moon-explanation-text">

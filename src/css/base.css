@@ -19,15 +19,16 @@ html {
 /* --- MATCHA LATTE THEME (Refined) --- */
 :root {
   /* Palette: Matcha, Cream, Gold, and Charcoal */
-  --color-background: #F7F5F2; /* Creamy Latte Foam */
-  --color-primary-matcha: #A3B899; /* Soft Matcha Green */
-  --color-secondary-cream: #FDFBF5; /* Lighter Cream */
-  --color-accent-gold: #C0A172; /* Elegant Gold */
-  --color-accent-deep-gold: #ab8a5b; /* Darker Gold for hover */
+  /* Updated for "Matcha & Gold Harmony" */
+  --color-background: #F8F5EE; /* Creamy Ivory */
+  --color-primary-matcha: #5F7C5D; /* Deep Matcha Green */
+  --color-secondary-cream: #F8F5EE; /* Creamy Ivory (used for various backgrounds) */
+  --color-accent-gold: #D4AF37; /* Bright Gold */
+  --color-accent-deep-gold: #A67C00; /* Antiqued Gold (darker for hover/accents) */
   --color-text-dark: #36454F; /* Charcoal */
-  --color-text-light: #FFFFFF;
-  --color-newspaper-bg: #fdfaf0; /* Aged paper color */
-  --color-newspaper-border: #dcd3b2; /* Faded border color */
+  --color-text-light: #FFFFFF; /* White */
+  --color-newspaper-bg: #FDFBF5; /* Slightly different creamy tone for newspaper background */
+  --color-newspaper-border: #C8B8A0; /* Light brown/gold for newspaper border */
 
   /* --- UPDATED FONT PALETTE --- */
   --font-display: 'Great Vibes', cursive; /* For the most prominent banner text */

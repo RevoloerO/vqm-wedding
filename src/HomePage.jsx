@@ -10,7 +10,7 @@ import heroBgImage from './assets/bg-2.jpeg';
 import journeyImage from './assets/bg-2.jpeg';
 import hqStamp1 from './assets/HQ-stamp-1-nobg.png'; // Rectangular Stamp
 import hqStamp2 from './assets/HQ-stamp-2-nobg.png'; // Circular Stamp
-import hqStamp3 from './assets/HQ-stamp-3-nobg.png'; // New stamp for schedule
+import hqStamp3 from './assets/hq-stamp-3-nobg.png'; // New stamp for schedule
 import hqArt from './assets/HQ-art.png'; // Footer Art
 
 // --- CONSTANTS ---
@@ -201,7 +201,7 @@ const LovePaparazziSection = () => {
                     <div className="article-content">
                         <div className="article-column-visual">
                             <div className="explanation-visual">
-                                <svg className="explanation-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                                     <g className="explanation-glow-group"><path d="M50 12 V30 M27 35 H45 M73 35 H55" strokeWidth="3"/><path d="M50 40 C 40 55, 60 55, 50 70 C 40 85, 60 85, 50 90" strokeWidth="2.5"/><path d="M50 40 C 60 55, 40 55, 50 70 C 60 85, 40 85, 50 90" strokeWidth="2.5"/><path d="M50 40 V 90" strokeWidth="2.5"/></g>
                                     <circle className="accent-circle" cx="50" cy="8" r="4"/><circle className="accent-circle" cx="23" cy="35" r="4"/><circle className="accent-circle" cx="77" cy="35" r="4"/><circle className="accent-circle" cx="50" cy="35" r="5"/><circle className="accent-circle" cx="50" cy="94" r="4"/>
                                 </svg>
@@ -231,11 +231,8 @@ const LovePaparazziSection = () => {
 
                 {/* REVISED Moon Phase Article */}
                 <div id="article-moon" className="moon-phase-article">
-                    {/* Changed h3 to h2 as requested */}
-                    <h2 className="article-headline">A Celestial Sync: Written in the Stars</h2>
-                    {/* Added onClick handler and dynamic class based on state */}
+                    <h2 className="article-headline">A Celestial Sync: Written in the Stars ✨</h2>
                     <div className={`moon-visualization-container ${isMoonAnimated ? 'active-moon-animation' : ''}`} onClick={toggleMoonAnimation}>
-                        {/* Individual moon wrappers (will fade out on hover) */}
                         <div className="moon-wrapper">
                             <div className="moon-icon waning-crescent"></div>
                             <p className="moon-label">Quyen's Moon</p>
@@ -246,18 +243,30 @@ const LovePaparazziSection = () => {
                             <p className="moon-label">Hien's Moon</p>
                             <p className="moon-phase-name">Waxing Gibbous</p>
                         </div>
-                        {/* New combined label for hover effect */}
                         <div className="moon-combined-label">
                             <p className="moon-combined-main">Our Moon</p>
                             <p className="moon-combined-sub">Full Moon</p>
                         </div>
                     </div>
                     <div className="moon-explanation-text">
-                        <p>
-                            Born under a <strong>Waning Crescent</strong>, a time for quiet reflection, and a <strong>Waxing Gibbous</strong>, a time for nurturing things toward fulfillment.
+                        <p className="moon-intro-paragraph">
+                            Did you know the moon phase on your birthday is considered your <b>"birth moon"</b>? It's said to offer insights into your personality and spiritual journey!
                         </p>
+
+                        <div className="moon-person-fact">
+                            <p className="person-name">Quyen Mai<span className="birth-date">(September 20, 1995)</span></p>
+                            <p className="moon-phase-detail"><i>Born under a <b>Waning Crescent</b></i> 🌙</p>
+                            <p className="moon-description">This phase often signifies a time of <b>quiet reflection, wisdom, and a desire to share knowledge</b>. It suggests a journey of completion and preparing for new beginnings with a gentle, introspective spirit.</p>
+                        </div>
+
+                        <div className="moon-person-fact">
+                            <p className="person-name">Hien Dang<span className="birth-date">(March 15, 2000)</span></p>
+                            <p className="moon-phase-detail"><i>Born under a <b>Waxing Gibbous</b></i> 🌔</p>
+                            <p className="moon-description">This moon phase represents nurturing things toward <b>fulfillment, growth, and refinement.</b> Individuals born under this moon are often dedicated, analytical, and strive for perfection in their endeavors.</p>
+                        </div>
+
                         <p className="moon-summary">
-                            As one moon rests and dreams, the other grows toward fullness. Hover over the moons to see how their spirits align to create a complete and harmonious cycle of love.
+                            How incredible that as one moon (Waning Crescent) embraces reflection and prepares for rest, the other (Waxing Gibbous) diligently grows towards its fullest potential! When combined, your individual moon energies beautifully align to form a <b>Full Moon</b> 🌕—a symbol of <b>completion, illumination, and profound unity</b>. It's a celestial reminder that together, your spirits create a harmonious, radiant, and complete cycle of love.
                         </p>
                     </div>
                 </div>
@@ -341,7 +350,7 @@ const RsvpForm = () => {
 const TabNavigation = ({ activeView, onViewChange }) => {
   const navRef = useRef(null);
   const [showLeftHint, setShowLeftHint] = useState(false);
-  const [showRightHint, setShowRightHint] = useState(false);
+  const [showRightHint, setShowRightHint] = useState(false); // Corrected typo here
 
   const navItems = [
       { id: VIEWS.JOURNEY, label: 'Our Journey' },

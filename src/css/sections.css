@@ -378,7 +378,7 @@
     z-index: 0;
     pointer-events: none;
     opacity: 0.05;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFalE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjgiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsdGVyPSJ1cmwoI25vaXNlKSIvPjwvc3ZnPg==');
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFalE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjgiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNub2lzZSkiLz48L3N2Zz4=');
 }
 
 .cross-newspaper-masthead,
@@ -649,20 +649,68 @@
     background-color: rgba(214, 204, 174, 0.15);
     border-radius: 4px;
     border: 1px solid rgba(214, 204, 174, 0.4);
+    /* Additions for Moon Explanation Text UI Improvement */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Space between paragraphs/fact cards */
 }
 
-.moon-explanation-text p {
-    margin: 0;
+.moon-intro-paragraph {
+    font-size: 1.1rem;
+    color: #444;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.moon-person-fact {
+    background-color: var(--color-secondary-cream); /* Creamy background for each fact */
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid var(--color-newspaper-border); /* Subtle border */
+    text-align: center; /* Center align content within the card */
+}
+
+.moon-person-fact .person-name {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--color-accent-deep-gold);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.moon-person-fact .birth-date {
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    color: #777;
+    display: block; /* Ensure it's on a new line */
+    margin-top: 0.2rem;
+}
+
+.moon-person-fact .moon-phase-detail {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    color: var(--color-primary-matcha);
+    margin-bottom: 1rem;
+}
+
+.moon-person-fact .moon-description {
     font-size: 1rem;
     line-height: 1.6;
     color: #555;
+    margin: 0;
 }
 
 .moon-summary {
-    margin-top: 1rem !important;
+    font-size: 1.1rem;
     font-style: italic;
-    font-size: 0.9rem;
-    color: #777;
+    color: var(--color-text-dark); /* Make it stand out more */
+    padding: 1rem 1.5rem;
+    background-color: rgba(163, 184, 153, 0.1); /* Lighter matcha background */
+    border-radius: 8px;
+    border-left: 5px solid var(--color-primary-matcha); /* Accent border */
+    margin-top: 2rem !important; /* Ensure good spacing */
+    text-align: center;
 }
 
 
@@ -924,4 +972,20 @@
     height: auto;
     margin-bottom: 1rem;
     filter: brightness(0) invert(1) opacity(0.9);
+}
+
+@media (max-width: 768px) {
+    .moon-person-fact {
+        padding: 1rem;
+    }
+    .moon-person-fact .person-name {
+        font-size: 1.4rem;
+    }
+    .moon-person-fact .moon-phase-detail {
+        font-size: 1.1rem;
+    }
+    .moon-summary {
+        font-size: 1rem;
+        padding: 1rem;
+    }
 }

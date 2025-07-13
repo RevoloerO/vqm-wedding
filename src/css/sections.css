@@ -392,7 +392,7 @@
     text-align: center;
     border-bottom: 4px double var(--color-newspaper-border);
     padding-bottom: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem; /* Adjusted margin */
 }
 
 .masthead-title {
@@ -413,6 +413,34 @@
     border-top: 1px solid var(--color-newspaper-border);
     border-bottom: 1px solid var(--color-newspaper-border);
     padding: 0.25rem 0;
+}
+
+/* NEW: Article Navigation Bar */
+.article-nav {
+    text-align: center;
+    padding: 0.5rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--color-newspaper-border);
+}
+
+.article-nav a {
+    font-family: var(--font-ui);
+    text-decoration: none;
+    color: var(--color-text-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 1rem;
+    transition: color 0.3s ease;
+}
+
+.article-nav a:hover {
+    color: var(--color-accent-deep-gold);
+}
+
+.article-nav-divider {
+    color: var(--color-newspaper-border);
 }
 
 .article-headline {
@@ -612,22 +640,38 @@
     line-height: 1.5;
 }
 
-/* REVISED: Moon Icon styles to use actual images */
+/* REVISED: CSS Moon Phase Representation */
 .moon-icon {
     width: 80px;
     height: 80px;
+    border-radius: 50%;
     margin: 0 auto 1rem auto;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+    position: relative;
+    overflow: hidden;
+    background-color: #f0e68c; /* Light part of the moon */
+    box-shadow: inset -8px 0px 12px -8px rgba(0,0,0,0.4);
 }
 
-.waning-crescent-icon {
-    background-image: url('http://googleusercontent.com/file_content/10');
+.moon-icon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
 
-.waxing-gibbous-icon {
-    background-image: url('http://googleusercontent.com/file_content/9');
+.waning-crescent::after {
+    background-color: var(--color-newspaper-bg);
+    transform: translateX(15%);
+}
+
+.waxing-gibbous::after {
+    background-color: transparent; /* Make overlay transparent */
+    /* Create the shadow crescent on the left */
+    box-shadow: 20px 0px 0 -5px var(--color-newspaper-bg) inset;
+    
 }
 
 

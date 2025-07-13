@@ -188,13 +188,14 @@ const OurCrossSection = () => {
             }
         );
 
-        if (moonSectionRef.current) {
-            observer.observe(moonSectionRef.current);
+        const currentRef = moonSectionRef.current;
+        if (currentRef) {
+            observer.observe(currentRef);
         }
 
         return () => {
-            if (moonSectionRef.current) {
-                observer.unobserve(moonSectionRef.current);
+            if (currentRef) {
+                observer.unobserve(currentRef);
             }
         };
     }, []);
@@ -204,15 +205,21 @@ const OurCrossSection = () => {
         <section id="our_cross" className="page-section cross-newspaper-section">
             <div className="cross-newspaper-page">
                 <div className="cross-newspaper-masthead">
-                    <div className="masthead-title">The Covenant Chronicle</div>
+                    <div className="masthead-title">The Love Paparazzi</div>
                     <div className="masthead-subheading">
                         <span>Vol. IV, No. 12</span>
                         <span>A.D. July 1, 2028</span>
                         <span>Price: One Prayer</span>
                     </div>
                 </div>
+                
+                <nav className="article-nav">
+                    <a href="#article-cord">The Three-Strand Cord</a>
+                    <span className="article-nav-divider">|</span>
+                    <a href="#article-moon">A Celestial Sync</a>
+                </nav>
 
-                <div className="cross-newspaper-article">
+                <div id="article-cord" className="cross-newspaper-article">
                     <h2 className="article-headline">On the Symbolism of the Three-Strand Cord</h2>
                     <div className="article-content">
                         <div className="article-column-visual">
@@ -234,18 +241,18 @@ const OurCrossSection = () => {
                 </div>
 
                 {/* REVISED Moon Phase Article */}
-                <div className="moon-phase-article" ref={moonSectionRef}>
+                <div id="article-moon" className="moon-phase-article" ref={moonSectionRef}>
                     <h3 className="article-headline">A Celestial Sync: Written in the Stars</h3>
                     <div className={`fun-facts-container ${isMoonSectionVisible ? 'animate' : ''}`}>
                         <div className="fact-card">
-                            <div className="moon-icon waning-crescent-icon"></div>
+                            <div className="moon-icon waning-crescent"></div>
                             <h3>Quyen's Moon</h3>
                             <h4><strong>Waning Crescent</strong></h4>
                             <p>Born under a <strong>Waning Crescent</strong> moon, a time for quiet reflection, release, and dreaming of the future.</p>
                         </div>
                         <div className="fact-card-connector">+</div>
                         <div className="fact-card">
-                            <div className="moon-icon waxing-gibbous-icon"></div>
+                            <div className="moon-icon waxing-gibbous"></div>
                             <h3>Hien's Moon</h3>
                             <h4><strong>Waxing Gibbous</strong></h4>
                             <p>Born under a <strong>Waxing Gibbous</strong> moon, a time for anticipation, refinement, and nurturing things toward fulfillment.</p>

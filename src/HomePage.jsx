@@ -74,7 +74,15 @@ const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
     const quotes = [
         { text: "I have found the one whom my soul loves.", source: "Song of Solomon 3:4" },
         { text: "Two are better than one... If either of them falls down, one can help the other up.", source: "Ecclesiastes 4:9-10" },
-        { text: "Let the morning bring me word of your unfailing love, for I have put my trust in you.", source: "Psalm 143:8" }
+        { text: "Let the morning bring me word of your unfailing love, for I have put my trust in you.", source: "Psalm 143:8" },
+        { text:  "I will betroth you to me forever; I will betroth you in righteousness and justice, in love and compassion."
+, source: "Hosea 2:19" },
+        { text: "I have loved you with an everlasting love; I have drawn you with unfailing kindness.", source: "Jeremiah 31:3" },
+        { text: "Love bears all things, believes all things, hopes all things, endures all things.", source: "1 Corinthians 13:7" },
+        { text: "Be completely humble and gentle; be patient, bearing with one another in love.", source: "Ephesians 4:2" },
+        { text: "No one has ever seen God; but if we love one another, God lives in us and his love is made complete in us.", source: "1 John 4:12" },
+        { text: "But the fruit of the Spirit is love, joy, peace, forbearance, kindness, goodness, faithfulness, gentleness and self-control.", source: "Galatians 5:22-23" },
+        { text: "Therefore what God has joined together, let no one separate.", source: "Mark 10:9" }
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -112,7 +120,7 @@ const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
                   <circle className="accent-circle" cx="50" cy="8" r="4"/>
                   <circle className="accent-circle" cx="23" cy="35" r="4"/>
                   <circle className="accent-circle" cx="77" cy="35" r="4"/>
-                  <circle className="accent-circle" cx="50" cy="35" r="5"/>
+                  <circle className="accent-circle" cx="50" cy="35" r="4"/>
                   <path d="M50 40 C 40 55, 60 55, 50 70 C 40 85, 60 85, 50 90" strokeWidth="2.5"/>
                   <path d="M50 40 C 60 55, 40 55, 50 70 C 60 85, 40 85, 50 90" strokeWidth="2.5"/>
                   <path d="M50 40 V 90" strokeWidth="2.5"/>
@@ -227,6 +235,11 @@ const LovePaparazziSection = () => {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                {/* Stamp between the two articles */}
+                <div className="love-paparazzi-stamp-container">
+                    <img src={hqStamp1} alt="Quyen & Hien Stamp" className="love-paparazzi-stamp" />
                 </div>
 
                 {/* REVISED Moon Phase Article */}

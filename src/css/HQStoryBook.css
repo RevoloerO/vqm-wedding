@@ -1,0 +1,387 @@
+/* --- Google Font Imports --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap');
+
+/* --- CSS Variables (Theme) --- */
+:root {
+  --color-bg: #F8F5EE; /* Creamy Ivory */
+  --color-matcha-deep: #5F7C5D; /* Deep Matcha Green */
+  --color-matcha-soft: #A3B899; /* Soft Matcha Green */
+  --color-gold: #C0A172; /* Elegant Gold */
+  --color-text-dark: #36454F; /* Charcoal */
+  --color-text-light: #FFFFFF;
+  --color-timeline-line: #e0dccc; /* Soft, earthy tone */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Cormorant Garamond', serif;
+  --font-ui: 'Lato', sans-serif;
+  --transition-speed: 0.7s;
+  --transition-timing: cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* --- Main Container --- */
+.hq-story-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--color-bg);
+  font-family: var(--font-body);
+  color: var(--color-text-dark);
+  transition: background-color var(--transition-speed) var(--transition-timing);
+  overflow: hidden; /* Prevent scrollbars during transition */
+}
+
+/* --- Timeline Column --- */
+.timeline-column {
+  width: 100%;
+  padding: 4rem 2rem;
+  flex-shrink: 0; /* Prevent from shrinking */
+  transition: width var(--transition-speed) var(--transition-timing), 
+              transform var(--transition-speed) var(--transition-timing);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Back to Home Button --- */
+.back-to-home-btn {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: transparent;
+  border: 2px solid var(--color-gold);
+  color: var(--color-gold);
+  border-radius: 50px;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.3s ease;
+}
+
+.back-to-home-btn:hover {
+  background-color: var(--color-gold);
+  color: var(--color-text-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.back-to-home-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.timeline-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  margin-top: 3rem; /* Add margin to avoid overlap with back button */
+}
+
+.story-title {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--color-matcha-deep);
+  margin: 0;
+}
+
+.story-subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--color-text-dark);
+  opacity: 0.8;
+  margin-top: 0.5rem;
+}
+
+.timeline {
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+}
+
+/* The actual timeline line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 15px;
+  bottom: 15px;
+  width: 3px;
+  background-color: var(--color-timeline-line);
+  transform: translateX(-50%);
+  border-radius: 3px;
+}
+
+/* --- Timeline Event --- */
+.timeline-event {
+  position: relative;
+  margin-bottom: 4rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.timeline-event:last-child {
+  margin-bottom: 0;
+}
+
+/* The circle on the timeline */
+.timeline-node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-bg);
+  border: 3px solid var(--color-matcha-soft);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.timeline-event:hover .timeline-node,
+.timeline-event.active .timeline-node {
+  transform: translate(-50%, -50%) scale(1.3);
+  background-color: var(--color-matcha-soft);
+  border-color: var(--color-matcha-deep);
+  box-shadow: 0 0 0 6px var(--color-bg), 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Brief event info */
+.timeline-brief {
+  padding: 1rem 2rem;
+  background-color: transparent;
+  border-radius: 8px;
+  width: calc(50% - 40px); /* Half width minus spacing */
+  transition: transform 0.3s ease;
+}
+
+.timeline-event:hover .timeline-brief {
+    transform: translateY(-5px);
+}
+
+/* Position events on alternating sides */
+.timeline-event:nth-child(odd) .timeline-brief {
+  margin-right: auto;
+  text-align: right;
+}
+
+.timeline-event:nth-child(even) .timeline-brief {
+  margin-left: auto;
+  text-align: left;
+}
+
+.brief-date {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.brief-title {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  margin: 0.25rem 0 0 0;
+  font-weight: 400;
+}
+
+/* --- Detail Column --- */
+.detail-column {
+  width: 0;
+  flex-shrink: 0;
+  background-color: var(--color-text-dark);
+  color: var(--color-text-light);
+  opacity: 0;
+  transform: translateX(50px);
+  transition: width var(--transition-speed) var(--transition-timing),
+              opacity calc(var(--transition-speed) * 0.8) ease-in-out calc(var(--transition-speed) * 0.2),
+              transform var(--transition-speed) var(--transition-timing);
+  position: relative;
+  overflow-y: auto;
+}
+
+.detail-content-wrapper {
+  display: flex;
+  height: 100vh;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.detail-image-container {
+  width: 50%;
+  height: 100vh;
+  flex-shrink: 0;
+}
+
+.detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-text-container {
+  padding: 4rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.detail-title {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: var(--color-gold);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.detail-date {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  color: var(--color-text-light);
+  opacity: 0.7;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.detail-full-text {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  line-height: 1.8;
+  opacity: 0.9;
+}
+
+.close-button {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+  font-size: 2.5rem;
+  font-weight: 300;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+
+.close-button:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+
+/* --- Active State Transition --- */
+.hq-story-container.detail-view-active .timeline-column {
+  width: 40%;
+  transform: translateX(0); /* Keep it from being pushed */
+}
+
+.hq-story-container.detail-view-active .detail-column {
+  width: 60%;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hq-story-container.detail-view-active .detail-content-wrapper {
+    opacity: 1;
+    transition-delay: calc(var(--transition-speed) * 0.5);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 1024px) {
+  .timeline-column,
+  .hq-story-container.detail-view-active .timeline-column {
+    width: 100%;
+    transform: translateX(0);
+  }
+
+  .detail-column {
+    position: fixed; /* Overlay on top */
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    transform: translateX(100%);
+    z-index: 100;
+  }
+  
+  .hq-story-container.detail-view-active .detail-column {
+    width: 100%;
+    transform: translateX(0);
+  }
+
+  .detail-content-wrapper {
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .detail-image-container {
+    width: 100%;
+    height: 40vh; /* Fixed height for image */
+  }
+
+  .detail-text-container {
+    height: 60vh;
+    padding: 2rem;
+  }
+  
+  .detail-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .back-to-home-btn {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .timeline-header {
+    margin-top: 5rem; /* More space for back button on mobile */
+  }
+
+  .story-title {
+    font-size: 2.5rem;
+  }
+  .story-subtitle {
+    font-size: 1.1rem;
+  }
+
+  /* Stack timeline events in the center */
+  .timeline::before {
+    left: 20px;
+  }
+  .timeline-event,
+  .timeline-event:nth-child(even),
+  .timeline-event:nth-child(odd) {
+    justify-content: flex-start;
+  }
+
+  .timeline-node {
+    left: 20px;
+  }
+  
+  .timeline-brief,
+  .timeline-event:nth-child(odd) .timeline-brief,
+  .timeline-event:nth-child(even) .timeline-brief {
+    width: calc(100% - 40px);
+    margin-left: 40px;
+    text-align: left;
+    padding: 0.5rem 1rem;
+  }
+
+  .brief-title {
+    font-size: 1.5rem;
+  }
+}

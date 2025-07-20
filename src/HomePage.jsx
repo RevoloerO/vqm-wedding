@@ -148,7 +148,7 @@ const OurJourney = () => (
                 {/* This is the background image next to the book */}
             </div>
             <div className="journey-book-container">
-                <Link to="/our-full-story" className="journey-book-link">
+                <Link to="/vqm-wedding/hq-storybook" className="journey-book-link">
                     <div className="journey-book">
                         <div className="journey-book-pages">
                             <div className="page-edge"></div>

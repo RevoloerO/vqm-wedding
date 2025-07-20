@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './css/base.css';
 import './css/sections.css';
 import './css/components.css';
@@ -141,36 +141,26 @@ const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
 };
 
 // Our Journey Section - Reworked as a Book
-const OurJourney = () => (
+const OurJourney = ({ onNavigate }) => (
     <section id="journey" className="page-section journey-section">
         <div className="section-content-journey">
             <div className="journey-image-container" style={{ backgroundImage: `url(${journeyImage})` }}>
                 {/* This is the background image next to the book */}
             </div>
             <div className="journey-book-container">
-                <Link to="/vqm-wedding/hq-storybook" className="journey-book-link">
+                <a href="/our-full-story" onClick={onNavigate} className="journey-book-link">
                     <div className="journey-book">
                         <div className="journey-book-pages">
-                            <div className="page-edge"></div>
-                            <div className="page-edge"></div>
-                            <div className="page-edge"></div>
+                            <div className="page-edge"></div><div className="page-edge"></div><div className="page-edge"></div>
                         </div>
                         <div className="journey-book-cover">
-                            <div
-                              className="journey-stamp-wrapper"
-                              style={{
-                                WebkitMaskImage: `url(${hqStamp2})`,
-                                maskImage: `url(${hqStamp2})`
-                              }}
-                            />
+                            <div className="journey-stamp-wrapper" style={{ WebkitMaskImage: `url(${hqStamp2})`, maskImage: `url(${hqStamp2})` }} />
                             <h2 className="journey-book-title">Our Journey</h2>
                             <p className="journey-book-subtitle">Walking together in faith and love.</p>
-                            <div className="journey-book-prompt">
-                                <span>Discover Love Story</span>
-                            </div>
+                            <div className="journey-book-prompt"><span>Discover Love Story</span></div>
                         </div>
                     </div>
-                </Link>
+                </a>
             </div>
         </div>
     </section>
@@ -422,10 +412,10 @@ const TabNavigation = ({ activeView, onViewChange }) => {
   );
 };
 
-const ViewDisplay = ({ activeView }) => {
+const ViewDisplay = ({ activeView, onStoryClick }) => {
   return (
     <div className="view-container">
-      {activeView === VIEWS.JOURNEY && <OurJourney />}
+      {activeView === VIEWS.JOURNEY && <OurJourney onNavigate={onStoryClick} />}
       {activeView === VIEWS.LOVE_PAPARAZZI && <LovePaparazziSection />}
       {activeView === VIEWS.SCHEDULE && <WeddingDaySchedule />}
       {activeView === VIEWS.PHOTOBOOK && <GuestPhotobook />}
@@ -433,6 +423,7 @@ const ViewDisplay = ({ activeView }) => {
     </div>
   );
 };
+
 
 // --- Scroll to Top Button ---
 const ScrollToTopButton = ({ isVisible }) => {
@@ -451,6 +442,19 @@ function HomePage() {
   // State to control the visibility of the AMDG tooltip on click
   const [showAmdgTooltip, setShowAmdgTooltip] = useState(false);
 
+  const [isZoomingOut, setIsZoomingOut] = useState(false);
+
+  const navigate = useNavigate();
+  const handleStoryClick = (e) => {
+    e.preventDefault(); // Prevent default link behavior
+    setIsZoomingOut(true); // Trigger the animation
+    
+    // Navigate after the animation completes
+    setTimeout(() => {
+        navigate('/vqm-wedding/hq-storybook');
+    }, 600); // This duration should match your CSS animation
+  };
+
   useEffect(() => {
     const handleScroll = () => { setShowScrollButton(window.scrollY > 300); };
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -463,11 +467,11 @@ function HomePage() {
   };
 
   return (
-    <div className="homepage-container">
+    <div className={`homepage-container ${isZoomingOut ? 'is-zooming-out' : ''}`}>
       <WelcomeBanner backgroundImage={heroBgImage} onViewChange={setActiveView} />
       <TabNavigation activeView={activeView} onViewChange={setActiveView} />
       <div className="main-content-area">
-        <ViewDisplay activeView={activeView} />
+        <ViewDisplay activeView={activeView} onStoryClick={handleStoryClick}/>
       </div>
       <footer className="footer">
         <img src={hqArt} alt="Quyen & Hien decorative art" className="footer-art" />

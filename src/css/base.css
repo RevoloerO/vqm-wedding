@@ -94,3 +94,57 @@ h2, h3, h4, h5, h6 {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* --- Homepage to Storybook Transition Animations --- */
+/* These classes are intended to be used on HomePage.jsx */
+
+@keyframes zoomInBookAnimation {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  90% {
+    transform: scale(5);
+    opacity: 1;
+  }
+
+  to {
+    height: 100vh;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInOverlayAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* This class is added to the .homepage-container on click */
+.homepage-container.is-zooming-out::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  /* Use the variable defined in base.css, with a fallback */
+  background-color: var(--color-bg, #F8F5EE); 
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeInOverlayAnimation 0.6s forwards ease-in;
+  animation-delay: 0.2s;
+}
+
+.homepage-container.is-zooming-out .journey-book {
+  position: relative; /* Make z-index work */
+  z-index: 1001;
+  animation: zoomInBookAnimation 1.2s forwards cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Disable hover effects during animation */
+.homepage-container.is-zooming-out .journey-book:hover .journey-book-cover {
+    transform: none;
+}

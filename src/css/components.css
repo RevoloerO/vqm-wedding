@@ -1,10 +1,16 @@
-/* --- BUTTONS --- */
+/* --- BUTTONS (Updated with new gold colors) --- */
 .button {
-    display: inline-block; background-color: var(--color-accent-gold);
-    color: var(--color-text-light); padding: 1rem 2.5rem; border-radius: 8px;
-    font-weight: 700; margin-top: 1rem;
+    display: inline-block; 
+    background-color: var(--color-accent-gold);
+    color: var(--color-text-light); 
+    padding: 1rem 2.5rem; 
+    border-radius: 8px;
+    font-weight: 700; 
+    margin-top: 1rem;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    text-transform: uppercase; letter-spacing: 1px; font-size: 1rem;
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    font-size: 1rem;
     border: none;
     cursor: pointer;
     font-family: var(--font-ui);
@@ -12,14 +18,27 @@
 }
 .button:hover {
     background-color: var(--color-accent-deep-gold);
-    color: var(--color-text-light); transform: translateY(-3px);
+    color: var(--color-text-light); 
+    transform: translateY(-3px);
     box-shadow: 0 7px 20px rgba(0,0,0,0.15);
 }
-.button-group { display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
+.button-group { 
+    display: flex; 
+    gap: 1rem; 
+    justify-content: center; 
+    margin-top: 1.5rem; 
+}
 
 /* --- COUNTDOWN & COUNTUP --- */
-.countdown, .countup { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
-.countdown-item, .countup { text-align: center; }
+.countdown, .countup { 
+    display: flex; 
+    justify-content: center; 
+    gap: 1.5rem; 
+    margin-top: 1rem; 
+}
+.countdown-item, .countup { 
+    text-align: center; 
+}
 .countdown-value, .countup-value {
   font-family: var(--font-heading);
   font-size: clamp(1.8rem, 3vw, 2.5rem);
@@ -28,9 +47,12 @@
 .countdown-unit, .countup-unit {
   font-family: var(--font-ui);
   font-size: clamp(0.6rem, 1vw, 0.7rem);
-  text-transform: uppercase; letter-spacing: 1px;
+  text-transform: uppercase; 
+  letter-spacing: 1px;
 }
-.countup { flex-direction: column; }
+.countup { 
+    flex-direction: column; 
+}
 
 
 /* --- STICKY TAB NAVIGATION --- */
@@ -43,7 +65,6 @@
   transition: box-shadow 0.3s ease;
   z-index: 999;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0);
-  /* MODIFICATION: Add position relative for scroll hint positioning */
   position: relative;
 }
 
@@ -53,7 +74,7 @@
 
 .tab-navbar {
     display: flex;
-    justify-content: center; /* Center align by default for desktop */
+    justify-content: center; 
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 5%;
@@ -72,7 +93,7 @@
     color: var(--color-text-dark);
     position: relative;
     transition: color 0.3s ease, background-color 0.3s ease;
-    flex-shrink: 0; /* Prevent items from shrinking on mobile */
+    flex-shrink: 0; 
 }
 
 .tab-nav-link:hover {
@@ -94,7 +115,7 @@
     background-color: var(--color-accent-gold);
 }
 
-/* --- MODIFICATION START: Scroll Hint Styles --- */
+/* --- Scroll Hint Styles --- */
 .scroll-hint {
     position: absolute;
     top: 0;
@@ -105,17 +126,15 @@
     justify-content: center;
     opacity: 0;
     transition: opacity 0.3s ease;
-    pointer-events: none; /* Make them non-interactive */
+    pointer-events: none; 
     z-index: 10;
 }
 .scroll-hint.left {
     left: 0;
-    /* MODIFICATION: Make gradient softer/wider */
     background: linear-gradient(to right, var(--color-background) 40%, transparent);
 }
 .scroll-hint.right {
     right: 0;
-    /* MODIFICATION: Make gradient softer/wider */
     background: linear-gradient(to left, var(--color-background) 40%, transparent);
 }
 .scroll-hint.visible {
@@ -125,7 +144,6 @@
     stroke: var(--color-accent-gold);
     filter: drop-shadow(0 0 3px rgba(0,0,0,0.2));
 }
-/* --- MODIFICATION END --- */
 
 
 /* --- RSVP Form --- */
@@ -168,7 +186,7 @@
 .rsvp-form input[type="text"]:focus,
 .rsvp-form textarea:focus {
     border-color: var(--color-accent-gold);
-    box-shadow: 0 0 0 4px rgba(192, 161, 114, 0.15);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15); /* Updated gold color */
     outline: none;
     background: white;
 }
@@ -235,7 +253,6 @@
     display: inline-block;
     border-bottom: 1px dotted rgba(255, 255, 255, 0.7);
     cursor: help;
-    /* Added for better click feedback */
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -273,35 +290,31 @@
     opacity: 0.8;
 }
 
-/* Show tooltip on hover for desktop */
 .amdg-wrapper:hover .amdg-tooltip {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Show tooltip on click/active for mobile (and also works on desktop) */
 .amdg-wrapper.active .amdg-tooltip {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Improve click effect for better UX */
 .amdg-wrapper.active {
-    background-color: rgba(255, 255, 255, 0.1); /* Subtle highlight on click */
-    border-radius: 4px; /* Match tooltip border radius */
-    transform: scale(1.05); /* Slight scale effect */
+    background-color: rgba(255, 255, 255, 0.1); 
+    border-radius: 4px; 
+    transform: scale(1.05);
 }
 
-/* Media query for phone screens to adjust tooltip position */
 @media (max-width: 768px) {
     .amdg-tooltip {
-        bottom: auto; /* Reset bottom positioning */
-        top: 120%; /* Position below the text */
-        left: 200%;
-        margin-left: -110px; /* Center it */
-        width: 220px; /* Keep consistent width */
+        bottom: auto; 
+        top: 120%; 
+        left: 50%;
+        margin-left: -110px; 
+        width: 220px; 
     }
 }
 

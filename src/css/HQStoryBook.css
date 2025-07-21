@@ -1,21 +1,23 @@
-/* --- Google Font Imports --- */
+/* --- Google Font Imports (Ensuring all are available) --- */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
 
-/* --- CSS Variables (Theme) --- */
+/* --- CSS Variables (Theme) - UPDATED to match base.css --- */
 :root {
   --color-bg: #F8F5EE; /* Creamy Ivory */
   --color-matcha-deep: #5F7C5D; /* Deep Matcha Green */
   --color-matcha-soft: #A3B899; /* Soft Matcha Green */
-  --color-gold: #C0A172; /* Elegant Gold */
+  --color-gold: #D4AF37; /* Brighter, vibrant Gold */
+  --color-deep-gold: #A67C00; /* Deeper, burnished Gold */
   --color-text-dark: #36454F; /* Charcoal */
   --color-text-light: #FFFFFF;
   --color-timeline-line: #e0dccc; /* Soft, earthy tone */
   --font-heading: 'Playfair Display', serif;
   --font-body: 'Cormorant Garamond', serif;
   --font-ui: 'Lato', sans-serif;
-  --font-stamp: 'Cinzel Decorative', serif;
+  --font-stamp: 'Great Vibes', cursive; /* Using accent font for the stamp */
   --transition-speed: 0.7s;
   --transition-timing: cubic-bezier(0.645, 0.045, 0.355, 1);
   --animation-duration: 1.2s;
@@ -42,21 +44,51 @@
   transform-origin: left center;
   z-index: 1000;
   display: flex;
+  flex-direction: column; /* Centering content vertically */
   justify-content: center;
   align-items: center;
   backface-visibility: hidden; /* Hide the back of the cover when it flips */
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
-.book-stamp {
-  font-family: var(--font-stamp);
-  font-size: 10vw;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.15);
-  border: 5px solid rgba(255, 255, 255, 0.15);
-  padding: 2rem 3rem;
-  border-radius: 8px;
-  user-select: none;
+/* Updated book cover title to use accent font */
+.book-cover .journey-book-title {
+    font-family: var(--font-stamp);
+    font-size: 6rem;
+    color: white;
+    margin: 0;
+    line-height: 1;
 }
+
+.book-cover .journey-book-subtitle {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 1.5rem 0;
+}
+
+.book-cover .journey-stamp-wrapper {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1rem;
+    background: linear-gradient(100deg, #c8c8c8, #f8f8f8, #c8c8c8);
+    background-size: 200% 100%;
+    animation: silver-shimmer-animation 8s infinite linear;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+@keyframes silver-shimmer-animation {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
 
 /* --- Keyframe Animations --- */
 @keyframes open-book {

@@ -16,27 +16,26 @@ html {
   box-sizing: inherit;
 }
 
-/* --- MATCHA LATTE THEME (Refined) --- */
+/* --- MATCHA LATTE THEME (Refined & Updated) --- */
 :root {
-  /* Palette: Matcha, Cream, Gold, and Charcoal */
-  /* Updated for "Matcha & Gold Harmony" */
+  /* Palette: Matcha, Cream, Gold, and Charcoal - UPDATED */
   --color-background: #F8F5EE; /* Creamy Ivory */
   --color-primary-matcha: #5F7C5D; /* Deep Matcha Green */
-  --color-secondary-cream: #F8F5EE; /* Creamy Ivory (used for various backgrounds) */
-  --color-accent-gold: #D4AF37; /* Bright Gold */
-  --color-accent-deep-gold: #A67C00; /* Antiqued Gold (darker for hover/accents) */
+  --color-secondary-cream: #FDFBF5; /* Slightly different creamy tone for cards/sections */
+  --color-accent-gold: #D4AF37; /* Brighter, vibrant Gold */
+  --color-accent-deep-gold: #A67C00; /* Deeper, burnished Gold for hover/accents */
   --color-text-dark: #36454F; /* Charcoal */
   --color-text-light: #FFFFFF; /* White */
-  --color-newspaper-bg: #FDFBF5; /* Slightly different creamy tone for newspaper background */
-  --color-newspaper-border: #C8B8A0; /* Light brown/gold for newspaper border */
+  --color-newspaper-bg: #FDFBF5; 
+  --color-newspaper-border: #C8B8A0;
 
   /* --- UPDATED FONT PALETTE --- */
   --font-display: 'Great Vibes', cursive; /* For the most prominent banner text */
   --font-heading: 'Playfair Display', serif; /* For all section and card titles */
   --font-body: 'Cormorant Garamond', serif; /* For all paragraphs and descriptive text */
   --font-ui: 'Lato', sans-serif; /* For buttons, nav, labels, and secondary details */
-  --font-logo: 'Cinzel Decorative', serif; /* Unchanged */
-  --font-newspaper-headline: 'Uncial Antiqua', cursive; /* NEW: Newspaper headline font */
+  --font-logo: 'Cinzel Decorative', serif;
+  --font-newspaper-headline: 'Uncial Antiqua', cursive;
 }
 
 /* --- GENERAL STYLES --- */
@@ -47,8 +46,8 @@ body {
   font-family: var(--font-body); /* Default to the elegant body font */
   margin: 0;
   padding: 0;
-  line-height: 1.7; /* Increased line-height for better readability with serif */
-  font-size: 17px; /* Slightly larger base font size for readability */
+  line-height: 1.7; 
+  font-size: 17px; 
 }
 
 /* Apply heading font consistently */
@@ -129,9 +128,10 @@ h2, h3, h4, h5, h6 {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
   height: 100vh;
   /* Use the variable defined in base.css, with a fallback */
-  background-color: var(--color-bg, #F8F5EE); 
+  background-color: var(--color-background, #F8F5EE); 
   z-index: 1000;
   opacity: 0;
   animation: fadeInOverlayAnimation 0.6s forwards ease-in;

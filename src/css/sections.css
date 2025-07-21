@@ -134,6 +134,7 @@
     text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
 }
 
+/* MODIFIED: Using the new --font-display variable */
 .welcome-banner-names {
     font-family: var(--font-display);
     font-size: 6rem;

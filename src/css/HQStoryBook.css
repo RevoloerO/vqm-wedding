@@ -25,29 +25,28 @@
 
 /* --- Book Animation Wrapper --- */
 .hq-story-book-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   perspective: 2500px;
   background-color: var(--color-bg);
+  overflow-x: hidden;
 }
 
 .book-cover {
-  position: absolute;
+  position: fixed; /* MODIFIED: Use fixed to ensure it covers the viewport during animation */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: var(--color-matcha-deep);
   transform-origin: left center;
-  z-index: 1000;
+  z-index: 2000; /* Highest z-index */
   display: flex;
-  flex-direction: column; /* Centering content vertically */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  backface-visibility: hidden; /* Hide the back of the cover when it flips */
+  backface-visibility: hidden;
   padding: 2rem;
   box-sizing: border-box;
 }
@@ -101,6 +100,17 @@
   100% { transform: rotateY(0deg); }
 }
 
+@keyframes eventFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* --- Applying Animations --- */
 .hq-story-book-wrapper.entering .book-cover {
   animation: open-book var(--animation-duration) forwards cubic-bezier(0.6, 0.0, 0.4, 1.0);
@@ -110,7 +120,6 @@
   animation: close-book var(--animation-duration) forwards cubic-bezier(0.6, 0.0, 0.4, 1.0);
 }
 
-/* Hide cover when book is open */
 .hq-story-book-wrapper.entered .book-cover {
   transform: rotateY(-180deg);
   pointer-events: none;
@@ -119,16 +128,16 @@
 /* --- Main Container --- */
 .hq-story-container {
   display: flex;
-  min-height: 100vh;
   width: 100%;
   background-color: var(--color-bg);
   font-family: var(--font-body);
   color: var(--color-text-dark);
-  transition: background-color var(--transition-speed) var(--transition-timing);
-  overflow: hidden; /* Prevent scrollbars during transition */
   opacity: 0;
   animation: fadeInContent calc(var(--animation-duration) * 0.5) ease-in forwards;
   animation-delay: calc(var(--animation-duration) * 0.3);
+  /* MODIFIED: Set height to 100vh for sticky positioning context on desktop */
+  height: 100vh;
+  overflow: hidden; /* Hide overflow on the container */
 }
 
 @keyframes fadeInContent {
@@ -144,26 +153,23 @@
 .timeline-column {
   width: 100%;
   padding: 4rem 2rem;
-  flex-shrink: 0; /* Prevent from shrinking */
-  transition: width var(--transition-speed) var(--transition-timing), 
-              transform var(--transition-speed) var(--transition-timing);
+  flex-shrink: 0;
+  transition: width var(--transition-speed) var(--transition-timing);
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* MODIFIED: Make this column scrollable */
   overflow-y: auto;
 }
 
 /* --- Back to Home Button --- */
 .back-to-home-btn {
-  position: absolute;
+  position: fixed;
   top: 2rem;
   left: 2rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1.2rem;
-  background-color: transparent;
+  background-color: var(--color-bg);
   border: 2px solid var(--color-gold);
   color: var(--color-gold);
   border-radius: 50px;
@@ -171,7 +177,7 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  z-index: 20;
+  z-index: 1010;
   transition: all 0.3s ease;
 }
 
@@ -190,7 +196,7 @@
 .timeline-header {
   text-align: center;
   margin-bottom: 3rem;
-  margin-top: 3rem; /* Add margin to avoid overlap with back button */
+  margin-top: 3rem;
 }
 
 .story-title {
@@ -214,9 +220,10 @@
   position: relative;
   max-width: 600px;
   width: 100%;
+  margin: 0 auto; /* Center the timeline content */
+  padding-bottom: 4rem;
 }
 
-/* The actual timeline line */
 .timeline::before {
   content: '';
   position: absolute;
@@ -236,13 +243,21 @@
   cursor: pointer;
   display: flex;
   justify-content: center;
+  opacity: 0;
+  /* MODIFIED: Adjusted animation for a smoother feel */
+  animation: eventFadeInUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-.timeline-event:last-child {
-  margin-bottom: 0;
-}
+/* MODIFIED: Adjusted delays for a better rhythm */
+.timeline-event:nth-child(1) { animation-delay: 0.2s; }
+.timeline-event:nth-child(2) { animation-delay: 0.4s; }
+.timeline-event:nth-child(3) { animation-delay: 0.6s; }
+.timeline-event:nth-child(4) { animation-delay: 0.8s; }
+.timeline-event:nth-child(5) { animation-delay: 1.0s; }
 
-/* The circle on the timeline */
+
+.timeline-event:last-child { margin-bottom: 0; }
+
 .timeline-node {
   position: absolute;
   top: 50%;
@@ -265,29 +280,17 @@
   box-shadow: 0 0 0 6px var(--color-bg), 0 0 15px rgba(0,0,0,0.1);
 }
 
-/* Brief event info */
 .timeline-brief {
   padding: 1rem 2rem;
   background-color: transparent;
   border-radius: 8px;
-  width: calc(50% - 40px); /* Half width minus spacing */
+  width: calc(50% - 40px);
   transition: transform 0.3s ease;
 }
 
-.timeline-event:hover .timeline-brief {
-    transform: translateY(-5px);
-}
-
-/* Position events on alternating sides */
-.timeline-event:nth-child(odd) .timeline-brief {
-  margin-right: auto;
-  text-align: right;
-}
-
-.timeline-event:nth-child(even) .timeline-brief {
-  margin-left: auto;
-  text-align: left;
-}
+.timeline-event:hover .timeline-brief { transform: translateY(-5px); }
+.timeline-event:nth-child(odd) .timeline-brief { margin-right: auto; text-align: right; }
+.timeline-event:nth-child(even) .timeline-brief { margin-left: auto; text-align: left; }
 
 .brief-date {
   font-family: var(--font-ui);
@@ -312,32 +315,36 @@
   background-color: var(--color-text-dark);
   color: var(--color-text-light);
   opacity: 0;
-  transform: translateX(50px);
   transition: width var(--transition-speed) var(--transition-timing),
-              opacity calc(var(--transition-speed) * 0.8) ease-in-out calc(var(--transition-speed) * 0.2),
-              transform var(--transition-speed) var(--transition-timing);
-  position: relative;
+              opacity calc(var(--transition-speed) * 0.8) ease-in-out calc(var(--transition-speed) * 0.2);
+  position: sticky;
+  top: 0;
+  height: 100vh;
   overflow-y: auto;
+  z-index: 1005;
 }
 
 .detail-content-wrapper {
   display: flex;
-  height: 100vh;
+  min-height: 100%;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
 
 .detail-image-container {
   width: 50%;
-  height: 100vh;
   flex-shrink: 0;
+  overflow: hidden;
 }
 
 .detail-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease-out;
 }
+
+.detail-image-container:hover .detail-image { transform: scale(1.05); }
 
 .detail-text-container {
   padding: 4rem;
@@ -385,24 +392,11 @@
   z-index: 10;
 }
 
-.close-button:hover {
-  opacity: 1;
-  transform: scale(1.2);
-}
-
+.close-button:hover { opacity: 1; transform: scale(1.2); }
 
 /* --- Active State Transition --- */
-.hq-story-container.detail-view-active .timeline-column {
-  width: 40%;
-  transform: translateX(0); /* Keep it from being pushed */
-}
-
-.hq-story-container.detail-view-active .detail-column {
-  width: 60%;
-  opacity: 1;
-  transform: translateX(0);
-}
-
+.hq-story-container.detail-view-active .timeline-column { width: 40%; }
+.hq-story-container.detail-view-active .detail-column { width: 60%; opacity: 1; }
 .hq-story-container.detail-view-active .detail-content-wrapper {
     opacity: 1;
     transition-delay: calc(var(--transition-speed) * 0.5);
@@ -410,45 +404,55 @@
 
 /* --- Responsive Design --- */
 @media (max-width: 1024px) {
-  .timeline-column,
-  .hq-story-container.detail-view-active .timeline-column {
-    width: 100%;
-    transform: translateX(0);
+  /* Revert container to normal flow for mobile scrolling */
+  .hq-story-container {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    display: block;
   }
 
+  .timeline-column {
+    overflow-y: visible;
+    width: 100% !important;
+  }
+
+  .hq-story-container.detail-view-active .timeline-column {
+    filter: blur(5px);
+  }
+
+  /* Detail column becomes a fixed overlay on mobile */
   .detail-column {
-    position: fixed; /* Overlay on top */
+    width: 100% !important;
+    transform: translateX(100%);
+    position: fixed;
     top: 0;
     right: 0;
-    height: 100vh;
-    width: 100%;
-    transform: translateX(100%);
-    z-index: 100;
+    transition: transform var(--transition-speed) var(--transition-timing);
   }
   
   .hq-story-container.detail-view-active .detail-column {
-    width: 100%;
     transform: translateX(0);
+    opacity: 1;
   }
 
   .detail-content-wrapper {
     flex-direction: column;
-    height: 100%;
+    height: auto;
+    min-height: 100vh;
   }
 
   .detail-image-container {
     width: 100%;
-    height: 40vh; /* Fixed height for image */
+    height: 40vh;
   }
 
   .detail-text-container {
-    height: 60vh;
+    height: auto;
     padding: 2rem;
   }
   
-  .detail-title {
-    font-size: 2.5rem;
-  }
+  .detail-title { font-size: 2.5rem; }
 }
 
 @media (max-width: 768px) {
@@ -459,30 +463,19 @@
     font-size: 0.9rem;
   }
 
-  .timeline-header {
-    margin-top: 5rem; /* More space for back button on mobile */
-  }
+  .timeline-header { margin-top: 5rem; }
+  .story-title { font-size: 2.5rem; }
+  .story-subtitle { font-size: 1.1rem; }
 
-  .story-title {
-    font-size: 2.5rem;
-  }
-  .story-subtitle {
-    font-size: 1.1rem;
-  }
-
-  /* Stack timeline events in the center */
-  .timeline::before {
-    left: 20px;
-  }
+  /* Stack timeline events to the left on mobile */
+  .timeline::before { left: 20px; }
   .timeline-event,
   .timeline-event:nth-child(even),
   .timeline-event:nth-child(odd) {
     justify-content: flex-start;
   }
 
-  .timeline-node {
-    left: 20px;
-  }
+  .timeline-node { left: 20px; }
   
   .timeline-brief,
   .timeline-event:nth-child(odd) .timeline-brief,
@@ -493,7 +486,5 @@
     padding: 0.5rem 1rem;
   }
 
-  .brief-title {
-    font-size: 1.5rem;
-  }
+  .brief-title { font-size: 1.5rem; }
 }

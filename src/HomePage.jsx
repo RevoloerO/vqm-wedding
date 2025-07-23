@@ -315,11 +315,10 @@ const GuestPhotobook = () => (
 );
 
 // RSVP Form Section
-const RsvpForm = () => {
+const RsvpForm = ({ churchCeremony, weddingParty }) => {
     const [formData, setFormData] = useState({ name: '', attending: '', attendingChurch: false, attendingParty: false, song: '', message: '' });
     const [submitted, setSubmitted] = useState(false);
-    const churchCeremony = { title: "Wedding Ceremony of Quyen & Hien", startDate: '20280701T140000', endDate: '20280701T150000', location: 'St. Joseph Cathedral, 212 E Broad St, Columbus, OH 43215', description: "The sacred union of Quyen Mai & Hien Dang." };
-    const weddingParty = { title: "Wedding Party for Quyen & Hien", startDate: '20280701T180000', endDate: '20280701T230000', location: 'The Westin Great Southern Columbus, 310 S High St, Columbus, OH 43215', description: "Join us for a night of dinner, dancing, and celebration!" };
+    
     const createGoogleCalendarUrl = (event) => `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.startDate}/${event.endDate}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`;
     const createIcsUrl = (event) => `data:text/calendar;charset=utf8,${encodeURIComponent(`BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nURL:${window.location.href}\nDTSTART:${event.startDate}\nDTEND:${event.endDate}\nSUMMARY:${event.title}\nDESCRIPTION:${event.description}\nLOCATION:${event.location}\nEND:VEVENT\nEND:VCALENDAR`)}`;
     const handleChange = (e) => { const { name, value, type, checked } = e.target; setFormData(prevData => ({ ...prevData, [name]: type === 'checkbox' ? checked : value })); };
@@ -353,7 +352,7 @@ const RsvpForm = () => {
 const TabNavigation = ({ activeView, onViewChange }) => {
   const navRef = useRef(null);
   const [showLeftHint, setShowLeftHint] = useState(false);
-  const [showRightHint, setShowRightHint] = useState(false); // Corrected typo here
+  const [showRightHint, setShowRightHint] = useState(false);
 
   const navItems = [
       { id: VIEWS.JOURNEY, label: 'Our Journey' },
@@ -412,14 +411,14 @@ const TabNavigation = ({ activeView, onViewChange }) => {
   );
 };
 
-const ViewDisplay = ({ activeView, onStoryClick }) => {
+const ViewDisplay = ({ activeView, onStoryClick, events }) => {
   return (
     <div className="view-container">
       {activeView === VIEWS.JOURNEY && <OurJourney onNavigate={onStoryClick} />}
       {activeView === VIEWS.LOVE_PAPARAZZI && <LovePaparazziSection />}
       {activeView === VIEWS.SCHEDULE && <WeddingDaySchedule />}
       {activeView === VIEWS.PHOTOBOOK && <GuestPhotobook />}
-      {activeView === VIEWS.RSVP && <RsvpForm />}
+      {activeView === VIEWS.RSVP && <RsvpForm {...events} />}
     </div>
   );
 };
@@ -439,20 +438,22 @@ const ScrollToTopButton = ({ isVisible }) => {
 function HomePage() {
   const [activeView, setActiveView] = useState(VIEWS.JOURNEY);
   const [showScrollButton, setShowScrollButton] = useState(false);
-  // State to control the visibility of the AMDG tooltip on click
   const [showAmdgTooltip, setShowAmdgTooltip] = useState(false);
-
   const [isZoomingOut, setIsZoomingOut] = useState(false);
-
   const navigate = useNavigate();
+
+  // Define event details here to be passed as props
+  const eventDetails = {
+    churchCeremony: { title: "Wedding Ceremony of Quyen & Hien", startDate: '20280701T140000', endDate: '20280701T150000', location: 'St. Joseph Cathedral, 212 E Broad St, Columbus, OH 43215', description: "The sacred union of Quyen Mai & Hien Dang." },
+    weddingParty: { title: "Wedding Party for Quyen & Hien", startDate: '20280701T180000', endDate: '20280701T230000', location: 'The Westin Great Southern Columbus, 310 S High St, Columbus, OH 43215', description: "Join us for a night of dinner, dancing, and celebration!" }
+  };
+
   const handleStoryClick = (e) => {
-    e.preventDefault(); // Prevent default link behavior
-    setIsZoomingOut(true); // Trigger the animation
-    
-    // Navigate after the animation completes
+    e.preventDefault();
+    setIsZoomingOut(true);
     setTimeout(() => {
         navigate('/vqm-wedding/hq-storybook');
-    }, 600); // This duration should match your CSS animation
+    }, 600);
   };
 
   useEffect(() => {
@@ -461,7 +462,6 @@ function HomePage() {
     return () => { window.removeEventListener('scroll', handleScroll); };
   }, []);
 
-  // Function to toggle AMDG tooltip visibility
   const toggleAmdgTooltip = () => {
     setShowAmdgTooltip(prev => !prev);
   };
@@ -471,12 +471,15 @@ function HomePage() {
       <WelcomeBanner backgroundImage={heroBgImage} onViewChange={setActiveView} />
       <TabNavigation activeView={activeView} onViewChange={setActiveView} />
       <div className="main-content-area">
-        <ViewDisplay activeView={activeView} onStoryClick={handleStoryClick}/>
+        <ViewDisplay 
+            activeView={activeView} 
+            onStoryClick={handleStoryClick}
+            events={eventDetails}
+        />
       </div>
       <footer className="footer">
         <img src={hqArt} alt="Quyen & Hien decorative art" className="footer-art" />
         <p>
-            {/* Add onClick handler and conditional class to amdg-wrapper */}
             <span 
                 className={`amdg-wrapper ${showAmdgTooltip ? 'active' : ''}`} 
                 onClick={toggleAmdgTooltip}

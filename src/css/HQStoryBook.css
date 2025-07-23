@@ -113,11 +113,11 @@
 
 /* --- Applying Animations --- */
 .hq-story-book-wrapper.entering .book-cover {
-  animation: open-book var(--animation-duration) forwards cubic-bezier(0.6, 0.0, 0.4, 1.0);
+  animation: open-book var(--animation-duration) forwards var(--transition-timing);
 }
 
 .hq-story-book-wrapper.exiting .book-cover {
-  animation: close-book var(--animation-duration) forwards cubic-bezier(0.6, 0.0, 0.4, 1.0);
+  animation: close-book var(--animation-duration) forwards var(--transition-timing);
 }
 
 .hq-story-book-wrapper.entered .book-cover {
@@ -246,6 +246,7 @@
   opacity: 0;
   /* MODIFIED: Adjusted animation for a smoother feel */
   animation: eventFadeInUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  transition: transform 0.3s ease, filter 0.3s ease; /* Added for active state */
 }
 
 /* MODIFIED: Adjusted delays for a better rhythm */
@@ -417,8 +418,17 @@
     width: 100% !important;
   }
 
+  /* --- IMPROVEMENT: Blur inactive items on mobile when detail is active --- */
   .hq-story-container.detail-view-active .timeline-column {
     filter: blur(5px);
+    transition: filter 0.5s ease-out;
+  }
+
+  /* --- IMPROVEMENT: Keep active item in focus --- */
+  .hq-story-container.detail-view-active .timeline-event.active {
+      filter: blur(0);
+      transform: scale(1.03);
+      z-index: 5; /* Ensure it's above the blur */
   }
 
   /* Detail column becomes a fixed overlay on mobile */

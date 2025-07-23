@@ -248,12 +248,25 @@
 }
 
 /* --- AMDG TOOLTIP --- */
+/* MODIFICATION: Changed to a button, so styles are added to reset its appearance */
 .amdg-wrapper {
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted rgba(255, 255, 255, 0.7);
     cursor: help;
     transition: background-color 0.2s ease, transform 0.2s ease;
+
+    /* Reset button styles to make it look like text */
+    background: transparent;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    line-height: inherit;
 }
 
 .amdg-tooltip {

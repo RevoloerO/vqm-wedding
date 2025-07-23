@@ -1,0 +1,92 @@
+/* --- GUEST BOOK / WELL WISHES SECTION --- */
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+
+.guestbook-section {
+    background: var(--color-secondary-cream);
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    max-width: 1100px;
+    margin: 4rem auto;
+    text-align: center;
+}
+
+.guestbook-intro {
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    font-style: italic;
+}
+
+.guestbook-messages-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    justify-content: center;
+}
+
+.message-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border: 1px solid var(--color-newspaper-border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    transform: rotate(calc(var(--random-rotate) * 1deg)); /* Apply random rotation */
+}
+
+.message-card:hover {
+    transform: translateY(-5px) scale(1.03) rotate(calc(var(--random-rotate) * 0.5deg));
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+/* Assign random rotation to each card for a scattered look */
+.message-card:nth-child(6n+1) { --random-rotate: -2; }
+.message-card:nth-child(6n+2) { --random-rotate: 1.5; }
+.message-card:nth-child(6n+3) { --random-rotate: -1; }
+.message-card:nth-child(6n+4) { --random-rotate: 2.5; }
+.message-card:nth-child(6n+5) { --random-rotate: -0.5; }
+.message-card:nth-child(6n+6) { --random-rotate: 1; }
+
+
+.message-text {
+    font-family: 'Kalam', cursive;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--color-text-dark);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.message-author {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--color-accent-gold);
+    text-align: right;
+    margin: 0;
+    line-height: 1;
+}
+
+/* Add a subtle "taped" effect */
+.message-card::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 25px;
+    background-color: rgba(212, 175, 55, 0.2);
+    border-left: 1px solid rgba(212, 175, 55, 0.3);
+    border-right: 1px solid rgba(212, 175, 55, 0.3);
+    opacity: 0.7;
+    transform: translateX(-50%) rotate(-3deg);
+}

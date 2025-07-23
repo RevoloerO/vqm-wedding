@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './css/HQStoryBook.css';
 import hqStamp2 from './assets/HQ-stamp-2-nobg.png'; 
 // Import story data from the new external file
-import { storyEvents } from './storyData.js';
+import { storyEvents } from './data/storyData.js';
 
 const ANIMATION_DURATION = 1200; // Corresponds to CSS animation duration
 

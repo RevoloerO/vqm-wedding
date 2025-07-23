@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './css/base.css';
 import './css/sections.css';
 import './css/components.css';
 import './css/responsive.css';
+import './css/GuestBook.css'; // Import the new CSS file
 
 // --- ASSET IMPORT ---
 import heroBgImage from './assets/bg-2.jpeg';
@@ -13,12 +14,16 @@ import hqStamp2 from './assets/HQ-stamp-2-nobg.png'; // Circular Stamp
 import hqStamp3 from './assets/HQ-stamp-3-nobg.png'; // New stamp for schedule
 import hqArt from './assets/HQ-art.png'; // Footer Art
 
+// --- LAZY LOAD COMPONENTS ---
+const GuestBook = lazy(() => import('./GuestBook'));
+
 // --- CONSTANTS ---
 const VIEWS = {
   JOURNEY: 'journey',
   LOVE_PAPARAZZI: 'love_paparazzi',
   SCHEDULE: 'schedule',
   PHOTOBOOK: 'photobook',
+  WELL_WISHES: 'well_wishes', // New view for GuestBook
   RSVP: 'rsvp',
 };
 
@@ -359,6 +364,7 @@ const TabNavigation = ({ activeView, onViewChange }) => {
       { id: VIEWS.LOVE_PAPARAZZI, label: 'Love Paparazzi' },
       { id: VIEWS.SCHEDULE, label: 'Schedule' },
       { id: VIEWS.PHOTOBOOK, label: 'Photobook' },
+      { id: VIEWS.WELL_WISHES, label: 'Well Wishes' }, // New Tab
       { id: VIEWS.RSVP, label: 'RSVP' }
   ];
   
@@ -418,6 +424,7 @@ const ViewDisplay = ({ activeView, onStoryClick, events }) => {
       {activeView === VIEWS.LOVE_PAPARAZZI && <LovePaparazziSection />}
       {activeView === VIEWS.SCHEDULE && <WeddingDaySchedule />}
       {activeView === VIEWS.PHOTOBOOK && <GuestPhotobook />}
+      {activeView === VIEWS.WELL_WISHES && <GuestBook />}
       {activeView === VIEWS.RSVP && <RsvpForm {...events} />}
     </div>
   );
@@ -471,25 +478,28 @@ function HomePage() {
       <WelcomeBanner backgroundImage={heroBgImage} onViewChange={setActiveView} />
       <TabNavigation activeView={activeView} onViewChange={setActiveView} />
       <div className="main-content-area">
-        <ViewDisplay 
-            activeView={activeView} 
-            onStoryClick={handleStoryClick}
-            events={eventDetails}
-        />
+        <Suspense fallback={<div className="loading-fallback">Loading...</div>}>
+            <ViewDisplay 
+                activeView={activeView} 
+                onStoryClick={handleStoryClick}
+                events={eventDetails}
+            />
+        </Suspense>
       </div>
       <footer className="footer">
         <img src={hqArt} alt="Quyen & Hien decorative art" className="footer-art" />
         <p>
-            <span 
+            <button 
                 className={`amdg-wrapper ${showAmdgTooltip ? 'active' : ''}`} 
                 onClick={toggleAmdgTooltip}
+                aria-describedby="amdg-tooltip"
             >
                 AMDG
-                <span className="amdg-tooltip">
+                <span className="amdg-tooltip" id="amdg-tooltip" role="tooltip">
                     <strong>Ad Majorem Dei Gloriam</strong>
                     <em>"for the greater glory of God"</em>
                 </span>
-            </span>
+            </button>
             &nbsp;|&nbsp;Made with love by Quyen & Hien&nbsp;|&nbsp;2028
         </p>
       </footer>

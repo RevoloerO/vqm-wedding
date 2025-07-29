@@ -197,6 +197,8 @@ const LovePaparazziSection = () => {
                     <a href="#article-cord">The Three-Strand Cord</a>
                     <span className="article-nav-divider">|</span>
                     <a href="#article-moon">A Celestial Sync</a>
+                    <span className="article-nav-divider">|</span>
+                    <a href="#article-ring">A Ring With Purpose</a>
                 </nav>
 
                 <div id="article-cord" className="cross-newspaper-article">
@@ -276,6 +278,46 @@ const LovePaparazziSection = () => {
                         <p className="moon-summary">
                             How incredible that as one moon (Waning Crescent) embraces reflection and prepares for rest, the other (Waxing Gibbous) diligently grows towards its fullest potential! When combined, your individual moon energies beautifully align to form a <b>Full Moon</b> 🌕—a symbol of <b>completion, illumination, and profound unity</b>. It's a celestial reminder that together, your spirits create a harmonious, radiant, and complete cycle of love.
                         </p>
+                    </div>
+                </div>
+
+                {/* Stamp between the articles */}
+                <div className="love-paparazzi-stamp-container">
+                    <img src={hqStamp2} alt="Quyen & Hien Stamp" className="love-paparazzi-stamp" style={{width: "120px", transform: 'translate(-50%, -50%) rotate(5deg)'}} />
+                </div>
+
+                {/* NEW: Ring Article */}
+                <div id="article-ring" className="cross-newspaper-article">
+                    <h2 className="article-headline">Our Ring: A Vow of Love, A Well of Life</h2>
+                    <div className="article-content ring-article-layout">
+                        <div className="article-column-visual">
+                            <div className="ring-image-placeholder">
+                                <img 
+                                    src="https://placehold.co/400x500/e0dccc/36454F?text=Our+Ring" 
+                                    alt="Our engagement ring" 
+                                    className="ring-image"
+                                    onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/400x500/cccccc/ffffff?text=Image+Coming+Soon'; }}
+                                />
+                            </div>
+                            <p className="explanation-scripture" style={{textAlign: 'center', background: 'transparent', padding: '1rem 0'}}><em>"For where your treasure is, there your heart will be also."<br/>— Matthew 6:21</em></p>
+                        </div>
+                        <div className="article-column-text">
+                            <div className="article-paragraph">
+                                <h4 className="article-paragraph-title">A Symbol with Substance</h4>
+                                <p>When we began searching for an engagement ring, we knew we wanted it to represent more than just our commitment to each other. We wanted it to reflect our shared values and our desire to contribute to a world filled with more love and care. That's when we discovered Do Amore, a brand whose name means "I Give with Love."</p>
+                            </div>
+                             <div className="article-paragraph">
+                                <h4 className="article-paragraph-title">Love's Ripple Effect</h4>
+                                <p>With every ring they create, Do Amore helps bring clean water to a person in need by partnering with charity: water. The very ring that symbolizes the start of our new life together has also created a ripple of change, providing essential, life-sustaining water for a community. It’s a profound reminder that our love can extend far beyond ourselves.</p>
+                            </div>
+                             <div className="article-paragraph">
+                                <h4 className="article-paragraph-title">A Promise for a Better World</h4>
+                                <p>This ring is not just a circle of precious metal and stone; it's a circle of compassion. It serves as a daily reminder of our promise to each other and our shared commitment to live a life of purpose, to love generously, and to be a force for good in the world. We are so grateful to begin our marriage with a symbol that so beautifully encapsulates this hope.</p>
+                            </div>
+                             <div className="article-paragraph article-source-link">
+                                <p>Learn more about the impact at the <a href="https://www.doamore.com/impact" target="_blank" rel="noopener noreferrer">Do Amore website</a>.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -803,6 +803,40 @@
     transform: translateX(-100%);
 }
 
+/* --- NEW: Ring Article Styles --- */
+.cross-newspaper-article {
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 2px solid var(--color-newspaper-border);
+}
+
+.ring-article-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.ring-image-placeholder {
+    width: 100%;
+    border: 1px solid var(--color-newspaper-border);
+    padding: 8px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transform: rotate(-3deg);
+    transition: transform 0.3s ease;
+}
+
+.ring-image-placeholder:hover {
+    transform: rotate(0deg) scale(1.05);
+}
+
+.ring-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 
 /* --- Reworked Wedding Day Schedule Section (Timeline) --- */
 .schedule-section {
@@ -991,6 +1025,19 @@
     margin-bottom: 1rem;
     filter: brightness(0) invert(1) opacity(0.9);
 }
+
+@media (max-width: 900px) {
+    /* Responsive adjustments for ring article */
+    .ring-article-layout {
+        grid-template-columns: 1fr; /* Stack on smaller screens */
+    }
+    .ring-image-placeholder {
+        max-width: 250px;
+        margin: 0 auto 2rem auto; /* Center the image when stacked */
+        transform: rotate(0deg);
+    }
+}
+
 
 @media (max-width: 768px) {
     .moon-person-fact {

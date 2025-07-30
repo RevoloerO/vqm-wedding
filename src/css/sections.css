@@ -1,40 +1,41 @@
 /* --- Welcome Banner Section --- */
 .welcome-banner-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 2rem 20px;
-  color: var(--color-text-light);
-  position: relative;
-  overflow: hidden;
-  min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 20px;
+    color: var(--color-text-light);
+    position: relative;
+    overflow: hidden;
+    min-height: 80vh;
 }
 
-.welcome-banner-background-blur, .welcome-banner-background-clear {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-position: center;
-  transition: opacity 0.5s ease-out, background-size 0.5s ease-out;
+.welcome-banner-background-blur,
+.welcome-banner-background-clear {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    transition: opacity 0.5s ease-out, background-size 0.5s ease-out;
 }
 
 .welcome-banner-background-blur {
-  z-index: -2;
-  filter: blur(20px);
-  transform: scale(1.1);
-  animation: zoomEffect 40s ease-in-out infinite;
-  will-change: opacity, transform, filter;
+    z-index: -2;
+    filter: blur(20px);
+    transform: scale(1.1);
+    animation: zoomEffect 40s ease-in-out infinite;
+    will-change: opacity, transform, filter;
 }
 
 .welcome-banner-background-clear {
-  z-index: -1;
-  background-size: contain;
-  background-repeat: no-repeat;
-  will-change: background-size;
+    z-index: -1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    will-change: background-size;
 }
 
 .welcome-banner-section::after {
@@ -44,7 +45,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
     z-index: 0;
 }
 
@@ -69,9 +70,11 @@
 .welcome-banner-section:hover .welcome-banner-background-blur {
     opacity: 0;
 }
+
 .welcome-banner-section:hover .welcome-banner-background-clear {
     background-size: cover;
 }
+
 .welcome-banner-section:hover .welcome-banner-content {
     background-color: rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(0);
@@ -79,9 +82,17 @@
 }
 
 @keyframes zoomEffect {
-    0% { transform: scale(1.1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1.1); }
+    0% {
+        transform: scale(1.1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
 }
 
 /* --- Cross Design --- */
@@ -105,7 +116,7 @@
     height: 100%;
     fill: none;
     stroke: var(--color-background);
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
     transition: stroke 0.5s ease-out, filter 0.5s ease-out, fill 0.5s ease-out;
 }
 
@@ -117,10 +128,9 @@
 .welcome-banner-section:hover .cross-design svg {
     stroke: rgba(255, 255, 255, 1);
     filter:
-        drop-shadow(0 0 5px rgba(255, 255, 255, 0.9))
-        drop-shadow(0 0 15px rgba(255, 255, 255, 0.7))
-        drop-shadow(0 0 25px var(--color-accent-gold, #C0A172));
+        drop-shadow(0 0 5px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 25px var(--color-accent-gold, #C0A172));
 }
+
 .welcome-banner-section:hover .cross-design svg .accent-circle {
     fill: rgba(255, 255, 255, 1);
 }
@@ -129,9 +139,10 @@
     display: none;
 }
 
-.welcome-banner-content h1, .welcome-banner-content h2 {
+.welcome-banner-content h1,
+.welcome-banner-content h2 {
     color: var(--color-text-light);
-    text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
 }
 
 /* MODIFIED: Using the new --font-display variable */
@@ -141,15 +152,15 @@
     font-weight: 400;
     line-height: 1;
     margin-bottom: 0.5rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3), 0 0 10px rgba(255,255,255,0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .welcome-banner-details {
-  font-family: var(--font-ui);
-  font-size: clamp(1rem, 1.8vw, 1.4rem);
-  font-weight: 400;
-  letter-spacing: 1px;
-  margin: 1rem 0;
+    font-family: var(--font-ui);
+    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 1rem 0;
 }
 
 .welcome-banner-blessing {
@@ -165,20 +176,40 @@
 .blessing-text {
     font-family: var(--font-body);
     font-size: clamp(1.1rem, 1.5vw, 1.4rem);
-    font-style: italic; color: var(--color-text-light); line-height: 1.4;
+    font-style: italic;
+    color: var(--color-text-light);
+    line-height: 1.4;
     margin: 0;
 }
+
 .blessing-source {
     font-family: var(--font-ui);
     font-size: 0.9rem;
-    color: var(--color-text-light); margin-top: 0.5rem; opacity: 0.8;
+    color: var(--color-text-light);
+    margin-top: 0.5rem;
+    opacity: 0.8;
 }
-.fade-in-out { animation: fadeInOut 7s infinite; }
+
+.fade-in-out {
+    animation: fadeInOut 7s infinite;
+}
+
 @keyframes fadeInOut {
-    0% { opacity: 0; }
-    14% { opacity: 1; }
-    86% { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 0;
+    }
+
+    14% {
+        opacity: 1;
+    }
+
+    86% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 /* --- REWORKED: Our Journey Section --- */
@@ -200,7 +231,7 @@
     width: 100%;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     aspect-ratio: 4 / 5;
     background-size: cover;
     background-position: center;
@@ -234,8 +265,8 @@
     background-color: var(--color-primary-matcha);
     border-radius: 4px 8px 8px 4px;
     box-shadow:
-        inset 2px 0 0 rgba(255,255,255,0.1),
-        3px 3px 15px rgba(0,0,0,0.2);
+        inset 2px 0 0 rgba(255, 255, 255, 0.1),
+        3px 3px 15px rgba(0, 0, 0, 0.2);
     transform-origin: left;
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s ease;
     z-index: 10;
@@ -270,8 +301,13 @@
 
 /* --- SHINY SILVER STAMP EFFECT (MASKING APPROACH) --- */
 @keyframes silver-shimmer-animation {
-    0% { background-position: -200% center; }
-    100% { background-position: 200% center; }
+    0% {
+        background-position: -200% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
 }
 
 .journey-stamp-wrapper {
@@ -306,6 +342,7 @@
 .journey-stamp-wrapper::after {
     display: none;
 }
+
 /* --- END SHINY SILVER STAMP --- */
 
 
@@ -335,7 +372,7 @@
     left: 0;
     background-color: #fff;
     border-radius: 4px 8px 8px 4px;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.15);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
     overflow: hidden;
 }
 
@@ -346,9 +383,21 @@
     height: 100%;
     background: linear-gradient(to right, #e0e0e0, #f0f0f0);
 }
-.journey-book-pages .page-edge:nth-child(1) { width: 3px; right: 1px; }
-.journey-book-pages .page-edge:nth-child(2) { width: 2px; right: 5px; }
-.journey-book-pages .page-edge:nth-child(3) { width: 1px; right: 8px; }
+
+.journey-book-pages .page-edge:nth-child(1) {
+    width: 3px;
+    right: 1px;
+}
+
+.journey-book-pages .page-edge:nth-child(2) {
+    width: 2px;
+    right: 5px;
+}
+
+.journey-book-pages .page-edge:nth-child(3) {
+    width: 1px;
+    right: 8px;
+}
 
 .journey-book-pages::before {
     display: none;
@@ -363,10 +412,12 @@
 .invitation-card {
     max-width: 900px;
     margin: 0 auto;
-    background: var(--color-secondary-cream);
+    background: var(--luxe-green, #2A4036);
+    /* Deep emerald green background */
     padding: 3rem;
-    border: 1px solid var(--color-newspaper-border);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 5px solid var(--luxe-gold);
+    /* Gold border */
+    box-shadow: 10px 10px 30px rgba(61, 60, 60, 0.08);
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -384,23 +435,28 @@
 .person-title {
     font-family: var(--font-ui);
     font-size: 1.1rem;
-    color: var(--color-accent-deep-gold);
+    color: var(--luxe-gold, #B49B6C);
+    /* Gold color */
     font-weight: 600;
     margin-bottom: 1rem;
+    text-shadow: 0 0 8px var(--luxe-gold-shine, rgba(212, 175, 55, 0.4));
 }
 
 .person-name-vertical {
     font-family: var(--font-display);
     font-size: 3.5rem;
-    color: var(--color-primary-matcha);
+    color: var(--luxe-gold, #B49B6C);
+    /* Gold color */
     line-height: 1.1;
     margin: 0.5rem 0;
+    text-shadow: 0 0 8px var(--luxe-gold-shine, rgba(212, 175, 55, 0.4));
 }
 
 .person-bio {
     font-size: 1.1rem;
     line-height: 1.7;
-    color: var(--color-text-dark);
+    color: var(--luxe-ivory, #F5F1E9);
+    /* Ivory text color */
     margin-top: 1.5rem;
     max-width: 300px;
 }
@@ -410,8 +466,10 @@
     align-items: center;
     justify-content: center;
     align-self: stretch;
-    border-left: 1px solid var(--color-newspaper-border);
-    border-right: 1px solid var(--color-newspaper-border);
+    border-left: 1px solid var(--luxe-gold, #B49B6C);
+    /* Gold border */
+    border-right: 1px solid var(--luxe-gold, #B49B6C);
+    /* Gold border */
     padding: 0 2rem;
 }
 
@@ -434,16 +492,19 @@
     padding: 2.5rem;
     background-color: var(--color-newspaper-bg);
     border: 1px solid var(--color-newspaper-border);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    position: relative; /* Ensure this is relative for absolute children */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    /* Ensure this is relative for absolute children */
 }
 
 /* Add a subtle noise texture for aged paper effect */
 .cross-newspaper-page::before {
     content: '';
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 0;
     pointer-events: none;
     opacity: 0.05;
@@ -460,13 +521,15 @@
     text-align: center;
     border-bottom: 4px double var(--color-newspaper-border);
     padding-bottom: 1rem;
-    margin-bottom: 1rem; /* Adjusted margin */
+    margin-bottom: 1rem;
+    /* Adjusted margin */
 }
 
 .masthead-title {
     font-family: var(--font-newspaper-headline);
     font-size: 3.5rem;
-    color: var(--color-text-dark);
+    color: var(--luxe-green);
+    text-shadow: 0 0 8px var(--luxe-gold-shine, rgba(212, 175, 55, 0.4));
     line-height: 1;
     margin: 0;
 }
@@ -494,7 +557,7 @@
 .article-nav a {
     font-family: var(--font-ui);
     text-decoration: none;
-    color: var(--color-text-dark);
+    color: var(--luxe-green);
     font-weight: 600;
     font-size: 0.9rem;
     text-transform: uppercase;
@@ -517,7 +580,7 @@
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 2rem;
-    color: var(--color-text-dark);
+    color: var(--luxe-green);
 }
 
 .article-content {
@@ -545,11 +608,15 @@
 }
 
 @keyframes heartbeatGlowLines {
-    0%, 100% {
+
+    0%,
+    100% {
         stroke: var(--color-primary-matcha);
         filter: drop-shadow(0 0 2px rgba(40, 40, 40, 0.2));
     }
-    40%, 60% {
+
+    40%,
+    60% {
         stroke: var(--color-accent-deep-gold);
         filter: drop-shadow(0 0 8px var(--color-accent-gold));
     }
@@ -589,6 +656,7 @@
 .article-paragraph {
     margin-bottom: 1.5rem;
 }
+
 .article-paragraph:last-child {
     margin-bottom: 0;
 }
@@ -613,23 +681,33 @@
 
 /* NEW: Love Paparazzi Stamp Styling */
 .love-paparazzi-stamp-container {
-    position: relative; /* To position the stamp absolutely within the newspaper page */
-    height: 0; /* No height, just for positioning the stamp */
-    text-align: center; /* For centering the stamp horizontally if not absolute */
-    margin: 3rem 0; /* Provide some vertical spacing */
+    position: relative;
+    /* To position the stamp absolutely within the newspaper page */
+    height: 0;
+    /* No height, just for positioning the stamp */
+    text-align: center;
+    /* For centering the stamp horizontally if not absolute */
+    margin: 3rem 0;
+    /* Provide some vertical spacing */
 }
 
 .love-paparazzi-stamp {
     position: absolute;
-    top: 50%; /* Center vertically relative to its container */
-    left: 50%; /* Center horizontally relative to its container */
-    transform: translate(-50%, -50%); /* Adjust for the stamp's own size */
-    width: 180px; /* Adjust size as needed */
+    top: 50%;
+    /* Center vertically relative to its container */
+    left: 50%;
+    /* Center horizontally relative to its container */
+    transform: translate(-50%, -50%);
+    /* Adjust for the stamp's own size */
+    width: 180px;
+    /* Adjust size as needed */
     height: auto;
-    z-index: 2; /* Ensure it's above article content */
+    z-index: 2;
+    /* Ensure it's above article content */
     opacity: 0.8;
-    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
-    transform: translate(-50%, -50%) rotate(-5deg); /* Slight rotation for a stamped effect */
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
+    transform: translate(-50%, -50%) rotate(-5deg);
+    /* Slight rotation for a stamped effect */
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
@@ -652,7 +730,8 @@
     padding: 2rem 0;
     min-height: 150px;
     cursor: pointer;
-    position: relative; /* Added for absolute positioning of combined label */
+    position: relative;
+    /* Added for absolute positioning of combined label */
     /* Remove transition from gap, as it will now be handled by transform */
     transition: none;
 }
@@ -661,15 +740,19 @@
 .moon-wrapper {
     text-align: center;
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    will-change: transform; /* Hint to browser for optimization */
+    will-change: transform;
+    /* Hint to browser for optimization */
 }
 
 /* Initial separation for the moons using transform */
 .moon-wrapper:first-child {
-    transform: translateX(-1rem); /* Adjust based on desired initial visual gap */
+    transform: translateX(-1rem);
+    /* Adjust based on desired initial visual gap */
 }
+
 .moon-wrapper:nth-child(2) {
-    transform: translateX(1rem); /* Adjust based on desired initial visual gap */
+    transform: translateX(1rem);
+    /* Adjust based on desired initial visual gap */
 }
 
 
@@ -678,11 +761,13 @@
 .moon-visualization-container.active-moon-animation .moon-wrapper:first-child {
     transform: translateX(50%);
 }
+
 /* Apply hover effects also when 'active-moon-animation' class is present */
 .moon-visualization-container:hover .moon-wrapper:nth-child(2),
 .moon-visualization-container.active-moon-animation .moon-wrapper:nth-child(2) {
     transform: translateX(-50%);
 }
+
 /* Hide individual labels on hover, also when 'active-moon-animation' class is present */
 .moon-visualization-container:hover .moon-label,
 .moon-visualization-container.active-moon-animation .moon-label,
@@ -690,7 +775,8 @@
 .moon-visualization-container.active-moon-animation .moon-phase-name {
     opacity: 0;
     transition: opacity 0.5s ease;
-    pointer-events: none; /* Disable interaction with hidden elements */
+    pointer-events: none;
+    /* Disable interaction with hidden elements */
 }
 
 /* New combined label styles */
@@ -700,20 +786,27 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    opacity: 0; /* Initially hidden */
-    pointer-events: none; /* Initially non-interactive */
-    transition: opacity 0.6s ease; /* Smooth fade in/out */
-    z-index: 3; /* Ensure it appears above moons */
+    opacity: 0;
+    /* Initially hidden */
+    pointer-events: none;
+    /* Initially non-interactive */
+    transition: opacity 0.6s ease;
+    /* Smooth fade in/out */
+    z-index: 3;
+    /* Ensure it appears above moons */
 }
 
 /* Show on hover, also when 'active-moon-animation' class is present */
 .moon-visualization-container:hover .moon-combined-label,
 .moon-visualization-container.active-moon-animation .moon-combined-label {
-    opacity: 1; /* Show on hover */
-    pointer-events: auto; /* Enable interaction on hover */
+    opacity: 1;
+    /* Show on hover */
+    pointer-events: auto;
+    /* Enable interaction on hover */
 }
 
-.moon-combined-main, .moon-label {
+.moon-combined-main,
+.moon-label {
     font-family: var(--font-ui);
     font-weight: 600;
     transition: opacity 0.6s ease;
@@ -721,7 +814,8 @@
     line-height: 1;
 }
 
-.moon-combined-sub, .moon-phase-name {
+.moon-combined-sub,
+.moon-phase-name {
     font-size: 1.2rem;
     color: #777;
     margin: 0;
@@ -738,7 +832,8 @@
     /* Additions for Moon Explanation Text UI Improvement */
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Space between paragraphs/fact cards */
+    gap: 1.5rem;
+    /* Space between paragraphs/fact cards */
 }
 
 .moon-intro-paragraph {
@@ -749,12 +844,15 @@
 }
 
 .moon-person-fact {
-    background-color: var(--color-secondary-cream); /* Creamy background for each fact */
+    background-color: var(--color-secondary-cream);
+    /* Creamy background for each fact */
     padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    border: 1px solid var(--color-newspaper-border); /* Subtle border */
-    text-align: center; /* Center align content within the card */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-newspaper-border);
+    /* Subtle border */
+    text-align: center;
+    /* Center align content within the card */
 }
 
 .moon-person-fact .person-name {
@@ -769,7 +867,8 @@
     font-family: var(--font-ui);
     font-size: 0.9rem;
     color: #777;
-    display: block; /* Ensure it's on a new line */
+    display: block;
+    /* Ensure it's on a new line */
     margin-top: 0.2rem;
 }
 
@@ -790,12 +889,16 @@
 .moon-summary {
     font-size: 1.1rem;
     font-style: italic;
-    color: var(--color-text-dark); /* Make it stand out more */
+    color: var(--color-text-dark);
+    /* Make it stand out more */
     padding: 1rem 1.5rem;
-    background-color: rgba(163, 184, 153, 0.1); /* Lighter matcha background */
+    background-color: rgba(163, 184, 153, 0.1);
+    /* Lighter matcha background */
     border-radius: 8px;
-    border-left: 5px solid var(--color-primary-matcha); /* Accent border */
-    margin-top: 2rem !important; /* Ensure good spacing */
+    border-left: 5px solid var(--color-primary-matcha);
+    /* Accent border */
+    margin-top: 2rem !important;
+    /* Ensure good spacing */
     text-align: center;
 }
 
@@ -808,15 +911,16 @@
     margin: 0 auto;
     position: relative;
     overflow: hidden;
-    background-color: #f0e68c; /* Light part of the moon */
-    box-shadow: inset -10px 0px 15px -10px rgba(0,0,0,0.4);
+    background-color: #f0e68c;
+    /* Light part of the moon */
+    box-shadow: inset -10px 0px 15px -10px rgba(0, 0, 0, 0.4);
     transition: box-shadow 0.6s ease;
 }
 
 /* Apply hover effects also when 'active-moon-animation' class is present */
 .moon-visualization-container:hover .moon-icon,
 .moon-visualization-container.active-moon-animation .moon-icon {
-    box-shadow: inset 0 0 20px -5px rgba(0,0,0,0.2);
+    box-shadow: inset 0 0 20px -5px rgba(0, 0, 0, 0.2);
 }
 
 /* Glossy highlight pseudo-element */
@@ -855,7 +959,8 @@
 /* Apply hover effects also when 'active-moon-animation' class is present */
 .moon-visualization-container:hover .waning-crescent::after,
 .moon-visualization-container.active-moon-animation .waning-crescent::after {
-    transform: translateX(100%); /* Move to the right to reveal the full moon */
+    transform: translateX(100%);
+    /* Move to the right to reveal the full moon */
 }
 
 
@@ -890,7 +995,7 @@
     border: 1px solid var(--color-newspaper-border);
     padding: 8px;
     background-color: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transform: rotate(-3deg);
     transition: transform 0.3s ease;
 }
@@ -990,26 +1095,49 @@
     stroke-width: 1.5;
 }
 
-.schedule-item:nth-child(odd) { left: 0; padding-left: 0; padding-right: 30px; }
-.schedule-item:nth-child(even) { left: 50%; padding-right: 0; padding-left: 30px; }
-.schedule-item:nth-child(odd) .schedule-icon { right: -25px; transform: translateX(50%); }
-.schedule-item:nth-child(odd):hover .schedule-icon { transform: scale(1.1) translateX(50%); }
-.schedule-item:nth-child(even) .schedule-icon { left: -25px; transform: translateX(-50%); }
-.schedule-item:nth-child(even):hover .schedule-icon { transform: scale(1.1) translateX(-50%); }
+.schedule-item:nth-child(odd) {
+    left: 0;
+    padding-left: 0;
+    padding-right: 30px;
+}
+
+.schedule-item:nth-child(even) {
+    left: 50%;
+    padding-right: 0;
+    padding-left: 30px;
+}
+
+.schedule-item:nth-child(odd) .schedule-icon {
+    right: -25px;
+    transform: translateX(50%);
+}
+
+.schedule-item:nth-child(odd):hover .schedule-icon {
+    transform: scale(1.1) translateX(50%);
+}
+
+.schedule-item:nth-child(even) .schedule-icon {
+    left: -25px;
+    transform: translateX(-50%);
+}
+
+.schedule-item:nth-child(even):hover .schedule-icon {
+    transform: scale(1.1) translateX(-50%);
+}
 
 .schedule-content {
     padding: 20px 30px;
     background-color: white;
     position: relative;
     border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
     border: 1px solid var(--color-newspaper-border);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .schedule-item:hover .schedule-content {
     transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
 }
 
 .schedule-content::after {
@@ -1021,13 +1149,47 @@
     transition: transform 0.3s ease;
 }
 
-.schedule-item:nth-child(odd) .schedule-content { text-align: right; }
-.schedule-item:nth-child(odd) .schedule-content::after { right: -10px; border-left: 10px solid white; filter: drop-shadow(1px 0px 0px #e0dccc); }
-.schedule-item:nth-child(even) .schedule-content { text-align: left; }
-.schedule-item:nth-child(even) .schedule-content::after { left: -10px; border-right:10px solid white; filter: drop-shadow(-1px 0px 0px #e0dccc); }
-.schedule-content h3 { margin-top: 0; font-size: 1.5rem; color: var(--color-accent-gold); }
-.schedule-content .schedule-time { font-family: var(--font-ui); font-weight: 700; font-size: 1rem; color: var(--color-primary-matcha); margin-bottom: 0.5rem; }
-.schedule-content .schedule-location { font-style: italic; font-size: 0.9rem; color: #777; margin-top: 0.75rem; margin-bottom: 0; }
+.schedule-item:nth-child(odd) .schedule-content {
+    text-align: right;
+}
+
+.schedule-item:nth-child(odd) .schedule-content::after {
+    right: -10px;
+    border-left: 10px solid white;
+    filter: drop-shadow(1px 0px 0px #e0dccc);
+}
+
+.schedule-item:nth-child(even) .schedule-content {
+    text-align: left;
+}
+
+.schedule-item:nth-child(even) .schedule-content::after {
+    left: -10px;
+    border-right: 10px solid white;
+    filter: drop-shadow(-1px 0px 0px #e0dccc);
+}
+
+.schedule-content h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: var(--color-accent-gold);
+}
+
+.schedule-content .schedule-time {
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-primary-matcha);
+    margin-bottom: 0.5rem;
+}
+
+.schedule-content .schedule-location {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+}
 
 /* --- MODERNIZED: RSVP & Details Section --- */
 .rsvp-section {
@@ -1037,7 +1199,7 @@
     background: white;
     padding: 3rem;
     border-radius: 12px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
 }
 
 .rsvp-details-container {
@@ -1056,19 +1218,51 @@
     border: 1px solid #e0dccc;
 }
 
-.rsvp-details-container .detail-item h3 { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--color-accent-gold); }
-.rsvp-details-container .detail-item p { font-family: var(--font-ui); margin: 0.3rem 0; color: #555; font-size: 1rem; }
-.rsvp-details-container .button-group { margin-top: 1.5rem; justify-content: center; }
-.rsvp-details-container .calendar-btn { background-color: transparent; border: 2px solid var(--color-accent-gold); color: var(--color-accent-gold); font-size: 0.8rem; padding: 0.6rem 1.2rem; }
-.rsvp-details-container .calendar-btn:hover { background-color: var(--color-accent-gold); color: var(--color-text-light); }
-.rsvp-divider { border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0)); margin: 0 auto 2.5rem auto; width: 80%; }
+.rsvp-details-container .detail-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-accent-gold);
+}
+
+.rsvp-details-container .detail-item p {
+    font-family: var(--font-ui);
+    margin: 0.3rem 0;
+    color: #555;
+    font-size: 1rem;
+}
+
+.rsvp-details-container .button-group {
+    margin-top: 1.5rem;
+    justify-content: center;
+}
+
+.rsvp-details-container .calendar-btn {
+    background-color: transparent;
+    border: 2px solid var(--color-accent-gold);
+    color: var(--color-accent-gold);
+    font-size: 0.8rem;
+    padding: 0.6rem 1.2rem;
+}
+
+.rsvp-details-container .calendar-btn:hover {
+    background-color: var(--color-accent-gold);
+    color: var(--color-text-light);
+}
+
+.rsvp-divider {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+    margin: 0 auto 2.5rem auto;
+    width: 80%;
+}
 
 /* --- NEW: Guest Photobook Section --- */
 .photobook-section {
     background: white;
     padding: 3rem;
     border-radius: 12px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
     max-width: 900px;
     margin: 4rem auto;
     text-align: center;
@@ -1095,14 +1289,14 @@
 
 /* --- FOOTER --- */
 .footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 2rem;
-  background-color: var(--color-primary-matcha);
-  color: var(--color-text-light);
-  font-family: var(--font-ui);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--color-primary-matcha);
+    color: var(--color-text-light);
+    font-family: var(--font-ui);
 }
 
 .footer-art {
@@ -1113,13 +1307,17 @@
 }
 
 @media (max-width: 900px) {
+
     /* Responsive adjustments for ring article */
     .ring-article-layout {
-        grid-template-columns: 1fr; /* Stack on smaller screens */
+        grid-template-columns: 1fr;
+        /* Stack on smaller screens */
     }
+
     .ring-image-placeholder {
         max-width: 250px;
-        margin: 0 auto 2rem auto; /* Center the image when stacked */
+        margin: 0 auto 2rem auto;
+        /* Center the image when stacked */
         transform: rotate(0deg);
     }
 }
@@ -1129,12 +1327,15 @@
     .moon-person-fact {
         padding: 1rem;
     }
+
     .moon-person-fact .person-name {
         font-size: 1.4rem;
     }
+
     .moon-person-fact .moon-phase-detail {
         font-size: 1.1rem;
     }
+
     .moon-summary {
         font-size: 1rem;
         padding: 1rem;
@@ -1142,7 +1343,8 @@
 
     /* Responsive adjustments for the stamp */
     .love-paparazzi-stamp {
-        width: 120px; /* Smaller on mobile */
+        width: 120px;
+        /* Smaller on mobile */
     }
 
     /* Responsive for bio section */
@@ -1151,15 +1353,19 @@
         align-items: center;
         padding: 2rem;
     }
+
     .invitation-center-divider {
         border-left: none;
         border-right: none;
-        border-top: 1px solid var(--color-newspaper-border);
-        border-bottom: 1px solid var(--color-newspaper-border);
+        border-top: 1px solid var(--luxe-gold, #B49B6C);
+        /* Gold border */
+        border-bottom: 1px solid var(--luxe-gold, #B49B6C);
+        /* Gold border */
         padding: 1.5rem 0;
         margin: 1.5rem 0;
         width: 100%;
     }
+
     .person-name-vertical {
         writing-mode: horizontal-tb;
         height: auto;

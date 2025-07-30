@@ -440,15 +440,25 @@ const RsvpForm = ({ churchCeremony, weddingParty }) => {
 
 // --- NEW: Utility Bar Component ---
 const UtilityBar = ({ language, setLanguage }) => {
-    const toggleLanguage = () => {
-        setLanguage(lang => lang === 'en' ? 'vn' : 'en');
-    };
-
     return (
         <div className="utility-bar">
-            <button onClick={toggleLanguage} className="lang-switcher-btn">
-                {language === 'en' ? 'Tiếng Việt' : 'English'}
-            </button>
+            <div className="lang-switcher">
+                <div 
+                    className={`lang-slider ${language === 'vn' ? 'vn-active' : ''}`}
+                ></div>
+                <button 
+                    className={`lang-btn ${language === 'en' ? 'active' : ''}`} 
+                    onClick={() => setLanguage('en')}
+                >
+                    EN
+                </button>
+                <button 
+                    className={`lang-btn ${language === 'vn' ? 'active' : ''}`} 
+                    onClick={() => setLanguage('vn')}
+                >
+                    VN
+                </button>
+            </div>
         </div>
     );
 };

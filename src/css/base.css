@@ -16,18 +16,25 @@ html {
   box-sizing: inherit;
 }
 
-/* --- MATCHA LATTE THEME (Refined & Updated) --- */
+/* --- THEME COLORS --- */
 :root {
-  /* Palette: Matcha, Cream, Gold, and Charcoal - UPDATED */
-  --color-background: #F8F5EE; /* Creamy Ivory */
-  --color-primary-matcha: #5F7C5D; /* Deep Matcha Green */
-  --color-secondary-cream: #FDFBF5; /* Slightly different creamy tone for cards/sections */
-  --color-accent-gold: #D4AF37; /* Brighter, vibrant Gold */
-  --color-accent-deep-gold: #A67C00; /* Deeper, burnished Gold for hover/accents */
-  --color-text-dark: #36454F; /* Charcoal */
-  --color-text-light: #FFFFFF; /* White */
+  /* --- ACTIVE THEME: MATCHA LATTE --- */
+  --color-background: #F8F5EE; 
+  --color-primary-matcha: #2A4036; 
+  --color-secondary-cream: #FDFBF5; 
+  --color-accent-gold: #f8da7f; 
+  --color-accent-deep-gold: #c19614; 
+  --color-text-dark: #36454F; 
+  --color-text-light: #FFFFFF; 
   --color-newspaper-bg: #FDFBF5; 
   --color-newspaper-border: #C8B8A0;
+
+  /* --- INACTIVE THEME: LUXURY EMERALD (For specific elements) --- */
+  --luxe-green: #2A4036;
+  --luxe-gold: #F4DA8F;
+  --luxe-ivory: #F5F1E9;
+  --luxe-gold-shine: rgba(212, 175, 55, 0.5);
+
 
   /* --- UPDATED FONT PALETTE --- */
   --font-display: 'Great Vibes', cursive; /* For the most prominent banner text */

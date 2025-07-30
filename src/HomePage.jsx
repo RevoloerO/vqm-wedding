@@ -6,6 +6,9 @@ import './css/components.css';
 import './css/responsive.css';
 import './css/GuestBook.css'; // Import the new CSS file
 
+// --- TRANSLATION DATA ---
+import { translations } from './data/translations.js';
+
 // --- ASSET IMPORT ---
 import heroBgImage from './assets/bg-2.jpeg';
 import journeyImage from './assets/bg-2.jpeg';
@@ -13,6 +16,9 @@ import hqStamp1 from './assets/HQ-stamp-1-nobg.png'; // Rectangular Stamp
 import hqStamp2 from './assets/HQ-stamp-2-nobg.png'; // Circular Stamp
 import hqStamp3 from './assets/HQ-stamp-3-nobg.png'; // New stamp for schedule
 import hqArt from './assets/HQ-art.png'; // Footer Art
+// NOTE: Assumes you have added the new stamp image to your assets folder as 'HQ-art-2.png'
+import hqArt2 from './assets/HQ-art-2.png'; 
+
 
 // --- LAZY LOAD COMPONENTS ---
 const GuestBook = lazy(() => import('./GuestBook'));
@@ -30,7 +36,7 @@ const VIEWS = {
 // --- Reusable Components ---
 
 // Countdown Timer for the Wedding
-const Countdown = ({ targetDate }) => {
+const Countdown = ({ targetDate, t }) => {
   const calculateTimeLeft = useCallback(() => {
     const difference = +new Date(targetDate) - +new Date();
     let timeLeft = {};
@@ -75,7 +81,7 @@ const Countdown = ({ targetDate }) => {
 };
 
 // Main Welcome Banner (Stays at the top)
-const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
+const WelcomeBanner = ({ backgroundImage, onViewChange, t }) => {
     const quotes = [
         { text: "I have found the one whom my soul loves.", source: "Song of Solomon 3:4" },
         { text: "Two are better than one... If either of them falls down, one can help the other up.", source: "Ecclesiastes 4:9-10" },
@@ -133,8 +139,8 @@ const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
               </svg>
             </div>
           </button>
-          <h1 className="welcome-banner-names">Quyen Mai & Hien Dang</h1>
-          <p className="welcome-banner-details">July 1, 2028 &nbsp;|&nbsp; Columbus, OH</p>
+          <h1 className="welcome-banner-names">{t.welcomeBanner.names}</h1>
+          <p className="welcome-banner-details">{t.welcomeBanner.details}</p>
           <Countdown targetDate="2028-07-01T00:00:00" />
            <div className="welcome-banner-blessing">
                 <p className="blessing-text fade-in-out">"{currentQuote.text}"</p>
@@ -146,7 +152,7 @@ const WelcomeBanner = ({ backgroundImage, onViewChange }) => {
 };
 
 // Our Journey Section - Reworked as a Book
-const OurJourney = ({ onNavigate }) => (
+const OurJourney = ({ onNavigate, t }) => (
     <section id="journey" className="page-section journey-section">
         <div className="section-content-journey">
             <div className="journey-image-container" style={{ backgroundImage: `url(${journeyImage})` }}>
@@ -160,9 +166,9 @@ const OurJourney = ({ onNavigate }) => (
                         </div>
                         <div className="journey-book-cover">
                             <div className="journey-stamp-wrapper" style={{ WebkitMaskImage: `url(${hqStamp2})`, maskImage: `url(${hqStamp2})` }} />
-                            <h2 className="journey-book-title">Our Journey</h2>
-                            <p className="journey-book-subtitle">Walking together in faith and love.</p>
-                            <div className="journey-book-prompt"><span>Discover Love Story</span></div>
+                            <h2 className="journey-book-title">{t.journey.title}</h2>
+                            <p className="journey-book-subtitle">{t.journey.subtitle}</p>
+                            <div className="journey-book-prompt"><span>{t.journey.prompt}</span></div>
                         </div>
                     </div>
                 </a>
@@ -171,8 +177,45 @@ const OurJourney = ({ onNavigate }) => (
     </section>
 );
 
+// --- NEW: Meet the Couple Section ---
+const MeetTheCouple = ({ t }) => {
+    // Helper to format the name with line breaks
+    const formatName = (name) => {
+        return name.split(' ').join('<br/>');
+    };
+
+    return (
+        <section className="page-section meet-the-couple-section">
+            <div className="invitation-card">
+                {/* Groom's Column (Left - Nam Tả) */}
+                <div className="invitation-column">
+                    <div className="person-title">{t.meetTheCouple.groomTitle}</div>
+                    <h3 
+                        className="person-name-vertical"
+                        dangerouslySetInnerHTML={{ __html: formatName(t.meetTheCouple.groomName) }}
+                    ></h3>
+                    <p className="person-bio">{t.meetTheCouple.groomBio}</p>
+                </div>
+                <div className="invitation-center-divider">
+                    <img src={hqArt2} alt="Quyen & Hien Stamp" className="invitation-stamp" />
+                </div>
+                {/* Bride's Column (Right - Nữ Hữu) */}
+                <div className="invitation-column">
+                    <div className="person-title">{t.meetTheCouple.brideTitle}</div>
+                     <h3 
+                        className="person-name-vertical"
+                        dangerouslySetInnerHTML={{ __html: formatName(t.meetTheCouple.brideName) }}
+                    ></h3>
+                    <p className="person-bio">{t.meetTheCouple.brideBio}</p>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+
 // --- REVISED: Love Paparazzi Section as a Newspaper Article ---
-const LovePaparazziSection = () => {
+const LovePaparazziSection = ({ t }) => {
     // State to manage the active animation class for the moon visualization
     const [isMoonAnimated, setIsMoonAnimated] = useState(false);
 
@@ -185,7 +228,7 @@ const LovePaparazziSection = () => {
         <section id="love_paparazzi" className="page-section love-paparazzi-newspaper-section">
             <div className="cross-newspaper-page">
                 <div className="cross-newspaper-masthead">
-                    <div className="masthead-title">The Love Paparazzi</div>
+                    <div className="masthead-title">{t.lovePaparazzi.masthead}</div>
                     <div className="masthead-subheading">
                         <span>Vol. IV, No. 12</span>
                         <span>A.D. July 1, 2028</span>
@@ -194,15 +237,15 @@ const LovePaparazziSection = () => {
                 </div>
                 
                 <nav className="article-nav">
-                    <a href="#article-cord">The Three-Strand Cord</a>
+                    <a href="#article-cord">{t.lovePaparazzi.articleNavCord}</a>
                     <span className="article-nav-divider">|</span>
-                    <a href="#article-moon">A Celestial Sync</a>
+                    <a href="#article-moon">{t.lovePaparazzi.articleNavMoon}</a>
                     <span className="article-nav-divider">|</span>
-                    <a href="#article-ring">A Ring With Purpose</a>
+                    <a href="#article-ring">{t.lovePaparazzi.articleNavRing}</a>
                 </nav>
 
                 <div id="article-cord" className="cross-newspaper-article">
-                    <h2 className="article-headline">On the Symbolism of the Three-Strand Cord</h2>
+                    <h2 className="article-headline">{t.lovePaparazzi.cordHeadline}</h2>
                     <div className="article-content">
                         <div className="article-column-visual">
                             <div className="explanation-visual">
@@ -211,24 +254,24 @@ const LovePaparazziSection = () => {
                                     <circle className="accent-circle" cx="50" cy="8" r="4"/><circle className="accent-circle" cx="23" cy="35" r="4"/><circle className="accent-circle" cx="77" cy="35" r="4"/><circle className="accent-circle" cx="50" cy="35" r="5"/><circle className="accent-circle" cx="50" cy="94" r="4"/>
                                 </svg>
                             </div>
-                            <p className="explanation-scripture"><em>"A cord of three strands is not quickly broken."<br/>— Ecclesiastes 4:12</em></p>
+                            <p className="explanation-scripture"><em>{t.lovePaparazzi.cordScripture}</em></p>
                         </div>
                         <div className="article-column-text">
                             <div className="article-paragraph">
-                                <h4 className="article-paragraph-title">The Three Strands</h4>
-                                <p>In the Cord of Three Strands ceremony, three separate strands are braided together. These represent the bride, the groom, and God, each being whole and individual before being woven together.</p>
+                                <h4 className="article-paragraph-title">{t.lovePaparazzi.cordStrandsTitle}</h4>
+                                <p>{t.lovePaparazzi.cordStrandsText}</p>
                             </div>
                              <div className="article-paragraph">
-                                <h4 className="article-paragraph-title">The Braid</h4>
-                                <p>Newly formed as one, the act of braiding symbolizes the couple's lives being intertwined. It signifies the deliberate inclusion of God as the central, binding force in their union.</p>
+                                <h4 className="article-paragraph-title">{t.lovePaparazzi.cordBraidTitle}</h4>
+                                <p>{t.lovePaparazzi.cordBraidText}</p>
                             </div>
                              <div className="article-paragraph">
-                                <h4 className="article-paragraph-title">The Five Holy Wounds</h4>
-                                <p>Remembering the ultimate sacrifice, our cross design incorporates five circles symbolizing the Five Holy Wounds of Jesus, a reminder of the sacrificial love that forms the foundation of a Christian marriage.</p>
+                                <h4 className="article-paragraph-title">{t.lovePaparazzi.cordWoundsTitle}</h4>
+                                <p>{t.lovePaparazzi.cordWoundsText}</p>
                             </div>
                              <div className="article-paragraph">
-                                <h4 className="article-paragraph-title">A Lasting Reminder</h4>
-                                <p>In our home, this cross will serve as a lasting reminder of the sacred vows we make on our wedding day—a covenant not just between us, but with God at the center of our new life together.</p>
+                                <h4 className="article-paragraph-title">{t.lovePaparazzi.cordReminderTitle}</h4>
+                                <p>{t.lovePaparazzi.cordReminderText}</p>
                             </div>
                         </div>
                     </div>
@@ -288,7 +331,7 @@ const LovePaparazziSection = () => {
 
                 {/* NEW: Ring Article */}
                 <div id="article-ring" className="cross-newspaper-article">
-                    <h2 className="article-headline">Our Ring: A Vow of Love, A Well of Life</h2>
+                    <h2 className="article-headline">{t.lovePaparazzi.ringHeadline}</h2>
                     <div className="article-content ring-article-layout">
                         <div className="article-column-visual">
                             <div className="ring-image-placeholder">
@@ -299,23 +342,23 @@ const LovePaparazziSection = () => {
                                     onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/400x500/cccccc/ffffff?text=Image+Coming+Soon'; }}
                                 />
                             </div>
-                            <p className="explanation-scripture" style={{textAlign: 'center', background: 'transparent', padding: '1rem 0'}}><em>"For where your treasure is, there your heart will be also."<br/>— Matthew 6:21</em></p>
+                            <p className="explanation-scripture" style={{textAlign: 'center', background: 'transparent', padding: '1rem 0'}}><em>{t.lovePaparazzi.ringScripture}</em></p>
                         </div>
                         <div className="article-column-text">
                             <div className="article-paragraph">
-                                <h4 className="article-paragraph-title">A Symbol with Substance</h4>
-                                <p>When we began searching for an engagement ring, we knew we wanted it to represent more than just our commitment to each other. We wanted it to reflect our shared values and our desire to contribute to a world filled with more love and care. That's when we discovered Do Amore, a brand whose name means "I Give with Love."</p>
+                                <h4 className="article-paragraph-title">{t.lovePaparazzi.ringSubstanceTitle}</h4>
+                                <p>{t.lovePaparazzi.ringSubstanceText}</p>
                             </div>
                              <div className="article-paragraph">
-                                <h4 className="article-paragraph-title">Love's Ripple Effect</h4>
-                                <p>With every ring they create, Do Amore helps bring clean water to a person in need by partnering with charity: water. The very ring that symbolizes the start of our new life together has also created a ripple of change, providing essential, life-sustaining water for a community. It’s a profound reminder that our love can extend far beyond ourselves.</p>
+                                <h4 className="article-paragraph-title">{t.lovePaparazzi.ringRippleTitle}</h4>
+                                <p>{t.lovePaparazzi.ringRippleText}</p>
                             </div>
                              <div className="article-paragraph">
-                                <h4 className="article-paragraph-title">A Promise for a Better World</h4>
-                                <p>This ring is not just a circle of precious metal and stone; it's a circle of compassion. It serves as a daily reminder of our promise to each other and our shared commitment to live a life of purpose, to love generously, and to be a force for good in the world. We are so grateful to begin our marriage with a symbol that so beautifully encapsulates this hope.</p>
+                                <h4 className="article-paragraph-title">{t.lovePaparazzi.ringPromiseTitle}</h4>
+                                <p>{t.lovePaparazzi.ringPromiseText}</p>
                             </div>
                              <div className="article-paragraph article-source-link">
-                                <p>Learn more about the impact at the <a href="https://www.doamore.com/impact" target="_blank" rel="noopener noreferrer">Do Amore website</a>.</p>
+                                <p>{t.lovePaparazzi.ringLink} <a href="https://www.doamore.com/impact" target="_blank" rel="noopener noreferrer">Do Amore website</a>.</p>
                             </div>
                         </div>
                     </div>
@@ -327,17 +370,17 @@ const LovePaparazziSection = () => {
 
 
 // Reworked Wedding Day Schedule Section with Timeline and new Icons
-const WeddingDaySchedule = () => (
+const WeddingDaySchedule = ({ t }) => (
     <section id="schedule" className="page-section schedule-section">
         <div className="section-header">
             <img src={hqStamp3} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
-            <h2>Our Wedding Day</h2>
+            <h2>{t.schedule.title}</h2>
         </div>
         <div className="schedule-timeline-container">
-            <div className="schedule-item"><div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M8 9H4v10h4V9zm8 0h4v10h-4V9z"/><path d="M4 9V5l8-3 8 3v4"/></svg></div><div className="schedule-content"><h3>Church Ceremony</h3><p className="schedule-time">2:00 PM</p><p>Join us as we exchange vows and begin our journey as one.</p><p className="schedule-location">St. Joseph Cathedral, Columbus, OH</p></div></div>
-            <div className="schedule-item"><div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="m19 3-7 8-7-8Z"/></svg></div><div className="schedule-content"><h3>Cocktail Hour</h3><p className="schedule-time">6:00 PM</p><p>Enjoy drinks and appetizers before the main celebration begins.</p><p className="schedule-location">The Westin Great Southern, Columbus, OH</p></div></div>
-            <div className="schedule-item"><div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div className="schedule-content"><h3>Dinner & Celebration</h3><p className="schedule-time">7:15 PM</p><p>Dine, dance, and celebrate with us through the night.</p><p className="schedule-location">The Westin Great Southern, Columbus, OH</p></div></div>
-            <div className="schedule-item"><div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9L2 12v9c0 .6.4 1 1 1h3"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div><div className="schedule-content"><h3>Grand Exit</h3><p className="schedule-time">11:00 PM</p><p>Help us end our special day with a memorable send-off!</p><p className="schedule-location">The Westin Great Southern, Columbus, OH</p></div></div>
+            <div className="schedule-item"><div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M8 9H4v10h4V9zm8 0h4v10h-4V9z"/><path d="M4 9V5l8-3 8 3v4"/></svg></div><div className="schedule-content"><h3>{t.schedule.ceremony}</h3><p className="schedule-time">{t.schedule.ceremonyTime}</p><p>{t.schedule.ceremonyDesc}</p><p className="schedule-location">{t.schedule.ceremonyLocation}</p></div></div>
+            <div className="schedule-item"><div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="m19 3-7 8-7-8Z"/></svg></div><div className="schedule-content"><h3>{t.schedule.cocktail}</h3><p className="schedule-time">{t.schedule.cocktailTime}</p><p>{t.schedule.cocktailDesc}</p><p className="schedule-location">{t.schedule.cocktailLocation}</p></div></div>
+            <div className="schedule-item"><div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div className="schedule-content"><h3>{t.schedule.dinner}</h3><p className="schedule-time">{t.schedule.dinnerTime}</p><p>{t.schedule.dinnerDesc}</p><p className="schedule-location">{t.schedule.dinnerLocation}</p></div></div>
+            <div className="schedule-item"><div className="schedule-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9L2 12v9c0 .6.4 1 1 1h3"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div><div className="schedule-content"><h3>{t.schedule.exit}</h3><p className="schedule-time">{t.schedule.exitTime}</p><p>{t.schedule.exitDesc}</p><p className="schedule-location">{t.schedule.exitLocation}</p></div></div>
         </div>
     </section>
 );
@@ -395,19 +438,35 @@ const RsvpForm = ({ churchCeremony, weddingParty }) => {
     );
 };
 
+// --- NEW: Utility Bar Component ---
+const UtilityBar = ({ language, setLanguage }) => {
+    const toggleLanguage = () => {
+        setLanguage(lang => lang === 'en' ? 'vn' : 'en');
+    };
+
+    return (
+        <div className="utility-bar">
+            <button onClick={toggleLanguage} className="lang-switcher-btn">
+                {language === 'en' ? 'Tiếng Việt' : 'English'}
+            </button>
+        </div>
+    );
+};
+
+
 // --- Tab Navigation with Scroll-to-Center Logic ---
-const TabNavigation = ({ activeView, onViewChange }) => {
+const TabNavigation = ({ activeView, onViewChange, t }) => {
   const navRef = useRef(null);
   const [showLeftHint, setShowLeftHint] = useState(false);
   const [showRightHint, setShowRightHint] = useState(false);
 
   const navItems = [
-      { id: VIEWS.JOURNEY, label: 'Our Journey' },
-      { id: VIEWS.LOVE_PAPARAZZI, label: 'Love Paparazzi' },
-      { id: VIEWS.SCHEDULE, label: 'Schedule' },
-      { id: VIEWS.PHOTOBOOK, label: 'Photobook' },
-      { id: VIEWS.WELL_WISHES, label: 'Well Wishes' }, // New Tab
-      { id: VIEWS.RSVP, label: 'RSVP' }
+      { id: VIEWS.JOURNEY, label: t.nav.journey },
+      { id: VIEWS.LOVE_PAPARAZZI, label: t.nav.lovePaparazzi },
+      { id: VIEWS.SCHEDULE, label: t.nav.schedule },
+      { id: VIEWS.PHOTOBOOK, label: t.nav.photobook },
+      { id: VIEWS.WELL_WISHES, label: t.nav.wellWishes },
+      { id: VIEWS.RSVP, label: t.nav.rsvp }
   ];
   
   useEffect(() => {
@@ -459,15 +518,20 @@ const TabNavigation = ({ activeView, onViewChange }) => {
   );
 };
 
-const ViewDisplay = ({ activeView, onStoryClick, events }) => {
+const ViewDisplay = ({ activeView, onStoryClick, events, t }) => {
   return (
     <div className="view-container">
-      {activeView === VIEWS.JOURNEY && <OurJourney onNavigate={onStoryClick} />}
-      {activeView === VIEWS.LOVE_PAPARAZZI && <LovePaparazziSection />}
-      {activeView === VIEWS.SCHEDULE && <WeddingDaySchedule />}
-      {activeView === VIEWS.PHOTOBOOK && <GuestPhotobook />}
-      {activeView === VIEWS.WELL_WISHES && <GuestBook />}
-      {activeView === VIEWS.RSVP && <RsvpForm {...events} />}
+      {activeView === VIEWS.JOURNEY && (
+        <>
+          <MeetTheCouple t={t} />
+          <OurJourney onNavigate={onStoryClick} t={t} />
+        </>
+      )}
+      {activeView === VIEWS.LOVE_PAPARAZZI && <LovePaparazziSection t={t} />}
+      {activeView === VIEWS.SCHEDULE && <WeddingDaySchedule t={t} />}
+      {activeView === VIEWS.PHOTOBOOK && <GuestPhotobook t={t} />}
+      {activeView === VIEWS.WELL_WISHES && <GuestBook t={t} />}
+      {activeView === VIEWS.RSVP && <RsvpForm {...events} t={t} />}
     </div>
   );
 };
@@ -489,7 +553,10 @@ function HomePage() {
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [showAmdgTooltip, setShowAmdgTooltip] = useState(false);
   const [isZoomingOut, setIsZoomingOut] = useState(false);
+  const [language, setLanguage] = useState('en');
   const navigate = useNavigate();
+
+  const t = translations[language];
 
   // Define event details here to be passed as props
   const eventDetails = {
@@ -517,14 +584,16 @@ function HomePage() {
 
   return (
     <div className={`homepage-container ${isZoomingOut ? 'is-zooming-out' : ''}`}>
-      <WelcomeBanner backgroundImage={heroBgImage} onViewChange={setActiveView} />
-      <TabNavigation activeView={activeView} onViewChange={setActiveView} />
+      <WelcomeBanner backgroundImage={heroBgImage} onViewChange={setActiveView} t={t} />
+      <UtilityBar language={language} setLanguage={setLanguage} />
+      <TabNavigation activeView={activeView} onViewChange={setActiveView} t={t} />
       <div className="main-content-area">
         <Suspense fallback={<div className="loading-fallback">Loading...</div>}>
             <ViewDisplay 
                 activeView={activeView} 
                 onStoryClick={handleStoryClick}
                 events={eventDetails}
+                t={t}
             />
         </Suspense>
       </div>

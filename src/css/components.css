@@ -55,6 +55,35 @@
 }
 
 
+/* --- NEW: Utility Bar --- */
+.utility-bar {
+    background-color: var(--color-secondary-cream);
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid var(--color-newspaper-border);
+}
+
+.lang-switcher-btn {
+    background: none;
+    border: 1px solid var(--color-accent-gold);
+    color: var(--color-accent-gold);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lang-switcher-btn:hover {
+    background-color: var(--color-accent-gold);
+    color: var(--color-text-light);
+}
+
+
 /* --- STICKY TAB NAVIGATION --- */
 .tab-navbar-wrapper {
   position: -webkit-sticky;

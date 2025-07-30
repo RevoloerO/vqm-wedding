@@ -354,6 +354,74 @@
     display: none;
 }
 
+/* --- NEW: Meet the Couple Section --- */
+.meet-the-couple-section {
+    background: var(--color-background);
+    padding: 4rem 2rem;
+}
+
+.invitation-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--color-secondary-cream);
+    padding: 3rem;
+    border: 1px solid var(--color-newspaper-border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.invitation-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.person-title {
+    font-family: var(--font-ui);
+    font-size: 1.1rem;
+    color: var(--color-accent-deep-gold);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.person-name-vertical {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: var(--color-primary-matcha);
+    line-height: 1.1;
+    margin: 0.5rem 0;
+}
+
+.person-bio {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-text-dark);
+    margin-top: 1.5rem;
+    max-width: 300px;
+}
+
+.invitation-center-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    border-left: 1px solid var(--color-newspaper-border);
+    border-right: 1px solid var(--color-newspaper-border);
+    padding: 0 2rem;
+}
+
+.invitation-stamp {
+    width: 120px;
+    height: auto;
+    opacity: 0.8;
+}
+
+
 /* --- REVISED: Love Paparazzi Section (Newspaper Style) --- */
 .love-paparazzi-newspaper-section {
     padding: 1rem 2rem;
@@ -837,6 +905,24 @@
     display: block;
 }
 
+.article-column-text .article-paragraph.article-source-link p {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+    font-style: italic;
+}
+
+.article-source-link a {
+    color: var(--color-accent-deep-gold);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.article-source-link a:hover {
+    color: var(--color-primary-matcha);
+    text-decoration: none;
+}
+
 
 /* --- Reworked Wedding Day Schedule Section (Timeline) --- */
 .schedule-section {
@@ -1057,5 +1143,26 @@
     /* Responsive adjustments for the stamp */
     .love-paparazzi-stamp {
         width: 120px; /* Smaller on mobile */
+    }
+
+    /* Responsive for bio section */
+    .invitation-card {
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+    }
+    .invitation-center-divider {
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid var(--color-newspaper-border);
+        border-bottom: 1px solid var(--color-newspaper-border);
+        padding: 1.5rem 0;
+        margin: 1.5rem 0;
+        width: 100%;
+    }
+    .person-name-vertical {
+        writing-mode: horizontal-tb;
+        height: auto;
+        font-size: 2.5rem;
     }
 }

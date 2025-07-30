@@ -3,7 +3,7 @@
 /* For Tablets and smaller desktops */
 @media (max-width: 900px) {
     .main-content-area {
-        padding: 3rem 3%; /* Adjust padding for smaller screens */
+        padding: 1rem 3%; /* Adjust padding for smaller screens */
     }
 
     /* REVISED: Stack the newspaper article columns */

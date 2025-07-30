@@ -35,7 +35,6 @@
     z-index: -1;
     background-size: contain;
     background-repeat: no-repeat;
-    /* REMOVED: Unnecessary will-change for hover effect */
 }
 
 .welcome-banner-section::after {
@@ -60,7 +59,6 @@
     z-index: 1;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
     transition: background-color 0.5s ease-out, backdrop-filter 0.5s ease-out;
-    /* REMOVED: Unnecessary will-change for hover effect */
     width: auto;
     max-width: 90%;
     display: grid;
@@ -145,7 +143,6 @@
     text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
 }
 
-/* MODIFIED: Using the new --font-display variable */
 .welcome-banner-names {
     font-family: var(--font-display);
     font-size: 6rem;
@@ -403,25 +400,56 @@
     display: none;
 }
 
-/* --- NEW: Meet the Couple Section --- */
+/* --- REVISED: Meet the Couple Section --- */
 .meet-the-couple-section {
     background: var(--color-background);
     padding: 4rem 2rem;
 }
 
-.invitation-card {
+.invitation-card-container {
     max-width: 900px;
     margin: 0 auto;
-    background: var(--luxe-green, #2A4036);
-    /* Deep emerald green background */
-    padding: 3rem;
-    border: 5px solid var(--luxe-gold);
-    /* Gold border */
-    box-shadow: 10px 10px 30px rgba(61, 60, 60, 0.08);
+    perspective: 1500px;
+}
+
+.invitation-card {
+    position: relative;
+    width: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    min-height: 480px;
+}
+
+.invitation-card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.invitation-card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     display: flex;
+    gap: 2rem;
+    padding: 3rem;
+    box-sizing: border-box;
+    background: var(--luxe-green, #2A4036);
+    border: 5px solid var(--luxe-gold);
+    box-shadow: 10px 10px 30px rgba(61, 60, 60, 0.08);
+}
+
+.invitation-card-front {
     justify-content: space-between;
     align-items: flex-start;
-    gap: 2rem;
+}
+
+.invitation-card-back {
+    transform: rotateY(180deg);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .invitation-column {
@@ -436,27 +464,32 @@
     font-family: var(--font-ui);
     font-size: 1.1rem;
     color: var(--luxe-gold, #B49B6C);
-    /* Gold color */
     font-weight: 600;
     margin-bottom: 1rem;
     text-shadow: 0 0 8px var(--luxe-gold-shine, rgba(212, 175, 55, 0.4));
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.person-name-vertical {
+.person-name {
     font-family: var(--font-display);
     font-size: 3.5rem;
     color: var(--luxe-gold, #B49B6C);
-    /* Gold color */
     line-height: 1.1;
     margin: 0.5rem 0;
     text-shadow: 0 0 8px var(--luxe-gold-shine, rgba(212, 175, 55, 0.4));
+    min-height: 16rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .person-bio {
     font-size: 1.1rem;
     line-height: 1.7;
     color: var(--luxe-ivory, #F5F1E9);
-    /* Ivory text color */
     margin-top: 1.5rem;
     max-width: 300px;
 }
@@ -467,9 +500,7 @@
     justify-content: center;
     align-self: stretch;
     border-left: 1px solid var(--luxe-gold, #B49B6C);
-    /* Gold border */
     border-right: 1px solid var(--luxe-gold, #B49B6C);
-    /* Gold border */
     padding: 0 2rem;
 }
 
@@ -479,6 +510,13 @@
     opacity: 0.8;
 }
 
+/* Hide mobile content on desktop */
+.mobile-only-front-content {
+    display: none;
+}
+.mobile-bio-header {
+    display: none;
+}
 
 /* --- REVISED: Love Paparazzi Section (Newspaper Style) --- */
 .love-paparazzi-newspaper-section {
@@ -494,10 +532,8 @@
     border: 1px solid var(--color-newspaper-border);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     position: relative;
-    /* Ensure this is relative for absolute children */
 }
 
-/* Add a subtle noise texture for aged paper effect */
 .cross-newspaper-page::before {
     content: '';
     position: absolute;
@@ -522,7 +558,6 @@
     border-bottom: 4px double var(--color-newspaper-border);
     padding-bottom: 1rem;
     margin-bottom: 1rem;
-    /* Adjusted margin */
 }
 
 .masthead-title {
@@ -546,7 +581,6 @@
     padding: 0.25rem 0;
 }
 
-/* NEW: Article Navigation Bar */
 .article-nav {
     text-align: center;
     padding: 0.5rem 0;
@@ -608,7 +642,6 @@
 }
 
 @keyframes heartbeatGlowLines {
-
     0%,
     100% {
         stroke: var(--color-primary-matcha);
@@ -679,39 +712,32 @@
     border-bottom: none;
 }
 
-/* NEW: Love Paparazzi Stamp Styling */
 .love-paparazzi-stamp-container {
     position: relative;
-    /* To position the stamp absolutely within the newspaper page */
     height: 0;
-    /* No height, just for positioning the stamp */
     text-align: center;
-    /* For centering the stamp horizontally if not absolute */
     margin: 3rem 0;
-    /* Provide some vertical spacing */
 }
 
 .love-paparazzi-stamp {
     position: absolute;
     top: 50%;
-    /* Center vertically relative to its container */
     left: 50%;
-    /* Center horizontally relative to its container */
-    transform: translate(-50%, -50%);
-    /* Adjust for the stamp's own size */
     width: 180px;
-    /* Adjust size as needed */
-    height: auto;
+    height: 180px;
     z-index: 2;
-    /* Ensure it's above article content */
     opacity: 0.8;
     filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
     transform: translate(-50%, -50%) rotate(-5deg);
-    /* Slight rotation for a stamped effect */
     transition: transform 0.3s ease, opacity 0.3s ease;
+    background-color: var(--color-primary-matcha);
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
 }
-
-
 
 /* REVISED: Moon Phase Article Styles */
 .moon-phase-article {
@@ -724,15 +750,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Changed gap to 0 and will use transform for initial separation */
     gap: 0;
     margin: 2rem 0;
     padding: 2rem 0;
     min-height: 150px;
     cursor: pointer;
     position: relative;
-    /* Added for absolute positioning of combined label */
-    /* Remove transition from gap, as it will now be handled by transform */
     transition: none;
 }
 
@@ -740,34 +763,26 @@
 .moon-wrapper {
     text-align: center;
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    /* REMOVED: Unnecessary will-change for hover effect */
 }
 
-/* Initial separation for the moons using transform */
 .moon-wrapper:first-child {
     transform: translateX(-1rem);
-    /* Adjust based on desired initial visual gap */
 }
 
 .moon-wrapper:nth-child(2) {
     transform: translateX(1rem);
-    /* Adjust based on desired initial visual gap */
 }
 
-
-/* On hover/active, move them back to original position (no translation) */
 .moon-visualization-container:hover .moon-wrapper:first-child,
 .moon-visualization-container.active-moon-animation .moon-wrapper:first-child {
     transform: translateX(50%);
 }
 
-/* Apply hover effects also when 'active-moon-animation' class is present */
 .moon-visualization-container:hover .moon-wrapper:nth-child(2),
 .moon-visualization-container.active-moon-animation .moon-wrapper:nth-child(2) {
     transform: translateX(-50%);
 }
 
-/* Hide individual labels on hover, also when 'active-moon-animation' class is present */
 .moon-visualization-container:hover .moon-label,
 .moon-visualization-container.active-moon-animation .moon-label,
 .moon-visualization-container:hover .moon-phase-name,
@@ -775,10 +790,8 @@
     opacity: 0;
     transition: opacity 0.5s ease;
     pointer-events: none;
-    /* Disable interaction with hidden elements */
 }
 
-/* New combined label styles */
 .moon-combined-label {
     position: absolute;
     bottom: -0.5rem;
@@ -786,22 +799,15 @@
     transform: translate(-50%, -50%);
     text-align: center;
     opacity: 0;
-    /* Initially hidden */
     pointer-events: none;
-    /* Initially non-interactive */
     transition: opacity 0.6s ease;
-    /* Smooth fade in/out */
     z-index: 3;
-    /* Ensure it appears above moons */
 }
 
-/* Show on hover, also when 'active-moon-animation' class is present */
 .moon-visualization-container:hover .moon-combined-label,
 .moon-visualization-container.active-moon-animation .moon-combined-label {
     opacity: 1;
-    /* Show on hover */
     pointer-events: auto;
-    /* Enable interaction on hover */
 }
 
 .moon-combined-main,
@@ -828,11 +834,9 @@
     background-color: rgba(214, 204, 174, 0.15);
     border-radius: 4px;
     border: 1px solid rgba(214, 204, 174, 0.4);
-    /* Additions for Moon Explanation Text UI Improvement */
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    /* Space between paragraphs/fact cards */
 }
 
 .moon-intro-paragraph {
@@ -844,14 +848,11 @@
 
 .moon-person-fact {
     background-color: var(--color-secondary-cream);
-    /* Creamy background for each fact */
     padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--color-newspaper-border);
-    /* Subtle border */
     text-align: center;
-    /* Center align content within the card */
 }
 
 .moon-person-fact .person-name {
@@ -867,7 +868,6 @@
     font-size: 0.9rem;
     color: #777;
     display: block;
-    /* Ensure it's on a new line */
     margin-top: 0.2rem;
 }
 
@@ -889,20 +889,14 @@
     font-size: 1.1rem;
     font-style: italic;
     color: var(--color-text-dark);
-    /* Make it stand out more */
     padding: 1rem 1.5rem;
     background-color: rgba(163, 184, 153, 0.1);
-    /* Lighter matcha background */
     border-radius: 8px;
     border-left: 5px solid var(--color-primary-matcha);
-    /* Accent border */
     margin-top: 2rem !important;
-    /* Ensure good spacing */
     text-align: center;
 }
 
-
-/* REVISED: CSS Moon Phase Representation with Interactive Merge */
 .moon-icon {
     width: 100px;
     height: 100px;
@@ -911,18 +905,15 @@
     position: relative;
     overflow: hidden;
     background-color: #f0e68c;
-    /* Light part of the moon */
     box-shadow: inset -10px 0px 15px -10px rgba(0, 0, 0, 0.4);
     transition: box-shadow 0.6s ease;
 }
 
-/* Apply hover effects also when 'active-moon-animation' class is present */
 .moon-visualization-container:hover .moon-icon,
 .moon-visualization-container.active-moon-animation .moon-icon {
     box-shadow: inset 0 0 20px -5px rgba(0, 0, 0, 0.2);
 }
 
-/* Glossy highlight pseudo-element */
 .moon-icon::before {
     content: '';
     position: absolute;
@@ -954,12 +945,9 @@
     box-shadow: 20px 0px 10px -10px #f0e68c inset;
 }
 
-/* Added to make the waning crescent moon join on hover */
-/* Apply hover effects also when 'active-moon-animation' class is present */
 .moon-visualization-container:hover .waning-crescent::after,
 .moon-visualization-container.active-moon-animation .waning-crescent::after {
     transform: translateX(100%);
-    /* Move to the right to reveal the full moon */
 }
 
 
@@ -969,7 +957,6 @@
     box-shadow: 25px 0px 10px -10px var(--color-newspaper-bg) inset;
 }
 
-/* Apply hover effects also when 'active-moon-animation' class is present */
 .moon-visualization-container:hover .waxing-gibbous::after,
 .moon-visualization-container.active-moon-animation .waxing-gibbous::after {
     transform: translateX(-100%);
@@ -1033,6 +1020,21 @@
     background: var(--color-background);
     padding: 4rem 2rem;
     position: relative;
+}
+
+.section-stamp-logo {
+    width: 150px;
+    height: 150px;
+    transform: rotate(-3deg);
+    margin-bottom: -1rem;
+    opacity: 0.9;
+    background-color: var(--color-primary-matcha);
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
 }
 
 .schedule-section .section-stamp-logo {
@@ -1306,17 +1308,13 @@
 }
 
 @media (max-width: 900px) {
-
-    /* Responsive adjustments for ring article */
     .ring-article-layout {
         grid-template-columns: 1fr;
-        /* Stack on smaller screens */
     }
 
     .ring-image-placeholder {
         max-width: 250px;
         margin: 0 auto 2rem auto;
-        /* Center the image when stacked */
         transform: rotate(0deg);
     }
 }
@@ -1340,34 +1338,95 @@
         padding: 1rem;
     }
 
-    /* Responsive adjustments for the stamp */
     .love-paparazzi-stamp {
         width: 120px;
-        /* Smaller on mobile */
     }
 
-    /* Responsive for bio section */
+    /* --- REVISED: Responsive for bio section --- */
     .invitation-card {
+        cursor: pointer;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+    .mobile-only-front-content {
+        display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .invitation-card-face {
         padding: 2rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mobile-names-container {
+        display: flex;
+        gap: 2rem;
+        width: 100%;
+    }
+    
+    .mobile-names-container .invitation-column {
+        flex-direction: column;
+    }
+
+    .person-name {
+        font-size: 2.5rem;
+        min-height: 10rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .invitation-center-divider {
         border-left: none;
         border-right: none;
         border-top: 1px solid var(--luxe-gold, #B49B6C);
-        /* Gold border */
         border-bottom: 1px solid var(--luxe-gold, #B49B6C);
-        /* Gold border */
-        padding: 1.5rem 0;
-        margin: 1.5rem 0;
-        width: 100%;
+        padding: 1rem 0;
+        margin: 0.75rem 0;
+        width: 80%;
+        align-self: center;
+        height: auto;
+    }
+    
+    .invitation-center-divider.back-divider {
+        width: 50%;
     }
 
-    .person-name-vertical {
-        writing-mode: horizontal-tb;
-        height: auto;
-        font-size: 2.5rem;
+    .mobile-bio-header {
+        display: block;
+        font-family: var(--font-heading);
+        color: var(--luxe-gold);
+        font-size: 1.8rem;
+    }
+
+    .invitation-card-back .invitation-column {
+        gap: 1rem;
+    }
+
+    .invitation-card-back .person-bio {
+        margin-top: 0;
+        font-size: 1rem;
+        max-width: 90%;
+    }
+
+    .mobile-tap-prompt {
+        display: block;
+        font-family: var(--font-ui);
+        color: var(--luxe-gold);
+        opacity: 0.7;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .mobile-tap-prompt.back {
+        position: absolute;
+        bottom: 2rem;
     }
 }

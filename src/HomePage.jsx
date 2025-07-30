@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './css/base.css';
 import './css/sections.css';
 import './css/components.css';
@@ -16,8 +16,7 @@ import hqStamp1 from './assets/HQ-stamp-1-nobg.png'; // Rectangular Stamp
 import hqStamp2 from './assets/HQ-stamp-2-nobg.png'; // Circular Stamp
 import hqStamp3 from './assets/HQ-stamp-3-nobg.png'; // New stamp for schedule
 import hqArt from './assets/HQ-art.png'; // Footer Art
-// NOTE: Assumes you have added the new stamp image to your assets folder as 'HQ-art-2.png'
-import hqArt2 from './assets/HQ-art-2.png'; 
+import hqArt2 from './assets/HQ-art-2.png';
 
 
 // --- LAZY LOAD COMPONENTS ---
@@ -29,7 +28,7 @@ const VIEWS = {
   LOVE_PAPARAZZI: 'love_paparazzi',
   SCHEDULE: 'schedule',
   PHOTOBOOK: 'photobook',
-  WELL_WISHES: 'well_wishes', // New view for GuestBook
+  WELL_WISHES: 'well_wishes',
   RSVP: 'rsvp',
 };
 
@@ -177,36 +176,78 @@ const OurJourney = ({ onNavigate, t }) => (
     </section>
 );
 
-// --- NEW: Meet the Couple Section ---
+// --- REVISED: Meet the Couple Section with Flip Interaction ---
 const MeetTheCouple = ({ t }) => {
-    // Helper to format the name with line breaks
+    const [isFlipped, setIsFlipped] = useState(false);
+
+    // Helper to format the name with line breaks for desktop
     const formatName = (name) => {
         return name.split(' ').join('<br/>');
     };
 
+    // Function to handle click, only flips on mobile
+    const handleCardClick = () => {
+        if (window.innerWidth <= 768) {
+            setIsFlipped(!isFlipped);
+        }
+    };
+
     return (
         <section className="page-section meet-the-couple-section">
-            <div className="invitation-card">
-                {/* Groom's Column (Left - Nam Tả) */}
-                <div className="invitation-column">
-                    <div className="person-title">{t.meetTheCouple.groomTitle}</div>
-                    <h3 
-                        className="person-name-vertical"
-                        dangerouslySetInnerHTML={{ __html: formatName(t.meetTheCouple.groomName) }}
-                    ></h3>
-                    <p className="person-bio">{t.meetTheCouple.groomBio}</p>
-                </div>
-                <div className="invitation-center-divider">
-                    <img src={hqArt2} alt="Quyen & Hien Stamp" className="invitation-stamp" />
-                </div>
-                {/* Bride's Column (Right - Nữ Hữu) */}
-                <div className="invitation-column">
-                    <div className="person-title">{t.meetTheCouple.brideTitle}</div>
-                     <h3 
-                        className="person-name-vertical"
-                        dangerouslySetInnerHTML={{ __html: formatName(t.meetTheCouple.brideName) }}
-                    ></h3>
-                    <p className="person-bio">{t.meetTheCouple.brideBio}</p>
+            <div className="invitation-card-container" onClick={handleCardClick}>
+                <div className={`invitation-card ${isFlipped ? 'is-flipped' : ''}`}>
+                    {/* Front of the card */}
+                    <div className="invitation-card-face invitation-card-front">
+                        {/* Desktop-only view */}
+                        <div className="invitation-column desktop-only">
+                            <div className="person-title">{t.meetTheCouple.groomTitle}</div>
+                            <h3 className="person-name" dangerouslySetInnerHTML={{ __html: formatName(t.meetTheCouple.groomName) }}></h3>
+                            <p className="person-bio">{t.meetTheCouple.groomBio}</p>
+                        </div>
+                        <div className="invitation-center-divider desktop-only">
+                            <img src={hqArt2} alt="Quyen & Hien Stamp" className="invitation-stamp" />
+                        </div>
+                        <div className="invitation-column desktop-only">
+                            <div className="person-title">{t.meetTheCouple.brideTitle}</div>
+                            <h3 className="person-name" dangerouslySetInnerHTML={{ __html: formatName(t.meetTheCouple.brideName) }}></h3>
+                            <p className="person-bio">{t.meetTheCouple.brideBio}</p>
+                        </div>
+
+                        {/* Mobile-only view */}
+                        <div className="mobile-only-front-content">
+                            <div className="mobile-names-container">
+                                <div className="invitation-column">
+                                    <div className="person-title">{t.meetTheCouple.groomTitle}</div>
+                                    <h3 className="person-name">{t.meetTheCouple.groomName}</h3>
+                                </div>
+                                <div className="invitation-column">
+                                    <div className="person-title">{t.meetTheCouple.brideTitle}</div>
+                                    <h3 className="person-name">{t.meetTheCouple.brideName}</h3>
+                                </div>
+                            </div>
+                            <div className="invitation-center-divider">
+                                <img src={hqArt2} alt="Quyen & Hien Stamp" className="invitation-stamp" />
+                            </div>
+                            <div className="mobile-tap-prompt">
+                                <span>The Couple's Bio &gt;</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Back of the card (Mobile only) */}
+                    <div className="invitation-card-face invitation-card-back">
+                        <h2 className="mobile-bio-header">Our Story</h2>
+                        <div className="invitation-column">
+                             <p className="person-bio">{t.meetTheCouple.groomBio}</p>
+                        </div>
+                        <div className="invitation-center-divider back-divider"></div>
+                        <div className="invitation-column">
+                            <p className="person-bio">{t.meetTheCouple.brideBio}</p>
+                        </div>
+                        <div className="mobile-tap-prompt back">
+                            <span>Tap to return</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -279,7 +320,7 @@ const LovePaparazziSection = ({ t }) => {
 
                 {/* Stamp between the two articles */}
                 <div className="love-paparazzi-stamp-container">
-                    <img src={hqStamp1} alt="Quyen & Hien Stamp" className="love-paparazzi-stamp" />
+                    <div className="love-paparazzi-stamp" style={{ maskImage: `url(${hqStamp1})`, WebkitMaskImage: `url(${hqStamp1})` }}></div>
                 </div>
 
                 {/* REVISED Moon Phase Article */}
@@ -326,7 +367,7 @@ const LovePaparazziSection = ({ t }) => {
 
                 {/* Stamp between the articles */}
                 <div className="love-paparazzi-stamp-container">
-                    <img src={hqStamp2} alt="Quyen & Hien Stamp" className="love-paparazzi-stamp" style={{width: "120px", transform: 'translate(-50%, -50%) rotate(5deg)'}} />
+                    <div className="love-paparazzi-stamp" style={{ maskImage: `url(${hqStamp2})`, WebkitMaskImage: `url(${hqStamp2})`, width: "120px", height: "120px", transform: 'translate(-50%, -50%) rotate(5deg)' }}></div>
                 </div>
 
                 {/* NEW: Ring Article */}
@@ -373,7 +414,7 @@ const LovePaparazziSection = ({ t }) => {
 const WeddingDaySchedule = ({ t }) => (
     <section id="schedule" className="page-section schedule-section">
         <div className="section-header">
-            <img src={hqStamp3} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
+            <div className="section-stamp-logo" style={{ maskImage: `url(${hqStamp3})`, WebkitMaskImage: `url(${hqStamp3})` }}></div>
             <h2>{t.schedule.title}</h2>
         </div>
         <div className="schedule-timeline-container">
@@ -389,7 +430,7 @@ const WeddingDaySchedule = ({ t }) => (
 const GuestPhotobook = () => (
     <section id="photobook" className="page-section photobook-section">
         <div className="section-header">
-            <img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
+            <div className="section-stamp-logo" style={{ maskImage: `url(${hqStamp1})`, WebkitMaskImage: `url(${hqStamp1})` }}></div>
             <h2>Guest Photobook</h2>
         </div>
         <div className="photobook-intro">
@@ -417,7 +458,10 @@ const RsvpForm = ({ churchCeremony, weddingParty }) => {
 
     return (
         <section id="rsvp" className="page-section rsvp-section">
-            <div className="section-header"><img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" /><h2>Event Details & RSVP</h2></div>
+            <div className="section-header">
+                <div className="section-stamp-logo" style={{ maskImage: `url(${hqStamp1})`, WebkitMaskImage: `url(${hqStamp1})` }}></div>
+                <h2>Event Details & RSVP</h2>
+            </div>
             <div className="rsvp-details-container">
                 <div className="detail-item"><h3>Church Ceremony</h3><p><strong>July 1, 2028 at 2:00 PM</strong></p><p>St. Joseph Cathedral, Columbus, OH</p><div className="button-group"><a href={createGoogleCalendarUrl(churchCeremony)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a><a href={createIcsUrl(churchCeremony)} download="wedding-ceremony.ics" className="button calendar-btn">Apple/Outlook</a></div></div>
                 <div className="detail-item"><h3>Wedding Party</h3><p><strong>July 1, 2028 at 6:00 PM</strong></p><p>The Westin Great Southern, Columbus, OH</p><div className="button-group"><a href={createGoogleCalendarUrl(weddingParty)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a><a href={createIcsUrl(weddingParty)} download="wedding-party.ics" className="button calendar-btn">Apple/Outlook</a></div></div>
@@ -438,26 +482,35 @@ const RsvpForm = ({ churchCeremony, weddingParty }) => {
     );
 };
 
-// --- NEW: Utility Bar Component ---
+// --- REVISED: Utility Bar Component ---
 const UtilityBar = ({ language, setLanguage }) => {
+    const handleToggle = () => {
+        setLanguage(prev => prev === 'en' ? 'vn' : 'en');
+    };
+
     return (
         <div className="utility-bar">
-            <div className="lang-switcher">
-                <div 
+            <div
+                className="lang-switcher"
+                onClick={handleToggle}
+                role="button"
+                tabIndex="0"
+                onKeyPress={(e) => (e.key === 'Enter' || e.key === ' ') && handleToggle()}
+                aria-label={`Switch to ${language === 'en' ? 'Vietnamese' : 'English'}`}
+            >
+                <div
                     className={`lang-slider ${language === 'vn' ? 'vn-active' : ''}`}
                 ></div>
-                <button 
-                    className={`lang-btn ${language === 'en' ? 'active' : ''}`} 
-                    onClick={() => setLanguage('en')}
+                <span
+                    className={`lang-btn ${language === 'en' ? 'active' : ''}`}
                 >
                     EN
-                </button>
-                <button 
-                    className={`lang-btn ${language === 'vn' ? 'active' : ''}`} 
-                    onClick={() => setLanguage('vn')}
+                </span>
+                <span
+                    className={`lang-btn ${language === 'vn' ? 'active' : ''}`}
                 >
                     VN
-                </button>
+                </span>
             </div>
         </div>
     );

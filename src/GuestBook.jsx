@@ -13,8 +13,7 @@ const GuestBook = ({ t }) => {
   return (
     <section id="guestbook" className="page-section guestbook-section">
       <div className="section-header">
-        <img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
-        {/* MODIFIED: Used the translation prop for the title */}
+        <div className="section-stamp-logo" style={{ maskImage: `url(${hqStamp1})`, WebkitMaskImage: `url(${hqStamp1})` }}></div>
         <h2>{t.nav.wellWishes}</h2>
       </div>
       <div className="guestbook-intro">

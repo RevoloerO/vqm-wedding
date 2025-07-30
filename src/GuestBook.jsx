@@ -6,13 +6,16 @@ import hqStamp1 from './assets/HQ-stamp-1-nobg.png';
 /**
  * GuestBook Component
  * Displays well wishes from guests in a styled format.
+ * @param {object} props - Component props.
+ * @param {object} props.t - The translation object.
  */
-const GuestBook = () => {
+const GuestBook = ({ t }) => {
   return (
     <section id="guestbook" className="page-section guestbook-section">
       <div className="section-header">
         <img src={hqStamp1} alt="Quyen & Hien Stamp" className="section-stamp-logo" />
-        <h2>Well Wishes</h2>
+        {/* MODIFIED: Used the translation prop for the title */}
+        <h2>{t.nav.wellWishes}</h2>
       </div>
       <div className="guestbook-intro">
         <p>Thank you to our beloved family and friends for sharing in our joy. Your words of love and support mean the world to us and will be cherished forever.</p>

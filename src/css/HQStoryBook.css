@@ -1,27 +1,6 @@
-/* --- Google Font Imports (Ensuring all are available) --- */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+/* REMOVED: Redundant Google Font imports. They are now loaded from base.css */
 
-
-/* --- CSS Variables (Theme) - UPDATED to match base.css --- */
-:root {
-  --color-bg: #F8F5EE; /* Creamy Ivory */
-  --color-matcha-deep: #5F7C5D; /* Deep Matcha Green */
-  --color-matcha-soft: #A3B899; /* Soft Matcha Green */
-  --color-gold: #D4AF37; /* Brighter, vibrant Gold */
-  --color-deep-gold: #A67C00; /* Deeper, burnished Gold */
-  --color-text-dark: #36454F; /* Charcoal */
-  --color-text-light: #FFFFFF;
-  --color-timeline-line: #e0dccc; /* Soft, earthy tone */
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Cormorant Garamond', serif;
-  --font-ui: 'Lato', sans-serif;
-  --font-stamp: 'Great Vibes', cursive; /* Using accent font for the stamp */
-  --transition-speed: 0.7s;
-  --transition-timing: cubic-bezier(0.645, 0.045, 0.355, 1);
-  --animation-duration: 1.2s;
-}
+/* REMOVED: Redundant :root variables. They are now inherited from base.css */
 
 /* --- Book Animation Wrapper --- */
 .hq-story-book-wrapper {
@@ -29,7 +8,7 @@
   width: 100%;
   min-height: 100vh;
   perspective: 2500px;
-  background-color: var(--color-bg);
+  background-color: var(--color-background); /* Using variable from base.css */
   overflow-x: hidden;
 }
 
@@ -39,7 +18,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--color-matcha-deep);
+  background-color: var(--color-primary-matcha); /* Using variable from base.css */
   transform-origin: left center;
   z-index: 2000; /* Highest z-index */
   display: flex;
@@ -53,7 +32,7 @@
 
 /* Updated book cover title to use accent font */
 .book-cover .journey-book-title {
-    font-family: var(--font-stamp);
+    font-family: var(--font-display); /* Using variable from base.css */
     font-size: 6rem;
     color: white;
     margin: 0;
@@ -61,7 +40,7 @@
 }
 
 .book-cover .journey-book-subtitle {
-    font-family: var(--font-body);
+    font-family: var(--font-body); /* Using variable from base.css */
     font-style: italic;
     font-size: 1.2rem;
     color: rgba(255, 255, 255, 0.9);
@@ -113,11 +92,11 @@
 
 /* --- Applying Animations --- */
 .hq-story-book-wrapper.entering .book-cover {
-  animation: open-book var(--animation-duration) forwards var(--transition-timing);
+  animation: open-book 1.2s forwards cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .hq-story-book-wrapper.exiting .book-cover {
-  animation: close-book var(--animation-duration) forwards var(--transition-timing);
+  animation: close-book 1.2s forwards cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .hq-story-book-wrapper.entered .book-cover {
@@ -129,12 +108,12 @@
 .hq-story-container {
   display: flex;
   width: 100%;
-  background-color: var(--color-bg);
-  font-family: var(--font-body);
-  color: var(--color-text-dark);
+  background-color: var(--color-background); /* Using variable from base.css */
+  font-family: var(--font-body); /* Using variable from base.css */
+  color: var(--color-text-dark); /* Using variable from base.css */
   opacity: 0;
-  animation: fadeInContent calc(var(--animation-duration) * 0.5) ease-in forwards;
-  animation-delay: calc(var(--animation-duration) * 0.3);
+  animation: fadeInContent calc(1.2s * 0.5) ease-in forwards;
+  animation-delay: calc(1.2s * 0.3);
   /* MODIFIED: Set height to 100vh for sticky positioning context on desktop */
   height: 100vh;
   overflow: hidden; /* Hide overflow on the container */
@@ -146,7 +125,7 @@
 
 .hq-story-book-wrapper.exiting .hq-story-container {
   opacity: 0;
-  transition: opacity calc(var(--animation-duration) * 0.5) ease-out;
+  transition: opacity calc(1.2s * 0.5) ease-out;
 }
 
 /* --- Timeline Column --- */
@@ -154,7 +133,7 @@
   width: 100%;
   padding: 4rem 2rem;
   flex-shrink: 0;
-  transition: width var(--transition-speed) var(--transition-timing);
+  transition: width 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
   position: relative;
   /* MODIFIED: Make this column scrollable */
   overflow-y: auto;
@@ -169,11 +148,11 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1.2rem;
-  background-color: var(--color-bg);
-  border: 2px solid var(--color-gold);
-  color: var(--color-gold);
+  background-color: var(--color-background); /* Using variable from base.css */
+  border: 2px solid var(--color-accent-gold); /* Using variable from base.css */
+  color: var(--color-accent-gold); /* Using variable from base.css */
   border-radius: 50px;
-  font-family: var(--font-ui);
+  font-family: var(--font-ui); /* Using variable from base.css */
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -182,8 +161,8 @@
 }
 
 .back-to-home-btn:hover {
-  background-color: var(--color-gold);
-  color: var(--color-text-light);
+  background-color: var(--color-accent-gold); /* Using variable from base.css */
+  color: var(--color-text-light); /* Using variable from base.css */
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
@@ -200,18 +179,18 @@
 }
 
 .story-title {
-  font-family: var(--font-heading);
+  font-family: var(--font-heading); /* Using variable from base.css */
   font-size: 3.5rem;
   font-weight: 700;
-  color: var(--color-matcha-deep);
+  color: var(--color-primary-matcha); /* Using variable from base.css */
   margin: 0;
 }
 
 .story-subtitle {
-  font-family: var(--font-body);
+  font-family: var(--font-body); /* Using variable from base.css */
   font-style: italic;
   font-size: 1.3rem;
-  color: var(--color-text-dark);
+  color: var(--color-text-dark); /* Using variable from base.css */
   opacity: 0.8;
   margin-top: 0.5rem;
 }
@@ -231,7 +210,7 @@
   top: 15px;
   bottom: 15px;
   width: 3px;
-  background-color: var(--color-timeline-line);
+  background-color: var(--color-newspaper-border); /* Using variable from base.css */
   transform: translateX(-50%);
   border-radius: 3px;
 }
@@ -265,8 +244,8 @@
   left: 50%;
   width: 20px;
   height: 20px;
-  background-color: var(--color-bg);
-  border: 3px solid var(--color-matcha-soft);
+  background-color: var(--color-background); /* Using variable from base.css */
+  border: 3px solid var(--color-accent-gold); /* Using variable from base.css */
   border-radius: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -276,9 +255,9 @@
 .timeline-event:hover .timeline-node,
 .timeline-event.active .timeline-node {
   transform: translate(-50%, -50%) scale(1.3);
-  background-color: var(--color-matcha-soft);
-  border-color: var(--color-matcha-deep);
-  box-shadow: 0 0 0 6px var(--color-bg), 0 0 15px rgba(0,0,0,0.1);
+  background-color: var(--color-accent-gold); /* Using variable from base.css */
+  border-color: var(--color-accent-deep-gold); /* Using variable from base.css */
+  box-shadow: 0 0 0 6px var(--color-background), 0 0 15px rgba(0,0,0,0.1);
 }
 
 .timeline-brief {
@@ -294,16 +273,16 @@
 .timeline-event:nth-child(even) .timeline-brief { margin-left: auto; text-align: left; }
 
 .brief-date {
-  font-family: var(--font-ui);
+  font-family: var(--font-ui); /* Using variable from base.css */
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--color-gold);
+  color: var(--color-accent-deep-gold); /* Using variable from base.css */
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .brief-title {
-  font-family: var(--font-heading);
+  font-family: var(--font-heading); /* Using variable from base.css */
   font-size: 1.8rem;
   margin: 0.25rem 0 0 0;
   font-weight: 400;
@@ -313,11 +292,11 @@
 .detail-column {
   width: 0;
   flex-shrink: 0;
-  background-color: var(--color-text-dark);
-  color: var(--color-text-light);
+  background-color: var(--color-text-dark); /* Using variable from base.css */
+  color: var(--color-text-light); /* Using variable from base.css */
   opacity: 0;
-  transition: width var(--transition-speed) var(--transition-timing),
-              opacity calc(var(--transition-speed) * 0.8) ease-in-out calc(var(--transition-speed) * 0.2);
+  transition: width 0.7s cubic-bezier(0.645, 0.045, 0.355, 1),
+              opacity calc(0.7s * 0.8) ease-in-out calc(0.7s * 0.2);
   position: sticky;
   top: 0;
   height: 100vh;
@@ -354,17 +333,17 @@
 }
 
 .detail-title {
-  font-family: var(--font-heading);
+  font-family: var(--font-heading); /* Using variable from base.css */
   font-size: 3rem;
-  color: var(--color-gold);
+  color: var(--color-accent-gold); /* Using variable from base.css */
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
 
 .detail-date {
-  font-family: var(--font-ui);
+  font-family: var(--font-ui); /* Using variable from base.css */
   font-size: 1rem;
-  color: var(--color-text-light);
+  color: var(--color-text-light); /* Using variable from base.css */
   opacity: 0.7;
   margin-bottom: 2rem;
   text-transform: uppercase;
@@ -372,7 +351,7 @@
 }
 
 .detail-full-text {
-  font-family: var(--font-body);
+  font-family: var(--font-body); /* Using variable from base.css */
   font-size: 1.2rem;
   line-height: 1.8;
   opacity: 0.9;
@@ -384,7 +363,7 @@
   right: 2rem;
   background: none;
   border: none;
-  color: var(--color-text-light);
+  color: var(--color-text-light); /* Using variable from base.css */
   font-size: 2.5rem;
   font-weight: 300;
   cursor: pointer;
@@ -400,7 +379,7 @@
 .hq-story-container.detail-view-active .detail-column { width: 60%; opacity: 1; }
 .hq-story-container.detail-view-active .detail-content-wrapper {
     opacity: 1;
-    transition-delay: calc(var(--transition-speed) * 0.5);
+    transition-delay: calc(0.7s * 0.5);
 }
 
 /* --- Responsive Design --- */
@@ -438,7 +417,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    transition: transform var(--transition-speed) var(--transition-timing);
+    transition: transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
   
   .hq-story-container.detail-view-active .detail-column {

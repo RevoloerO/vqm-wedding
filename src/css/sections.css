@@ -147,7 +147,7 @@
     font-family: var(--font-display);
     font-size: 6rem;
     font-weight: 400;
-    line-height: 1;
+    line-height: 1.2;
     margin-bottom: 0.5rem;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.3);
 }
@@ -417,7 +417,7 @@
     width: 100%;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-    min-height: 480px;
+    min-height: 560px; /* Increased from 480px to better fit content */
 }
 
 .invitation-card.is-flipped {
@@ -505,9 +505,9 @@
 }
 
 .invitation-stamp {
-    width: 120px;
-    height: auto;
-    opacity: 0.8;
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
 }
 
 /* Hide mobile content on desktop */

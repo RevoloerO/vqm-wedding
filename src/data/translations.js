@@ -16,7 +16,7 @@ export const translations = {
     },
     // Welcome Banner
     welcomeBanner: {
-      names: 'Quyen Mai & Hien Dang',
+      names: 'Quyen Mai<br/>&<br/>Hien Dang',
       details: 'July 1, 2028 | Columbus, OH',
     },
     // Our Journey Section
@@ -32,8 +32,8 @@ export const translations = {
         brideName: 'Đặng Ngọc Thu Hiền',
         groomTitle: 'The Eldest Son',
         brideTitle: 'The Youngest Daughter',
-        groomBio: '[Enter a short bio for Quyen here. You can write about his hobbies, profession, or a fun fact!]',
-        brideBio: '[Enter a short bio for Hien here. You can write about her hobbies, profession, or a fun fact!]',
+        groomBio: 'Born on September 20, 1995, Quyen is a creative web and blockchain developer. In his free time, he enjoys coding, tending to his plants, and gaming.',
+        brideBio: 'Born on March 15, 2000, Hien is a compassionate nurse. She loves to unwind with music, knitting, and watching movies.',
     },
     // Love Paparazzi Section
     lovePaparazzi: {
@@ -95,7 +95,7 @@ export const translations = {
     },
     // Welcome Banner
     welcomeBanner: {
-      names: 'Quyền Mai & Hiền Đặng',
+      names: 'Quyền Mai<br/>&<br/>Hiền Đặng',
       details: 'Ngày 1 tháng 7, 2028 | Columbus, OH',
     },
     // Our Journey Section
@@ -111,8 +111,8 @@ export const translations = {
         brideName: 'Đặng Ngọc Thu Hiền',
         groomTitle: 'Trưởng Nam',
         brideTitle: 'Út Nữ',
-        groomBio: '[Nhập tiểu sử ngắn cho Quyên ở đây. Bạn có thể viết về sở thích, nghề nghiệp, hoặc một sự thật thú vị!]',
-        brideBio: '[Nhập tiểu sử ngắn cho Hiền ở đây. Bạn có thể viết về sở thích, nghề nghiệp, hoặc một sự thật thú vị!]',
+        groomBio: 'Sinh ngày 20 tháng 9 năm 1995, Quyên là một nhà phát triển web và blockchain sáng tạo. Trong thời gian rảnh, anh thích viết mã, chăm sóc cây cối và chơi game.',
+        brideBio: 'Sinh ngày 15 tháng 3 năm 2000, Hiền là một y tá nhân ái. Cô ấy thích thư giãn với âm nhạc, đan lát và xem phim.',
     },
     // Love Paparazzi Section
     lovePaparazzi: {

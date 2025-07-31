@@ -16,7 +16,7 @@ import hqStamp1 from './assets/HQ-stamp-1-nobg.png'; // Rectangular Stamp
 import hqStamp2 from './assets/HQ-stamp-2-nobg.png'; // Circular Stamp
 import hqStamp3 from './assets/HQ-stamp-3-nobg.png'; // New stamp for schedule
 import hqArt from './assets/HQ-art.png'; // Footer Art
-import hqArt2 from './assets/HQ-art-2.png';
+import invitationStamp from './assets/invitation-stamp.png'; // Double Happy Stamp
 
 
 // --- LAZY LOAD COMPONENTS ---
@@ -138,7 +138,7 @@ const WelcomeBanner = ({ backgroundImage, onViewChange, t }) => {
               </svg>
             </div>
           </button>
-          <h1 className="welcome-banner-names">{t.welcomeBanner.names}</h1>
+          <h1 className="welcome-banner-names" dangerouslySetInnerHTML={{ __html: t.welcomeBanner.names }}></h1>
           <p className="welcome-banner-details">{t.welcomeBanner.details}</p>
           <Countdown targetDate="2028-07-01T00:00:00" />
            <div className="welcome-banner-blessing">
@@ -205,7 +205,7 @@ const MeetTheCouple = ({ t }) => {
                             <p className="person-bio">{t.meetTheCouple.groomBio}</p>
                         </div>
                         <div className="invitation-center-divider desktop-only">
-                            <img src={hqArt2} alt="Quyen & Hien Stamp" className="invitation-stamp" />
+                            <img src={invitationStamp} alt="Double Happiness Stamp" className="invitation-stamp" />
                         </div>
                         <div className="invitation-column desktop-only">
                             <div className="person-title">{t.meetTheCouple.brideTitle}</div>
@@ -226,7 +226,7 @@ const MeetTheCouple = ({ t }) => {
                                 </div>
                             </div>
                             <div className="invitation-center-divider">
-                                <img src={hqArt2} alt="Quyen & Hien Stamp" className="invitation-stamp" />
+                                <img src={invitationStamp} alt="Double Happiness Stamp" className="invitation-stamp" />
                             </div>
                             <div className="mobile-tap-prompt">
                                 <span>The Couple's Bio &gt;</span>
@@ -236,7 +236,6 @@ const MeetTheCouple = ({ t }) => {
 
                     {/* Back of the card (Mobile only) */}
                     <div className="invitation-card-face invitation-card-back">
-                        <h2 className="mobile-bio-header">Our Story</h2>
                         <div className="invitation-column">
                              <p className="person-bio">{t.meetTheCouple.groomBio}</p>
                         </div>

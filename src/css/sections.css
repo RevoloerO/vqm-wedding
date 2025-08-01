@@ -417,7 +417,7 @@
     width: 100%;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-    min-height: 560px; /* Increased from 480px to better fit content */
+    display: grid; /* Use grid to manage face stacking and height */
 }
 
 .invitation-card.is-flipped {
@@ -425,9 +425,8 @@
 }
 
 .invitation-card-face {
-    position: absolute;
+    grid-area: 1 / 1; /* Place both faces in the same cell */
     width: 100%;
-    height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     display: flex;
@@ -437,7 +436,47 @@
     background: var(--luxe-green, #2A4036);
     border: 5px solid var(--luxe-gold);
     box-shadow: 10px 10px 30px rgba(61, 60, 60, 0.08);
+    position: relative;
+    z-index: 1;
 }
+
+/* --- NEW: Border Decorations --- */
+.invitation-card-face::before,
+.invitation-card-face::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Inner border line */
+.invitation-card-face::before {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 1px solid rgba(244, 218, 143, 0.3);
+}
+
+/* Corner flourishes */
+.invitation-card-face::after {
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    background:
+        /* Top-left */
+        radial-gradient(circle at 0 0, rgba(244,218,143,0.3) 0, transparent 25%) top left,
+        /* Top-right */
+        radial-gradient(circle at 100% 0, rgba(244,218,143,0.3) 0, transparent 25%) top right,
+        /* Bottom-left */
+        radial-gradient(circle at 0 100%, rgba(244,218,143,0.3) 0, transparent 25%) bottom left,
+        /* Bottom-right */
+        radial-gradient(circle at 100% 100%, rgba(244,218,143,0.3) 0, transparent 25%) bottom right;
+    background-size: 80px 80px;
+    background-repeat: no-repeat;
+}
+
 
 .invitation-card-front {
     justify-content: space-between;
@@ -501,13 +540,17 @@
     align-self: stretch;
     border-left: 1px solid var(--luxe-gold, #B49B6C);
     border-right: 1px solid var(--luxe-gold, #B49B6C);
-    padding: 0 2rem;
+    padding: 0;
+    margin: 0;
 }
 
-.invitation-stamp {
-    width: 200px;
-    height: 200px;
+.invitation-emblem {
+    width: 160px;
+    height: 160px;
     object-fit: contain;
+    margin: 0 1.5rem;
+    /* This filter combination tints the (presumably dark) PNG image to a gold color */
+    filter: brightness(0) saturate(100%) invert(85%) sepia(25%) saturate(550%) hue-rotate(350deg) brightness(105%) contrast(95%);
 }
 
 /* Hide mobile content on desktop */
@@ -1356,7 +1399,6 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        height: 100%;
     }
 
     .invitation-card-face {

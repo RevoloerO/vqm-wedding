@@ -16,7 +16,7 @@ import hqStamp1 from './assets/HQ-stamp-1-nobg.png'; // Rectangular Stamp
 import hqStamp2 from './assets/HQ-stamp-2-nobg.png'; // Circular Stamp
 import hqStamp3 from './assets/HQ-stamp-3-nobg.png'; // New stamp for schedule
 import hqArt from './assets/HQ-art.png'; // Footer Art
-import invitationStamp from './assets/invitation-stamp.png'; // Double Happy Stamp
+import invitationEmblem from './assets/invitation-emblem-2.png'; // Double Happy Emblem
 
 
 // --- LAZY LOAD COMPONENTS ---
@@ -205,7 +205,7 @@ const MeetTheCouple = ({ t }) => {
                             <p className="person-bio">{t.meetTheCouple.groomBio}</p>
                         </div>
                         <div className="invitation-center-divider desktop-only">
-                            <img src={invitationStamp} alt="Double Happiness Stamp" className="invitation-stamp" />
+                            <img src={invitationEmblem} alt="Double Happiness Emblem" className="invitation-emblem" />
                         </div>
                         <div className="invitation-column desktop-only">
                             <div className="person-title">{t.meetTheCouple.brideTitle}</div>
@@ -226,7 +226,7 @@ const MeetTheCouple = ({ t }) => {
                                 </div>
                             </div>
                             <div className="invitation-center-divider">
-                                <img src={invitationStamp} alt="Double Happiness Stamp" className="invitation-stamp" />
+                                <img src={invitationEmblem} alt="Double Happiness Emblem" className="invitation-emblem" />
                             </div>
                             <div className="mobile-tap-prompt">
                                 <span>The Couple's Bio &gt;</span>

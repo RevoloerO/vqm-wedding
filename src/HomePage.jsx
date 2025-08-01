@@ -198,6 +198,7 @@ const MeetTheCouple = ({ t }) => {
                 <div className={`invitation-card ${isFlipped ? 'is-flipped' : ''}`}>
                     {/* Front of the card */}
                     <div className="invitation-card-face invitation-card-front">
+                        <div className="invitation-bg-emblem"></div>
                         {/* Desktop-only view */}
                         <div className="invitation-column desktop-only">
                             <div className="person-title">{t.meetTheCouple.groomTitle}</div>
@@ -236,15 +237,17 @@ const MeetTheCouple = ({ t }) => {
 
                     {/* Back of the card (Mobile only) */}
                     <div className="invitation-card-face invitation-card-back">
-                        <div className="invitation-column">
-                             <p className="person-bio">{t.meetTheCouple.groomBio}</p>
-                        </div>
-                        <div className="invitation-center-divider back-divider"></div>
-                        <div className="invitation-column">
-                            <p className="person-bio">{t.meetTheCouple.brideBio}</p>
-                        </div>
-                        <div className="mobile-tap-prompt back">
-                            <span>Tap to return</span>
+                        <div className="invitation-card-back-content">
+                            <div className="invitation-column">
+                                 <p className="person-bio">{t.meetTheCouple.groomBio}</p>
+                            </div>
+                            <div className="invitation-center-divider back-divider"></div>
+                            <div className="invitation-column">
+                                <p className="person-bio">{t.meetTheCouple.brideBio}</p>
+                            </div>
+                            <div className="mobile-tap-prompt back">
+                                <span>Tap to return</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -324,43 +327,40 @@ const LovePaparazziSection = ({ t }) => {
 
                 {/* REVISED Moon Phase Article */}
                 <div id="article-moon" className="moon-phase-article">
-                    <h2 className="article-headline">A Celestial Sync: Written in the Stars ✨</h2>
+                    <h2 className="article-headline" dangerouslySetInnerHTML={{ __html: t.lovePaparazzi.moonPhase.headline }}></h2>
                     <div className={`moon-visualization-container ${isMoonAnimated ? 'active-moon-animation' : ''}`} onClick={toggleMoonAnimation}>
                         <div className="moon-wrapper">
                             <div className="moon-icon waning-crescent"></div>
-                            <p className="moon-label">Quyen's Moon</p>
-                            <p className="moon-phase-name">Waning Crescent</p>
+                            <p className="moon-label">{t.lovePaparazzi.moonPhase.quyensMoon}</p>
+                            <p className="moon-phase-name">{t.lovePaparazzi.moonPhase.waningCrescent}</p>
                         </div>
                         <div className="moon-wrapper">
                             <div className="moon-icon waxing-gibbous"></div>
-                            <p className="moon-label">Hien's Moon</p>
-                            <p className="moon-phase-name">Waxing Gibbous</p>
+                            <p className="moon-label">{t.lovePaparazzi.moonPhase.hiensMoon}</p>
+                            <p className="moon-phase-name">{t.lovePaparazzi.moonPhase.waxingGibbous}</p>
                         </div>
                         <div className="moon-combined-label">
-                            <p className="moon-combined-main">Our Moon</p>
-                            <p className="moon-combined-sub">Full Moon</p>
+                            <p className="moon-combined-main">{t.lovePaparazzi.moonPhase.ourMoon}</p>
+                            <p className="moon-combined-sub">{t.lovePaparazzi.moonPhase.fullMoon}</p>
                         </div>
                     </div>
                     <div className="moon-explanation-text">
-                        <p className="moon-intro-paragraph">
-                            Did you know the moon phase on your birthday is considered your <b>"birth moon"</b>? It's said to offer insights into your personality and spiritual journey!
-                        </p>
+                        <p className="moon-intro-paragraph" dangerouslySetInnerHTML={{ __html: t.lovePaparazzi.moonPhase.intro }}></p>
+                        <div className="moon-facts-container">
+                            <div className="moon-person-fact">
+                                <p className="moon-person-name">{t.meetTheCouple.groomName}<span className="birth-date">{t.lovePaparazzi.moonPhase.quyenDob}</span></p>
+                                <p className="moon-phase-detail" dangerouslySetInnerHTML={{ __html: t.lovePaparazzi.moonPhase.quyenPhase }}></p>
+                                <p className="moon-description" dangerouslySetInnerHTML={{ __html: t.lovePaparazzi.moonPhase.quyenDesc }}></p>
+                            </div>
 
-                        <div className="moon-person-fact">
-                            <p className="person-name">Quyen Mai<span className="birth-date">(September 20, 1995)</span></p>
-                            <p className="moon-phase-detail"><i>Born under a <b>Waning Crescent</b></i> 🌙</p>
-                            <p className="moon-description">This phase often signifies a time of <b>quiet reflection, wisdom, and a desire to share knowledge</b>. It suggests a journey of completion and preparing for new beginnings with a gentle, introspective spirit.</p>
+                            <div className="moon-person-fact">
+                                <p className="moon-person-name">{t.meetTheCouple.brideName}<span className="birth-date">{t.lovePaparazzi.moonPhase.hienDob}</span></p>
+                                <p className="moon-phase-detail" dangerouslySetInnerHTML={{ __html: t.lovePaparazzi.moonPhase.hienPhase }}></p>
+                                <p className="moon-description" dangerouslySetInnerHTML={{ __html: t.lovePaparazzi.moonPhase.hienDesc }}></p>
+                            </div>
                         </div>
 
-                        <div className="moon-person-fact">
-                            <p className="person-name">Hien Dang<span className="birth-date">(March 15, 2000)</span></p>
-                            <p className="moon-phase-detail"><i>Born under a <b>Waxing Gibbous</b></i> 🌔</p>
-                            <p className="moon-description">This moon phase represents nurturing things toward <b>fulfillment, growth, and refinement.</b> Individuals born under this moon are often dedicated, analytical, and strive for perfection in their endeavors.</p>
-                        </div>
-
-                        <p className="moon-summary">
-                            How incredible that as one moon (Waning Crescent) embraces reflection and prepares for rest, the other (Waxing Gibbous) diligently grows towards its fullest potential! When combined, your individual moon energies beautifully align to form a <b>Full Moon</b> 🌕—a symbol of <b>completion, illumination, and profound unity</b>. It's a celestial reminder that together, your spirits create a harmonious, radiant, and complete cycle of love.
-                        </p>
+                        <p className="moon-summary" dangerouslySetInnerHTML={{ __html: t.lovePaparazzi.moonPhase.summary }}></p>
                     </div>
                 </div>
 

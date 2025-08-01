@@ -135,6 +135,9 @@
     .photobook-section {
         padding: 2rem 1rem;
     }
+    .invitation-bg-emblem {
+        background-size: min(90vh, 90vw);
+    }
 }
 
 /* For Small Mobile Devices */

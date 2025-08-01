@@ -145,10 +145,11 @@
 
 .welcome-banner-names {
     font-family: var(--font-display);
-    font-size: 6rem;
+    font-size: 5rem;
     font-weight: 400;
     line-height: 1.2;
     margin-bottom: 0.5rem;
+    margin-top: 0;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
@@ -403,7 +404,7 @@
 /* --- REVISED: Meet the Couple Section --- */
 .meet-the-couple-section {
     background: var(--color-background);
-    padding: 4rem 2rem;
+    padding: 1rem 2rem;
 }
 
 .invitation-card-container {
@@ -445,7 +446,7 @@
 .invitation-card-face::after {
     content: '';
     position: absolute;
-    z-index: -1;
+    z-index: 0;
     pointer-events: none;
 }
 
@@ -481,14 +482,20 @@
 .invitation-card-front {
     justify-content: space-between;
     align-items: flex-start;
+    position: relative;
 }
 
 .invitation-card-back {
     transform: rotateY(180deg);
+}
+
+.invitation-card-back-content {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    width: 100%;
+    height: 100%;
 }
 
 .invitation-column {
@@ -497,6 +504,8 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
 .person-title {
@@ -542,6 +551,8 @@
     border-right: 1px solid var(--luxe-gold, #B49B6C);
     padding: 0;
     margin: 0;
+    position: relative;
+    z-index: 2;
 }
 
 .invitation-emblem {
@@ -559,6 +570,21 @@
 }
 .mobile-bio-header {
     display: none;
+}
+
+.invitation-bg-emblem {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../assets/invitation-emblem-2.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: min(125vh, 125vw);
+    opacity: 0.05;
+    filter: brightness(0) saturate(100%) invert(85%) sepia(25%) saturate(550%) hue-rotate(350deg) brightness(105%) contrast(95%);
+    z-index: 1;
 }
 
 /* --- REVISED: Love Paparazzi Section (Newspaper Style) --- */
@@ -889,6 +915,11 @@
     margin-bottom: 1rem;
 }
 
+.moon-facts-container {
+    display: flex;
+    gap: 1.5rem;
+}
+
 .moon-person-fact {
     background-color: var(--color-secondary-cream);
     padding: 1.5rem;
@@ -896,9 +927,10 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--color-newspaper-border);
     text-align: center;
+    flex: 1;
 }
 
-.moon-person-fact .person-name {
+.moon-person-name {
     font-family: var(--font-heading);
     font-size: 1.6rem;
     color: var(--color-accent-deep-gold);
@@ -1360,6 +1392,10 @@
         margin: 0 auto 2rem auto;
         transform: rotate(0deg);
     }
+    
+    .moon-facts-container {
+        flex-direction: column;
+    }
 }
 
 
@@ -1368,7 +1404,7 @@
         padding: 1rem;
     }
 
-    .moon-person-fact .person-name {
+    .moon-person-name {
         font-size: 1.4rem;
     }
 
@@ -1399,6 +1435,8 @@
         align-items: center;
         justify-content: center;
         width: 100%;
+        position: relative;
+        z-index: 2;
     }
 
     .invitation-card-face {

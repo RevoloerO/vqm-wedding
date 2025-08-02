@@ -17,8 +17,8 @@ export const guestMessages = [
     },
     {
         id: 3,
-        author: "The Bridesmaids",
-        message: "To our dearest Quyen! We are so incredibly happy for you. Hien, you've officially joined the family! Let the fun begin! We love you both to the moon and back."
+        author: "An Elderly Gentleman",
+        message: "I wish for the best version of you and the best version of her meet in the placement of the wonderful universe. Enjoy the journey of life together, and may your love grow stronger with each passing day!"
     },
     {
         id: 4,

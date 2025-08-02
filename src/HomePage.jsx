@@ -185,11 +185,10 @@ const MeetTheCouple = ({ t }) => {
         return name.split(' ').join('<br/>');
     };
 
-    // Function to handle click, only flips on mobile
+    // BUG FIX: Removed window.innerWidth check. Click is now handled by state,
+    // and cursor style is handled by CSS media query for better responsiveness.
     const handleCardClick = () => {
-        if (window.innerWidth <= 768) {
-            setIsFlipped(!isFlipped);
-        }
+        setIsFlipped(!isFlipped);
     };
 
     return (
@@ -426,15 +425,15 @@ const WeddingDaySchedule = ({ t }) => (
 );
 
 // --- Guest Photobook Section ---
-const GuestPhotobook = () => (
+const GuestPhotobook = ({ t }) => (
     <section id="photobook" className="page-section photobook-section">
         <div className="section-header">
             <div className="section-stamp-logo" style={{ maskImage: `url(${hqStamp1})`, WebkitMaskImage: `url(${hqStamp1})` }}></div>
-            <h2>Guest Photobook</h2>
+            <h2>{t.photobook.title}</h2>
         </div>
         <div className="photobook-intro">
-            <p>Share your favorite moments from our special day! We've set up a Google Form to collect photos from our beloved guests. Your pictures will be a cherished part of our wedding album.</p>
-            <p>Please upload your photos and share a memory with us below.</p>
+            <p>{t.photobook.intro1}</p>
+            <p>{t.photobook.intro2}</p>
         </div>
         <div className="google-form-embed-container">
             <iframe
@@ -445,7 +444,7 @@ const GuestPhotobook = () => (
 );
 
 // RSVP Form Section
-const RsvpForm = ({ churchCeremony, weddingParty }) => {
+const RsvpForm = ({ churchCeremony, weddingParty, t }) => {
     const [formData, setFormData] = useState({ name: '', attending: '', attendingChurch: false, attendingParty: false, song: '', message: '' });
     const [submitted, setSubmitted] = useState(false);
     
@@ -466,7 +465,7 @@ const RsvpForm = ({ churchCeremony, weddingParty }) => {
                 <div className="detail-item"><h3>Wedding Party</h3><p><strong>July 1, 2028 at 6:00 PM</strong></p><p>The Westin Great Southern, Columbus, OH</p><div className="button-group"><a href={createGoogleCalendarUrl(weddingParty)} target="_blank" rel="noopener noreferrer" className="button calendar-btn">Google Calendar</a><a href={createIcsUrl(weddingParty)} download="wedding-party.ics" className="button calendar-btn">Apple/Outlook</a></div></div>
             </div>
             <hr className="rsvp-divider" />
-            {submitted ? (<div className="thank-you-message"><h3>Thank you!</h3><p>Your response has been recorded. We can't wait to celebrate with you!</p></div>) : (
+            {submitted ? (<div className="thank-you-message"><h3>{t.rsvp.thankYouTitle}</h3><p>{t.rsvp.thankYouMessage}</p></div>) : (
                 <form onSubmit={handleSubmit} className="rsvp-form">
                     <p>Please let us know if you can join our celebration by May 1st, 2028.</p>
                     <div className="form-group"><label htmlFor="name">Full Name(s)</label><input type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="e.g., John & Jane Doe" required /></div>
@@ -650,7 +649,7 @@ function HomePage() {
       <UtilityBar language={language} setLanguage={setLanguage} />
       <TabNavigation activeView={activeView} onViewChange={setActiveView} t={t} />
       <div className="main-content-area">
-        <Suspense fallback={<div className="loading-fallback">Loading...</div>}>
+        <Suspense fallback={<div className="loading-fallback">{t.common.loading}</div>}>
             <ViewDisplay 
                 activeView={activeView} 
                 onStoryClick={handleStoryClick}

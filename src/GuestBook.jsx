@@ -17,7 +17,7 @@ const GuestBook = ({ t }) => {
         <h2>{t.nav.wellWishes}</h2>
       </div>
       <div className="guestbook-intro">
-        <p>Thank you to our beloved family and friends for sharing in our joy. Your words of love and support mean the world to us and will be cherished forever.</p>
+        <p>{t.guestbook.intro}</p>
       </div>
       <div className="guestbook-messages-container">
         {guestMessages.map(item => (

@@ -5,6 +5,10 @@
  */
 export const translations = {
   en: {
+    // Common UI text
+    common: {
+      loading: 'Loading...',
+    },
     // Navigation
     nav: {
       journey: 'Our Journey',
@@ -39,7 +43,7 @@ export const translations = {
     lovePaparazzi: {
       masthead: 'The Love Paparazzi',
       articleNavCord: 'The Three-Strand Cord',
-      articleNavMoon: 'A Celestial Sync',
+      articleNavMoon: 'To the moon and back',
       articleNavRing: 'A Ring With Purpose',
       cordHeadline: 'On the Symbolism of the Three-Strand Cord',
       cordScripture: '"A cord of three strands is not quickly broken." — Ecclesiastes 4:12',
@@ -61,7 +65,7 @@ export const translations = {
       ringPromiseText: 'This ring is not just a circle of precious metal and stone; it\'s a circle of compassion. It serves as a daily reminder of our promise to each other and our shared commitment to live a life of purpose, to love generously, and to be a force for good in the world. We are so grateful to begin our marriage with a symbol that so beautifully encapsulates this hope.',
       ringLink: 'Learn more about the impact at the',
       moonPhase: {
-        headline: 'A Celestial Sync: Written in the Stars ✨',
+        headline: 'To the moon and back ✨',
         intro: 'Did you know the moon phase on your birthday is considered your <b>"birth moon"</b>? It\'s said to offer insights into your personality and spiritual journey!',
         quyenDob: '(September 20, 1995)',
         quyenPhase: '<i>Born under a <b>Waning Crescent</b></i> 🌙',
@@ -98,9 +102,27 @@ export const translations = {
       exitDesc: 'Help us end our special day with a memorable send-off!',
       exitLocation: 'The Westin Great Southern, Columbus, OH',
     },
-    // ... other sections can be added here
+    // Photobook Section
+    photobook: {
+      title: 'Guest Photobook',
+      intro1: "Share your favorite moments from our special day! We've set up a Google Form to collect photos from our beloved guests. Your pictures will be a cherished part of our wedding album.",
+      intro2: 'Please upload your photos and share a memory with us below.',
+    },
+    // Guestbook / Well Wishes Section
+    guestbook: {
+      intro: 'Thank you to our beloved family and friends for sharing in our joy. Your words of love and support mean the world to us and will be cherished forever.',
+    },
+    // RSVP Section
+    rsvp: {
+      thankYouTitle: 'Thank you!',
+      thankYouMessage: "Your response has been recorded. We can't wait to celebrate with you!",
+    },
   },
   vn: {
+    // Common UI text
+    common: {
+      loading: 'Đang tải...',
+    },
     // Navigation
     nav: {
       journey: 'Hành Trình',
@@ -135,7 +157,7 @@ export const translations = {
     lovePaparazzi: {
       masthead: 'Thời Báo Tình Yêu',
       articleNavCord: 'Dây Ba Sợi',
-      articleNavMoon: 'Giao Thoa Thiên Thể',
+      articleNavMoon: 'Tới Mặt Trăng và Trở Về',
       articleNavRing: 'Chiếc Nhẫn Ý Nghĩa',
       cordHeadline: 'Biểu Tượng Của Thánh Giá Bện Ba Sợi',
       cordScripture: '"Một sợi dây bện ba lấy làm khó đứt." — Truyền Đạo 4:12',
@@ -157,7 +179,7 @@ export const translations = {
       ringPromiseText: 'Chiếc nhẫn này không chỉ là một vòng tròn kim loại quý và đá; đó là một vòng tròn của lòng cảm thông. Nó đóng vai trò như một lời nhắc nhở hàng ngày về lời hứa của chúng con với nhau và cam kết chung của chúng con để sống một cuộc sống có mục đích, yêu thương một cách quảng đại, và là một động lực cho điều tốt đẹp trên thế giới. Chúng con rất biết ơn khi bắt đầu cuộc hôn nhân của mình với một biểu tượng gói gọn hy vọng này một cách tuyệt vời.',
       ringLink: 'Tìm hiểu thêm về hoạt động tại trang web',
       moonPhase: {
-        headline: 'Sự Đồng Điệu Thiên Thể: Viết Nên Từ Những Vì Sao ✨',
+        headline: 'Hành Trình Tới Mặt Trăng Và Trở Về ✨',
         intro: 'Bạn có biết tuần trăng vào ngày sinh của bạn được coi là <b>"trăng bản mệnh"</b> không? Người ta nói rằng nó mang lại cái nhìn sâu sắc về tính cách và hành trình tâm linh của bạn!',
         quyenDob: '(20 tháng 9, 1995)',
         quyenPhase: '<i>Sinh dưới tuần <b>Trăng Tàn</b></i> 🌙',
@@ -194,6 +216,20 @@ export const translations = {
         exitDesc: 'Cùng chúng con kết thúc ngày đặc biệt bằng một màn chào kết đáng nhớ!',
         exitLocation: 'The Westin Great Southern, Columbus, OH',
     },
-    // ... other sections can be added here
+    // Photobook Section
+    photobook: {
+      title: 'Album Ảnh Khách Mời',
+      intro1: 'Hãy chia sẻ những khoảnh khắc yêu thích của bạn trong ngày đặc biệt của chúng tôi! Chúng tôi đã tạo một Google Form để thu thập ảnh từ những vị khách yêu quý. Những bức ảnh của bạn sẽ là một phần kỷ niệm quý giá trong album cưới của chúng tôi.',
+      intro2: 'Vui lòng tải ảnh của bạn lên và chia sẻ kỷ niệm với chúng tôi dưới đây.',
+    },
+    // Guestbook / Well Wishes Section
+    guestbook: {
+      intro: 'Cảm ơn gia đình và bạn bè thân yêu đã chia sẻ niềm vui cùng chúng con. Những lời chúc yêu thương và sự ủng hộ của mọi người là cả thế giới đối với chúng con và sẽ được trân trọng mãi mãi.',
+    },
+    // RSVP Section
+    rsvp: {
+      thankYouTitle: 'Cảm ơn bạn!',
+      thankYouMessage: 'Phản hồi của bạn đã được ghi nhận. Chúng tôi rất mong được chung vui cùng bạn!',
+    },
   },
 };

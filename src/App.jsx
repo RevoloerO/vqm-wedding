@@ -1,7 +1,7 @@
 import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
 import HomePage from './HomePage.jsx';
-import HQStoryBook from './HQStorybook.jsx';
+import HQStoryBook from './HQStoryBook.jsx';
 function App() {
   return (
     <div>

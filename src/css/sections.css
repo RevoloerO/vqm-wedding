@@ -581,7 +581,7 @@
     background-image: url('../assets/invitation-emblem-2.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: min(125vh, 125vw);
+    background-size: min(95vh, 95vw);
     opacity: 0.05;
     filter: brightness(0) saturate(100%) invert(85%) sepia(25%) saturate(550%) hue-rotate(350deg) brightness(105%) contrast(95%);
     z-index: 1;

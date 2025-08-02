@@ -110,7 +110,7 @@
 }
 
 
-/* --- STICKY TAB NAVIGATION --- */
+/* --- MODIFIED: STICKY TAB NAVIGATION --- */
 .tab-navbar-wrapper {
   position: -webkit-sticky;
   position: sticky;
@@ -120,7 +120,6 @@
   transition: box-shadow 0.3s ease;
   z-index: 999;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0);
-  position: relative;
 }
 
 .tab-navbar-wrapper:stuck {
@@ -201,6 +200,95 @@
     filter: drop-shadow(0 0 3px rgba(0,0,0,0.2));
 }
 
+/* --- NEW: Mobile Navigation Dropdown Styles --- */
+.mobile-nav-toggle {
+    display: none; /* Hidden by default, shown in responsive.css */
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    cursor: pointer;
+    font-family: var(--font-ui);
+    color: var(--color-text-dark);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-nav-label {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-accent-deep-gold);
+}
+
+.hamburger-icon {
+    width: 24px;
+    height: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hamburger-icon span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-text-dark);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.tab-navbar-wrapper.menu-is-open .hamburger-icon span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.tab-navbar-wrapper.menu-is-open .hamburger-icon span:nth-child(2) {
+    opacity: 0;
+}
+.tab-navbar-wrapper.menu-is-open .hamburger-icon span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.mobile-nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-background);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
+    z-index: -1;
+    border-top: 1px solid #ddd;
+}
+
+.mobile-nav-menu.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-nav-menu .tab-nav-link {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.mobile-nav-menu .tab-nav-link:last-child {
+    border-bottom: none;
+}
+
+.mobile-nav-menu .tab-nav-link.active {
+    background-color: var(--color-secondary-cream);
+}
+
+.mobile-nav-menu .tab-nav-link.active::after {
+    display: none; /* No underline needed in dropdown */
+}
 
 /* --- RSVP Form --- */
 .rsvp-form p {

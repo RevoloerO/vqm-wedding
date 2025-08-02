@@ -515,11 +515,12 @@ const UtilityBar = ({ language, setLanguage }) => {
 };
 
 
-// --- Tab Navigation with Scroll-to-Center Logic ---
+// --- Tab Navigation with Scroll-to-Center Logic & Mobile Dropdown ---
 const TabNavigation = ({ activeView, onViewChange, t }) => {
   const navRef = useRef(null);
   const [showLeftHint, setShowLeftHint] = useState(false);
   const [showRightHint, setShowRightHint] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu
 
   const navItems = [
       { id: VIEWS.JOURNEY, label: t.nav.journey },
@@ -530,6 +531,7 @@ const TabNavigation = ({ activeView, onViewChange, t }) => {
       { id: VIEWS.RSVP, label: t.nav.rsvp }
   ];
   
+  // Logic for centering active tab on desktop
   useEffect(() => {
     const nav = navRef.current;
     if (nav && activeView) {
@@ -544,6 +546,7 @@ const TabNavigation = ({ activeView, onViewChange, t }) => {
     }
   }, [activeView]);
 
+  // Logic for showing scroll hints on desktop
   const checkForScroll = useCallback(() => {
     const nav = navRef.current;
     if (nav) {
@@ -566,8 +569,17 @@ const TabNavigation = ({ activeView, onViewChange, t }) => {
     }
   }, [checkForScroll]);
 
+  // Handler for mobile menu link clicks
+  const handleMobileLinkClick = (viewId) => {
+    onViewChange(viewId);
+    setIsMenuOpen(false); // Close menu on selection
+  };
+  
+  const activeLabel = navItems.find(item => item.id === activeView)?.label || 'Menu';
+
   return (
-    <div className="tab-navbar-wrapper">
+    <div className={`tab-navbar-wrapper ${isMenuOpen ? 'menu-is-open' : ''}`}>
+      {/* Desktop scrolling navigation */}
       <div className={`scroll-hint left ${showLeftHint ? 'visible' : ''}`}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
       <nav className="tab-navbar" ref={navRef}>
         {navItems.map(item => (
@@ -575,6 +587,23 @@ const TabNavigation = ({ activeView, onViewChange, t }) => {
         ))}
       </nav>
       <div className={`scroll-hint right ${showRightHint ? 'visible' : ''}`}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+
+      {/* Mobile navigation toggle button */}
+      <button className="mobile-nav-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-haspopup="true" aria-expanded={isMenuOpen}>
+        <span className="mobile-nav-label">{activeLabel}</span>
+        <div className="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+      </button>
+
+      {/* Mobile dropdown menu */}
+      <div className={`mobile-nav-menu ${isMenuOpen ? 'is-open' : ''}`}>
+        {navItems.map(item => (
+            <button key={item.id} data-view-id={item.id} className={`tab-nav-link ${activeView === item.id ? 'active' : ''}`} onClick={() => handleMobileLinkClick(item.id)}>{item.label}</button>
+        ))}
+      </div>
     </div>
   );
 };

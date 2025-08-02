@@ -43,24 +43,17 @@
     }
     .welcome-banner-details { font-size: 0.9rem; }
     
+    /* --- MODIFIED: Navigation for Mobile --- */
     .tab-navbar {
-        justify-content: flex-start; 
-        overflow-x: auto; 
-        white-space: nowrap; 
-        -webkit-overflow-scrolling: touch; 
-        scrollbar-width: none; 
-        padding: 0 35px; 
-        scroll-behavior: smooth;
+        display: none; /* Hide scrolling tabs on mobile */
+    }
+    .scroll-hint {
+        display: none; /* Hide scroll arrows on mobile */
+    }
+    .mobile-nav-toggle {
+        display: flex; /* Show the hamburger menu button */
     }
 
-    .tab-navbar::-webkit-scrollbar {
-        display: none;
-    }
-
-    .tab-nav-link { 
-        font-size: 0.9rem; 
-        padding: 0.8rem 1.2rem; 
-    }
 
     .rsvp-form .radio-group, .rsvp-form .checkbox-group { grid-template-columns: 1fr; }
     .rsvp-details-container { grid-template-columns: 1fr; }

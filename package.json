@@ -10,7 +10,9 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:analyze": "vite build --mode analyze",
+    "test:perf": "npm run build && npm run preview"
   },
   "dependencies": {
     "gh-pages": "^6.3.0",
@@ -29,6 +31,9 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
-    "vite": "^6.0.5"
+    "terser": "^5.44.0",
+    "vite": "^6.0.5",
+    "vite-imagetools": "^9.0.0",
+    "vite-plugin-compression": "^0.5.1"
   }
 }

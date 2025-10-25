@@ -1,5 +1,5 @@
 /* --- GUEST BOOK / WELL WISHES SECTION --- */
-@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+/* Font loaded in index.html for better performance */
 
 .guestbook-section {
     background: var(--color-secondary-cream);

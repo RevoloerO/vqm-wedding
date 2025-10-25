@@ -1,0 +1,357 @@
+/**
+ * Optimized Animations
+ * Performance-focused animation styles with will-change and GPU acceleration
+ */
+
+/* ============================================
+   PERFORMANCE BEST PRACTICES
+   ============================================
+   1. Use transform and opacity for animations (GPU-accelerated)
+   2. Apply will-change only during animation, not constantly
+   3. Avoid animating expensive properties (width, height, margin, padding)
+   4. Use translate3d() to force GPU acceleration
+   5. Respect prefers-reduced-motion for accessibility
+   ============================================ */
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   FADE ANIMATIONS (Optimized)
+   ============================================ */
+
+.fade-in-optimized {
+  opacity: 0;
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.fade-in-up-optimized {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* ============================================
+   SCROLL-TRIGGERED ANIMATIONS
+   ============================================ */
+
+/* Only apply will-change when actively animating */
+.animating {
+  will-change: transform, opacity;
+}
+
+.animation-complete {
+  will-change: auto;
+}
+
+/* Intersection Observer triggered animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 30px, 0);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Staggered reveal (use with nth-child) */
+.stagger-reveal {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.stagger-reveal:nth-child(1) { transition-delay: 0.1s; }
+.stagger-reveal:nth-child(2) { transition-delay: 0.2s; }
+.stagger-reveal:nth-child(3) { transition-delay: 0.3s; }
+.stagger-reveal:nth-child(4) { transition-delay: 0.4s; }
+.stagger-reveal:nth-child(5) { transition-delay: 0.5s; }
+
+.stagger-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* ============================================
+   CARD FLIP OPTIMIZATION
+   ============================================ */
+
+.card-flip-container {
+  perspective: 1000px;
+  /* Apply will-change only when hovering/interacting */
+}
+
+.card-flip-container:hover .flip-card,
+.card-flip-container.is-flipping .flip-card {
+  will-change: transform;
+}
+
+.flip-card {
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+  backface-visibility: hidden;
+}
+
+.flip-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-face {
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0); /* Force GPU acceleration */
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* ============================================
+   HOVER EFFECTS (GPU Accelerated)
+   ============================================ */
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform: translate3d(0, 0, 0);
+}
+
+.hover-lift:hover {
+  transform: translate3d(0, -5px, 0);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+  transform: scale(1);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   MOON PHASE ANIMATION (Optimized)
+   ============================================ */
+
+.moon-visualization-container {
+  position: relative;
+}
+
+/* Only apply will-change during active animation */
+.moon-visualization-container.active-moon-animation .moon-icon {
+  will-change: transform, opacity;
+}
+
+.moon-visualization-container .moon-icon {
+  transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+  transform: translate3d(0, 0, 0);
+}
+
+.moon-visualization-container.active-moon-animation .moon-icon.waning-crescent {
+  animation: moonMergeLeft 1.5s ease-in-out forwards;
+}
+
+.moon-visualization-container.active-moon-animation .moon-icon.waxing-gibbous {
+  animation: moonMergeRight 1.5s ease-in-out forwards;
+}
+
+@keyframes moonMergeLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(50%, 0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes moonMergeRight {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(-50%, 0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+/* Remove will-change after animation completes */
+.moon-visualization-container:not(.active-moon-animation) .moon-icon {
+  will-change: auto;
+}
+
+/* ============================================
+   SCROLL TO TOP BUTTON OPTIMIZATION
+   ============================================ */
+
+.scroll-to-top-btn {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0) scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.scroll-to-top-btn.visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  pointer-events: auto;
+}
+
+/* Apply will-change only on hover */
+.scroll-to-top-btn:hover {
+  will-change: transform;
+  transform: translate3d(0, -3px, 0) scale(1.05);
+}
+
+/* ============================================
+   TAB NAVIGATION SCROLL OPTIMIZATION
+   ============================================ */
+
+.tab-navbar {
+  /* Use scroll-behavior: smooth with caution - can cause jank */
+  scroll-behavior: smooth;
+  /* Optimize scrolling performance */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.tab-navbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* Only apply will-change to active tab during scroll */
+.tab-navbar.is-scrolling .tab-nav-link {
+  will-change: transform;
+}
+
+.tab-nav-link {
+  transition: color 0.3s ease, background-color 0.3s ease;
+  /* No will-change by default */
+}
+
+/* ============================================
+   BLESSING TEXT FADE OPTIMIZATION
+   ============================================ */
+
+.fade-in-out {
+  animation: fadeInOut 7s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  10%, 90% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Apply will-change only to actively animating elements */
+.welcome-banner-blessing .fade-in-out {
+  will-change: opacity, transform;
+}
+
+/* ============================================
+   CROSS DESIGN GLOW ANIMATION
+   ============================================ */
+
+.cross-design svg path,
+.cross-design svg circle {
+  transition: stroke 0.3s ease, fill 0.3s ease;
+}
+
+.cross-design-wrapper:hover .cross-design svg {
+  will-change: filter;
+  filter: drop-shadow(0 0 8px rgba(193, 150, 20, 0.4));
+}
+
+.cross-design-wrapper:not(:hover) .cross-design svg {
+  will-change: auto;
+}
+
+/* ============================================
+   LOADING STATES (Skeleton Screens)
+   ============================================ */
+
+.skeleton-loading {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ============================================
+   PERFORMANCE TIPS
+   ============================================
+
+   DO:
+   ✓ Use transform and opacity for animations
+   ✓ Apply will-change only during active animations
+   ✓ Use translate3d() to trigger GPU acceleration
+   ✓ Remove will-change after animation completes
+   ✓ Use Intersection Observer for scroll animations
+   ✓ Respect prefers-reduced-motion
+
+   DON'T:
+   ✗ Animate width, height, top, left, margin, padding
+   ✗ Apply will-change to many elements at once
+   ✗ Use will-change permanently on elements
+   ✗ Trigger layout/reflow during animations
+   ✗ Animate box-shadow directly (use opacity instead)
+
+   ============================================ */

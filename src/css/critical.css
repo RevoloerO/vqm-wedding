@@ -1,0 +1,219 @@
+/* CRITICAL CSS - Above-the-fold content only */
+/* This CSS should be inlined in the HTML head for fastest rendering */
+
+/* CSS Variables - Essential theme colors and fonts */
+:root {
+  --color-background: #F8F5EE;
+  --color-primary-matcha: #2A4036;
+  --color-secondary-cream: #FDFBF5;
+  --color-accent-gold: #f8da7f;
+  --color-accent-deep-gold: #c19614;
+  --color-text-dark: #36454F;
+  --color-text-light: #FFFFFF;
+  --font-display: 'Great Vibes', cursive;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Cormorant Garamond', serif;
+  --font-ui: 'Lato', sans-serif;
+}
+
+/* Reset & Base */
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-dark);
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  line-height: 1.7;
+  font-size: 17px;
+}
+
+/* Welcome Banner - Above the fold */
+.welcome-banner-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+}
+
+.welcome-banner-background-blur,
+.welcome-banner-background-clear {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.welcome-banner-background-blur {
+  filter: blur(8px);
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.welcome-banner-background-clear {
+  opacity: 0.15;
+  z-index: 2;
+}
+
+.welcome-banner-content {
+  position: relative;
+  z-index: 3;
+  color: var(--color-text-dark);
+  max-width: 90%;
+  padding: 2rem;
+}
+
+.welcome-banner-names {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  margin: 1rem 0 0.5rem;
+  color: var(--color-accent-deep-gold);
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+.welcome-banner-details {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  margin-bottom: 2rem;
+  color: var(--color-primary-matcha);
+  letter-spacing: 0.05em;
+}
+
+/* Countdown Timer */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.countdown-item {
+  text-align: center;
+}
+
+.countdown-value {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--color-accent-deep-gold);
+  font-weight: 700;
+}
+
+.countdown-unit {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  color: var(--color-primary-matcha);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+}
+
+/* Cross Design Button */
+.cross-design-wrapper {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.cross-design {
+  width: 80px;
+  height: 100px;
+}
+
+.cross-design svg {
+  width: 100%;
+  height: 100%;
+  stroke: var(--color-accent-deep-gold);
+  fill: none;
+}
+
+/* Loading fallback */
+.loading-fallback {
+  text-align: center;
+  padding: 4rem 2rem;
+  font-family: var(--font-ui);
+  color: var(--color-primary-matcha);
+}
+
+/* Utility Bar - At top of page */
+.utility-bar {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  background: rgba(253, 251, 245, 0.95);
+  border: 2px solid var(--color-accent-gold);
+  border-radius: 25px;
+  padding: 0.3rem;
+  cursor: pointer;
+  position: relative;
+  width: 120px;
+  height: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.lang-btn {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-text-dark);
+  z-index: 2;
+  transition: color 0.3s;
+}
+
+.lang-btn.active {
+  color: var(--color-text-light);
+}
+
+.lang-slider {
+  position: absolute;
+  top: 0.3rem;
+  left: 0.3rem;
+  width: calc(50% - 0.3rem);
+  height: calc(100% - 0.6rem);
+  background: var(--color-accent-deep-gold);
+  border-radius: 20px;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.lang-slider.vn-active {
+  transform: translateX(100%);
+}
+
+/* Hide non-critical elements initially */
+.tab-navbar-wrapper,
+.main-content-area,
+footer {
+  opacity: 0;
+  animation: fadeInContent 0.3s ease forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeInContent {
+  to {
+    opacity: 1;
+  }
+}

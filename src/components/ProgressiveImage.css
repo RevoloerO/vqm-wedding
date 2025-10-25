@@ -1,0 +1,41 @@
+.progressive-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.progressive-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.progressive-image.loading {
+  filter: blur(10px);
+  opacity: 0.8;
+  transform: scale(1.1); /* Slight scale to hide blur edges */
+}
+
+.progressive-image.loaded {
+  filter: blur(0);
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Aspect ratio container variants */
+.progressive-image-wrapper.aspect-16-9 {
+  aspect-ratio: 16 / 9;
+}
+
+.progressive-image-wrapper.aspect-4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+.progressive-image-wrapper.aspect-1-1 {
+  aspect-ratio: 1 / 1;
+}
+
+.progressive-image-wrapper.aspect-3-2 {
+  aspect-ratio: 3 / 2;
+}
